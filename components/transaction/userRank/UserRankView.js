@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const UserRankView = (props) => {
+function UserRankView(props) {
     return (
         <RankDiv>
             <UserDescDiv ><span>{props.name}님</span>의 랭킹은 <span>{props.rank}</span> 입니다.🎉</UserDescDiv>
@@ -9,7 +9,7 @@ const UserRankView = (props) => {
 }
 
 const RankDiv = styled.div`
-    margin: 10px 20px;
+    margin: 20px 20px;
     width: 390px;
     height: 64px;
     background: #434051;

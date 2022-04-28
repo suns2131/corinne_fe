@@ -1,32 +1,37 @@
 import styled from "styled-components";
+// eslint-disable-next-line import/no-unresolved
+import BottomView from "../components/transaction/bottom/bottomView";
+import Chart from "../components/transaction/chart/Chart";
+import Chatting from "../components/transaction/chatting/Chartting";
 import CoinList from "../components/transaction/coinList/CoinList";
 import UserRank from "../components/transaction/userRank/UserRank";
 
 export default function Transaction() {
     return (
-        <>
-            <ContainerDiv>
-                <HeaderDiv />
-                <ContentDiv >
-                    <CarouselDiv />
-                    <MainDiv>
-                      <DataDiv>
-                      </DataDiv>
-                      <SidelDiv>
-                        <UserRank />
-                        <CoinList />
-                      </SidelDiv>
-                    </MainDiv>
-                </ContentDiv>
-                <FooterDiv />
-            </ContainerDiv>
-        </>
+        <ContainerDiv>
+              <HeaderDiv />
+              <ContentDiv >
+                  <CarouselDiv />
+                  <MainDiv>
+                    <DataDiv>
+                      <Chart />
+                      <BottomView />
+                    </DataDiv>
+                    <SidelDiv>
+                      <UserRank />
+                      <CoinList />
+                      <Chatting />
+                    </SidelDiv>
+                  </MainDiv>
+              </ContentDiv>
+              <FooterDiv />
+          </ContainerDiv>
     );
 }
 
 const ContainerDiv = styled.div`
-    margin: 0px 360px;
-    background-color: antiquewhite;
+    margin: auto;
+    width: 1200px;
 `
 const HeaderDiv = styled.div`
     width: 100%;
@@ -36,7 +41,6 @@ const HeaderDiv = styled.div`
 
 const ContentDiv = styled.article`
     width: 100%;
-    height: 969px;
 `
 
 const CarouselDiv = styled.article`
@@ -45,7 +49,6 @@ const CarouselDiv = styled.article`
 `
 
 const MainDiv = styled.article`
-  background-color: cadetblue;
   width: 100%;
   display: flex;
 `
@@ -56,12 +59,11 @@ const DataDiv = styled.article`
 
 const SidelDiv = styled.article`
   background-color: white;
+  min-width: 415px;
   width: 26%;
-  margin: 0px 20px;
 `
 
 const FooterDiv = styled.div`
     width: 100%;
     height: 250px;
-    background-color: aliceblue;
 `
