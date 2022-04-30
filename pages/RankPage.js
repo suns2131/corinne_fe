@@ -12,7 +12,7 @@ export default function RankPage() {
                 <div className="  w-rankview  bg-white mr-5">
                     <RankView />
                 </div>
-                <div className=" w-ranksideview bg-lime-700">
+                <div className=" w-ranksideview bg-white">
                     <RankSideView />
                 </div>
             </div>

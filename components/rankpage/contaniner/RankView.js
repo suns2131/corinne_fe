@@ -2,7 +2,6 @@ import React from "react";
 
 function RankView() {
     const rankData = Array.from({ length : 12 }, (v,i)=> i);
-    console.log(rankData)
     return (
       <div className=" font-Pretendard ">
         <div className="w-full mb-5 flex justify-between items-center" >
