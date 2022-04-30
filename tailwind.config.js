@@ -43,6 +43,7 @@ module.exports = {
           'h170' : '170px',
           'h29' : '29px',
           'h46' : '46px',
+          'h5' : '5px',
         },
         width : {
           container : '1200px',

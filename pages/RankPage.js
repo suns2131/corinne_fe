@@ -5,7 +5,7 @@ import Headers from "../components/shared/Headers";
 export default function RankPage() {
     return (
         <div className=" w-container m-auto ">
-            <div className=" h-headers bg-slate-700">
+            <div className=" h-headers bg-white">
                 <Headers />
             </div>
             <div className=" bg-white flex">

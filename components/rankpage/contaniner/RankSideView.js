@@ -11,6 +11,7 @@ function RankSideView() {
                     <p className=" font-semibold text-base">랭킹 00위</p>
                   </div>
                   <p className=" font-normal text-xxs">경험치 00000</p>  
+                  <div className=" bg-white rounded-xl w-full h-h5"/>
                 </div>
                 
               </div>
