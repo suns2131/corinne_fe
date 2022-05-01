@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Headers from "../components/shared/Headers/container/Headers";
 // eslint-disable-next-line import/no-unresolved
 import BottomView from "../components/transaction/bottom/bottomView";
 import Chart from "../components/transaction/chart/Chart";
@@ -9,7 +10,7 @@ import UserRank from "../components/transaction/userRank/UserRank";
 export default function Transaction() {
     return (
         <ContainerDiv>
-              <HeaderDiv />
+              <Headers />
               <ContentDiv >
                   <CarouselDiv />
                   <MainDiv>
@@ -32,11 +33,6 @@ export default function Transaction() {
 const ContainerDiv = styled.div`
     margin: auto;
     width: 1200px;
-`
-const HeaderDiv = styled.div`
-    width: 100%;
-    height: 65px;
-    background-color: aliceblue;
 `
 
 const ContentDiv = styled.article`

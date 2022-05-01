@@ -15,7 +15,7 @@ function RankSideView() {
                 </div>
                 
               </div>
-              <div className=" w-full flex justify-between items-center text-xs font-normal mb-1">
+              <div className=" w-full flex justify-between items-center text-xs font-normal mb-1 ">
                 <p>수익률</p>
                 <p>00.00%</p>
               </div>

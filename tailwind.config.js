@@ -6,9 +6,9 @@ module.exports = {
     theme: {
       extend: {
         colors : {
-          customcolor : {
-            'nomals': '#C4C4C4',
-          } 
+          'curp' : '#6800BA',
+          'curr' : '#E5606B',
+          'curb' : '#4380F8',
         },
         padding : {
           auto : 'auto',
@@ -22,12 +22,17 @@ module.exports = {
         },
         fontSize : {
           xxs : ['10px','12px'],
+          ch1 : ['48px','67px'],
+          ch2 : ['32px','38px'],
+          ch3 : ['20px','24px'],
+          ch4 : ['18px','29px'],
+          menus : ['15px','18px'],
         },
         fontFamily : {
           'Pretendard' : 'Pretendard'
         },
         height : {
-          headers : '65px',
+          headers : '60px',
           footers : '250px',
           contents : '765px',
           userinfo : '178px',

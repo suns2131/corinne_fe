@@ -1,6 +1,6 @@
 import RankSideView from "../components/rankpage/contaniner/RankSideView";
 import RankView from "../components/rankpage/contaniner/RankView";
-import Headers from "../components/shared/Headers";
+import Headers from "../components/shared/Headers/container/Headers";
 
 export default function RankPage() {
     return (
