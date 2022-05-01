@@ -9,6 +9,11 @@ module.exports = {
           'curp' : '#6800BA',
           'curr' : '#E5606B',
           'curb' : '#4380F8',
+          'neutrals1' : '#33323F',
+          'neutrals2' : '#45425E',
+          'neutrals3' : '#777777',
+          'neutrals4' : '#CECECE',
+          'neutrals5' : '#FFFFFF',
         },
         padding : {
           auto : 'auto',
@@ -27,9 +32,11 @@ module.exports = {
           ch3 : ['20px','24px'],
           ch4 : ['18px','29px'],
           menus : ['15px','18px'],
+          logos : ['30px','30px'],
         },
         fontFamily : {
-          'Pretendard' : 'Pretendard'
+          'Pretendard' : 'Pretendard',
+          'Gmarket Sans' : 'Gmarket Sans',
         },
         height : {
           headers : '60px',
