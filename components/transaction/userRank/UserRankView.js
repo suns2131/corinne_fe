@@ -1,15 +1,21 @@
 import styled from "styled-components";
+import propTypes from "prop-types";
 
-const UserRankView = (props) => {
+function UserRankView({ name , rank }) {
     return (
         <RankDiv>
-            <UserDescDiv ><span>{props.name}님</span>의 랭킹은 <span>{props.rank}</span> 입니다.🎉</UserDescDiv>
+            <UserDescDiv ><span>{name}님</span>의 랭킹은 <span>{rank}</span> 입니다.🎉</UserDescDiv>
         </RankDiv>
     );
 }
 
+UserRankView.propTypes = {
+    name : propTypes.node.isRequired,
+    rank : propTypes.node.isRequired,
+}
+
 const RankDiv = styled.div`
-    margin: 10px 20px;
+    margin: 20px 20px;
     width: 390px;
     height: 64px;
     background: #434051;
