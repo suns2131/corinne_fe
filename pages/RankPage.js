@@ -1,6 +1,7 @@
 import RankSideView from "../components/rankpage/contaniner/RankSideView";
 import RankView from "../components/rankpage/contaniner/RankView";
 import Headers from "../components/shared/Headers/container/Headers";
+import rankData from "../components/rankpage/presentational/RankData";
 
 export default function RankPage() {
     return (
@@ -10,7 +11,7 @@ export default function RankPage() {
             </div>
             <div className=" bg-white flex">
                 <div className="  w-rankview  bg-white mr-5">
-                    <RankView />
+                    <RankView prevRank = {rankData.prevRank} matchInfo = {rankData.matchInfo} realRank = {rankData.realRank} />
                 </div>
                 <div className=" w-ranksideview bg-white">
                     <RankSideView />
