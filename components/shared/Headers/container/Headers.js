@@ -1,16 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
-import {useSession} from 'next-auth/react';
 
 export default function Headers() {
     const router = useRouter();
-    const {islogin : session} = useSession();
     const tf = true;
-    console.log(session);
-    // const login = () => {
-    //     signIn('kakao');
-    // }
+   
     if(tf){
       return (
         <div className=' font-Gmarket Sans w-full h-headers py-4 flex justify-between items-center '>
