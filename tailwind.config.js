@@ -71,8 +71,16 @@ module.exports = {
           'w299' : '299px',
           'w732' : '732px',
         },
+        variants: {
+          // ...
+          scrollbar: ['dark']
+        },
       },
       
     },
-    plugins: [],
+    plugins: [
+      // ...
+      require("tailwind-scrollbar"),
+      
+    ],
   }

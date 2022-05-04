@@ -1,5 +1,7 @@
 import React from 'react'
 import Image from "next/image";
+import transprops from "../../presentational/transaction/TransactionLogic";
+import intercept from '../../shared/intercept';
 
 function TransSideView() {
     const [coinList,setCoinList] = React.useState(
@@ -11,6 +13,13 @@ function TransSideView() {
           price : '10,000,000',
           unitPrice : 'BTC',
         })
+    const [buystate,setBuyState] = React.useState(true);
+    // const [listTrans,setListTrans] = React.useState(null);
+    // const data1 = coinDetail;
+
+    // console.log(data1);
+   
+    
     return (
       <div className=' font-Pretendard'>
         <div className=" w-[793px] h-[90px] bg-neutrals5 p-5 shadow-md rounded-[10px] mb-5 ">
@@ -63,55 +72,127 @@ function TransSideView() {
           </div>
         </div>
         <div className=' w-[793px] h-[464px] flex shadow-md'>
-          <div className=' w-[386px] h-[464px] mr-[20px] sha '> 
-            <div className='w-full h-[69px] flex'>
-              <div className=' w-1/2 flex justify-center items-center shadow-md rounded-t-xl bg-neutrals5'>매수</div>
-              <div className=' w-1/2 flex justify-center items-center shadow-md rounded-t-xl bg-neutrals5'>매도</div>
-            </div>
-            <div className='  w-full h-[395px] rounded-b-xl bg-neutrals5 p-5 '>
-               <div className='w-full flex justify-between items-center text-[14px] mb-[33px]'>
-                  <p>매수 가능 금액</p>
-                  <p>10,000,000원</p>
-               </div>
-               <div className='w-full flex justify-start items-center text-[14px] mb-[33px]'>
-                 <p className='w-[80px] mr-[5px]'>레버리지</p>
-                 <div className='w-[213px] h-[7px] bg-violet-500 rounded-xl  mr-[14px] ' />
-                 <p className=' text-[15px] text-curp font-bold'>25x</p>
-               </div>
-                <div className='flex justify-center items-start mb-[12px] '>
-                  <p className=' text-[14px] w-[80px] pt-[10px] mr-[5px]'>매수 금액</p>
-                  <div>
-                  <div className='w-full flex justify-start items-center text-[14px] bg-[#fbfbfb] px-[9px] py-[6px]' >
-                    <button className='w-[32px] h-[32px] flex justify-center items-center border border-solid border-[#eeeeee] rounded-md mr-[10px]' type='button' >-</button>
-                    <input className='bg-[#fbfbfb] outline-none' type="text" placeholder='금액을 입력해주세요.' />
-                    <button className='w-[32px] h-[32px] flex justify-center items-center border border-solid border-[#eeeeee] rounded-md ml-[10px]' type='button' >+</button>
+          <div className=' w-[386px] h-[464px] mr-[20px] '> 
+            {buystate ? 
+              <div>
+                <div className='w-full h-[69px] flex'>
+                  <button
+                    type='button' 
+                    className=' w-1/2 flex justify-center items-center shadow-md rounded-t-xl bg-neutrals5'
+                    onClick={()=> setBuyState(true)}
+                  >매수</button>
+                  <button 
+                    type='button' 
+                    className=' w-1/2 flex justify-center items-center shadow-md rounded-t-xl text-[#cecece] bg-[#eeeeee]'
+                    onClick={()=> setBuyState(false)}
+                    >
+                      매도
+                    </button>
+                </div>
+                <div className='  w-full h-[395px] rounded-b-xl bg-neutrals5 p-5 '>
+                  <div className='w-full flex justify-between items-center text-[14px] mb-[33px]'>
+                    <p>매수 가능 금액</p>
+                    <p>10,000,000원</p>
                   </div>
-                  <div className='flex justify-center items-center'>
-                    <button className='w-[41px] h-[32px] px-[7.5px] py-[5.5px] mr-[9px] rounded-md text-[14px] border border-solid border-[#eeeeee] active:bg-[#eeeeee]' type='button'>0%</button>
-                    <button className='w-[45px] h-[32px] px-[7.5px] py-[5.5px] mr-[9px] rounded-md text-[14px] border border-solid border-[#eeeeee] active:bg-[#eeeeee]' type='button'>25%</button>
-                    <button className='w-[45px] h-[32px] px-[7.5px] py-[5.5px] mr-[9px] rounded-md text-[14px] border border-solid border-[#eeeeee] active:bg-[#eeeeee]' type='button'>50%</button>
-                    <button className='w-[45px] h-[32px] px-[7.5px] py-[5.5px] mr-[9px] rounded-md text-[14px] border border-solid border-[#eeeeee] active:bg-[#eeeeee]' type='button'>75%</button>
-                    <button className='w-[50px] h-[32px] px-[7.5px] py-[5.5px] mr-[9px] rounded-md text-[14px] border border-solid border-[#eeeeee] active:bg-[#eeeeee]' type='button'>100%</button>
+                  <div className='w-full flex justify-start items-center text-[14px] mb-[33px]'>
+                    <p className='w-[80px] mr-[5px]'>레버리지</p>
+                    <div className='w-[213px] h-[7px] bg-violet-500 rounded-xl  mr-[14px] ' />
+                    <p className=' text-[15px] text-curp font-bold'>25x</p>
+                  </div>
+                  <div className='flex justify-center items-start mb-[12px] '>
+                    <p className=' text-[14px] w-[80px] pt-[10px] mr-[5px]'>매수 금액</p>
+                    <div>
+                    <div className='w-full flex justify-start items-center text-[14px] bg-[#fbfbfb] px-[9px] py-[6px]' >
+                      <button className='w-[32px] h-[32px] flex justify-center items-center border border-solid border-[#eeeeee] rounded-md mr-[10px]' type='button' >-</button>
+                      <input className='bg-[#fbfbfb] outline-none' type="text" placeholder='금액을 입력해주세요.' />
+                      <button className='w-[32px] h-[32px] flex justify-center items-center border border-solid border-[#eeeeee] rounded-md ml-[10px]' type='button' >+</button>
+                    </div>
+                    <div className='flex justify-center items-center'>
+                      <button className='w-[41px] h-[32px] px-[7.5px] py-[5.5px] mr-[9px] rounded-md text-[14px] border border-solid border-[#eeeeee] active:bg-[#eeeeee]' type='button'>0%</button>
+                      <button className='w-[45px] h-[32px] px-[7.5px] py-[5.5px] mr-[9px] rounded-md text-[14px] border border-solid border-[#eeeeee] active:bg-[#eeeeee]' type='button'>25%</button>
+                      <button className='w-[45px] h-[32px] px-[7.5px] py-[5.5px] mr-[9px] rounded-md text-[14px] border border-solid border-[#eeeeee] active:bg-[#eeeeee]' type='button'>50%</button>
+                      <button className='w-[45px] h-[32px] px-[7.5px] py-[5.5px] mr-[9px] rounded-md text-[14px] border border-solid border-[#eeeeee] active:bg-[#eeeeee]' type='button'>75%</button>
+                      <button className='w-[50px] h-[32px] px-[7.5px] py-[5.5px] mr-[9px] rounded-md text-[14px] border border-solid border-[#eeeeee] active:bg-[#eeeeee]' type='button'>100%</button>
+                    </div>
                   </div>
                 </div>
-                
-              </div>
-              <div className=' mt-[77px] flex flex-col justify-center items-center'> 
-                  <p className=' text-[#cecece] text-[12px] mb-[15px]'>최소 주문금액 50,000원 (수수료 0%)</p>
+                <div className=' mt-[77px] flex flex-col justify-center items-center'> 
+                    <p className=' text-[#cecece] text-[12px] mb-[15px]'>최소 주문금액 50,000원 (수수료 0%)</p>
+                    <button
+                      className=' w-[346px] h-[45px] bg-curp rounded-md text-[14px] text-[#ffffff]'
+                      type='button'
+                      >
+                      매수하기
+                    </button>
+                </div>
+                </div>
+                </div>
+                :
+                <div>
+                <div className='w-full h-[69px] flex'>
                   <button
-                   className=' w-[346px] h-[45px] bg-curp rounded-md text-[14px] text-[#ffffff]'
-                   type='button'
-                   >
-                    매수하기
-                  </button>
-              </div>
-            </div>
+                    type='button' 
+                    className=' w-1/2 flex justify-center items-center shadow-md rounded-t-xl text-[#cecece] bg-[#eeeeee]'
+                    onClick={()=> setBuyState(true)}
+                  >매수</button>
+                  <button 
+                    type='button' 
+                    className=' w-1/2 flex justify-center items-center shadow-md rounded-t-xl bg-neutrals5 '
+                    onClick={()=> setBuyState(false)}
+                    >
+                      매도
+                    </button>
+                </div>
+                <div className='  w-full h-[395px] rounded-b-xl bg-neutrals5 p-5 '>
+                  <div className='w-full flex justify-between items-center text-[14px] mb-[33px]'>
+                    <p>매도 가능 금액</p>
+                    <p>10,000,000원</p>
+                  </div>
+                  <div className='w-full flex justify-start items-center text-[14px] mb-[33px]'>
+                    <p className='w-[80px] mr-[5px]'>레버리지</p>
+                    <div className='w-[213px] h-[7px] bg-[#FF9E0D] rounded-xl  mr-[14px] ' />
+                    <p className=' text-[15px] text-[#FF9E0D] font-bold'>25x</p>
+                  </div>
+                  <div className='flex justify-center items-start mb-[12px] '>
+                    <p className=' text-[14px] w-[80px] pt-[10px] mr-[5px]'>매도 금액</p>
+                    <div>
+                    <div className='w-full flex justify-start items-center text-[14px] bg-[#fbfbfb] px-[9px] py-[6px]' >
+                      <button className='w-[32px] h-[32px] flex justify-center items-center border border-solid border-[#eeeeee] rounded-md mr-[10px]' type='button' >-</button>
+                      <input className='bg-[#fbfbfb] outline-none' type="text" placeholder='금액을 입력해주세요.' />
+                      <button className='w-[32px] h-[32px] flex justify-center items-center border border-solid border-[#eeeeee] rounded-md ml-[10px]' type='button' >+</button>
+                    </div>
+                    <div className='flex justify-center items-center'>
+                      <button className='w-[41px] h-[32px] px-[7.5px] py-[5.5px] mr-[9px] rounded-md text-[14px] border border-solid border-[#eeeeee] active:bg-[#eeeeee]' type='button'>0%</button>
+                      <button className='w-[45px] h-[32px] px-[7.5px] py-[5.5px] mr-[9px] rounded-md text-[14px] border border-solid border-[#eeeeee] active:bg-[#eeeeee]' type='button'>25%</button>
+                      <button className='w-[45px] h-[32px] px-[7.5px] py-[5.5px] mr-[9px] rounded-md text-[14px] border border-solid border-[#eeeeee] active:bg-[#eeeeee]' type='button'>50%</button>
+                      <button className='w-[45px] h-[32px] px-[7.5px] py-[5.5px] mr-[9px] rounded-md text-[14px] border border-solid border-[#eeeeee] active:bg-[#eeeeee]' type='button'>75%</button>
+                      <button className='w-[50px] h-[32px] px-[7.5px] py-[5.5px] mr-[9px] rounded-md text-[14px] border border-solid border-[#eeeeee] active:bg-[#eeeeee]' type='button'>100%</button>
+                    </div>
+                  </div>
+                </div>
+                <div className=' mt-[77px] flex flex-col justify-center items-center'> 
+                    <p className=' text-[#cecece] text-[12px] mb-[15px]'>최소 주문금액 50,000원 (수수료 0%)</p>
+                    <button
+                      className=' w-[346px] h-[45px] bg-[#FF9E0D] rounded-md text-[14px] text-[#ffffff]'
+                      type='button'
+                      >
+                      매도하기
+                    </button>
+                </div>
+                </div>
+                </div>
+
+
+            }
+            
             
           </div>
+
           <div className=' w-[387px] h-[464px] shadow-md '> 
             <div className='w-full h-[69px] flex'>
               <div className=' w-full flex justify-center items-center shadow-md rounded-t-xl bg-neutrals5'>거래내역</div>
             </div>
+            {/* 반복문 */}
             <div className='w-full h-[395px] p-5 rounded-b-xl bg-neutrals5'>
               <div>
                 <div className='flex justify-between items-center'>

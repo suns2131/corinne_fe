@@ -1,8 +1,10 @@
 import Headers from "../../shared/Headers/container/Headers";
 import TransContentView from "./TransContentView";
 import TransSideView from "./TransSideView";
+import transprops from "../../presentational/transaction/TransactionLogic";
 
 function TransactionView() {
+    const propsData = transprops;
     return (
         <div className=" w-container m-auto ">
             <div className=" h-headers bg-white">
@@ -10,15 +12,16 @@ function TransactionView() {
             </div>
             <div className=" bg-white flex">
                 <div className="  w-[387px] mr-5">
-                    <TransContentView />
+                  <TransContentView 
+                    coinsList = {propsData.coinList}
+                    searchCoin = {propsData.searchCoin}
+                    />
                 </div>
                 <div className=" w-rankview ">
                     <TransSideView />
                 </div>
             </div>
-            <div className=" h-footers bg-green-500">
-                footer
-            </div>
+          
         </div>
     );
 }
