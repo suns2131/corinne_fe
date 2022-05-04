@@ -7,7 +7,7 @@ function Wrapper({children}) {
         <div className=" h-headers bg-white">
             <Headers />
         </div>
-        <div className=" bg-white flex">
+        <div className=" bg-white">
             {children}
         </div>
     </div>
