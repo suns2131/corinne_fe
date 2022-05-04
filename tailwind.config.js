@@ -27,10 +27,12 @@ module.exports = {
         },
         fontSize : {
           xxs : ['10px','12px'],
+          btnxs : ['12px','14px'],
           ch1 : ['48px','67px'],
           ch2 : ['32px','38px'],
           ch3 : ['20px','24px'],
           ch4 : ['18px','29px'],
+          ch5 : ['18px','21px'],
           menus : ['15px','18px'],
           logos : ['30px','30px'],
         },
@@ -69,8 +71,16 @@ module.exports = {
           'w299' : '299px',
           'w732' : '732px',
         },
+        variants: {
+          // ...
+          scrollbar: ['dark']
+        },
       },
       
     },
-    plugins: [],
+    plugins: [
+      // ...
+      require("tailwind-scrollbar"),
+      
+    ],
   }
