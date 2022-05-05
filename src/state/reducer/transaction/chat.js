@@ -10,8 +10,12 @@ const { actions, reducer } = createSlice({
     initialState,
     reducers : {
         addChat : (state, {payload}) => {
+                console.log(payload);
                 // eslint-disable-next-line no-param-reassign
-                state.ChatMessage = payload
+                const array = [...state.ChatMessage].concat(payload);
+                console.log(array)
+                // eslint-disable-next-line no-param-reassign
+                state.ChatMessage = array
         }
     }
 })

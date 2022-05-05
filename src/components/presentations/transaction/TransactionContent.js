@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react'
 import Image from "next/image";
 import { useDispatch, useSelector } from 'react-redux';
+import TransChart from './TransChart';
 import {getServer , PostServer} from '../../../state/reducer/transaction/trans'
+
 
 function TransactionContent() {
     const dispatch = useDispatch();
@@ -22,15 +24,29 @@ function TransactionContent() {
     const [inputPrice,setInputPrice] = React.useState(0);
     
     const clickBuy = (type) => {
-      const requestData = {
-        'tiker' : '',
-        'leverage' : 0,
-        'tradePirce' : 0,
-        'buyAmont' : inputPrice,
+      let requestData;
+      if(type === "buy")
+      {
+        requestData = {
+          'tiker' : 'KRW-BTC',
+          'leverage' : 1,
+          'tradePrice' : 1000,
+          'buyAmount' : Number(inputPrice),
+        }  
       }
+      else
+      {
+        requestData = {
+          'tiker' : 'KRW-BTC',
+          'leverage' : 1,
+          'tradePrice' : 1000,
+          'sellAmount' : Number(inputPrice),
+        }  
+      }
+      
       console.log('버튼클릭')
       console.log(requestData)
-      // dispatch(PostServer(`/api/transaction/${type}`),requestData);
+      dispatch(PostServer(`/api/transaction/${type}`,requestData));
     }
 
     return (
@@ -60,7 +76,7 @@ function TransactionContent() {
           </div>
           }
         </div>
-        <div className=' w-[793px] h-[558px] p-5 bg-neutrals5 shadow-md rounded-[10px] mb-5'>
+        <div className=' w-[793px] h-[558px] p-5 bg-neutrals1 shadow-md rounded-[10px] mb-5'>
           <div className=' w-full h-[32px] mb-[10px]  flex justify-start item-center '>
             <button 
               className=' w-[31px] h-[32px] border-solid border-[#eeeeee] border-[1px] rounded-md hover:bg-[#eeeeee] mr-[4px] '
@@ -80,9 +96,7 @@ function TransactionContent() {
             <p className=' text-[12px] flex justify-center items-center mr-[10px]'>거래대금 <span className='ml-[3px] text-[#434051]'>50,000,000</span>원</p>
             <div className=' text-[12px] flex justify-center items-center border-solid border border-[#eeeeee] rounded-md py-[3px] px-[6px]'>금주매수회원 <span className='ml-[3px] text-[#A634FF]'>8</span>명</div>
           </div>
-          <div>
-            차트
-          </div>
+          <TransChart />
         </div>
         <div className=' w-[793px] h-[464px] flex shadow-md'>
           <div className=' w-[386px] h-[464px] mr-[20px] '> 

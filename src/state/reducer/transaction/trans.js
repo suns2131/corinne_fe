@@ -20,6 +20,8 @@ export const getServer = (url,requestData) => function (dispatch, getState){
     }
 
 export const PostServer = (url,requestData) => function (dispatch) {
+    console.log(url);
+    console.log(requestData);
     intercept.post(url,requestData
     ).then((response) => {
         console.log(response);

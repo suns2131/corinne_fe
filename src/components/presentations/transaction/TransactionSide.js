@@ -1,11 +1,26 @@
+import { dispatch } from "d3";
 import Image from "next/image";
-import React from 'react'
-import { useSelector } from "react-redux";
+import React, { useCallback, useEffect, useRef } from "react"
+import { useDispatch, useSelector } from "react-redux";
+import sockjs from "sockjs-client"
+import Stomp from 'stompjs'
+import {addChat} from '../../../state/reducer/transaction/chat'
+import TransChatting from "./TransChatting";
 
 function TransactionSide({coinsList}) {
     const defaultList = coinsList;
-    const chatting = useSelector((state) => state.ChatMessage);
+    const scrollRef = useRef();
+    const [editDone,setEditDone] = React.useState(false);
+    // eslint-disable-next-line no-shadow
+    const dispatch = useDispatch();
+    const chatting = useSelector((state) => state.chat.ChatMessage);
+
+    const socket = sockjs("http://52.79.228.83:8090/stomp");
+    const stpClient = Stomp.over(socket);
+
     const [coinList,setCoinList] = React.useState(defaultList)
+    const [inputMessage,setInputMessage] = React.useState('');
+
     const changeCoinList = (e) => {
         setCoinList(defaultList.filter((el) => el.name.includes(e.target.value.toUpperCase())))
     }
@@ -20,9 +35,75 @@ function TransactionSide({coinsList}) {
       setCoinList(pdata);
       }
     
-      React.useEffect(()=> {
-        
-      },[chatting])
+      React.useEffect(()=> {  
+        stpClient.connect({}, ()=> {
+          console.log('커넥트 성공');
+          // 방정보 넣어야댐
+          stpClient.subscribe(`/sub/topic/corinnechat`, (message) =>{
+            const returnData = JSON.parse(message.body);
+            console.log(returnData);
+            
+            const shot = {
+              nickname : returnData.nickname,
+              message : returnData.message,
+            }
+            dispatch(addChat(shot));
+          })
+          
+          const connectEnter = {
+            type : 'ENTER',
+            topicName : 'corinnechat',
+            nickname : '코린이',
+            imageUrl : '',
+            exp : 1000,
+            sendTime : '',
+            message :'',
+          }
+          stpClient.send(`/pub/chat/message`,{},JSON.stringify(connectEnter))
+        })
+        stpClient.debug = (str) => {
+          console.log(str);
+        }
+        return () => {
+          try {
+            stpClient.disconnect(
+              () => {
+                stpClient.unsubscribe('sub-0');
+              },
+              {}
+            );
+          } catch (error) {
+            console.log(error);
+          }
+        }
+      },[])
+
+      const sendMessage = (e) => {
+        console.log(e.key)
+        if(e.key === "Enter")
+        {
+          console.log(inputMessage);
+          const SendData = {
+            type : 'TALK',
+            topicName : 'corinnechat',
+            nickname : '코린이2',
+            imageUrl : '',
+            exp : 1000,
+            sendTime : '',
+            message :inputMessage,
+          }
+          stpClient.send(`/pub/chat/message`,{},JSON.stringify(SendData));
+          e.target.value = '';
+        }
+      }
+
+    const scrollToBottom = () => {
+        scrollRef.current.scrollIntoView({behavior : 'smooth'});
+    }
+   
+    useEffect(() => {
+      scrollToBottom();
+    },[chatting])
 
     return (
         <div className=" font-Pretendard bg-slate-50">
@@ -97,45 +178,26 @@ function TransactionSide({coinsList}) {
                 ))}
             </div>
           </div>
-          <div className=" w-[387px] h-[465px] bg-neutrals5">
+          <div className=" w-[387px] h-[465px] bg-black">
             <div className=" w-full p-5 h-[69px] rounded-t-xl shadow-md ">
               <p className=" font-bold text-base" >채팅</p>
             </div>
-            {/* 내 메세지 */}
-            <div className=" w-full h-[396px] flex flex-col justify-center items-center  shadow-md">
-              <div className=" w-full h-[324px] mt-[10px] px-5 mb-5">
-                <div className="flex mb-[10px]  ">
-                  <div className=" w-[32px] h-[32px] rounded-full bg-[#EDEDED] mr-[13px]" />
-                  <div className=" ">
-                    <p className=" text-[#cecece] text-sm font-normal ">코린이</p>
-                    <div className="flex">
-                      <div className=" bg-[#eeeeee] rounded-tr-[16px] rounded-br-[16px] rounded-bl-[16px] text-[15px] py-[7px] px-[19px]">아 망했다</div> 
-                      <p className=" flex justify-center items-end text-[#cecece] text-[12px]">00:00</p> 
-                    </div>
-                  </div>
-                </div>
-                {/* 다른사람 메세지 */}
-                <div className="flex justify-end items-center  ">
-                    <div className="flex">
-                      <p className=" flex justify-center items-end text-[#cecece] text-[12px] mr-[5px]">00:00</p> 
-                      <div 
-                        className=" bg-cur rounded-tr-[16px] rounded-br-[16px] rounded-bl-[16px] text-[15px] py-[7px] px-[19px] text-neutrals5 bg-curp"
-                        >
-                        아 망했다
-                        </div> 
-                    </div>
-                </div>
-              </div>
-              <div className=" w-[347px] h-[32px] px-5 mb-5 bg-[#f9f9f9] py-[7px] pl-[12px] flex justify-center items-center">
-                <input className=" w-[300px] bg-transparent outline-none" type="text" placeholder="채팅을 입력해주세요" />
-                <button className="ml-2" type="button">
+            <div className=" w-full h-[396px] flex flex-col justify-start items-center shadow-md px-5 pb-5">
+            <div
+              ref={scrollRef} 
+              className=" bg-black w-full h-[324px] overflow-y-scroll "
+            >
+                <TransChatting />
+            </div>
+            <div className=" w-[347px] h-[32px] px-5 mb-5 bg-[#f9f9f9] py-[7px] pl-[12px] flex justify-center items-center">  
+              <input className=" w-[300px] bg-transparent outline-none" type="text" placeholder="채팅을 입력해주세요" onChange={(e) =>{setInputMessage(e.target.value)} } onKeyUp={(e) =>{sendMessage(e)}} />
+                <button className="ml-2" type="button" >
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3.93313 3.21344L9.59313 1.32677C12.1331 0.480103 13.5131 1.86677 12.6731 4.40677L10.7865 10.0668C9.51979 13.8734 7.43979 13.8734 6.17313 10.0668L5.61312 8.38677L3.93313 7.82677C0.126458 6.5601 0.126458 4.48677 3.93313 3.21344Z" stroke="#292D32" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </button>
-              </div>    
-            </div>
-            
+              </div>
+            </div>    
           </div>
 
         </div>
