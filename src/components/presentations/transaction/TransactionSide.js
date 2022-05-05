@@ -9,8 +9,6 @@ import TransChatting from "./TransChatting";
 
 function TransactionSide({coinsList}) {
     const defaultList = coinsList;
-    const scrollRef = useRef();
-    const [editDone,setEditDone] = React.useState(false);
     // eslint-disable-next-line no-shadow
     const dispatch = useDispatch();
     const chatting = useSelector((state) => state.chat.ChatMessage);
@@ -97,14 +95,6 @@ function TransactionSide({coinsList}) {
         }
       }
 
-    const scrollToBottom = () => {
-        scrollRef.current.scrollIntoView({behavior : 'smooth'});
-    }
-   
-    useEffect(() => {
-      scrollToBottom();
-    },[chatting])
-
     return (
         <div className=" font-Pretendard bg-slate-50">
           <div className=" w-[387px] h-[61px] py-5 pl-5 bg-curp rounded-[10px] font-bold text-neutrals5 text-ch5 shadow-md ">
@@ -183,12 +173,7 @@ function TransactionSide({coinsList}) {
               <p className=" font-bold text-base" >채팅</p>
             </div>
             <div className=" w-full h-[396px] flex flex-col justify-start items-center shadow-md px-5 pb-5">
-            <div
-              ref={scrollRef} 
-              className=" bg-black w-full h-[324px] overflow-y-scroll "
-            >
-                <TransChatting />
-            </div>
+              <TransChatting />
             <div className=" w-[347px] h-[32px] px-5 mb-5 bg-[#f9f9f9] py-[7px] pl-[12px] flex justify-center items-center">  
               <input className=" w-[300px] bg-transparent outline-none" type="text" placeholder="채팅을 입력해주세요" onChange={(e) =>{setInputMessage(e.target.value)} } onKeyUp={(e) =>{sendMessage(e)}} />
                 <button className="ml-2" type="button" >

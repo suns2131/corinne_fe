@@ -1,14 +1,21 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import sockjs from "sockjs-client"
-import Stomp from 'stompjs'
-import {addChat} from '../../../state/reducer/transaction/chat'
+import React, { useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 
 function TransChatting() {
-    const dispatch = useDispatch();
     const chatting = useSelector((state) => state.chat.ChatMessage);
+    const scrollref = useRef(null);
+
+    const scrollToBottom = () => {
+      // scrollref.current.scrollIntoView({behavior : 'smooth'});
+      scrollref.current.scrollTop = scrollref.current.scrollHeight;
+    }
+
+    useEffect(() => {
+      scrollToBottom();
+    },[chatting])
+
     return (
-        <div>
+        <div ref={scrollref} className=" w-full h-[324px] overflow-y-scroll">
           {chatting && chatting.map((el) => (
             <ul>
               {el.nickname === '코린이'? 
