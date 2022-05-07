@@ -3,6 +3,8 @@ import intercept from "../../../data/intercept"
 
 // 초기 state값
 const initialState = {
+    getCurrentMonut: 0,
+    selectChartInfo : {},
     getChart : [],
 }
 
@@ -28,12 +30,21 @@ const { actions, reducer } = createSlice({
     initialState,
     reducers : {
         addChart : (state, {payload}) => {
+                const array = [...state.getChart].concat(payload);
                 // eslint-disable-next-line no-param-reassign
-                state.getChart = payload
-        }
+                state.getChart = array
+        },
+        getCurMonut: (state, {payload}) => {
+            // eslint-disable-next-line no-param-reassign
+            state.getCurrentMonut = payload;
+        },
+        selectChart: (state, {payload}) => {
+            // eslint-disable-next-line no-param-reassign
+            state.selectChartInfo = payload;
+        },
     }
 })
 
-export const {addChat} = actions;
+export const {addChart,getCurMonut} = actions;
 
 export default reducer;

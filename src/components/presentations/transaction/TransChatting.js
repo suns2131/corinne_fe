@@ -6,7 +6,6 @@ function TransChatting() {
     const scrollref = useRef(null);
 
     const scrollToBottom = () => {
-      // scrollref.current.scrollIntoView({behavior : 'smooth'});
       scrollref.current.scrollTop = scrollref.current.scrollHeight;
     }
 

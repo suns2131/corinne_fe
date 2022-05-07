@@ -1,17 +1,18 @@
-import { dispatch } from "d3";
 import Image from "next/image";
-import React, { useCallback, useEffect, useRef } from "react"
+import React from "react"
 import { useDispatch, useSelector } from "react-redux";
 import sockjs from "sockjs-client"
 import Stomp from 'stompjs'
 import {addChat} from '../../../state/reducer/transaction/chat'
 import TransChatting from "./TransChatting";
+import {getMyRank} from '../../../state/reducer/rank/rank'
 
 function TransactionSide({coinsList}) {
     const defaultList = coinsList;
     // eslint-disable-next-line no-shadow
     const dispatch = useDispatch();
-    const chatting = useSelector((state) => state.chat.ChatMessage);
+    const userinfo = useSelector((state) => state.user);
+    const rankInfo = useSelector((state) => state.rank);
 
     const socket = sockjs("http://52.79.228.83:8090/stomp");
     const stpClient = Stomp.over(socket);
@@ -33,13 +34,12 @@ function TransactionSide({coinsList}) {
       setCoinList(pdata);
       }
     
-      React.useEffect(()=> {  
+      React.useEffect(()=> {
+        dispatch(getMyRank('/api/rank/myrank',''))  
         stpClient.connect({}, ()=> {
-          console.log('커넥트 성공');
           // 방정보 넣어야댐
           stpClient.subscribe(`/sub/topic/corinnechat`, (message) =>{
             const returnData = JSON.parse(message.body);
-            console.log(returnData);
             
             const shot = {
               nickname : returnData.nickname,
@@ -77,10 +77,8 @@ function TransactionSide({coinsList}) {
       },[])
 
       const sendMessage = (e) => {
-        console.log(e.key)
         if(e.key === "Enter")
         {
-          console.log(inputMessage);
           const SendData = {
             type : 'TALK',
             topicName : 'corinnechat',
@@ -98,7 +96,10 @@ function TransactionSide({coinsList}) {
     return (
         <div className=" font-Pretendard bg-slate-50">
           <div className=" w-[387px] h-[61px] py-5 pl-5 bg-curp rounded-[10px] font-bold text-neutrals5 text-ch5 shadow-md ">
-            채채님의 현재 랭킹은 00위 입니다 🎉
+            {userinfo && rankInfo &&
+              `${userinfo.name} 님의 현재 랭킹은 ${rankInfo.myrank}위 입니다 🎉`  
+            }
+            
           </div>
           <div className=" w-[387px] h-[587px] my-5">
             <div className=" w-full h-[114px] p-5 bg-white rounded-t-xl shadow-md">    
@@ -184,7 +185,6 @@ function TransactionSide({coinsList}) {
               </div>
             </div>    
           </div>
-
         </div>
     );
 }

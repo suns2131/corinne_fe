@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import Image from "next/image";
 import { useDispatch, useSelector } from 'react-redux';
 import TransChart from './TransChart';
 import {getServer , PostServer} from '../../../state/reducer/transaction/trans'
-
+import TransProgressbar from './TransProgressbar';
+import TransactionCurrent from './TransactionCurrent';
 
 function TransactionContent() {
     const dispatch = useDispatch();
+    const buyInputRef = useRef();
     const seletor = useSelector((state) => state.trans);
     useEffect(()=> {
       dispatch(getServer('/api/transaction/KRW-BTC/1',''));
@@ -22,31 +24,43 @@ function TransactionContent() {
         })
     const [buystate,setBuyState] = React.useState(true);
     const [inputPrice,setInputPrice] = React.useState(0);
+    const [buyRequest, setBuyRequest] = React.useState({
+        'tiker': '',
+        'leverage' : 0,
+        'tradePrice' : 0,
+        'buyAmount' : 0
+    })
+    const [sellRequest, setSellRequest] = React.useState({
+      'tiker': '',
+      'leverage' : 0,
+      'tradePrice' : 0,
+      'sellAmount' : 0
+    })
     
     const clickBuy = (type) => {
-      let requestData;
-      if(type === "buy")
-      {
-        requestData = {
-          'tiker' : 'KRW-BTC',
-          'leverage' : 1,
-          'tradePrice' : 1000,
-          'buyAmount' : Number(inputPrice),
-        }  
-      }
-      else
-      {
-        requestData = {
-          'tiker' : 'KRW-BTC',
-          'leverage' : 1,
-          'tradePrice' : 1000,
-          'sellAmount' : Number(inputPrice),
-        }  
-      }
-      
-      console.log('버튼클릭')
-      console.log(requestData)
-      dispatch(PostServer(`/api/transaction/${type}`,requestData));
+      console.log(buyRequest)
+      console.log(sellRequest);
+      if(type === 'buy') dispatch(PostServer(`/api/transaction/${type}`,buyRequest));
+      else if(type === 'sell') dispatch(PostServer(`/api/transaction/${type}`,sellRequest));
+    }
+
+    const changeAmount = (type) => {
+        const currentAmonut = buyInputRef.current.value;
+
+        if(type === '-')
+        {
+          if(currentAmonut - 50000 > 0)
+            buyInputRef.current.value = currentAmonut - 50000;
+          else 
+          buyInputRef.current.value = 0;
+        }
+        else if(type === '+')
+          buyInputRef.current.value = Number(currentAmonut) + 50000;
+        else if(type === '0%')
+          buyInputRef.current.value = 0;
+        else if(type === '25%')
+          buyInputRef.current.value = currentAmonut * 0.25;
+
     }
 
     return (
@@ -66,13 +80,14 @@ function TransactionContent() {
                 <p className='text-[13px] text-[#cecece]'>비트코인</p>
               </div>
             </div>
-            <div className='flex flex-col justify-center items-end'> 
+            <TransactionCurrent />
+            {/* <div className='flex flex-col justify-center items-end'> 
               <div className='flex justify-center items-center text-[#A634FF]'>
                 <p className='text-[12px] mr-[4px]' >+0.01%(▲ 7,000) </p>
                 <p className='text-[24px] font-bold'>{coinList.price}원</p>
               </div> 
               <p className=' text-[14px] font-normal text-[#CECECE]'>1.00 {coinList.unitPrice}</p>
-            </div>  
+            </div>   */}
           </div>
           }
         </div>
@@ -122,24 +137,35 @@ function TransactionContent() {
                     <p>10,000,000원</p>
                   </div>
                   <div className='w-full flex justify-start items-center text-[14px] mb-[33px]'>
-                    <p className='w-[80px] mr-[5px]'>레버리지</p>
-                    <div className='w-[213px] h-[7px] bg-violet-500 rounded-xl  mr-[14px] ' />
-                    <p className=' text-[15px] text-curp font-bold'>25x</p>
+                    <TransProgressbar buyRequest={buyRequest} setBuyRequest={setBuyRequest} />
                   </div>
                   <div className='flex justify-center items-start mb-[12px] '>
                     <p className=' text-[14px] w-[80px] pt-[10px] mr-[5px]'>매수 금액</p>
                     <div>
                     <div className='w-full flex justify-start items-center text-[14px] bg-[#fbfbfb] px-[9px] py-[6px]' >
-                      <button className='w-[32px] h-[32px] flex justify-center items-center border border-solid border-[#eeeeee] rounded-md mr-[10px]' type='button' >-</button>
+                      <button 
+                        className='w-[32px] h-[32px] flex justify-center items-center border border-solid border-[#eeeeee] rounded-md mr-[10px]' 
+                        type='button' 
+                        onClick={()=> {changeAmount('-')}}
+                        >-</button>
                       <input 
+                      ref={buyInputRef} 
                       className='bg-[#fbfbfb] outline-none' 
                       type="text" 
-                      onChange={(e)=> setInputPrice(e.target.value)}
+                      onChange={(e)=> {setInputPrice(e.target.value); setBuyRequest({...buyRequest, 'buyAmount': e.target.value})}}
                       placeholder='금액을 입력해주세요.' />
-                      <button className='w-[32px] h-[32px] flex justify-center items-center border border-solid border-[#eeeeee] rounded-md ml-[10px]' type='button' >+</button>
+                      <button 
+                        className='w-[32px] h-[32px] flex justify-center items-center border border-solid border-[#eeeeee] rounded-md ml-[10px]' 
+                        type='button'
+                        onClick={()=> {changeAmount('+')}}
+                         >+</button>
                     </div>
                     <div className='flex justify-center items-center'>
-                      <button className='w-[41px] h-[32px] px-[7.5px] py-[5.5px] mr-[9px] rounded-md text-[14px] border border-solid border-[#eeeeee] active:bg-[#eeeeee]' type='button'>0%</button>
+                      <button 
+                        className='w-[41px] h-[32px] px-[7.5px] py-[5.5px] mr-[9px] rounded-md text-[14px] border border-solid border-[#eeeeee] active:bg-[#eeeeee]'
+                        type='button'
+                        onClick={()=> {changeAmount('0%')}}
+                        >0%</button>
                       <button className='w-[45px] h-[32px] px-[7.5px] py-[5.5px] mr-[9px] rounded-md text-[14px] border border-solid border-[#eeeeee] active:bg-[#eeeeee]' type='button'>25%</button>
                       <button className='w-[45px] h-[32px] px-[7.5px] py-[5.5px] mr-[9px] rounded-md text-[14px] border border-solid border-[#eeeeee] active:bg-[#eeeeee]' type='button'>50%</button>
                       <button className='w-[45px] h-[32px] px-[7.5px] py-[5.5px] mr-[9px] rounded-md text-[14px] border border-solid border-[#eeeeee] active:bg-[#eeeeee]' type='button'>75%</button>

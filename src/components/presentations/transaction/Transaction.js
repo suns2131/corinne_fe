@@ -4,8 +4,8 @@ import TransactionSide from './TransactionSide';
 import TransactionContent from './TransactionContent';
 
 function Transaction(){
-      
-      
+      const dispatch = useDispatch();
+      const list2 = useSelector((state) => state.trans.tikerList);
       const list = [{
           favorite : true,
           src : '/icons/icon_btc.png',
