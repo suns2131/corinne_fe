@@ -1,0 +1,25 @@
+.progress {
+    display: block; /* default: inline-block */
+    width: 204px;
+    height: 8px;
+    border: 0 none;
+    background: #eeeeee;
+    border-radius: 14px;
+  }
+  .progress::-moz-progress-bar {
+    border-radius: 10px;
+    background: #FFF;
+  }
+  /* webkit */
+  @media screen and (-webkit-min-device-pixel-ratio:0) {
+    .progress {
+      height: 8px;
+    }
+  }
+  .progress::-webkit-progress-bar {
+      background: transparent;
+  }  
+  .progress::-webkit-progress-value {  
+    border-radius: 8px;
+    background: #E05656;
+  } 

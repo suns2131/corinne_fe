@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import { useDispatch, useSelector } from "react-redux";
 import { useSelect } from "@mui/base";
@@ -10,6 +10,13 @@ const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 function TransChart() {
     const dispatch = useDispatch();
     const chartData = useSelector((state) => state.chart.getChart);
+    const [currentState,setCureentState] = useState({
+      time: '',
+      start : 0,
+      high: 0,
+      low: 0,
+      close: 0
+    });
     const coinType = 'KRW-BTC';
     const dState = {
         options: {
@@ -33,10 +40,28 @@ function TransChart() {
           }]
         };
     const DataSetting = (realData) => {
-      const inputData = {
-        x: realData.tradeTime,
-        y: [realData.tradePrice,realData.tradePrice,realData.tradePrice,realData.tradePrice]
+      
+      // 현재 state의 시간과 realData의 시간이 일치할 경우 
+      if(realData.tradeTime === currentState.time)
+      {
+        const newState = {
+          ...currentState,
+          high: realData.tradePrice > currentState.high ? realData.tradePrice : currentState.high,
+          low: realData.tradePrice < currentState.low ? realData.tradePrice : currentState.low,
+          close: realData.tradePrice
+        }
+        setCureentState(newState);
       }
+      // 일치하지 않을 경우 
+      else 
+      if(currentState.time !== 0)
+        {
+          const inputData = {
+            x: currentState.time,
+            y: [currentState.start,currentState.high,currentState.low,currentState.close]
+          }
+          dispatch(addChart(inputData))
+        }
     }
 
     React.useEffect(()=> {
