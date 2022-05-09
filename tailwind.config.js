@@ -2,6 +2,7 @@ module.exports = {
     content: [
       "./pages/**/*.{js,ts,jsx,tsx}",
       "./components/**/*.{js,ts,jsx,tsx}",
+      "./src/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
       extend: {
@@ -74,6 +75,9 @@ module.exports = {
         variants: {
           // ...
           scrollbar: ['dark']
+        },
+        boxShadow: {
+          '008': '0px 0px 8px rgba(0,0,0,0.07)',
         },
       },
       
