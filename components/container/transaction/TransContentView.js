@@ -56,7 +56,7 @@ function TransContentView({coinsList}) {
             </div>
             <div className=" w-full h-[474px] bg-white drop-shadow-md overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-200 ">
             {coinList && coinList.map((el,idx) =>(
-                  <div key={idx} className=" w-full h-[90px] p-5 flex justify-between items-cente hover:bg-[#FBF6FF]  ">
+                  <div className=" w-full h-[90px] p-5 flex justify-between items-cente hover:bg-[#FBF6FF]  ">
                   <div className=" flex ">
                     <div className=" mr-[10px] flex justify-center items-center ">
                       {el.favorite ? 

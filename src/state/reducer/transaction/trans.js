@@ -41,6 +41,7 @@ export const getTikerList = () => function (dispatch){
 
 
 export const PostServer = (url,requestData) => function (dispatch) {
+    console.log(requestData)
     intercept.post(url,requestData
     ).then((response) => {
         console.log(response);

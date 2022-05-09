@@ -25,9 +25,9 @@ function TransactionContent() {
     const [buystate,setBuyState] = React.useState(true);
     const [inputPrice,setInputPrice] = React.useState(0);
     const [buyRequest, setBuyRequest] = React.useState({
-        'tiker': '',
+        'tiker': 'KRW-BTC',
         'leverage' : 0,
-        'tradePrice' : 0,
+        'tradePrice' : 46300000,
         'buyAmount' : 0
     })
     const [sellRequest, setSellRequest] = React.useState({
@@ -91,7 +91,7 @@ function TransactionContent() {
           </div>
           }
         </div>
-        <div className=' w-[793px] h-[558px] p-5 bg-neutrals1 shadow-md rounded-[10px] mb-5'>
+        <div className=' w-[793px] h-[558px] p-5  shadow-md rounded-[10px] mb-5'>
           <div className=' w-full h-[32px] mb-[10px]  flex justify-start item-center '>
             <button 
               className=' w-[31px] h-[32px] border-solid border-[#eeeeee] border-[1px] rounded-md hover:bg-[#eeeeee] mr-[4px] '

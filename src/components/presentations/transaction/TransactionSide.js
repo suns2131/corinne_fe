@@ -14,7 +14,7 @@ function TransactionSide({coinsList}) {
     const userinfo = useSelector((state) => state.user);
     const rankInfo = useSelector((state) => state.rank);
 
-    const socket = sockjs("http://52.79.228.83:8090/stomp");
+    const socket = sockjs("http://3.39.187.36:8090/stomp");
     const stpClient = Stomp.over(socket);
 
     const [coinList,setCoinList] = React.useState(defaultList)
@@ -169,7 +169,7 @@ function TransactionSide({coinsList}) {
                 ))}
             </div>
           </div>
-          <div className=" w-[387px] h-[465px] bg-black">
+          <div className=" w-[387px] h-[465px] ">
             <div className=" w-full p-5 h-[69px] rounded-t-xl shadow-md ">
               <p className=" font-bold text-base" >채팅</p>
             </div>

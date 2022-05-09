@@ -1,7 +1,17 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./Rank.module.css"
+import {getMyRank, getTop3Rank, getRealRank} from '../../../state/reducer/rank/rank'
 
 function Rank() {
+    const dispatch = useDispatch();
+    const rankData = useSelector((state) => state.rank);
+    console.log(rankData);
+    React.useEffect(()=>{
+      // dispatch(getTop3Rank());
+      dispatch(getRealRank(1));
+    },[])
+
     return (
       <div className=" font-Pretendard flex overflow-hidden">
         <div className=" w-[793px] mr-5">
@@ -23,37 +33,44 @@ function Rank() {
                 <p className="font-normal text-[12px] text-[#cecece]">2022.00.00 ~ 2022.00.00 </p>
               </div>
             </div>
-            <div>
+            {/* <div>
               <p className="font-normal text-[16px] text-[#ffffff]">00님 축하드립니다.🎉</p>  
-            </div>
-            <div className="w-[99%] h-[168px] flex justify-center items-end mt-[20px] mb-[72px] ">
-               <div className="w-[84px] flex flex-col justify-start items-center   mr-[56px] ">
-                  <div className="w-[84px] h-[84px] rounded-full bg-slate-500 mb-[4px]" />
+            </div> */}
+            <div className="w-[99%] h-[267px] flex justify-start items-end mt-[20px] ">
+              <div><p className=" text-left font-normal text-[12px] text-[#ffffff] mr-[96px]  mb-5">전체 랭킹 보기 &gt;</p></div>
+               <div className="w-[84px] flex flex-col justify-start items-center mr-[56px]">
                   <p className="font-bold text-[16px] text-[#ffffff] mb-[9px]">🥈쏘냐도르</p>
-                  <p className="font-bold text-[12px] text-[#A634FF] ">00.00%</p>
-                  <p className="font-normal text-[12px] text-[#ffffff]">0,000,000원</p>
+                  <div className="w-[84px] h-[84px] rounded-full bg-slate-500 mb-[4px]" />
+                  <div className="bg-[#33323F] w-[118px] h-[78px] rounded-t-md  pt-[16px] flex flex-col justify-start items-center  ">
+                    <p className="font-bold text-[12px] text-[#A634FF] ">00.00%</p>
+                    <p className="font-normal text-[12px] text-[#ffffff]">0,000,000원</p>
+                  </div>
                </div>
                <div className="w-[110px] flex flex-col justify-start items-center mr-[56px] ">
-                  <div className="w-[110px] h-[110px] rounded-full bg-slate-500 mb-[4px] " />
                   <p className="font-bold text-[16px] text-[#ffffff] mb-[9px]">🥇채채</p>
-                  <p className="font-bold text-[12px] text-[#A634FF] ">00.00%</p>
-                  <p className="font-normal text-[12px] text-[#ffffff]">0,000,000원</p>
+                  <div className="w-[110px] h-[110px] rounded-full bg-slate-500 mb-[4px] " />
+                  <div className="bg-[#33323F] w-[140px] h-[108px] rounded-t-md  pt-[16px] flex flex-col justify-start items-center">
+                    <p className="font-bold text-[12px] text-[#A634FF] ">00.00%</p>
+                    <p className="font-normal text-[12px] text-[#ffffff]">0,000,000원</p>
+                  </div>
                </div>
                <div className="w-[120px] flex flex-col justify-start items-center ">
-                  <div className="w-[84px] h-[84px] rounded-full bg-slate-500 mb-[4px]" />
                   <p className="font-bold text-[16px] text-[#ffffff] mb-[9px]">🥉골목대장백종원</p>
-                  <p className="font-bold text-[12px] text-[#A634FF] ">00.00%</p>
-                  <p className="font-normal text-[12px] text-[#ffffff]">0,000,000원</p>
+                  <div className="w-[84px] h-[84px] rounded-full bg-slate-500 mb-[4px]" />
+                  <div className="bg-[#33323F] w-[118px] h-[78px] rounded-t-md pt-[16px] flex flex-col justify-start items-center ">
+                    <p className="font-bold text-[12px] text-[#A634FF] ">00.00%</p>
+                    <p className="font-normal text-[12px] text-[#ffffff]">0,000,000원</p>
+                  </div>
                </div>
             </div>
           </div>
-          <div className=" w-full h-[100px] mb-[21px] rounded-[10px] bg-[#c4c4c4] flex justify-center items-center">
+          {/* <div className=" w-full h-[100px] mb-[21px] rounded-[10px] bg-[#c4c4c4] flex justify-center items-center">
             1:1
-          </div>
+          </div> */}
           <div className=" w-full h-[923px] shadow-md rounded-t-[10px] border border-solid border-black">
             <div className="w-[753px] h-[44px] m-5 flex justify-between items-center   ">
-              <p className="font-bold text-[16px] text-[#33323f]">실시간 랭킹</p>
-              <div className="flex justify-between ">
+              <p className="font-bold text-[16px] text-[#33323f] ">실시간 랭킹</p>
+              <div className="flex justify-between rounded-[10px] bg-[#f9f9f9] ">
                 <input placeholder="닉네임 검색" />
                 <button
                   type="button"
@@ -186,17 +203,20 @@ function Rank() {
           </div>
         </div>
         <div className=" w-[387px]"> 
-          <div className="w-full h-[492px] mb-[21px] rounded-[10px] border border-solid border-black  ">
+          <div className="w-full h-[473px] mb-[21px] rounded-[10px] border border-solid border-black  ">
             <div className="m-[20px] flex flex-col justify-start items-center">
               <div className="w-[141px] h-[141px] bg-slate-500 rounded-full mb-[15px]" />
               <p className="font-bold text-[20px] mb-[8px]">채채</p>
-              <div className="w-[74px] h-[26px] border border-solid border-[#e4e4e4] rounded-[20px] flex justify-center items-center  mb-[15px] ">
-                <div className="w-[14px] h-[14px] bg-red-600 rounded-full mr-[4px]" />
-                <p className=" font-normal text-[12px]">Lv.레드</p>
+              <div className=" flex justify-center items-center mb-[24px]">
+                <div className="w-[74px] h-[26px] border border-solid border-[#e4e4e4] rounded-[20px] flex justify-center items-center mr-[8px]">
+                  <div className="w-[14px] h-[14px] bg-red-600 rounded-full mr-[4px]" />
+                  <p className=" font-normal text-[12px]">Lv.레드</p>
+                  </div>
+                <progress className={styles.progress}  max={5000} value={1000}  />
+                <div className="ml-[8px] text-[12px] font-normal" >1000xp / 5000xp</div>
               </div>
-              <progress className={styles.progress}  max={5000} value={1000}  />
-              <div className="mt-[6px] mb-[30px] text-[12px] font-normal" >1000xp / 5000xp</div>
-              <div className=" flex justify-around items-center mb-[28px]">
+              
+              <div className=" flex justify-around items-center mb-[30px]">
                   <div className="w-[52px] h-[42px] mr-[32px] flex flex-col justify-center items-center">
                     <p className="font-bold text-[15px] text-curp">00위</p>
                     <p className="font-bold text-[12px] text-[#777777]">현재랭킹</p>
@@ -214,16 +234,26 @@ function Rank() {
                     <p className="font-bold text-[12px] text-[#777777]">팔로잉</p>
                   </div>
               </div>
-              <div className="w-[347px] h-[73px] px-5 py-[14px] flex justify-between items-center bg-[#f6f6f6] rounded-[10px]">
-                <div className=" font-normal text-[12px] text-[#777777]">
+              <div className="w-[347px] h-[109px] p-5 flex justify-between items-center bg-[#f6f6f6] rounded-[10px]">
+                <div className=" font-normal text-[14px]  text-[#777777]">
                   <p>수익률</p>
                   <p className="mt-[3px]">총 자산</p>
+                  <p className="mt-[3px]">리셋횟수</p>
                 </div>
                 <div className=" text-right text-[15px]">
                   <p className="font-bold text-[#A634FF]">00.00%</p>
-                  <p className="font-normal text-[#33323f]">0,000,000원</p>
+                  <p className="mt-[3px] font-normal text-[#33323f]">0,000,000원</p>
+                  <p className="mt-[3px] font-normal text-[#33323f]">0</p>
                 </div>  
               </div>
+            </div>
+          </div>
+          <div className="w-[387px] h-[100px] mb-5 bg-red-800 rounded-[10px] flex "> 
+            <div className=" bg-curp w-[50%] rounded-tl-md rounded-bl-md flex justify-center items-center">
+                1
+            </div>
+            <div className=" bg-[#cecece] w-[50%] rounded-tr-md rounded-br-md flex justify-center items-center">
+                2
             </div>
           </div>
           <div className=" w-full h-[923px] rounded-[10px] border border-solid border-black">
