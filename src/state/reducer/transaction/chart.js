@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, current } from "@reduxjs/toolkit"
 import intercept from "../../../data/intercept"
 
 // 초기 state값
@@ -30,9 +30,44 @@ const { actions, reducer } = createSlice({
     initialState,
     reducers : {
         addChart : (state, {payload}) => {
-                const array = [...state.getChart].concat(payload);
-                // eslint-disable-next-line no-param-reassign
-                state.getChart = array
+                const prevArray = current(state.getChart);
+                if(prevArray.length > 0)
+                {
+                    if(payload.x !== prevArray[prevArray.length-1].x)
+                    {
+                        const array = [...state.getChart,payload];
+                        // eslint-disable-next-line no-param-reassign
+                        state.getChart = array
+                    }
+                    else
+                    {
+                        const array = [...state.getChart];
+                        const lastdata = prevArray[prevArray.length-1];
+                        const newPayload = {
+                            x:lastdata.x,
+                            y:[
+                                lastdata.y[0],
+                                payload.y[1] > lastdata.y[1] ? payload.y[1] : lastdata.y[1],
+                                payload.y[2] < lastdata.y[2] ? payload.y[2] : lastdata.y[2],
+                                payload.y[3]
+                            ]
+                        }
+                        const index = array.findIndex(el => el.x === payload.x);
+                        array.splice(index,1,newPayload)
+                        // eslint-disable-next-line no-param-reassign
+                        state.getChart = array
+                    }
+                }
+                else{
+                    const array = [...state.getChart,payload];
+                    // eslint-disable-next-line no-param-reassign
+                    state.getChart = array
+                }
+                
+        },
+        updateChart: (state, {payload}) => {
+            console.log(payload);
+            // const array = [...state.getChart].findIndex(el => el.x === payload.x)
         },
         getCurMonut: (state, {payload}) => {
             // eslint-disable-next-line no-param-reassign
@@ -45,6 +80,6 @@ const { actions, reducer } = createSlice({
     }
 })
 
-export const {addChart,getCurMonut} = actions;
+export const {addChart,updateChart,getCurMonut} = actions;
 
 export default reducer;

@@ -14,7 +14,7 @@ function TransactionSide({coinsList}) {
     const userinfo = useSelector((state) => state.user);
     const rankInfo = useSelector((state) => state.rank);
 
-    const socket = sockjs("http://3.39.187.36:8090/stomp");
+    const socket = sockjs("http://13.125.232.165:8090/stomp");
     const stpClient = Stomp.over(socket);
 
     const [coinList,setCoinList] = React.useState(defaultList)

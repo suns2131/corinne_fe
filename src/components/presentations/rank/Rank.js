@@ -67,8 +67,8 @@ function Rank() {
           {/* <div className=" w-full h-[100px] mb-[21px] rounded-[10px] bg-[#c4c4c4] flex justify-center items-center">
             1:1
           </div> */}
-          <div className=" w-full h-[923px] shadow-md rounded-t-[10px] border border-solid border-black">
-            <div className="w-[753px] h-[44px] m-5 flex justify-between items-center   ">
+          <div className=" w-full h-[923px] rounded-t-[10px] shadow-008">
+            <div className="w-[753px] h-[84px] mx-5 flex justify-between items-center">
               <p className="font-bold text-[16px] text-[#33323f] ">실시간 랭킹</p>
               <div className="flex justify-between rounded-[10px] bg-[#f9f9f9] ">
                 <input placeholder="닉네임 검색" />
@@ -81,7 +81,7 @@ function Rank() {
                 </button>
               </div>
             </div>
-            <div className="w-full flex flex-col mx-5 mt-[19px]">
+            <div className="w-full h-[839px] flex flex-col mx-5 mt-[19px] ">
               {/* 123반복문 */}
               <div className=" w-[753px] h-[64px] mb-[15px] bg-curp rounded-[10px] p-5 flex justify-between items-center">
                  <div className="w-[45px] font-bold text-[15px] text-neutrals5">🥇1위</div>
@@ -203,7 +203,7 @@ function Rank() {
           </div>
         </div>
         <div className=" w-[387px]"> 
-          <div className="w-full h-[473px] mb-[21px] rounded-[10px] border border-solid border-black  ">
+          <div className="w-full h-[473px] mb-[20px] rounded-[10px] shadow-008 border border-solid border-black  ">
             <div className="m-[20px] flex flex-col justify-start items-center">
               <div className="w-[141px] h-[141px] bg-slate-500 rounded-full mb-[15px]" />
               <p className="font-bold text-[20px] mb-[8px]">채채</p>
@@ -256,8 +256,8 @@ function Rank() {
                 2
             </div>
           </div>
-          <div className=" w-full h-[923px] rounded-[10px] border border-solid border-black">
-            <div className="w-[347px] h-[44px] m-5 flex justify-between items-center ">
+          <div className=" w-full h-[618px] rounded-[10px] shadow-008">
+            <div className="w-[347px] h-[84px] m-5 flex justify-between items-center ">
               <p className=" font-bold text-[16px]">팔로잉 랭킹</p>
               <div>
                   <input className="w-[216px] h-[44px]" placeholder="닉네임 검색"/>
@@ -271,7 +271,7 @@ function Rank() {
                   </button>
                 </div>
             </div>
-            <div className="mx-5 h-[834px] overflow-y-scroll">
+            <div className="mx-5 h-[618px] overflow-y-scroll ">
               {/* 반복문 */}
               <div className="flex justify-between items-start mb-[20px]">
                 <div className="flex">

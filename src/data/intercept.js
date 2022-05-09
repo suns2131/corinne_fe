@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const intercept = axios.create({
-    baseURL: "http://3.39.187.36:8081",
+    baseURL: "http://13.125.232.165:8081",
     headers: {
         "content-type" : "application/json; charset=UTF-8",
         accept : "application/json",
