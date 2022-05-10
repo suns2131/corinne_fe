@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const intercept = axios.create({
-    baseURL: "http://3.39.187.36",
+    baseURL: "http://13.125.232.165:8081",
     headers: {
         "content-type" : "application/json; charset=UTF-8",
         accept : "application/json",
@@ -9,8 +9,5 @@ const intercept = axios.create({
     },
     withCredentials: false,
 });
-
-//  axios.defaults.headers.common.Authorization = "BEARER eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJFWFBJUkVEX0RBVEUiOjE2NTE5MTk5NjQsIlVTRVJfRU1BSUwiOiJhQG5hdmVyLmNvbSIsImlzcyI6InNwYXJ0YSIsIkNMQUlNX1VTRVJfTklDS05BTUUiOiLquYDshLHsp4QifQ.IGgEhzdNvqtl5Lj-LxRW7oM5PVu7yvXYO5anIuQkQBU";
-// axios.defaults.headers.post['Content-Type'] = 'application/json; charset=UTF-8'
 
 export default intercept;

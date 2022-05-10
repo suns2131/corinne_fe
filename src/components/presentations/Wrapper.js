@@ -1,12 +1,19 @@
-import { memo } from 'react';
+
+import React from 'react'
+import Headers from '../../../components/shared/Headers/container/Headers'
 
 function Wrapper({children}) {
     return (
-    <div>
-        <video className='fixed top-0 right-0 bottom-0 min-w-full min-h-full' src="/images/corinne_background.mp4" autoPlay loop muted /> 
-        {children}
+    <div className='w-full h-full bg-[#fbfbfb]'>
+        <div className=" w-container m-auto bg-[#ffffff] ">
+            <div className=" h-header">
+                <Headers />
+            </div>
+            <div>
+                {children}
+            </div>
+        </div>
     </div>
     )
 }
-
-export default memo(Wrapper);
+export default Wrapper
