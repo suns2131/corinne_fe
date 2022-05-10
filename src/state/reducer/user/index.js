@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { signUp } from "./thunk";
 
 const initialState = {
     name: '',
+    status: 'success'
 }
 
 const { actions, reducer } = createSlice({
@@ -11,6 +13,12 @@ const { actions, reducer } = createSlice({
         login: (state) => ({
             name: 'test'
         })
+    },
+    extroReducers: (builder) => {
+        builder.addCase(signUp.fulfilled, (state, { payload }) => ({
+            ...state,
+            status: payload.error,
+        }))
     }
 })
 

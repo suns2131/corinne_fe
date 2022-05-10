@@ -1,8 +1,7 @@
 import '../styles/globals.css'
-import {SessionProvider} from 'next-auth/react'
+import wrapper from '../src/state'
 import sockjs from "sockjs-client"
 import Stomp from 'stompjs'
-import wrapper from '../src/state'
 
 const socket = sockjs("http://3.39.187.36:8090/stomp");
 const alarmClient = Stomp.over(socket);
@@ -15,9 +14,9 @@ alarmClient.connect({}, ()=> {
   })
 })
 
-function MyApp({ Component, pageProps : {session, ...pageProps} }) {
-  return <Component {...pageProps} />
-
+function MyApp({ Component, pageProps }) {
+  return <Component ponent {...pageProps} />;
 }
+
 
 export default wrapper.withRedux(MyApp);

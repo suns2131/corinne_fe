@@ -1,19 +1,13 @@
 import React from 'react';
 
-import KaKaoLogin from 'react-kakao-login';
-
-function Login({ onSuccess, kakaoKey }) {
+function Login({ kakaoRedirectUrl }) {
     return (
     <div>
-        <KaKaoLogin
-            token={kakaoKey}
-            buttonText="kakao"
-            onSuccess={onSuccess}
-            onFail={console.error}
-            onLogout={console.info}
-        >
-        <h3>카카오 계정으로 로그인</h3>
-      </KaKaoLogin>
+        <a className="ml-[200px] z-10 cursor-pointer" href={kakaoRedirectUrl}>
+            <button type="button">
+                카카오 계정으로 로그인
+            </button>
+        </a>
     </div>
     )
 }

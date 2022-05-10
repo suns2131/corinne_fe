@@ -1,29 +1,48 @@
-import React, {useCallback, useEffect} from 'react';
+import React, {useCallback, useState, useEffect, useRef} from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../state/reducer/user';
-import Login from '../presentations/login/Login';
+import { selectLoginStatus } from '../../state/reducer/user/selectors';
+import { signUp } from '../../state/reducer/user/thunk';
+import FirstLoginForm from '../presentations/login/FirstLoginForm';
+import Wrapper from '../presentations/Wrapper';
 
 function LoginContainer(){
     const dispatch = useDispatch();
-    const kakaoKey = process.env.NEXT_PUBLIC_KAKAO_JSKEY;
+    const userNameRef = useRef();
 
-    const kakaoLoginHandler = useCallback((response) => {
-        const { id } = response.profile;
-        const { email } = response.profile.kakao_account;
+    const status = useSelector(selectLoginStatus);
 
-        console.log(response);
-    }, [])
+    const [loginStatusText, setLoginStatusText] = useState('')
+    const [loginStatus, setLoginStatus] = useState(false);
+
+    const handleClickLoginSuccess = useCallback(() => {
+        const userName = userNameRef.current.value;
+        if(userName.length < 2 || userName.length > 8){
+            setLoginStatusText('글자수를 확인해주세요');
+        }else{
+            dispatch(signUp(userName))
+        }
+    }, [dispatch, userNameRef])
 
     useEffect(() => {
-        dispatch(login());
-    }, [dispatch])
+        if(status === 'error'){
+            setLoginStatusText('닉네임이 중복입니다.')
+        }
+        if(status === 'success'){
+            setLoginStatusText('')
+        }
+    }, [loginStatus, status])
 
     return (
-        <Login 
-        onSuccess={kakaoLoginHandler}
-        kakaoKey={kakaoKey}
-        />
+        <Wrapper>
+            <FirstLoginForm 
+            userNameRef={userNameRef}
+            handleClickLoginSuccess={handleClickLoginSuccess}
+            loginStatus={loginStatus}
+            loginStatusText={loginStatusText}
+            />
+        </Wrapper>
     )
 }
 
