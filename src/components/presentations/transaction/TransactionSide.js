@@ -9,6 +9,7 @@ import {getMyRank} from '../../../state/reducer/rank/rank'
 
 function TransactionSide({coinsList}) {
     const defaultList = coinsList;
+    console.log(defaultList)
     // eslint-disable-next-line no-shadow
     const dispatch = useDispatch();
     const userinfo = useSelector((state) => state.user);
@@ -17,8 +18,9 @@ function TransactionSide({coinsList}) {
     const socket = sockjs("http://13.125.232.165:8090/stomp");
     const stpClient = Stomp.over(socket);
 
-    const [coinList,setCoinList] = React.useState(defaultList)
+    const [coinList,setCoinList] = React.useState(coinsList)
     const [inputMessage,setInputMessage] = React.useState('');
+    console.log(coinList)
 
     const changeCoinList = (e) => {
         setCoinList(defaultList.filter((el) => el.name.includes(e.target.value.toUpperCase())))
@@ -36,7 +38,7 @@ function TransactionSide({coinsList}) {
     
       React.useEffect(()=> {
         dispatch(getMyRank('/api/rank/myrank',''))  
-        stpClient.connect({}, ()=> {
+        stpClient.connect({token : "BEARER eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJFWFBJUkVEX0RBVEUiOjE2NTIyNjkzMjcsIlVTRVJfRU1BSUwiOiJhQG5hdmVyLmNvbSIsImlzcyI6InNwYXJ0YSIsIkNMQUlNX1VTRVJfTklDS05BTUUiOiLquYDshLHsp4QifQ.5MVuc5ERTcK-keMryiH-JxUvZgODITR89BS-ddkZpHM"}, ()=> {
           // 방정보 넣어야댐
           stpClient.subscribe(`/sub/topic/corinnechat`, (message) =>{
             const returnData = JSON.parse(message.body);
@@ -75,6 +77,10 @@ function TransactionSide({coinsList}) {
           }
         }
       },[])
+
+      React.useEffect(()=>{
+        setCoinList(coinsList)
+      },[coinsList])
 
       const sendMessage = (e) => {
         if(e.key === "Enter")
@@ -139,13 +145,13 @@ function TransactionSide({coinsList}) {
                   <div className=" flex ">
                     <div className=" mr-[10px] flex justify-center items-center ">
                       {el.favorite ? 
-                        <button type="button" onClick={() => {chageFaivorite(el.name)}}>
+                        <button type="button" onClick={() => {chageFaivorite(el.tiker)}}>
                          <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M11.7299 1.50989L13.4899 5.02989C13.7299 5.51989 14.3699 5.98989 14.9099 6.07989L18.0999 6.60989C20.1399 6.94989 20.6199 8.42989 19.1499 9.88989L16.6699 12.3699C16.2499 12.7899 16.0199 13.5999 16.1499 14.1799L16.8599 17.2499C17.4199 19.6799 16.1299 20.6199 13.9799 19.3499L10.9899 17.5799C10.4499 17.2599 9.55991 17.2599 9.00991 17.5799L6.01991 19.3499C3.87991 20.6199 2.57991 19.6699 3.13991 17.2499L3.84991 14.1799C3.97991 13.5999 3.74991 12.7899 3.32991 12.3699L0.849909 9.88989C-0.610091 8.42989 -0.140091 6.94989 1.89991 6.60989L5.08991 6.07989C5.61991 5.98989 6.25991 5.51989 6.49991 5.02989L8.25991 1.50989C9.21991 -0.400107 10.7799 -0.400107 11.7299 1.50989Z" fill="#FFCE85"/>
                          </svg>
                         </button>
                          :
-                        <button type="button" onClick={() => {chageFaivorite(el.name);}}>
+                        <button type="button" onClick={() => {chageFaivorite(el.tiker);}}>
                           <svg width="21" height="20" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M12.7299 2.51014L14.4899 6.03014C14.7299 6.52014 15.3699 6.99014 15.9099 7.08014L19.0999 7.61014C21.1399 7.95014 21.6199 9.43014 20.1499 10.8901L17.6699 13.3701C17.2499 13.7901 17.0199 14.6001 17.1499 15.1801L17.8599 18.2501C18.4199 20.6801 17.1299 21.6201 14.9799 20.3501L11.9899 18.5801C11.4499 18.2601 10.5599 18.2601 10.0099 18.5801L7.01991 20.3501C4.87991 21.6201 3.57991 20.6701 4.13991 18.2501L4.84991 15.1801C4.97991 14.6001 4.74991 13.7901 4.32991 13.3701L1.84991 10.8901C0.389909 9.43014 0.859909 7.95014 2.89991 7.61014L6.08991 7.08014C6.61991 6.99014 7.25991 6.52014 7.49991 6.03014L9.25991 2.51014C10.2199 0.600137 11.7799 0.600137 12.7299 2.51014Z" stroke="#CECECE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                           <path d="M12.7299 2.51014L14.4899 6.03014C14.7299 6.52014 15.3699 6.99014 15.9099 7.08014L19.0999 7.61014C21.1399 7.95014 21.6199 9.43014 20.1499 10.8901L17.6699 13.3701C17.2499 13.7901 17.0199 14.6001 17.1499 15.1801L17.8599 18.2501C18.4199 20.6801 17.1299 21.6201 14.9799 20.3501L11.9899 18.5801C11.4499 18.2601 10.5599 18.2601 10.0099 18.5801L7.01991 20.3501C4.87991 21.6201 3.57991 20.6701 4.13991 18.2501L4.84991 15.1801C4.97991 14.6001 4.74991 13.7901 4.32991 13.3701L1.84991 10.8901C0.389909 9.43014 0.859909 7.95014 2.89991 7.61014L6.08991 7.08014C6.61991 6.99014 7.25991 6.52014 7.49991 6.03014L9.25991 2.51014C10.2199 0.600137 11.7799 0.600137 12.7299 2.51014Z" stroke="black" strokeOpacity="0.2" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>

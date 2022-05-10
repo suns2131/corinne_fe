@@ -21,21 +21,22 @@ export const getTikerList = () => function (dispatch){
 
       intercept.get('/api/price/rank'
         ).then((response) => {
-            const reusltData  = response.data.content;
-            const src = `${reusltData.unitPrice}_ICON`;
-            const tikerList = {
-                favorite : true,
-                src : process.env.BTC_ICON,
-                alt : 'btc',
-                name : 'BTC',
-                tiker: reusltData.tiker,
-                upRate : reusltData.fluctuationRate,
-                price: reusltData.tradePrice,
-                unitPrice : 'BTC',    
-            }
-
+            const reusltData  = response.data;
+            const newArray = reusltData.map((el) => {
+               const newElemnt = {
+                   favorite: el.favorite,
+                   src: `/icons/icon_${el.unit.toLowerCase()}.png`,
+                   alt: el.unit,
+                   name: el.tikername,
+                   tiker: el.tiker,
+                   upRate: el.fluctuationRate,
+                   price: el.tradePrice,
+                   unitPrice: el.unit,
+               }
+               return newElemnt
+            })
             // eslint-disable-next-line no-use-before-define
-            dispatch(tikerData(tikerList)); 
+            dispatch(tikerList(newArray)); 
         })
 }
 
@@ -59,13 +60,12 @@ const { actions, reducer } = createSlice({
                 state.tikerDetail = payload
         },
         tikerList : (state, {payload}) => {
-            const arrays = [...state.tikerList,payload]
             // eslint-disable-next-line no-param-reassign
-            state.tikerList = arrays
+            state.tikerList = payload
     }
     }
 })
 
-export const {tikerData} = actions;
+export const {tikerData,tikerList} = actions;
 
 export default reducer;

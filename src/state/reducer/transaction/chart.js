@@ -14,13 +14,17 @@ export const getServer = (url,requestData) => function (dispatch, getState){
     ).then((response) => {
         const reusltData  = response.data.content;
         console.log(reusltData);
-        // const newChartData = {
-        //     x : response.data.content.tradeTime,
-        //     y : []
-        // }
+
+        const prevChartData = reusltData.map((el) => {
+            const chartdt = {
+                x: el.tradeTime,
+                y: [el.startPrice,el.highPrice,el.lowPrice,el.endPrice]
+            }
+            return chartdt;
+        })
 
         // eslint-disable-next-line no-use-before-define
-        // dispatch(tikerData(reusltData)); 
+        dispatch(updateChart(prevChartData)); 
     })
 }
 
@@ -67,6 +71,8 @@ const { actions, reducer } = createSlice({
         },
         updateChart: (state, {payload}) => {
             console.log(payload);
+            // eslint-disable-next-line no-param-reassign
+            state.getChart = payload
             // const array = [...state.getChart].findIndex(el => el.x === payload.x)
         },
         getCurMonut: (state, {payload}) => {
