@@ -78,6 +78,68 @@ function TransChart() {
         }
         dispatch(addChart(inputData))
       }
+      // // 1. currentstate 검사 
+      // if(currentState.time !== '')
+      // {
+      //   console.log('시간값 비어있지않음')
+      //   // 3. 있으면 받아온 시간과 state의 시간값 비교
+      //   if(date === currentState.time)
+      //   {
+      //     const updateState={
+      //       ...currentState,
+      //       high: realData.tradePrice > currentState.high ? realData.tradePrice : currentState.high,
+      //       low: realData.tradePrice < currentState.low ? realData.tradePrice : currentState.low,
+      //       close: realData.tradePrice,
+      //     }
+      //     setCureentState(updateState);
+      //   }
+      //   // 4. 받아온 시간과 state의 시간값이 다른 경우 dispatch 
+      //   else 
+      //   {
+      //     const inputData = {
+      //       x: currentState.time,
+      //       y: [currentState.start,currentState.high,currentState.low,currentState.close]
+      //     }
+      //     dispatch(addChart(inputData))
+
+      //   }
+      // }
+      // // 2. 없으면 tradePrice로 초기값 세팅
+      // else
+      // {
+      //   console.log('시간값 비어있음.')
+      //   const newState = {
+      //     time: date,
+      //     start: realData.tradePrice,
+      //     high: realData.tradePrice,
+      //     low: realData.tradePrice,
+      //     close: realData.tradePrice,
+      //   }
+      //   console.log(newState);
+      //   setCureentState(newState);
+      // }
+
+      // // 현재 state의 시간과 realData의 시간이 일치할 경우 
+      // if(date === currentState.x)
+      // {
+      //   const newState = {
+      //     ...currentState,
+      //     high: realData.tradePrice > currentState.high ? realData.tradePrice : currentState.high,
+      //     low: realData.tradePrice < currentState.low ? realData.tradePrice : currentState.low,
+      //     close: realData.tradePrice
+      //   }
+      //   setCureentState(newState);
+      // }
+      // // 일치하지 않을 경우 
+      // else if(currentState.time !== 0)
+      // {
+      //   const inputData = {
+      //     x: date,
+      //     y: [realData.tradePrice,realData.tradePrice,realData.tradePrice,realData.tradePrice]
+      //   }
+      //   dispatch(addChart(inputData))
+      //   setCureentState(defaultState);
+      // }
     }
 
     React.useEffect(()=> {

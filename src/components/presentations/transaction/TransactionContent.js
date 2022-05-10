@@ -207,9 +207,7 @@ function TransactionContent() {
                     <p>10,000,000원</p>
                   </div>
                   <div className='w-full flex justify-start items-center text-[14px] mb-[33px]'>
-                    <p className='w-[80px] mr-[5px]'>레버리지</p>
-                    <div className='w-[213px] h-[7px] bg-[#FF9E0D] rounded-xl  mr-[14px] ' />
-                    <p className=' text-[15px] text-[#FF9E0D] font-bold'>25x</p>
+                    <TransProgressbar buyRequest={sellRequest} setBuyRequest={setBuyRequest} />
                   </div>
                   <div className='flex justify-center items-start mb-[12px] '>
                     <p className=' text-[14px] w-[80px] pt-[10px] mr-[5px]'>매도 금액</p>
