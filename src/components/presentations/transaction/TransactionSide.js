@@ -60,22 +60,22 @@ function TransactionSide({coinsList}) {
     
       React.useEffect(()=> {
         dispatch(getMyRank('/api/rank/myrank',''))  
-        socketClient.connect({token : "BEARER eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJFWFBJUkVEX0RBVEUiOjE2NTIyNjkzMjcsIlVTRVJfRU1BSUwiOiJhQG5hdmVyLmNvbSIsImlzcyI6InNwYXJ0YSIsIkNMQUlNX1VTRVJfTklDS05BTUUiOiLquYDshLHsp4QifQ.5MVuc5ERTcK-keMryiH-JxUvZgODITR89BS-ddkZpHM"}, ()=> {
-          chatSubscribe();
-        })
-        socketClient.debug = null;
-        return () => {
-          try {
-            socketClient.disconnect(
-              () => {
-                socketClient.unsubscribe('sub-0');
-              },
-              {}
-            );
-          // eslint-disable-next-line no-empty
-          } catch (error) {
-          }
-        }
+        // socketClient.connect({token : "BEARER eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJFWFBJUkVEX0RBVEUiOjE2NTIyNjkzMjcsIlVTRVJfRU1BSUwiOiJhQG5hdmVyLmNvbSIsImlzcyI6InNwYXJ0YSIsIkNMQUlNX1VTRVJfTklDS05BTUUiOiLquYDshLHsp4QifQ.5MVuc5ERTcK-keMryiH-JxUvZgODITR89BS-ddkZpHM"}, ()=> {
+        //   chatSubscribe();
+        // })
+        // socketClient.debug = null;
+        // return () => {
+        //   try {
+        //     socketClient.disconnect(
+        //       () => {
+        //         socketClient.unsubscribe('sub-0');
+        //       },
+        //       {}
+        //     );
+        //   // eslint-disable-next-line no-empty
+        //   } catch (error) {
+        //   }
+        // }
       },[])
 
       React.useEffect(()=>{

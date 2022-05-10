@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {getTop3Rank} from '../../../state/reducer/rank/rank'
+import { Won } from '../../../share/convertWon';
 
 function RankTop3() {
     const top3Data = useSelector((state) => state.rank.top3Rank);

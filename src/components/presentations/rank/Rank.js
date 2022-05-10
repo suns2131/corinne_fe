@@ -4,6 +4,9 @@ import styles from "./Rank.module.css"
 import {getMyRank, getTop3Rank, getRealRank} from '../../../state/reducer/rank/rank'
 import RankTop3 from "./RankTop3";
 import RankList from "./RankList";
+import RankUserinfo from "./RankUserInfo";
+import RankMatch from "./RankMatch";
+import RankFollow from "./RankFollow";
 
 function Rank() {
     const dispatch = useDispatch();
@@ -86,94 +89,8 @@ function Rank() {
           </div>
         </div>
         <div className=" w-[387px] "> 
-          <div className="w-full h-[473px] mb-[20px] rounded-[10px] shadow-008 py-5">
-            <div className="m-[20px] flex flex-col justify-start items-center">
-              <div className="w-[141px] h-[141px] bg-slate-500 rounded-full mb-[15px]" />
-              <p className="font-bold text-[20px] mb-[8px]">채채</p>
-              <div className=" flex justify-center items-center mb-[24px]">
-                <div className="w-[74px] h-[26px] border border-solid border-[#e4e4e4] rounded-[20px] flex justify-center items-center mr-[8px]">
-                  <div className="w-[14px] h-[14px] bg-red-600 rounded-full mr-[4px]" />
-                  <p className=" font-normal text-[12px]">Lv.레드</p>
-                  </div>
-                <progress className={styles.progress}  max={5000} value={1000}  />
-                <div className="ml-[8px] text-[12px] font-normal" >1000xp / 5000xp</div>
-              </div>
-              
-              <div className=" flex justify-around items-center mb-[30px]">
-                  <div className="w-[52px] h-[42px] mr-[32px] flex flex-col justify-center items-center">
-                    <p className="font-bold text-[15px] text-curp">00위</p>
-                    <p className="font-bold text-[12px] text-[#777777]">현재랭킹</p>
-                  </div>
-                  <div className="w-[52px] h-[42px] mr-[32px] flex flex-col justify-center items-center">
-                    <p className="font-bold text-[15px] text-[#33323f]">00위</p>
-                    <p className="font-bold text-[12px] text-[#777777]">최고 기록</p>
-                  </div>
-                  <div className="w-[52px] h-[42px] mr-[32px] flex flex-col justify-center items-center">
-                    <p className="font-bold text-[15px] text-[#33323f]">00</p>
-                    <p className="font-bold text-[12px] text-[#777777]">팔로워</p>
-                  </div>
-                  <div className="w-[52px] h-[42px] flex flex-col justify-center items-center">
-                    <p className="font-bold text-[15px] text-[#33323f]">00</p>
-                    <p className="font-bold text-[12px] text-[#777777]">팔로잉</p>
-                  </div>
-              </div>
-              <div className="w-[347px] h-[109px] p-5 flex justify-between items-center bg-[#f6f6f6] rounded-[10px]">
-                <div className=" font-normal text-[14px]  text-[#777777]">
-                  <p>수익률</p>
-                  <p className="mt-[3px]">총 자산</p>
-                  <p className="mt-[3px]">리셋횟수</p>
-                </div>
-                <div className=" text-right text-[15px]">
-                  <p className="font-bold text-[#A634FF]">00.00%</p>
-                  <p className="mt-[3px] font-normal text-[#33323f]">0,000,000원</p>
-                  <p className="mt-[3px] font-normal text-[#33323f]">0</p>
-                </div>  
-              </div>
-            </div>
-          </div>
-          <div className="w-[387px] h-[100px] mb-5 rounded-[10px] flex bg-black"> 
-            <div className="w-[164.5px] h-[100px] bg-curp rounded-tl-[10px] rounded-bl-[10px] flex flex-col justify-center items-center">
-                <div className="flex justify-center item_center">
-                  <div className="w-[12.8px] h-[12.8px] bg-slate-500 rounded-full mr-[5.6px]" />
-                  <p className="font-bold text-[12px] text-[#ffffff]" >파트라슈</p>
-                </div>
-                <p className="font-bold text-[20px] text-[#ffffff]">+34.8%</p>
-            </div>
-            <div className={styles.matchs}/>
-            <div className="w-[164.5px] h-[100px] bg-[#33323f] rounded-tr-[10px] rounded-br-[10px] flex flex-col justify-center items-center">
-           
-            <div className="flex justify-center item_center">
-                  <div className="w-[12.8px] h-[12.8px] bg-slate-500 rounded-full mr-[5.6px]" />
-                  <p className="font-bold text-[12px] text-[#ffffff]" >나</p>
-                </div>
-                <p className="font-bold text-[20px] text-[#ffffff]">+34.8%</p>
-            </div>
-            <div className=" absolute left-[79%] top-[59%]"
-              onMouseEnter={()=>{setMatchRank(true)}}
-              onMouseLeave={()=>{setMatchRank(false)}}
-            >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8.00004 14.6668C11.6667 14.6668 14.6667 11.6668 14.6667 8.00016C14.6667 4.3335 11.6667 1.3335 8.00004 1.3335C4.33337 1.3335 1.33337 4.3335 1.33337 8.00016C1.33337 11.6668 4.33337 14.6668 8.00004 14.6668Z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M7.77315 9V8.86003C7.77315 8.40669 8.05317 8.16668 8.33317 7.97335C8.6065 7.78668 8.8798 7.54669 8.8798 7.10669C8.8798 6.49336 8.38649 6 7.77315 6C7.15982 6 6.6665 6.49336 6.6665 7.10669" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M7.77026 10.5933H7.77626" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-            {matchRank &&
-              <div className=" absolute w-[245px] h-[218px] left-[82%] top-[55%] bg-[#33323f] p-5 rounded-[12px] shadow-008">
-                <p className="font-bold text-[12px] text-[#ffffff] mb-[8px]">1:1 랜덤배틀</p>
-                <p className="font-bold text-[12px] text-[#cecece] mb-[8px]">
-                본인과 같은 레벨의 회원 중 한명과 랜덤으로<br/>
-                매치되어 일주일동안 수익률 배틀을 합니다.<br/>
-                <br/>
-                모의투자 랭킹과 상관없이 1:1 랜덤 배틀에서<br/>
-                승리하면 보상으로 <span className="text-[12px] text-[#ffce85]">경험치 5,000xp,</span><br/>
-                <span className="text-[12px] text-[#ffce85]">원화 100,000원</span>을 획득하게됩니다.<br/>
-                <br/>
-                패배할 경우, 패널티는 없습니다.<br/>
-                </p>
-              </div>
-            }
-          </div>
+          <RankUserinfo />
+          <RankMatch />
           <div className=" w-full h-[618px] rounded-[10px] shadow-008">
             <div className="w-[347px] h-[84px] m-5 flex justify-between items-center ">
               <p className=" font-bold text-[16px]">팔로잉 랭킹</p>
@@ -189,22 +106,7 @@ function Rank() {
                   </button>
                 </div>
             </div>
-            <div className="mx-5 h-[618px] overflow-y-scroll ">
-              {/* 반복문 */}
-              <div className="flex justify-between items-start mb-[20px]">
-                <div className="flex">
-                  <div className="w-[60px] h-[60px] bg-slate-500 rounded-full" />
-                  <div className="ml-[13px] flex justify-center items-start font-bold">
-                    <p className="mr-[7px]">7위</p>
-                    <p>닉네임</p>
-                  </div>
-                </div>
-                <div className=" text-right">
-                  <p className="font-bold text-[15px] text-curp">00.00%</p>
-                  <p className=" font-normal text-[12px] text-[#cecece]">0,000,00원</p>
-                </div>
-              </div>
-            </div>
+            <RankFollow />
           </div>
         </div>
       </div>
