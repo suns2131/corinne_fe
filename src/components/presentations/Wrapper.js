@@ -1,3 +1,4 @@
+
 import React from 'react'
 import Headers from '../../../components/shared/Headers/container/Headers'
 
@@ -15,5 +16,4 @@ function Wrapper({children}) {
     </div>
     )
 }
-
 export default Wrapper
