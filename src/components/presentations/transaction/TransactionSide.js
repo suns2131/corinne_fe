@@ -9,7 +9,6 @@ import {getMyRank} from '../../../state/reducer/rank/rank'
 function TransactionSide({coinsList}) {
     const defaultList = coinsList;
     console.log(defaultList)
-    // eslint-disable-next-line no-shadow
     const dispatch = useDispatch();
     const userinfo = useSelector((state) => state.user);
     const rankInfo = useSelector((state) => state.rank);
@@ -31,7 +30,7 @@ function TransactionSide({coinsList}) {
       const pdata = [...coinList];
       pdata.splice(changedata,1,chagedata3);
       setCoinList(pdata);
-      }
+    }
     
     const chatSubscribe = () =>{
        // 방정보 넣어야댐
@@ -45,6 +44,9 @@ function TransactionSide({coinsList}) {
         dispatch(addChat(shot));
       })
       
+    
+
+
       const connectEnter = {
         type : 'ENTER',
         topicName : 'corinnechat',

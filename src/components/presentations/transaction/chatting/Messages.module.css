@@ -1,0 +1,100 @@
+.MessageDiv{
+    width: 347px;
+    height: 324px;
+    overflow-y: scroll;
+}
+
+.MessageDiv::-webkit-scrollbar{
+    width: 5px;
+}
+
+.MessageDiv::-webkit-scrollbar-thumb{
+    height: 50px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+}
+
+.MessageDiv::-webkit-scrollbar-track{
+    background-color: transparent;
+}
+
+.MyMessage{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: auto;
+  height: 57px;
+  margin-bottom: 10px;
+}
+
+.MyMessageImage{
+    width: 32px;
+    height: 32px;
+    border-radius: 9999px;
+    background-color: black;
+    margin-right: 9px;
+}
+
+.MyMessageNickname{
+    color: #cecece;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+}
+
+.MyMessageDiv1{
+    display: flex;
+}
+
+.MyMessageMsg{
+    background-color: #eeeeee;
+    border-radius: 0px 16px 16px 16px;
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 7px 19px;
+    gap: 10px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #33323F;
+    margin-right: 5px;
+}
+
+.MyMessageTime{
+    font-family: 'Pretendard';
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 19px;
+    color: #CECECE
+}
+
+.Audience{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: auto;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.AudienceMsg{
+    padding: 7px 19px;
+    gap: 10px;
+    width: auto;
+    height: auto;
+    background: #6800BA;
+    border-radius: 16px 16px 0px 16px;
+    margin-left: 5px;
+}
