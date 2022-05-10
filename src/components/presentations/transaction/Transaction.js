@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import TransactionSide from './TransactionSide';
 import TransactionContent from './TransactionContent';
+import { getTikerList } from '../../../state/reducer/transaction/trans';
 
 function Transaction(){
       const dispatch = useDispatch();
@@ -33,10 +34,13 @@ function Transaction(){
           price : '3,588,000',
           unitPrice : 'ETH',
         }]
+      useEffect(() =>{
+        dispatch(getTikerList())
+      },[])
     return (
         <div className='flex'>
           <div className="  w-[387px] mr-5">
-            <TransactionSide coinsList={list} />
+            <TransactionSide coinsList={list2} />
           </div>
           <div className=" w-rankview ">
             <TransactionContent />

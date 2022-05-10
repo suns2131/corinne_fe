@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Rank.module.css"
 import {getMyRank, getTop3Rank, getRealRank} from '../../../state/reducer/rank/rank'
@@ -6,6 +6,8 @@ import {getMyRank, getTop3Rank, getRealRank} from '../../../state/reducer/rank/r
 function Rank() {
     const dispatch = useDispatch();
     const rankData = useSelector((state) => state.rank);
+    const [weekRank,setWeekRank] = useState(false);
+    const [matchRank,setMatchRank] = useState(false);
     console.log(rankData);
     React.useEffect(()=>{
       // dispatch(getTop3Rank());
@@ -29,10 +31,38 @@ function Rank() {
                 </svg>
               </div>
               <div className="ml-[4px] mb-[5px]">
-                <p className="font-bold text-[24px] text-[#ffffff]"  >지난주 랭킹결과 </p>
+                <div className="flex w-[710px] justify-between items-center">
+                  <p className="font-bold text-[24px] text-[#ffffff]"  >지난주 랭킹결과 </p>
+                  <div
+                    onMouseEnter={()=>{setWeekRank(true)}}
+                    onMouseLeave={()=>{setWeekRank(false)}}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M8.00004 14.6668C11.6667 14.6668 14.6667 11.6668 14.6667 8.00016C14.6667 4.3335 11.6667 1.3335 8.00004 1.3335C4.33337 1.3335 1.33337 4.3335 1.33337 8.00016C1.33337 11.6668 4.33337 14.6668 8.00004 14.6668Z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M7.77315 9V8.86003C7.77315 8.40669 8.05317 8.16668 8.33317 7.97335C8.6065 7.78668 8.8798 7.54669 8.8798 7.10669C8.8798 6.49336 8.38649 6 7.77315 6C7.15982 6 6.6665 6.49336 6.6665 7.10669" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M7.77026 10.5933H7.77626" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  {weekRank &&
+                        <div className=" absolute left-[800px] top-[10px] w-[375px] h-[295px] p-5 bg-[#33323F] rounded-[12px] shadow-008">
+                          <p className="font-bold text-[12px] text-[#ffffff]">주간 모의투자 랭킹</p>
+                          <p className="font-normal text-[12px] text-[#cecece]">주간 모의투자 랭킹은 일주일마다 총 자산 기준으로 순위가 책정되며,<br/>
+                          매주 월요일 AM 9:00 마다 총 자산이 초기화 됩니다.<br/>
+                          (순위 책정 기간 : 월요일 AM 9:00 ~ 다음주 월요일 AM 08:59)<br/><br/>
+                          랭킹 순위에 따라 보상이 지급됩니다.<br/>
+                          </p>
+                          <p className="text-[12px] text-[#ffce85]">🥇 경험치 30,000xp + 원화 2,000,000원</p>
+                          <p className="text-[12px] text-[#ffce85]">🥈 경험치 20,000xp + 원화 1,500,000원</p>
+                          <p className="text-[12px] text-[#ffce85]">🥉 경험치 10,000xp + 원화 1,200,000원</p>
+                          <p className="font-normal text-[12px] text-[#cecece]">👥 참여자 전원 경험치 <span className="text-[12px] text-[#ffce85]">5,000xp 지급</span> <br/> (참여자 기준: 매수, 매도 이력이 있는 사람)</p>
+                          <p className="font-normal text-[12px] text-[#ff6e0d]">** 보상으로 지급되는 원화는 실제 원화가 아닌, corinne 가상 원화입니다.</p>
+                      </div>
+                  }
+                </div>
                 <p className="font-normal text-[12px] text-[#cecece]">2022.00.00 ~ 2022.00.00 </p>
               </div>
             </div>
+            
             {/* <div>
               <p className="font-normal text-[16px] text-[#ffffff]">00님 축하드립니다.🎉</p>  
             </div> */}
@@ -96,7 +126,10 @@ function Rank() {
                  <div className="font-bold text-[15px] text-[#BF6FFF]">+00.00%</div>
                  <div className="font-normal text-[15px] text-[#FFFFFF]">100,00,000원</div>
                  <div className="flex justify-center items-center">
-                   <div>
+                   <div
+                    onMouseEnter={()=> {setWeekRank(true); console.log('over')}}
+                    onMouseLeave={()=> {setWeekRank(false); console.log('out')}}
+                   >
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M8.92664 1.38676C8.34664 1.21343 7.70664 1.1001 6.99997 1.1001C3.80664 1.1001 1.21997 3.68676 1.21997 6.8801C1.21997 10.0801 3.80664 12.6668 6.99997 12.6668C10.1933 12.6668 12.78 10.0801 12.78 6.88676C12.78 5.7001 12.42 4.59343 11.8066 3.67343" stroke="#CECECE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                       <path d="M8.92664 1.38676C8.34664 1.21343 7.70664 1.1001 6.99997 1.1001C3.80664 1.1001 1.21997 3.68676 1.21997 6.8801C1.21997 10.0801 3.80664 12.6668 6.99997 12.6668C10.1933 12.6668 12.78 10.0801 12.78 6.88676C12.78 5.7001 12.42 4.59343 11.8066 3.67343" stroke="black" strokeOpacity="0.2" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -202,8 +235,8 @@ function Rank() {
             </div>
           </div>
         </div>
-        <div className=" w-[387px]"> 
-          <div className="w-full h-[473px] mb-[20px] rounded-[10px] shadow-008 border border-solid border-black  ">
+        <div className=" w-[387px] "> 
+          <div className="w-full h-[473px] mb-[20px] rounded-[10px] shadow-008 py-5">
             <div className="m-[20px] flex flex-col justify-start items-center">
               <div className="w-[141px] h-[141px] bg-slate-500 rounded-full mb-[15px]" />
               <p className="font-bold text-[20px] mb-[8px]">채채</p>
@@ -248,13 +281,48 @@ function Rank() {
               </div>
             </div>
           </div>
-          <div className="w-[387px] h-[100px] mb-5 bg-red-800 rounded-[10px] flex "> 
-            <div className=" bg-curp w-[50%] rounded-tl-md rounded-bl-md flex justify-center items-center">
-                1
+          <div className="w-[387px] h-[100px] mb-5 rounded-[10px] flex bg-black"> 
+            <div className="w-[164.5px] h-[100px] bg-curp rounded-tl-[10px] rounded-bl-[10px] flex flex-col justify-center items-center">
+                <div className="flex justify-center item_center">
+                  <div className="w-[12.8px] h-[12.8px] bg-slate-500 rounded-full mr-[5.6px]" />
+                  <p className="font-bold text-[12px] text-[#ffffff]" >파트라슈</p>
+                </div>
+                <p className="font-bold text-[20px] text-[#ffffff]">+34.8%</p>
             </div>
-            <div className=" bg-[#cecece] w-[50%] rounded-tr-md rounded-br-md flex justify-center items-center">
-                2
+            <div className={styles.matchs}/>
+            <div className="w-[164.5px] h-[100px] bg-[#33323f] rounded-tr-[10px] rounded-br-[10px] flex flex-col justify-center items-center">
+           
+            <div className="flex justify-center item_center">
+                  <div className="w-[12.8px] h-[12.8px] bg-slate-500 rounded-full mr-[5.6px]" />
+                  <p className="font-bold text-[12px] text-[#ffffff]" >나</p>
+                </div>
+                <p className="font-bold text-[20px] text-[#ffffff]">+34.8%</p>
             </div>
+            <div className=" absolute left-[79%] top-[59%]"
+              onMouseEnter={()=>{setMatchRank(true)}}
+              onMouseLeave={()=>{setMatchRank(false)}}
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.00004 14.6668C11.6667 14.6668 14.6667 11.6668 14.6667 8.00016C14.6667 4.3335 11.6667 1.3335 8.00004 1.3335C4.33337 1.3335 1.33337 4.3335 1.33337 8.00016C1.33337 11.6668 4.33337 14.6668 8.00004 14.6668Z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M7.77315 9V8.86003C7.77315 8.40669 8.05317 8.16668 8.33317 7.97335C8.6065 7.78668 8.8798 7.54669 8.8798 7.10669C8.8798 6.49336 8.38649 6 7.77315 6C7.15982 6 6.6665 6.49336 6.6665 7.10669" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M7.77026 10.5933H7.77626" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+            {matchRank &&
+              <div className=" absolute w-[245px] h-[218px] left-[82%] top-[55%] bg-[#33323f] p-5 rounded-[12px] shadow-008">
+                <p className="font-bold text-[12px] text-[#ffffff] mb-[8px]">1:1 랜덤배틀</p>
+                <p className="font-bold text-[12px] text-[#cecece] mb-[8px]">
+                본인과 같은 레벨의 회원 중 한명과 랜덤으로<br/>
+                매치되어 일주일동안 수익률 배틀을 합니다.<br/>
+                <br/>
+                모의투자 랭킹과 상관없이 1:1 랜덤 배틀에서<br/>
+                승리하면 보상으로 <span className="text-[12px] text-[#ffce85]">경험치 5,000xp,</span><br/>
+                <span className="text-[12px] text-[#ffce85]">원화 100,000원</span>을 획득하게됩니다.<br/>
+                <br/>
+                패배할 경우, 패널티는 없습니다.<br/>
+                </p>
+              </div>
+            }
           </div>
           <div className=" w-full h-[618px] rounded-[10px] shadow-008">
             <div className="w-[347px] h-[84px] m-5 flex justify-between items-center ">
