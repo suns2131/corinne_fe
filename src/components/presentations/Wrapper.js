@@ -2,8 +2,8 @@ import { memo } from 'react';
 
 function Wrapper({children}) {
     return (
-    <div className="max-w-[1000px]">
-        <video className='fixed bg-cover' src="/images/corinne_background.mp4" autoPlay loop muted /> 
+    <div>
+        <video className='fixed top-0 right-0 bottom-0 min-w-full min-h-full' src="/images/corinne_background.mp4" autoPlay loop muted /> 
         {children}
     </div>
     )
