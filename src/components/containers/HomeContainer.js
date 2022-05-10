@@ -29,13 +29,13 @@ export default function HomeContainer() {
     }, [code])
 
   return (
-    <>
+    <Wrapper>
         <Login
           onSuccess={kakaoLoginHandler}
           kakaoKey={kakaoKey}
           kakaoRedirectUrl={kakaoRedirectUrl}
         />
         <HomeText />
-    </>
+    </Wrapper>
   )
 }

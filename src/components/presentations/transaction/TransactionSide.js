@@ -1,10 +1,9 @@
 import Image from "next/image";
 import React from "react"
 import { useDispatch, useSelector } from "react-redux";
-import sockjs from "sockjs-client"
-import Stomp from 'stompjs'
 import {addChat} from '../../../state/reducer/transaction/chat'
 import TransChatting from "./TransChatting";
+import socketClient from "../../../share/socket";
 import {getMyRank} from '../../../state/reducer/rank/rank'
 
 function TransactionSide({coinsList}) {
@@ -14,10 +13,8 @@ function TransactionSide({coinsList}) {
     const dispatch = useDispatch();
     const userinfo = useSelector((state) => state.user);
     const rankInfo = useSelector((state) => state.rank);
-
-    const socket = sockjs("http://13.125.232.165:8090/stomp");
-    const stpClient = Stomp.over(socket);
-
+    const chartData = useSelector((state) => state.chart.getChart);
+    
     const [coinList,setCoinList] = React.useState(coinsList)
     const [inputMessage,setInputMessage] = React.useState('');
     console.log(coinList)
@@ -36,44 +33,47 @@ function TransactionSide({coinsList}) {
       setCoinList(pdata);
       }
     
+    const chatSubscribe = () =>{
+       // 방정보 넣어야댐
+       socketClient.subscribe(`/sub/topic/corinnechat`, (message) =>{
+        const returnData = JSON.parse(message.body);
+        
+        const shot = {
+          nickname : returnData.nickname,
+          message : returnData.message,
+        }
+        dispatch(addChat(shot));
+      })
+      
+      const connectEnter = {
+        type : 'ENTER',
+        topicName : 'corinnechat',
+        nickname : '코린이',
+        imageUrl : '',
+        exp : 1000,
+        sendTime : '',
+        message :'',
+      }
+      socketClient.send(`/pub/chat/message`,{},JSON.stringify(connectEnter))
+    }
+    
+    
       React.useEffect(()=> {
         dispatch(getMyRank('/api/rank/myrank',''))  
-        stpClient.connect({token : "BEARER eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJFWFBJUkVEX0RBVEUiOjE2NTIyNjkzMjcsIlVTRVJfRU1BSUwiOiJhQG5hdmVyLmNvbSIsImlzcyI6InNwYXJ0YSIsIkNMQUlNX1VTRVJfTklDS05BTUUiOiLquYDshLHsp4QifQ.5MVuc5ERTcK-keMryiH-JxUvZgODITR89BS-ddkZpHM"}, ()=> {
-          // 방정보 넣어야댐
-          stpClient.subscribe(`/sub/topic/corinnechat`, (message) =>{
-            const returnData = JSON.parse(message.body);
-            
-            const shot = {
-              nickname : returnData.nickname,
-              message : returnData.message,
-            }
-            dispatch(addChat(shot));
-          })
-          
-          const connectEnter = {
-            type : 'ENTER',
-            topicName : 'corinnechat',
-            nickname : '코린이',
-            imageUrl : '',
-            exp : 1000,
-            sendTime : '',
-            message :'',
-          }
-          stpClient.send(`/pub/chat/message`,{},JSON.stringify(connectEnter))
+        socketClient.connect({token : "BEARER eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJFWFBJUkVEX0RBVEUiOjE2NTIyNjkzMjcsIlVTRVJfRU1BSUwiOiJhQG5hdmVyLmNvbSIsImlzcyI6InNwYXJ0YSIsIkNMQUlNX1VTRVJfTklDS05BTUUiOiLquYDshLHsp4QifQ.5MVuc5ERTcK-keMryiH-JxUvZgODITR89BS-ddkZpHM"}, ()=> {
+          chatSubscribe();
         })
-        stpClient.debug = (str) => {
-          console.log(str);
-        }
+        socketClient.debug = null;
         return () => {
           try {
-            stpClient.disconnect(
+            socketClient.disconnect(
               () => {
-                stpClient.unsubscribe('sub-0');
+                socketClient.unsubscribe('sub-0');
               },
               {}
             );
+          // eslint-disable-next-line no-empty
           } catch (error) {
-            console.log(error);
           }
         }
       },[])
@@ -94,7 +94,7 @@ function TransactionSide({coinsList}) {
             sendTime : '',
             message :inputMessage,
           }
-          stpClient.send(`/pub/chat/message`,{},JSON.stringify(SendData));
+          socketClient.send(`/pub/chat/message`,{},JSON.stringify(SendData));
           e.target.value = '';
         }
       }

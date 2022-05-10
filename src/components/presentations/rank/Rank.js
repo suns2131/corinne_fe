@@ -2,16 +2,17 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Rank.module.css"
 import {getMyRank, getTop3Rank, getRealRank} from '../../../state/reducer/rank/rank'
+import RankTop3 from "./RankTop3";
+import RankList from "./RankList";
 
 function Rank() {
     const dispatch = useDispatch();
     const rankData = useSelector((state) => state.rank);
     const [weekRank,setWeekRank] = useState(false);
     const [matchRank,setMatchRank] = useState(false);
-    console.log(rankData);
+    const [rankPageNum,setRankPageNum] = useState(1);
     React.useEffect(()=>{
-      // dispatch(getTop3Rank());
-      dispatch(getRealRank(1));
+      dispatch(getRealRank(rankPageNum));
     },[])
 
     return (
@@ -62,37 +63,7 @@ function Rank() {
                 <p className="font-normal text-[12px] text-[#cecece]">2022.00.00 ~ 2022.00.00 </p>
               </div>
             </div>
-            
-            {/* <div>
-              <p className="font-normal text-[16px] text-[#ffffff]">00님 축하드립니다.🎉</p>  
-            </div> */}
-            <div className="w-[99%] h-[267px] flex justify-start items-end mt-[20px] ">
-              <div><p className=" text-left font-normal text-[12px] text-[#ffffff] mr-[96px]  mb-5">전체 랭킹 보기 &gt;</p></div>
-               <div className="w-[84px] flex flex-col justify-start items-center mr-[56px]">
-                  <p className="font-bold text-[16px] text-[#ffffff] mb-[9px]">🥈쏘냐도르</p>
-                  <div className="w-[84px] h-[84px] rounded-full bg-slate-500 mb-[4px]" />
-                  <div className="bg-[#33323F] w-[118px] h-[78px] rounded-t-md  pt-[16px] flex flex-col justify-start items-center  ">
-                    <p className="font-bold text-[12px] text-[#A634FF] ">00.00%</p>
-                    <p className="font-normal text-[12px] text-[#ffffff]">0,000,000원</p>
-                  </div>
-               </div>
-               <div className="w-[110px] flex flex-col justify-start items-center mr-[56px] ">
-                  <p className="font-bold text-[16px] text-[#ffffff] mb-[9px]">🥇채채</p>
-                  <div className="w-[110px] h-[110px] rounded-full bg-slate-500 mb-[4px] " />
-                  <div className="bg-[#33323F] w-[140px] h-[108px] rounded-t-md  pt-[16px] flex flex-col justify-start items-center">
-                    <p className="font-bold text-[12px] text-[#A634FF] ">00.00%</p>
-                    <p className="font-normal text-[12px] text-[#ffffff]">0,000,000원</p>
-                  </div>
-               </div>
-               <div className="w-[120px] flex flex-col justify-start items-center ">
-                  <p className="font-bold text-[16px] text-[#ffffff] mb-[9px]">🥉골목대장백종원</p>
-                  <div className="w-[84px] h-[84px] rounded-full bg-slate-500 mb-[4px]" />
-                  <div className="bg-[#33323F] w-[118px] h-[78px] rounded-t-md pt-[16px] flex flex-col justify-start items-center ">
-                    <p className="font-bold text-[12px] text-[#A634FF] ">00.00%</p>
-                    <p className="font-normal text-[12px] text-[#ffffff]">0,000,000원</p>
-                  </div>
-               </div>
-            </div>
+            <RankTop3 />
           </div>
           {/* <div className=" w-full h-[100px] mb-[21px] rounded-[10px] bg-[#c4c4c4] flex justify-center items-center">
             1:1
@@ -111,128 +82,7 @@ function Rank() {
                 </button>
               </div>
             </div>
-            <div className="w-full h-[839px] flex flex-col mx-5 mt-[19px] ">
-              {/* 123반복문 */}
-              <div className=" w-[753px] h-[64px] mb-[15px] bg-curp rounded-[10px] p-5 flex justify-between items-center">
-                 <div className="w-[45px] font-bold text-[15px] text-neutrals5">🥇1위</div>
-                 <div className="flex justify-center items-center">
-                  <div className="w-[24px] h-[24px] rounded-full bg-[#c4c4c4] mr-[5px]"/>
-                  <p className="font-bold text-[15px] text-neutrals5">닉네임</p>
-                 </div>
-                 <div className="w-[74px] h-[26px] border border-solid border-[#e4e4e4] rounded-[20px] flex justify-center items-center bg-neutrals5">
-                  <div className="w-[14px] h-[14px] bg-red-600 rounded-full mr-[4px]" />
-                  <p className=" font-normal text-[12px]">Lv.레드</p>
-                 </div>
-                 <div className="font-bold text-[15px] text-[#BF6FFF]">+00.00%</div>
-                 <div className="font-normal text-[15px] text-[#FFFFFF]">100,00,000원</div>
-                 <div className="flex justify-center items-center">
-                   <div
-                    onMouseEnter={()=> {setWeekRank(true); console.log('over')}}
-                    onMouseLeave={()=> {setWeekRank(false); console.log('out')}}
-                   >
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M8.92664 1.38676C8.34664 1.21343 7.70664 1.1001 6.99997 1.1001C3.80664 1.1001 1.21997 3.68676 1.21997 6.8801C1.21997 10.0801 3.80664 12.6668 6.99997 12.6668C10.1933 12.6668 12.78 10.0801 12.78 6.88676C12.78 5.7001 12.42 4.59343 11.8066 3.67343" stroke="#CECECE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M8.92664 1.38676C8.34664 1.21343 7.70664 1.1001 6.99997 1.1001C3.80664 1.1001 1.21997 3.68676 1.21997 6.8801C1.21997 10.0801 3.80664 12.6668 6.99997 12.6668C10.1933 12.6668 12.78 10.0801 12.78 6.88676C12.78 5.7001 12.42 4.59343 11.8066 3.67343" stroke="black" strokeOpacity="0.2" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                   </div>
-                   <p className="ml-[6px] font-normal text-[15px] text-[#cecece]">0</p>
-                 </div>
-                 <div>
-                   <button
-                    type="button"
-                    className="w-[60px] h-[24px] p-[5px] bg-[#A634FF] rounded-[5px] flex justify-center items-center font-normal text-[12px] text-[#ffffff]"
-                   >팔로우</button>
-                   {/* <button>팔로잉</button> */}
-                 </div>
-              </div>
-              <div className=" w-[753px] h-[64px] mb-[15px] bg-[#434051] rounded-[10px] p-5 flex justify-between items-center">
-              <div className="w-[45px] font-bold text-[15px] text-neutrals5">🥇2위</div>
-                 <div className="flex justify-center items-center">
-                  <div className="w-[24px] h-[24px] rounded-full bg-[#c4c4c4] mr-[5px]"/>
-                  <p className="font-bold text-[15px] text-neutrals5">닉네임</p>
-                 </div>
-                 <div className="w-[74px] h-[26px] border border-solid border-[#e4e4e4] rounded-[20px] flex justify-center items-center bg-neutrals5">
-                  <div className="w-[14px] h-[14px] bg-red-600 rounded-full mr-[4px]" />
-                  <p className=" font-normal text-[12px]">Lv.레드</p>
-                 </div>
-                 <div className="font-bold text-[15px] text-[#BF6FFF]">+00.00%</div>
-                 <div className="font-normal text-[15px] text-[#FFFFFF]">100,00,000원</div>
-                 <div className="flex justify-center items-center">
-                   <div>
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M8.92664 1.38676C8.34664 1.21343 7.70664 1.1001 6.99997 1.1001C3.80664 1.1001 1.21997 3.68676 1.21997 6.8801C1.21997 10.0801 3.80664 12.6668 6.99997 12.6668C10.1933 12.6668 12.78 10.0801 12.78 6.88676C12.78 5.7001 12.42 4.59343 11.8066 3.67343" stroke="#CECECE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M8.92664 1.38676C8.34664 1.21343 7.70664 1.1001 6.99997 1.1001C3.80664 1.1001 1.21997 3.68676 1.21997 6.8801C1.21997 10.0801 3.80664 12.6668 6.99997 12.6668C10.1933 12.6668 12.78 10.0801 12.78 6.88676C12.78 5.7001 12.42 4.59343 11.8066 3.67343" stroke="black" strokeOpacity="0.2" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                   </div>
-                   <p className="ml-[6px] font-normal text-[15px] text-[#cecece]">0</p>
-                 </div>
-                 <div>
-                   <button
-                    type="button"
-                    className="w-[60px] h-[24px] p-[5px] bg-[#A634FF] rounded-[5px] flex justify-center items-center font-normal text-[12px] text-[#ffffff]"
-                   >팔로우</button>
-                   {/* <button>팔로잉</button> */}
-                 </div>
-              </div>
-              <div className=" w-[753px] h-[64px] mb-[15px] bg-[#434051] rounded-[10px] p-5 flex justify-between items-center">
-              <div className=" w-[45px] font-bold text-[15px] text-neutrals5">🥇3위</div>
-                 <div className="flex justify-center items-center">
-                  <div className="w-[24px] h-[24px] rounded-full bg-[#c4c4c4] mr-[5px]"/>
-                  <p className="font-bold text-[15px] text-neutrals5">닉네임</p>
-                 </div>
-                 <div className="w-[74px] h-[26px] border border-solid border-[#e4e4e4] rounded-[20px] flex justify-center items-center bg-neutrals5">
-                  <div className="w-[14px] h-[14px] bg-red-600 rounded-full mr-[4px]" />
-                  <p className=" font-normal text-[12px]">Lv.레드</p>
-                 </div>
-                 <div className="font-bold text-[15px] text-[#BF6FFF]">+00.00%</div>
-                 <div className="font-normal text-[15px] text-[#FFFFFF]">100,00,000원</div>
-                 <div className="flex justify-center items-center">
-                   <div>
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M8.92664 1.38676C8.34664 1.21343 7.70664 1.1001 6.99997 1.1001C3.80664 1.1001 1.21997 3.68676 1.21997 6.8801C1.21997 10.0801 3.80664 12.6668 6.99997 12.6668C10.1933 12.6668 12.78 10.0801 12.78 6.88676C12.78 5.7001 12.42 4.59343 11.8066 3.67343" stroke="#CECECE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M8.92664 1.38676C8.34664 1.21343 7.70664 1.1001 6.99997 1.1001C3.80664 1.1001 1.21997 3.68676 1.21997 6.8801C1.21997 10.0801 3.80664 12.6668 6.99997 12.6668C10.1933 12.6668 12.78 10.0801 12.78 6.88676C12.78 5.7001 12.42 4.59343 11.8066 3.67343" stroke="black" strokeOpacity="0.2" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                   </div>
-                   <p className="ml-[6px] font-normal text-[15px] text-[#cecece]">0</p>
-                 </div>
-                 <div>
-                   <button
-                    type="button"
-                    className="w-[60px] h-[24px] p-[5px] bg-[#A634FF] rounded-[5px] flex justify-center items-center font-normal text-[12px] text-[#ffffff]"
-                   >팔로우</button>
-                   {/* <button>팔로잉</button> */}
-                 </div>
-              </div>
-              <div className="w-[753px] h-[64px] mb-[15px] bg-[#f6f6f6] rounded-[10px] p-5 flex justify-between items-center">
-              <div className="w-[45px] text-right font-bold text-[15px] text-[#33323F]">4위</div>
-                 <div className="flex justify-center items-center">
-                  <div className="w-[24px] h-[24px] rounded-full bg-[#c4c4c4] mr-[5px]"/>
-                  <p className="font-bold text-[15px] text-[#33323F]">닉네임</p>
-                 </div>
-                 <div className="w-[74px] h-[26px] border border-solid border-[#e4e4e4] rounded-[20px] flex justify-center items-center bg-neutrals5">
-                  <div className="w-[14px] h-[14px] bg-red-600 rounded-full mr-[4px]" />
-                  <p className=" font-normal text-[12px]">Lv.레드</p>
-                 </div>
-                 <div className="font-bold text-[15px] text-[#BF6FFF]">+00.00%</div>
-                 <div className="font-normal text-[15px] text-[#33323F]">100,00,000원</div>
-                 <div className="flex justify-center items-center">
-                   <div>
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M8.92664 1.38676C8.34664 1.21343 7.70664 1.1001 6.99997 1.1001C3.80664 1.1001 1.21997 3.68676 1.21997 6.8801C1.21997 10.0801 3.80664 12.6668 6.99997 12.6668C10.1933 12.6668 12.78 10.0801 12.78 6.88676C12.78 5.7001 12.42 4.59343 11.8066 3.67343" stroke="#CECECE" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M8.92664 1.38676C8.34664 1.21343 7.70664 1.1001 6.99997 1.1001C3.80664 1.1001 1.21997 3.68676 1.21997 6.8801C1.21997 10.0801 3.80664 12.6668 6.99997 12.6668C10.1933 12.6668 12.78 10.0801 12.78 6.88676C12.78 5.7001 12.42 4.59343 11.8066 3.67343" stroke="black" strokeOpacity="0.2" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                   </div>
-                   <p className="ml-[6px] font-normal text-[15px] text-[#cecece]">0</p>
-                 </div>
-                 <div>
-                   <button
-                    type="button"
-                    className="w-[60px] h-[24px] p-[5px] bg-[#A634FF] rounded-[5px] flex justify-center items-center font-normal text-[12px] text-[#ffffff]"
-                   >팔로우</button>
-                   {/* <button>팔로잉</button> */}
-                 </div>
-              </div>
-            </div>
+            <RankList />
           </div>
         </div>
         <div className=" w-[387px] "> 

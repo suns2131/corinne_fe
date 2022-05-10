@@ -7,33 +7,6 @@ import { getTikerList } from '../../../state/reducer/transaction/trans';
 function Transaction(){
       const dispatch = useDispatch();
       const list2 = useSelector((state) => state.trans.tikerList);
-      const list = [{
-          favorite : true,
-          src : '/icons/icon_btc.png',
-          alt : 'btc',
-          name : 'BTC',
-          upRate : '+0.45%',
-          price : '48,936,000',
-          unitPrice : 'BTC',
-        },
-        {
-          favorite : true,
-          src : '/icons/icon_sol.png',
-          alt : 'sol',
-          name : 'SOL',
-          upRate : '-0.09%',
-          price : '7,000,000',
-          unitPrice : 'SOL',
-        },
-        {
-          favorite : false,
-          src : '/icons/icon_eth.png',
-          alt : 'eth',
-          name : 'ETH',
-          upRate : '-0.08%',
-          price : '3,588,000',
-          unitPrice : 'ETH',
-        }]
       useEffect(() =>{
         dispatch(getTikerList())
       },[])

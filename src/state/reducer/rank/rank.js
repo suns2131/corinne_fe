@@ -14,12 +14,20 @@ const { actions, reducer } = createSlice({
     initialState,
     reducers : {
         myRank : (state, {payload}) => {
-                // eslint-disable-next-line no-param-reassign
-                state.myrank = payload
-        }
+          // eslint-disable-next-line no-param-reassign
+          state.myrank = payload
+        },
+        topRank: (state, {payload}) => {
+          // eslint-disable-next-line no-param-reassign
+          state.top3Rank = payload;
+        },
+        rankList: (state, {payload}) => {
+          // eslint-disable-next-line no-param-reassign
+          state.realRank = payload;
+        },
     }
 })
-export const {myRank} = actions;
+export const {myRank,topRank,rankList} = actions;
 
 // 나의 랭크
 export const getMyRank = (url,requestData) => function (dispatch){
@@ -33,12 +41,33 @@ export const getMyRank = (url,requestData) => function (dispatch){
 }
 
 // top3 랭크 
-export const getTop3Rank = () => function(dispatch){
+export const getTop3Rank = () => function (dispatch){
      intercept.get('/api/rank/top3'
     ).then((response) => {
-        const reusltData  = response.data.content;
-        console.log(reusltData);
-        dispatch(myRank(reusltData))
+        const reusltData  = response.data.rank;
+        const newTop3 = [{
+            imageUrl: reusltData[1].imageUrl,
+            userId: reusltData[1].userId,
+            nickname: reusltData[1].nickname,
+            totalBalance: reusltData[1].totalBalance,
+            fluctuationRate: reusltData[1].fluctuationRate,
+          },
+          {
+            imageUrl: reusltData[0].imageUrl,
+            userId: reusltData[0].userId,
+            nickname: reusltData[0].nickname,
+            totalBalance: reusltData[0].totalBalance,
+            fluctuationRate: reusltData[0].fluctuationRate,
+          },
+          {
+            imageUrl: reusltData[2]?.imageUrl === undefined? null : reusltData[2].imageUrl,
+            userId: reusltData[2]?.userId === undefined? '' :  reusltData[2]?.userId,
+            nickname: reusltData[2]?.nickname === undefined? '' : reusltData[2]?.nickname,
+            totalBalance: reusltData[2]?.totalBalance === undefined? 0 : reusltData[2]?.totalBalance,
+            fluctuationRate: reusltData[2]?.fluctuationRate === undefined? 0 : reusltData[2]?.fluctuationRate,
+          }
+        ]
+        dispatch(topRank(newTop3))
     })
 }
 
@@ -49,7 +78,7 @@ export const getRealRank = (Page) => function(dispatch){
     ).then((response) => {
         const reusltData  = response.data;
         console.log(reusltData);
-        dispatch(myRank(reusltData))
+        dispatch(rankList(reusltData))
     })
 }
 
