@@ -21,6 +21,7 @@ function TransactionView() {
                     <TransSideView />
                 </div>
             </div>
+          
         </div>
     );
 }

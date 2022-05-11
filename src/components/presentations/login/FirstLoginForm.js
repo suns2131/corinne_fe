@@ -1,8 +1,8 @@
 import { memo } from 'react';
 
 function FirstLoginForm({
-    userNameRef, 
-    handleClickLoginSuccess, 
+    handleClickLoginSuccess,
+    handeChangeUserName,
     loginStatusText,
     loginStatus,
 }) {
@@ -19,7 +19,7 @@ function FirstLoginForm({
             <div className="w-[180px] h-[180px] rounded-full mx-auto bg-gray-50">
                 <img alt="프로필 이미지" />
             </div>
-            <input ref={userNameRef} className="w-[340px] mx-auto block" placeholder="닉네입 입력하기" />
+            <input onChange={handeChangeUserName} className="w-[340px] mx-auto block" placeholder="닉네입 입력하기" />
             <p>한글 or 영문 최소 2자, 최대 8자 입력 가능</p>
             <p>{loginStatusText}</p>
             <button 
