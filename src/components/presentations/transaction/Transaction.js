@@ -6,14 +6,15 @@ import { getTikerList } from '../../../state/reducer/transaction/trans';
 
 function Transaction(){
       const dispatch = useDispatch();
-      const list2 = useSelector((state) => state.trans.tikerList);
+      const list = useSelector((state) => state.trans.tikerList);
       useEffect(() =>{
         dispatch(getTikerList())
-      },[])
+      },[dispatch])
+
     return (
         <div className='flex'>
           <div className="  w-[387px] mr-5">
-            <TransactionSide coinsList={list2} />
+            <TransactionSide coinsList={list} />
           </div>
           <div className=" w-rankview ">
             <TransactionContent />

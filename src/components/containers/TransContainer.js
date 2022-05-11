@@ -1,11 +1,23 @@
 import React from 'react';
-import Transaction from "../presentations/transaction/Transaction";
 import Wrapper from "../presentations/Wrapper";
+import BuySellContainer from './Transaction/TrandDetailContainer';
+import ChattingContainer from './Transaction/chattingContainer';
+import RankContanier from './Transaction/RankContainer';
+import TikerListContainer from './Transaction/TikerListContainer';
 
 function TransContainer() {
     return (
         <Wrapper >
-            <Transaction  />
+            <div className='flex '>
+                <div className='mr-5'>
+                    <RankContanier />
+                    <TikerListContainer />
+                    <ChattingContainer />
+                </div>
+                <div>
+                    <BuySellContainer />
+                </div>
+            </div>
         </Wrapper>
     );
 }
