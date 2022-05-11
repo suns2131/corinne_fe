@@ -1,20 +1,14 @@
 /* eslint-disable import/prefer-default-export */
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import intercept from "../../../data/axios";
-
-export const kakaoLogin = createAsyncThunk(
-    "user/kakaoLogin",
-    async (data, thunkApi) => {
-        const response = await intercept.post('/user/kakao/callback', {autoCode: data})
-        console.log('test', data, response);
-    }
-)
+import axiosInstance from "../../../data/axios";
 
 export const signUp = createAsyncThunk(
     "user/signUp",
     async (data, thunkApi) => {
-        // const response = await intercept.get('/user/signup')
-        console.log(data);
-        return 'success'
+        const response = await axiosInstance.patch('/user/signup', {nickname: data})
+        if(response.status === 200){
+            return 'success'
+        }
+        return 'fail'
     }
 )
