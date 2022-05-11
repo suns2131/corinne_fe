@@ -18,7 +18,7 @@ function RankList() {
           {realData?.rank && realData.rank.map((el,idx) => (
             <div>
             {idx === 0 && 
-              <div className=" w-[753px] h-[64px] mb-[15px] bg-curp rounded-[10px] p-5 flex justify-between items-center">
+              <div id={el.id} className=" w-[753px] h-[64px] mb-[15px] bg-curp rounded-[10px] p-5 flex justify-between items-center">
                  <div className="w-[50px] h-[64px] flex justify-start items-center font-bold text-[15px] text-neutrals5 mr-[53px]">
                   🥇1위
                 </div>
