@@ -73,7 +73,7 @@
     font-style: normal;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
     font-weight: 400;
     font-size: 12px;
     line-height: 19px;
@@ -97,4 +97,5 @@
     background: #6800BA;
     border-radius: 16px 16px 0px 16px;
     margin-left: 5px;
+    color: white;
 }

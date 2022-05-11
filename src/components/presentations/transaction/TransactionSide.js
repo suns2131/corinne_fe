@@ -8,7 +8,6 @@ import {getMyRank} from '../../../state/reducer/rank/rank'
 
 function TransactionSide({coinsList}) {
     const defaultList = coinsList;
-    console.log(defaultList)
     const dispatch = useDispatch();
     const userinfo = useSelector((state) => state.user);
     const rankInfo = useSelector((state) => state.rank);
@@ -16,7 +15,6 @@ function TransactionSide({coinsList}) {
     
     const [coinList,setCoinList] = React.useState(coinsList)
     const [inputMessage,setInputMessage] = React.useState('');
-    console.log(coinList)
 
     const changeCoinList = (e) => {
         setCoinList(defaultList.filter((el) => el.name.includes(e.target.value.toUpperCase())))
@@ -43,9 +41,6 @@ function TransactionSide({coinsList}) {
         }
         dispatch(addChat(shot));
       })
-      
-    
-
 
       const connectEnter = {
         type : 'ENTER',
@@ -162,7 +157,7 @@ function TransactionSide({coinsList}) {
                       }
                     </div>
                     <div className=" mr-[10px] flex justify-center items-center ">
-                      <Image src={el.src} width="42" height="42" alt={el.alt} />
+                      <Image src={el.src} width="42" height="50" alt={el.alt} />
                     </div>
                     <div className=" h-[50px] flex flex-col justify-center items-start ">
                       <p className=" text-base font-bold" >{el.name}</p>

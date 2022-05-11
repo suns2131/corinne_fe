@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from 'react'
 import Image from "next/image";
 import { useDispatch, useSelector } from 'react-redux';
 import TransChart from './TransChart';
-import {getServer , PostServer} from '../../../state/reducer/transaction/trans'
-import TransProgressbar from './TransProgressbar';
+import {PostServer} from '../../../state/reducer/transaction/trans'
+import TransProgressbar from './tradeDetail/TransProgressbar';
 import TransactionCurrent from './TransactionCurrent';
 
 function TransactionContent() {
@@ -11,7 +11,7 @@ function TransactionContent() {
     const buyInputRef = useRef();
     const seletor = useSelector((state) => state.trans);
     useEffect(()=> {
-      dispatch(getServer('/api/transaction/KRW-BTC/1',''));
+      // dispatch(getServer('/api/transaction/KRW-BTC/1',''));
     },[])
     const [coinList,setCoinList] = React.useState(
         {
