@@ -5,12 +5,7 @@ import {useSession} from 'next-auth/react';
 
 export default function Headers() {
     const router = useRouter();
-    const {islogin : session} = useSession();
-    const tf = false;
-    console.log(session);
-    // const login = () => {
-    //     signIn('kakao');
-    // }
+    const tf = true;
     if(tf){
       return (
         <div className=' font-Gmarket Sans w-full h-headers py-4 flex justify-between items-center '>

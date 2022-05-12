@@ -1,7 +1,12 @@
 import React from "react";
+import {rankResult} from '../presentational/RankData'
 
 function RankView() {
     const rankData = Array.from({ length : 12 }, (v,i)=> i);
+    const resultCilck = () => {
+      rankResult();
+    }
+
     return (
       <div className=" font-Pretendard ">
         <div className="w-full mb-5 flex justify-between items-center" >
@@ -21,7 +26,11 @@ function RankView() {
           <div>
               <p className=" font-bold text-base mb-9">지난주 랭킹 결과</p>
               <p className=" font-semibold text-sm mb-4"> 나의 랭킹 : 00위</p>
-              <div className=" p-10s w-w130 h-h39 font-bold flex justify-center items-center mb-32 bg-[#848484]">보상받기</div>
+              <button 
+                type="button"
+                className=" p-10s w-w130 h-h39 font-bold flex justify-center items-center mb-32 bg-[#848484]" 
+                onClick={resultCilck}
+                >보상받기</button>
               <div className=" p-10s w-w99 h-h34 font-light text-xs flex justify-center items-center bg-[#AAAAAA]">전체 랭킹 보기</div>
           </div>
           <div className=" w-full flex justify-center items-end ">

@@ -27,5 +27,9 @@ module.exports = {
     "react-hooks/rules-of-hooks": 'error',
     "react-hooks/exhaustive-deps": 'warn', // <--- THIS IS THE NEW RULE
     "react/prop-types": 0,
+    "import/no-unresolved": 0,
+    "no-unused-vars": 1,
+    "import/no-extraneous-dependencies":0, //
+    "import/prefer-default-export": 0,
   },
 };

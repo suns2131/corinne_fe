@@ -49,7 +49,6 @@ function RankSideView() {
                   </div>
                 </div>
                 ))}
-              
           </div>
         </div>
     );
