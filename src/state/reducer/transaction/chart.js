@@ -25,14 +25,7 @@ export const getServer = (url,requestData) => function (dispatch, getState){
     })
 }
 
-// 차트 정보 조회 
-export const getLoadChart = (tiker,chartType) => function (dispatch) {
-    console.log(tiker, chartType)
-    intercept.get( chartType? `/api/price/date/${tiker}/1` : `/api/price/minute/${tiker}/1`
-    ).then((response) => {
-        console.log(response);
-    })
-}
+
 
 
 const { actions, reducer } = createSlice({
@@ -91,5 +84,25 @@ const { actions, reducer } = createSlice({
 })
 
 export const {addChart,updateChart,getCurMonut,getChart} = actions;
+
+// 차트 정보 조회 
+export const getLoadChart = (tiker,chartType) => function (dispatch) {
+    console.log(tiker, chartType)
+    intercept.get( chartType? `/api/price/date/${tiker}/1` : `/api/price/minute/${tiker}/1`
+    ).then((response) => {
+        console.log('차트정보')
+        console.log(response.data);
+        const newChart = response.data.content.map((el) => {
+            const chartdt = {
+                x: el.tradeTime,
+                y: [el.startPrice,el.highPrice,el.lowPrice,el.endPrice],
+            }
+            return  chartdt;
+            }
+        )
+        console.log(newChart);
+        dispatch(getChart(newChart));
+    })
+}
 
 export default reducer;

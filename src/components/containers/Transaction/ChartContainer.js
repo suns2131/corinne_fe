@@ -7,7 +7,7 @@ import { getLoadChart, addChart, getCurMonut } from '../../../state/reducer/tran
 function ChartContainer() {
     const dispatch = useDispatch();
     const selectInfo = useSelector((state) => state.trans.tikerinfo);
-    const [chartType, setChartType] = useState(true) // false 분봉 / true 일봉
+    const [chartType, setChartType] = useState(false) // false 분봉 / true 일봉
     const chartData = useSelector((state) => state.chart.getChart);
     
     const currentMount = useSelector((state) => state.chart.getCurrentMonut);
@@ -20,13 +20,10 @@ function ChartContainer() {
 
     // 차트 데이터 검사 로직
     const DataSetting = (date,realData) => {
-      console.log(chartData)
       if(chartData.x !== undefined)
       {
-        console.log(chartData.x)
         if(chartData.x === date)
         {
-          console.log('update')
           const updateData = {
             x:chartData.x,
             y:[
@@ -40,7 +37,6 @@ function ChartContainer() {
         }
         else
         {
-          console.log('input')
           const inputData = {
             x: date.trim(),
             y: [realData.tradePrice,realData.tradePrice,realData.tradePrice,realData.tradePrice]
@@ -50,7 +46,6 @@ function ChartContainer() {
       }
       else
       {
-        console.log('frist')
         const inputData = {
           x: date.trim(),
           y: [realData.tradePrice,realData.tradePrice,realData.tradePrice,realData.tradePrice]
@@ -61,11 +56,8 @@ function ChartContainer() {
 
     // info 변경될때마다 API 갱신 웹소켓 연결 체크
     React.useEffect(() => {
-      console.log(socketClient.connected)
-      
       if(selectInfo?.tiker !== undefined)
       {
-        console.log(subNum.current);
         socketClient.unsubscribe(subNum.current);  
       }
       
