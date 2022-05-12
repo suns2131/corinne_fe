@@ -3,7 +3,7 @@ import { Won } from '../../../../share/convertWon';
 import styles from './TradeDetail.module.css'
 import TransProgressbar from './TransProgressbar';
 
-function TradeDetail({infinitiRef, items, buysellState, setBuysellState ,buyRequest,setBuyRequest,sellRequest, setSellRequest , buySellClick, buyRef, sellRef , btnSet}) {
+function TradeDetail({infinitiRef, items, buysellState, setBuysellState ,buyRequest,setBuyRequest,sellRequest, setSellRequest , buySellClick, buyRef, sellRef , btnSet, userAmount}) {
     return (
         <div className=' font-Pretendard flex justify-center items-center'>
           {buysellState ?
@@ -26,7 +26,7 @@ function TradeDetail({infinitiRef, items, buysellState, setBuysellState ,buyRequ
               <div className='w-[339px] h-[188px] flex flex-col items-start mb-[77px]'>
                 <div className='w-full flex justify-between items-center mb-[33px]'>
                   <p className='font-normal text-[14px] flex items-center text-[#33323f]'>매수 가능 금액</p>
-                  <p className='font-bold text-[14px flex items-center]'>{Won(100000)}원</p>
+                  {userAmount?.accountBalance !== undefined && <p className='font-bold text-[14px flex items-center]'>{Won(userAmount.accountBalance)}원</p>}
                 </div>
                 <TransProgressbar type='buy' buyRequest={buyRequest} setBuyRequest={setBuyRequest}  />
                 <div className='w-full h-[88px] flex justify-between items-center '>
