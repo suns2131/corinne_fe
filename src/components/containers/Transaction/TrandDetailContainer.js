@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useInView } from 'react-intersection-observer'
 import axios from 'axios';
-import { getDetail } from '../../../state/reducer/transaction/trans';
+import { getDetail, getUserAmount } from '../../../state/reducer/transaction/trans';
 import TradeDetail from '../../presentations/transaction/tradeDetail/TradeDetail'
 
 
@@ -10,8 +10,9 @@ function TrandDetailContainer() {
     const dispatch = useDispatch();
     const BuySellData = useSelector((state) => state.trans.tikerDetail);
     const [items, setItems] = useState(BuySellData)
-    const [buysellState,setBuysellState] = useState(false);
+    const [buysellState,setBuysellState] = useState(true);
     const SelectCoin = useSelector((state) => state.trans.tikerinfo);
+    const userAmount = useSelector((state) => state.trans.userAmount);
     const [page, setPage] = useState(1)
     const buyRef = useRef(null);
 		const sellRef = useRef(null);
@@ -32,6 +33,11 @@ function TrandDetailContainer() {
         //     setItems(prevItem => [...prevItem, response.data])
         // })
     },[page])
+
+    // 유저 자산 정보 조회 
+    React.useEffect(() => {
+      dispatch(getUserAmount());
+    },[])
 
     // 매수 매도 처리
     const buySellClick = (type) => {
@@ -159,6 +165,7 @@ function TrandDetailContainer() {
 						buyRef={buyRef}
 						sellRef={sellRef}
             btnSet={btnSet}
+            userAmount={userAmount}
             />
         
     );

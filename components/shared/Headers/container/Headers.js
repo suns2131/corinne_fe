@@ -20,9 +20,9 @@ export default function Headers() {
                    <li className=' float-left text-menus mt-2 mr-[41px] text-[#777777] '><Link href="/transaction">모의투자</Link></li>
                 } 
                 {router.pathname === "/RankPage" ?
-                   <li className=' float-left text-menus mt-2 mr-[41px] font-bold '><Link href="/RankPage">랭킹</Link></li>
+                   <li className=' float-left text-menus mt-2 mr-[41px] font-bold '><Link href="/rankpage">랭킹</Link></li>
                    :
-                   <li className=' float-left text-menus mt-2 mr-[41px] text-[#777777]'><Link href="/RankPage">랭킹</Link></li>
+                   <li className=' float-left text-menus mt-2 mr-[41px] text-[#777777]'><Link href="/rankpage">랭킹</Link></li>
                 }
                 <li className=' float-left text-menus mt-2 mr-[41px] text-[#777777]'>커뮤니티</li>
                 <li className=' float-left text-menus mt-2 mr-[37px] text-[#777777]'>로그아웃</li>

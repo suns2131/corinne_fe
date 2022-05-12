@@ -5,7 +5,7 @@ import intercept from "../../../data/intercept"
 
 // 초기 state값
 const initialState = {
-    tikername_en : '',
+    userAmount : {},
     tikerList : [],
     TransDetail : [],
     tikerinfo: {},
@@ -31,11 +31,15 @@ const { actions, reducer } = createSlice({
         infos: (state, {payload}) => {
             // eslint-disable-next-line no-param-reassign
             state.tikerinfo = payload
-        }
+        },
+        Amounts: (state, {payload}) => {
+            // eslint-disable-next-line no-param-reassign
+            state.userAmount = payload
+        },
     }
 })
 
-export const {DetailList,tikerList,infos,addDetail} = actions;
+export const {DetailList,tikerList,infos,addDetail,Amounts} = actions;
 
 
 // 코인 정보리스트
@@ -91,6 +95,20 @@ export const postBuySell = (type,requestData) => function (dispatch) {
     ).then((response)=>{
         console.log(response.data)
         dispatch(addDetail(response.data));
+    })
+}
+
+// 유저 자산 정보 조회 
+export const getUserAmount = () => function (dispatch) {
+    intercept.get(`/api/account/balance`
+    ).then((response) => {
+        console.log('자산조회')
+        const newAmount = {
+            buyAmount: response.data.accountBalance,
+            sellAmount: 0,
+        }
+        console.log(response.data)
+        dispatch(Amounts(response.data))
     })
 }
 
