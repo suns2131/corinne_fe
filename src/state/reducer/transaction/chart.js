@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { createSlice, current } from "@reduxjs/toolkit"
 import intercept from "../../../data/intercept"
 
@@ -22,15 +21,6 @@ export const getServer = (url,requestData) => function (dispatch, getState){
 
         // eslint-disable-next-line no-use-before-define
         // dispatch(tikerData(reusltData)); 
-    })
-}
-
-// 차트 정보 조회 
-export const getLoadChart = (tiker,chartType) => function (dispatch) {
-    console.log(tiker, chartType)
-    intercept.get( chartType? `/api/price/date/${tiker}/1` : `/api/price/minute/${tiker}/1`
-    ).then((response) => {
-        console.log(response);
     })
 }
 
@@ -75,9 +65,9 @@ const { actions, reducer } = createSlice({
                 }
                 
         },
-        getChart: (state, {payload}) => {
+        updateChart: (state, {payload}) => {
             console.log(payload);
-            state.getChart = payload;
+            // const array = [...state.getChart].findIndex(el => el.x === payload.x)
         },
         getCurMonut: (state, {payload}) => {
             // eslint-disable-next-line no-param-reassign
@@ -90,6 +80,6 @@ const { actions, reducer } = createSlice({
     }
 })
 
-export const {addChart,updateChart,getCurMonut,getChart} = actions;
+export const {addChart,updateChart,getCurMonut} = actions;
 
 export default reducer;
