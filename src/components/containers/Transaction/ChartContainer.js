@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import socketClient from '../../../share/socket'
 import CoinChart from '../../presentations/transaction/chart/CoinChart'
 import { getLoadChart, addChart, getCurMonut } from '../../../state/reducer/transaction/chart';
-import { getUserAmount } from '../../../state/reducer/transaction/trans';
 
 function ChartContainer() {
     const dispatch = useDispatch();

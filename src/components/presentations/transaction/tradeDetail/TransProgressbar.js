@@ -1,8 +1,6 @@
 import React from 'react'
 import Slider from '@mui/material/Slider';
-import Box from '@mui/material/Box';
 import {createTheme, ThemeProvider} from '@mui/material/styles'
-import { height } from '@mui/system';
 
 function TransProgressbar({ buyRequest ,setBuyRequest,sellRequest ,setSellRequest, type }) {
     const marker = [{value : 0},{value: 25},{value: 50,},{value: 75,},{value: 100,}]

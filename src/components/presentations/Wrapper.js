@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Headers from '../../../components/shared/Headers/container/Headers'
+import Headers from '../../share/Headers'
 
 function Wrapper({children}) {
     return (

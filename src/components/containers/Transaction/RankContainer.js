@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 
 function RankContanier() {
     // const userinfo = useSelector((state) => state.user.)
