@@ -7,7 +7,7 @@ import intercept from "../../../data/intercept"
 const initialState = {
     userAmount : {},
     tikerList : [],
-    TransDetail : [],
+    transDetail : [],
     tikerinfo: {},
 }
 
@@ -15,14 +15,15 @@ const { actions, reducer } = createSlice({
     name : 'tiker',
     initialState,
     reducers : {
-        DetailList : (state, {payload}) => {
+        detailList : (state, {payload}) => {
             // eslint-disable-next-line no-param-reassign
-            state.tikerDetail = payload
+            state.transDetail = payload
         },
         addDetail : (state, {payload}) => {
-            const arrays = [...state.tikerDetail].unshift(payload);
+            const arrays = [...state.transDetail].unshift(payload);
+            console.log(arrays)
             // eslint-disable-next-line no-param-reassign
-            state.tikerDetail = arrays
+            state.transDetail = arrays
         },
         tikerList : (state, {payload}) => {
             // eslint-disable-next-line no-param-reassign
@@ -39,7 +40,7 @@ const { actions, reducer } = createSlice({
     }
 })
 
-export const {DetailList,tikerList,infos,addDetail,Amounts} = actions;
+export const {detailList,tikerList,infos,addDetail,Amounts} = actions;
 
 
 // 코인 정보리스트
@@ -81,16 +82,18 @@ export const SelectingTiker = (selectInfo) => function (dispatch) {
 
 // 거래내역 조회
 export const getDetail = (tiker,page) => function (dispatch) {
+    console.log("거래내역 조회");
     console.log(tiker,page);
     intercept.get(`/api/transaction/${tiker}/${page}`
     ).then((response) => {
-        console.log(response.data)
-        // dispatch(DetailList(response.data))
+        console.log(response.data.content)
+        dispatch(detailList(response.data.content))
     })
 }
 
 // 매수 매도 처리 
 export const postBuySell = (type,requestData) => function (dispatch) {
+    console.log(requestData);
     intercept.post(`/api/transaction/${type}`,requestData
     ).then((response)=>{
         console.log(response.data)

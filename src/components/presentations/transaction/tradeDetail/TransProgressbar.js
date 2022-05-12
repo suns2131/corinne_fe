@@ -8,10 +8,13 @@ function TransProgressbar({ buyRequest ,setBuyRequest,sellRequest ,setSellReques
     const sliderTheme = createTheme({
       palette : {
         customPurple: {
-          main: '#6800BA'
+          main: '#6800BA',
+          light: '#cecece',
+          dark: '#0066ff',
         },
         customOrange: {
           main: '#FF9E0D'
+
         }
       }
     })
@@ -56,7 +59,7 @@ function TransProgressbar({ buyRequest ,setBuyRequest,sellRequest ,setSellReques
             marks={marker}
             />
           </ThemeProvider>
-          <p className='text-[#6800BA] text-[15px] font-bold'>{leverage}x</p>
+          <p className=' w-[15px] text-[#6800BA] text-[15px] font-bold'>{leverage}x</p>
         </div>
         :
         <div className='w-[339px] flex justify-between items-center text-[14px] mb-[18px]'>
@@ -75,7 +78,7 @@ function TransProgressbar({ buyRequest ,setBuyRequest,sellRequest ,setSellReques
             marks={marker}
             />
           </ThemeProvider>
-          <p className='text-[#FF9E0D] text-[15px] font-bold'>{leverage}x</p>
+          <p className=' w-[15px] text-[#FF9E0D] text-[15px] font-bold'>{leverage}x</p>
         </div>
         }
         

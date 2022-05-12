@@ -65,7 +65,7 @@ function TikerList({defaultList ,coinList, setCoinList, itemClick, changeCoinLis
                       </button>
                     }
                     <div className={styles.TikeritemDiv2}>
-                      <Image src={el.src} width="50" height="50" alt='btc' />
+                      <Image src={el.src} width="42" height="42" alt='btc' />
                       <div className={styles.TikeritemTitle}>
                           <p className=" text-base font-bold" >{el.name}</p>
                           <p className=" text-sm font-normal text-[#CECECE]">{el.upRate.toFixed(2)}%</p>

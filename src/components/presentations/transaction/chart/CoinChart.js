@@ -8,19 +8,19 @@ function CoinChart({setChartType, selectInfo, currentMount,chartData}) {
   const dState = {
     options: {
         chart: {
-          id: "basic-bar"
+          
         },
-      },
-    plotOptions: {
-        candlestick: {
+        plotOptions: {
+          candlestick: {
             colors: {
-              upward: '#00B746',
-              downward: '#EF403C'
-            },
-            wick: {
-              useFillColor: true
+              upward: '#A634FF',
+              downward: '#FF9E0D'
             }
           }
+        },
+        yaxis: {
+          opposite: true,
+        },
       },
       series: [{
         data:chartData
@@ -111,6 +111,7 @@ function CoinChart({setChartType, selectInfo, currentMount,chartData}) {
                  options={dState.options}
                  series={dState.series}
                  plotoptions ={dState.plotOptions}
+                 yaxis={dState.yaxis}
                  type="candlestick"
                  width="753px"
                  height="472px"

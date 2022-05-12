@@ -3,7 +3,7 @@ import { Won } from '../../../../share/convertWon';
 import styles from './TradeDetail.module.css'
 import TransProgressbar from './TransProgressbar';
 
-function TradeDetail({infinitiRef, items, buysellState, setBuysellState ,buyRequest,setBuyRequest,sellRequest, setSellRequest , buySellClick, buyRef, sellRef , btnSet, userAmount}) {
+function TradeDetail({infinitiRef, items, buysellState, setBuysellState ,buyRequest,setBuyRequest,sellRequest, setSellRequest , buySellClick, buyRef, sellRef , btnSet}) {
     return (
         <div className=' font-Pretendard flex justify-center items-center'>
           {buysellState ?
@@ -26,7 +26,7 @@ function TradeDetail({infinitiRef, items, buysellState, setBuysellState ,buyRequ
               <div className='w-[339px] h-[188px] flex flex-col items-start mb-[77px]'>
                 <div className='w-full flex justify-between items-center mb-[33px]'>
                   <p className='font-normal text-[14px] flex items-center text-[#33323f]'>매수 가능 금액</p>
-                  {userAmount?.accountBalance !== undefined && <p className='font-bold text-[14px flex items-center]'>{Won(userAmount.accountBalance)}원</p>}
+                  <p className='font-bold text-[14px flex items-center]'>{Won(100000)}원</p>
                 </div>
                 <TransProgressbar type='buy' buyRequest={buyRequest} setBuyRequest={setBuyRequest}  />
                 <div className='w-full h-[88px] flex justify-between items-center '>
@@ -199,7 +199,7 @@ function TradeDetail({infinitiRef, items, buysellState, setBuysellState ,buyRequ
                 <div className='w-[386px] h-[69px] bg-[#ffffff] shadow-008 rounded-t-[10px] p-5 font-bold text-[16px] text-[#33323f]'>
                     거래내역
                 </div>
-                <div className={styles.contestDiv} ref={infinitiRef}>
+                <div className={styles.contestDiv}>
                     {items && items.map((el) => (
                       <div className='w-[347px] h-[96px] flex flex-row justify-between items-start gap-[50px] mb-[24px]'>
                           <div className='w-[49px] flex flex-col items-start gap-1 font-normal text-[14px] text-[#cecece]'>
@@ -213,14 +213,15 @@ function TradeDetail({infinitiRef, items, buysellState, setBuysellState ,buyRequ
                               <p>레버리지</p>
                           </div>
                           <div className='w-[97px] flex flex-col items-end gap-1 font-bold text-[15px] text-[#33323f] text-right'>
-                              <p className='font-normal text-[12px] text-[#cecece] flex items-center'>{el.tradeAT}</p>
-                              <p>{Won(el.price)}원</p>
-                              <p>{Won(el.amount)}원</p>
+                              <p className='font-normal text-[12px] text-[#cecece] flex items-center'>{el.tradeAt}</p>
+                              <p>{el.price}원</p>
+                              <p>{el.amount}원</p>
                               <p>{el.leverage}x</p>
                           </div>
                       </div>
                     ))
                     }
+                    <div ref={infinitiRef} />
                 </div>
             </div>
         </div>

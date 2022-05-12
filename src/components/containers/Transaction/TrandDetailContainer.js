@@ -1,18 +1,19 @@
 import React, { useCallback, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useInView } from 'react-intersection-observer'
-import axios from 'axios';
-import { getDetail, getUserAmount } from '../../../state/reducer/transaction/trans';
+import { getDetail, getUserAmount, postBuySell } from '../../../state/reducer/transaction/trans';
 import TradeDetail from '../../presentations/transaction/tradeDetail/TradeDetail'
+import intercept from '../../../data/intercept';
 
 
 function TrandDetailContainer() {
     const dispatch = useDispatch();
-    const BuySellData = useSelector((state) => state.trans.tikerDetail);
-    const [items, setItems] = useState(BuySellData)
+    const BuySellData = useSelector((state) => state.trans.transDetail);
+    const [item,setItem] = useState(BuySellData);
     const [buysellState,setBuysellState] = useState(true);
     const SelectCoin = useSelector((state) => state.trans.tikerinfo);
     const userAmount = useSelector((state) => state.trans.userAmount);
+    const currentMount = useSelector((state) => state.chart.getCurrentMonut);
     const [page, setPage] = useState(1)
     const buyRef = useRef(null);
 		const sellRef = useRef(null);
@@ -29,9 +30,12 @@ function TrandDetailContainer() {
     })
     
     const getitem = useCallback(async () => {
-        // await axios.get('').then((response) => {
-        //     setItems(prevItem => [...prevItem, response.data])
-        // })
+        if(SelectCoin?.tiker !== undefined)
+        {
+          await intercept.get(`/api/transaction/${SelectCoin.tiker}/${page}`).then((response) => {
+            setItem(prevItem => [...prevItem].concat(response.data.content))
+          })
+        }
     },[page])
 
     // 유저 자산 정보 조회 
@@ -42,9 +46,29 @@ function TrandDetailContainer() {
     // 매수 매도 처리
     const buySellClick = (type) => {
         if(type === "buy")
-            console.log(buyRequest)
+        {
+          if(SelectCoin?.tiker !== undefined)
+          {
+            const newRequest = {
+              ...buyRequest,
+              'tradePrice': currentMount,
+              'buyAmount': buyRef.current.value,
+              'tiker': SelectCoin.tiker
+            }
+            dispatch(postBuySell("buy",newRequest))
+          }
+          
+        }    
         else if(type === "sell")
-            console.log(sellRequest)
+        {
+          const newRequest = {
+            ...sellRequest,
+            'tradePrice': currentMount,
+            'sellAmount': sellRef.current.value,
+            'tiker': SelectCoin.tiker
+          }
+          dispatch(postBuySell("sell",newRequest))
+        }    
     }
 
     // 매수 금액 버튼 클릭시 자동 계산함수
@@ -129,7 +153,6 @@ function TrandDetailContainer() {
 ;       }
     }
 
-
     // getitem 변경될때마다 실행.
     React.useEffect(() => {
         getitem()
@@ -137,24 +160,24 @@ function TrandDetailContainer() {
 
     // 사용자가 마지막 요소 조회시 page + 1
     React.useEffect(() => {
-        setPage(prevPage => prevPage + 1);
+        if(inView && SelectCoin?.tiker !== undefined)
+         setPage(prevPage => prevPage + 1);
     },[inView])
 
     // info 변경될때마다 deatil 갱신
     React.useEffect(() => {
+      if(SelectCoin?.tiker !== undefined)
         dispatch(getDetail(SelectCoin.tiker, page))
     },[SelectCoin])
 
-    // 초기 페이지 로드시 거래내역 호출
-    React.useEffect(() => {
-        dispatch(getDetail(SelectCoin.tiker, page))
-    },[])
-
+    React.useEffect(()=>{
+      setItem(BuySellData)
+    },[BuySellData])
 
     return (
         <TradeDetail 
             infinitiRef={infinitiRef}
-            list={items}
+            items={item}
             buysellState={buysellState}
             setBuysellState={setBuysellState}
 						buyRequest={buyRequest}
@@ -167,7 +190,6 @@ function TrandDetailContainer() {
             btnSet={btnSet}
             userAmount={userAmount}
             />
-        
     );
 }
 
