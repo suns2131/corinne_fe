@@ -7,7 +7,7 @@ import Wrapper from "../presentations/Wrapper";
 import { login } from '../../state/reducer/user';
 import Login from '../presentations/login/Login';
 import HomeText from "../presentations/home/homeText";
-import { kakaoLogin } from "../../state/reducer/user/thunk";
+// import { kakaoLogin } from "../../state/reducer/user/thunk";
 
 export default function HomeContainer() {
     const router = useRouter();
