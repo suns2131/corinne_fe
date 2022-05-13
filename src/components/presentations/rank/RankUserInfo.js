@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./Rank.module.css"
 import { getUserInfo} from "../../../state/reducer/rank/rank";
 import { maxExp } from "../../../share/exp";
-import Level from "../../../share/level";
+import Level from "../../../share/Level";
 
 function RankUserinfo() {
     const userData = useSelector((state) => state.rank.userInfo);

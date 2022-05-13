@@ -1,7 +1,7 @@
 import React from 'react';
 import Wrapper from "../presentations/Wrapper";
 import BuySellContainer from './Transaction/TrandDetailContainer';
-import ChattingContainer from './Transaction/chattingContainer';
+import ChattingContainer from './Transaction/ChattingContainer';
 import RankContanier from './Transaction/RankContainer';
 import TikerListContainer from './Transaction/TikerListContainer';
 

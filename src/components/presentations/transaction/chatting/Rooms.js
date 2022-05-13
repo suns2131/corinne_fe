@@ -1,5 +1,5 @@
 import React from "react";
-import MessageBox from "./messageBox";
+import MessageBox from "./MessageBox";
 
 function Rooms({sendMessage, setInputMessage}) {
     return (

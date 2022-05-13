@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import Level from '../../../share/level';
+import Level from '../../../share/Level';
 import { getfollwerRank } from '../../../state/reducer/rank/rank';
 import {Won} from '../../../share/convertWon'
 

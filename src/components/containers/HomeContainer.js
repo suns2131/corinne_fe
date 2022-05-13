@@ -6,7 +6,7 @@ import { useRouter } from "next/router"
 import Wrapper from "../presentations/Wrapper";
 import { login } from '../../state/reducer/user';
 import Login from '../presentations/login/Login';
-import HomeText from "../presentations/home/homeText";
+import HomeText from "../presentations/home/HomeText";
 
 export default function HomeContainer() {
     const router = useRouter();

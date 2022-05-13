@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRealRank } from "../../../state/reducer/rank/rank";
 import { Won } from "../../../share/convertWon";
-import Level from "../../../share/level";
+import Level from "../../../share/Level";
 
 function RankList() {
     const realData = useSelector((state) => state.rank.realRank)
