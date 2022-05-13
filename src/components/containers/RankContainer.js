@@ -1,5 +1,5 @@
 import React from 'react';
-import Rank from '../presentations/rank/rank';
+import Rank from '../presentations/rank/Rank';
 import Wrapper from "../presentations/Wrapper";
 
 function RankContainer() {
