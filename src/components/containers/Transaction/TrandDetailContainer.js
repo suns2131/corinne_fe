@@ -14,6 +14,7 @@ function TrandDetailContainer() {
     const SelectCoin = useSelector((state) => state.trans.tikerinfo);
     const userAmount = useSelector((state) => state.trans.userAmount);
     const currentMount = useSelector((state) => state.chart.getCurrentMonut);
+
     const [page, setPage] = useState(1)
     const [sellPrice,setSellPrice] = useState(0);
     const buyRef = useRef(null);

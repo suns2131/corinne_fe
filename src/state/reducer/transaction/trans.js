@@ -5,7 +5,7 @@ import intercept from "../../../data/axios"
 
 // 초기 state값
 const initialState = {
-    userAmount : {},
+    tikername_en : '',
     tikerList : [],
     transDetail : [],
     tikerinfo: {},
@@ -32,16 +32,11 @@ const { actions, reducer } = createSlice({
         infos: (state, {payload}) => {
             // eslint-disable-next-line no-param-reassign
             state.tikerinfo = payload
-        },
-        Amounts: (state, {payload}) => {
-            // eslint-disable-next-line no-param-reassign
-            state.userAmount = payload
-        },
+        }
     }
 })
 
 export const {detailList,tikerList,infos,addDetail,Amounts} = actions;
-
 
 // 코인 정보리스트
 export const getTikerList = () => function (dispatch){

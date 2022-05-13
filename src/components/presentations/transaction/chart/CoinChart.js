@@ -8,7 +8,6 @@ function CoinChart({setChartType, selectInfo, currentMount,chartData}) {
   const dState = {
     options: {
         chart: {
-          
         },
         plotOptions: {
           candlestick: {
