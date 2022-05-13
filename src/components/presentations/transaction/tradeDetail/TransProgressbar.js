@@ -2,19 +2,16 @@ import React from 'react'
 import Slider from '@mui/material/Slider';
 import {createTheme, ThemeProvider} from '@mui/material/styles'
 
-function TransProgressbar({ buyRequest ,setBuyRequest,sellRequest ,setSellRequest, type }) {
-    const marker = [{value : 0},{value: 25},{value: 50,},{value: 75,},{value: 100,}]
-    const [leverage, setLeverage] = React.useState(0);
+function TransProgressbar({ buyRequest, setBuyRequest ,sellRequest ,setSellRequest, type, currentMount, userAmount, setSellPrice}) {
+    const marker = [{value : 1},{value: 25},{value: 50,},{value: 75,},{value: 100,}]
+    const [leverage, setLeverage] = React.useState(1);
     const sliderTheme = createTheme({
       palette : {
         customPurple: {
-          main: '#6800BA',
-          light: '#cecece',
-          dark: '#0066ff',
+          main: '#6800BA'
         },
         customOrange: {
-          main: '#FF9E0D'
-
+          main: '#FF9E0D',
         }
       }
     })
@@ -29,10 +26,28 @@ function TransProgressbar({ buyRequest ,setBuyRequest,sellRequest ,setSellReques
         })
       }
       else if(type === "sell"){
-        setSellRequest({
-          ...sellRequest,
-          'leverage': newValue
-        })
+
+        const sell = userAmount.coins.filter((el) => el.leverage === newValue);
+
+        console.log('매도 가능금액계산')
+        console.log(sell);
+        if(sell.length > 0)
+        {
+          console.log(sell[0].buyPrice)
+          console.log(sell[0].amount)
+          const bPrice = sell[0].buyPrice;
+          const account = sell[0].amount
+          console.log(bPrice);
+          const yieldSell = ((currentMount - bPrice) / bPrice) * account
+          const sellmonut = Math.floor((yieldSell * newValue) + account);
+          console.log(  sellmonut) ;
+          setSellPrice(sellmonut);
+          setSellRequest({
+            ...sellRequest,
+            'leverage': newValue
+          })
+        } 
+        
       }
       
     };

@@ -15,6 +15,7 @@ function TrandDetailContainer() {
     const userAmount = useSelector((state) => state.trans.userAmount);
     const currentMount = useSelector((state) => state.chart.getCurrentMonut);
     const [page, setPage] = useState(1)
+    const [sellPrice,setSellPrice] = useState(0);
     const buyRef = useRef(null);
 		const sellRef = useRef(null);
     const [infinitiRef,inView] = useInView();
@@ -43,6 +44,26 @@ function TrandDetailContainer() {
       dispatch(getUserAmount());
     },[])
 
+    const handleChange = (event, type, newValue) => {
+      if(type === "buy")
+      {
+        setBuyRequest({
+          ...buyRequest,
+          'leverage': newValue
+        })
+      }
+      else if(type === "sell"){
+
+        
+        setSellRequest({
+          ...sellRequest,
+          'leverage': newValue
+        })
+      }
+      
+    };
+
+
     // 매수 매도 처리
     const buySellClick = (type) => {
         if(type === "buy")
@@ -52,7 +73,7 @@ function TrandDetailContainer() {
             const newRequest = {
               ...buyRequest,
               'tradePrice': currentMount,
-              'buyAmount': buyRef.current.value,
+              'buyAmount': Number(buyRef.current.value),
               'tiker': SelectCoin.tiker
             }
             dispatch(postBuySell("buy",newRequest))
@@ -61,10 +82,11 @@ function TrandDetailContainer() {
         }    
         else if(type === "sell")
         {
+          // 레버리지값으로 coins에서 필터링한 buyprice 값으로 계산하여 sellAmount 값 계산 
           const newRequest = {
             ...sellRequest,
             'tradePrice': currentMount,
-            'sellAmount': sellRef.current.value,
+            'sellAmount': Number(sellRef.current.value),
             'tiker': SelectCoin.tiker
           }
           dispatch(postBuySell("sell",newRequest))
@@ -76,6 +98,7 @@ function TrandDetailContainer() {
         if(type === "buy")
         {
 					const buy = buyRef.current.value;
+          const buyPercent = userAmount?.accountBalance !== undefined ?userAmount.accountBalance: 0
 					switch(sign){
 						case '-': 
 							if(buy - 50000 > 0)
@@ -93,19 +116,19 @@ function TrandDetailContainer() {
 							break;
 
 						case '25%':
-							buyRef.current.value = buy * 0.25;
+							buyRef.current.value = Math.ceil(buyPercent * 0.25);
 							break;
 
 						case '50%':
-							buyRef.current.value = buy * 0.5;
+							buyRef.current.value = Math.ceil(buyPercent * 0.5);
 							break;
 
 						case '75%':
-							buyRef.current.value = buy * 0.75;
+							buyRef.current.value = Math.ceil(buyPercent * 0.75);
 							break;
 
 						case '100%':
-							buyRef.current.value = buy * 1;
+							buyRef.current.value = Math.ceil(buyPercent * 1);
 							break;
 
 						default:
@@ -115,6 +138,7 @@ function TrandDetailContainer() {
 				else if(type === "sell")
         {
 					const sell = sellRef.current.value;
+          const sellPercent = sellPrice;
 					switch(sign){
 						case '-': 
 							if(sell - 50000 > 0)
@@ -132,19 +156,19 @@ function TrandDetailContainer() {
 							break;
 
 						case '25%':
-							sellRef.current.value = sell * 0.25;
+							sellRef.current.value = Math.ceil(sellPercent * 0.25);
 							break;
 
 						case '50%':
-							sellRef.current.value = sell * 0.5;
+							sellRef.current.value = Math.ceil(sellPercent * 0.5);
 							break;
 
 						case '75%':
-							sellRef.current.value = sell * 0.75;
+							sellRef.current.value = Math.ceil(sellPercent * 0.75);
 							break;
 
 						case '100%':
-							sellRef.current.value = sell * 1;
+							sellRef.current.value = Math.ceil(sellPercent * 1);
 							break;
 
 						default:
@@ -167,7 +191,12 @@ function TrandDetailContainer() {
     // info 변경될때마다 deatil 갱신
     React.useEffect(() => {
       if(SelectCoin?.tiker !== undefined)
+      {
+        setPage(1);
         dispatch(getDetail(SelectCoin.tiker, page))
+        dispatch(getUserAmount(SelectCoin.tiker));
+      }
+        
     },[SelectCoin])
 
     React.useEffect(()=>{
@@ -179,16 +208,20 @@ function TrandDetailContainer() {
             infinitiRef={infinitiRef}
             items={item}
             buysellState={buysellState}
-            setBuysellState={setBuysellState}
-						buyRequest={buyRequest}
+            buyRequest={buyRequest}
             setBuyRequest={setBuyRequest}
-						sellRequest={sellRequest}
+            sellRequest={sellRequest}
             setSellRequest={setSellRequest}
+            setBuysellState={setBuysellState}
             buySellClick={buySellClick}
 						buyRef={buyRef}
 						sellRef={sellRef}
             btnSet={btnSet}
             userAmount={userAmount}
+            handleChange={handleChange}
+            currentMount={currentMount}
+            setSellPrice={setSellPrice}
+            sellPrice={sellPrice}
             />
     );
 }

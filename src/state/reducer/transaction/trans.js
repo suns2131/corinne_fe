@@ -20,8 +20,9 @@ const { actions, reducer } = createSlice({
             state.transDetail = payload
         },
         addDetail : (state, {payload}) => {
-            const arrays = [...state.transDetail].unshift(payload);
-            console.log(arrays)
+            const arrays = [...state.transDetail];
+            const array1 = arrays.unshift(payload);
+            console.log(array1)
             // eslint-disable-next-line no-param-reassign
             state.transDetail = arrays
         },
@@ -93,17 +94,25 @@ export const getDetail = (tiker,page) => function (dispatch) {
 
 // 매수 매도 처리 
 export const postBuySell = (type,requestData) => function (dispatch) {
+    console.log(`매수매도처리`);
     console.log(requestData);
     intercept.post(`/api/transaction/${type}`,requestData
     ).then((response)=>{
         console.log(response.data)
-        dispatch(addDetail(response.data));
+        const newArray = {
+            amount: response.data.amount,
+            price: response.data.type ==="buy"? response.data.buyPrice: response.data.sellPrice,
+            tradeAt: response.data.tradeAt,
+            leverage: response.data.leverage,
+            type: response.data.type
+        }
+        dispatch(addDetail(newArray));
     })
 }
 
 // 유저 자산 정보 조회 
-export const getUserAmount = () => function (dispatch) {
-    intercept.get(`/api/account/balance`
+export const getUserAmount = (tiker) => function (dispatch) {
+    intercept.get(`/api/account/balance/${tiker}`
     ).then((response) => {
         console.log('자산조회')
         const newAmount = {
