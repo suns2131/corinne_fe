@@ -49,14 +49,15 @@ function LoginContainer(){
     }, [loginStatus, status])
 
     return (
-        <LoginCheck>
-            <FirstLoginForm 
-                handeChangeUserName={handeChangeUserName}
-                handleClickLoginSuccess={handleClickLoginSuccess}
-                loginStatus={loginStatus}
-                loginStatusText={loginStatusText}
-                />
-        </LoginCheck>
+        <>d</>
+        // <LoginCheck>
+        //     <FirstLoginForm 
+        //         handeChangeUserName={handeChangeUserName}
+        //         handleClickLoginSuccess={handleClickLoginSuccess}
+        //         loginStatus={loginStatus}
+        //         loginStatusText={loginStatusText}
+        //         />
+        // </LoginCheck>
     )
 }
 
