@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
-import {useSession} from 'next-auth/react';
 
 export default function Headers() {
     const router = useRouter();
@@ -19,7 +18,7 @@ export default function Headers() {
                    :
                    <li className=' float-left text-menus mt-2 mr-[41px] text-[#777777] '><Link href="/transaction">모의투자</Link></li>
                 } 
-                {router.pathname === "/RankPage" ?
+                {router.pathname === "/rankpage" ?
                    <li className=' float-left text-menus mt-2 mr-[41px] font-bold '><Link href="/rankpage">랭킹</Link></li>
                    :
                    <li className=' float-left text-menus mt-2 mr-[41px] text-[#777777]'><Link href="/rankpage">랭킹</Link></li>

@@ -11,7 +11,7 @@ function ChartContainer() {
     const chartData = useSelector((state) => state.chart.getChart);
     
     const currentMount = useSelector((state) => state.chart.getCurrentMonut);
-    const subNum = useRef(0); // 구독취소할 subscribe id 저장변수
+    const subNum = useRef(''); // 구독취소할 subscribe id 저장변수
 
     // 차트 타입 변경될때마다 Chart state초기화
     React.useEffect(() => {

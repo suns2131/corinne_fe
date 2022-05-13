@@ -25,9 +25,6 @@ export const getServer = (url,requestData) => function (dispatch, getState){
     })
 }
 
-
-
-
 const { actions, reducer } = createSlice({
     name : 'chatting',
     initialState,
@@ -38,9 +35,11 @@ const { actions, reducer } = createSlice({
                 {
                     if(payload.x !== prevArray[prevArray.length-1].x)
                     {
-                        const array = [...state.getChart,payload];
+                        const array = [...state.getChart];
+                        array.shift();
+                        const array1 = [...array,payload];
                         // eslint-disable-next-line no-param-reassign
-                        state.getChart = array
+                        state.getChart = array1
                     }
                     else
                     {
@@ -62,9 +61,12 @@ const { actions, reducer } = createSlice({
                     }
                 }
                 else{
-                    const array = [...state.getChart,payload];
+                    const array = [...state.getChart];
+                    array.shift();
+                    console.log(array);
+                    const array1 = [...array,payload];
                     // eslint-disable-next-line no-param-reassign
-                    state.getChart = array
+                    state.getChart = array1
                 }
                 
         },
@@ -92,7 +94,9 @@ export const getLoadChart = (tiker,chartType) => function (dispatch) {
     ).then((response) => {
         console.log('차트정보')
         console.log(response.data);
-        const newChart = response.data.content.map((el) => {
+        const arrays = response.data.content.filter((el,idx) => idx > 69);
+        console.log(arrays)
+        const newChart = arrays.map((el) => {
             const chartdt = {
                 x: el.tradeTime,
                 y: [el.startPrice,el.highPrice,el.lowPrice,el.endPrice],

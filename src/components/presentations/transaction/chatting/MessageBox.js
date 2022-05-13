@@ -19,10 +19,11 @@ function MessageBox({nickname}) {
         <div 
           className={styles.MessageDiv}
           ref={scrollref}>
-            {chattingData && chattingData.map((el) => (
+            {chattingData && chattingData.map((el,idx) => (
               <ul>
               {username === el.nickname ?
-                <div className={styles.MyMessage}>
+                // eslint-disable-next-line react/no-array-index-key
+                <div key={idx} className={styles.MyMessage}>
                   <div className={styles.MyMessageImage}/>
                   <div>
                     <p className={styles.MyMessageNickname}>{el.nickname}</p>
@@ -33,7 +34,8 @@ function MessageBox({nickname}) {
                   </div>
                 </div>
                 :
-                <div className={styles.Audience}>
+                // eslint-disable-next-line react/no-array-index-key
+                <div key={idx} className={styles.Audience}>
                   <p className={styles.MyMessageTime}>{el.time}</p>
                   <div className={styles.AudienceMsg}>{el.message}</div> 
                 </div>  
