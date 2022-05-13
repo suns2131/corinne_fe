@@ -30,6 +30,7 @@ module.exports = {
     "import/no-unresolved": 0,
     "no-unused-vars": 1,
     "import/no-extraneous-dependencies":0, //
-    "import/prefer-default-export": 0,
+    "import/prefer-default-export": 'off',
+    "import/extenstions":['off'],
   },
 };
