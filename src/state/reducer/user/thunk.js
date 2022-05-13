@@ -12,3 +12,33 @@ export const signUp = createAsyncThunk(
         return 'fail'
     }
 )
+
+export const getUserInfo = createAsyncThunk(
+    "user/getUserInfo",
+    async () => {
+        
+        const response = await axiosInstance.get('/api/user/info')
+        
+        return response.data;
+    }
+)
+
+export const getUserBalance = createAsyncThunk(
+    "user/getUserBalance",
+    async () => {
+        
+        const response = await axiosInstance.get('/api/account/balance')
+
+        return response.data;
+    }
+)
+
+export const getUserTransaction = createAsyncThunk(
+    "user/getUserTransaction",
+    async ({page}) => {
+        
+        const response = await axiosInstance.get(`/api/transaction/${page}`)
+
+        return response.data;
+    }
+)

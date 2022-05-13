@@ -1,10 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Link from 'next/link';
-import {useRouter} from 'next/router';
-import {useSession} from 'next-auth/react';
 
-export default function Headers() {
-    const router = useRouter();
+function Headers({ handleRouter, router }) {
     const tf = true;
     if(tf){
       return (
@@ -34,7 +31,10 @@ export default function Headers() {
                   </svg>
                 </li>
                 <li className=' float-left'>
-                  <div className=" w-8 h-8 rounded-full bg-[#EDEDED]" />
+                  <div 
+                    role="presentation"
+                    onClick={handleRouter('/mypage')}
+                  className=" w-8 h-8 rounded-full bg-[#EDEDED]" />
                 </li>
               </ul>
             </nav>
@@ -50,3 +50,5 @@ export default function Headers() {
       </div>
     );
 }
+
+export default memo(Headers);

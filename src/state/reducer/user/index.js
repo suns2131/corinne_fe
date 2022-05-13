@@ -1,10 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signUp } from "./thunk";
+import { getUserInfo, signUp, getUserBalance, getUserTransaction } from "./thunk";
 
 const initialState = {
     name: '',
     isFirstLogin: false,
-    status: 'success'
+    status: 'success',
+    userInfo: null,
+    userBalance: null,
+    userTransaction: null,
 }
 
 const { actions, reducer } = createSlice({
@@ -20,10 +23,22 @@ const { actions, reducer } = createSlice({
             isFirstLogin: payload,
         })
     },
-    extroReducers: (builder) => {
+    extraReducers: (builder) => {
         builder.addCase(signUp.fulfilled, (state, { payload }) => ({
             ...state,
             status: payload,
+        }))
+        builder.addCase(getUserInfo.fulfilled, (state, { payload }) => ({
+            ...state,
+            userInfo: payload,
+        }))
+        builder.addCase(getUserBalance.fulfilled, (state, { payload }) => ({
+            ...state,
+            userBalance: payload,
+        }))
+        builder.addCase(getUserTransaction.fulfilled, (state, { payload }) => ({
+            ...state,
+            userTransaction: payload,
         }))
     }
 })
