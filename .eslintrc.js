@@ -31,6 +31,6 @@ module.exports = {
     "no-unused-vars": 1,
     "import/no-extraneous-dependencies":0, //
     "import/prefer-default-export": 'off',
-    "import/extenstions":['off'],
+    "import/extenstions":["off"],
   },
 };
