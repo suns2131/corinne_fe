@@ -14,7 +14,7 @@ export default function KakaoCallback() {
         if(code !== undefined){
             console.log(code);
             axios({
-                baseURL: "https://corinne-qvykpopkp-suns2131.vercel.app//user/kakao/callback",
+                baseURL: "https://gyuwony.shop/user/kakao/callback",
                 // baseURL: "http://13.125.232.165/user/kakao/callback",
                 headers: {
                     "content-type" : "application/json; charset=UTF-8",
