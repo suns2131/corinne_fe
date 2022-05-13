@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, current } from "@reduxjs/toolkit"
-import intercept from "../../../data/intercept"
+import intercept from "../../../data/axios"
 
 // 초기 state값
 const initialState = {

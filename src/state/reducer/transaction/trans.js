@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
 import { createSlice } from "@reduxjs/toolkit"
-import axios from "axios"
-import intercept from "../../../data/intercept"
+import intercept from "../../../data/axios"
+
 
 // 초기 state값
 const initialState = {
@@ -21,8 +21,7 @@ const { actions, reducer } = createSlice({
         },
         addDetail : (state, {payload}) => {
             const arrays = [...state.transDetail];
-            const array1 = arrays.unshift(payload);
-            console.log(array1)
+            arrays.unshift(payload);
             // eslint-disable-next-line no-param-reassign
             state.transDetail = arrays
         },
@@ -83,22 +82,16 @@ export const SelectingTiker = (selectInfo) => function (dispatch) {
 
 // 거래내역 조회
 export const getDetail = (tiker,page) => function (dispatch) {
-    console.log("거래내역 조회");
-    console.log(tiker,page);
     intercept.get(`/api/transaction/${tiker}/${page}`
     ).then((response) => {
-        console.log(response.data.content)
         dispatch(detailList(response.data.content))
     })
 }
 
 // 매수 매도 처리 
 export const postBuySell = (type,requestData) => function (dispatch) {
-    console.log(`매수매도처리`);
-    console.log(requestData);
     intercept.post(`/api/transaction/${type}`,requestData
     ).then((response)=>{
-        console.log(response.data)
         const newArray = {
             amount: response.data.amount,
             price: response.data.type ==="buy"? response.data.buyPrice: response.data.sellPrice,
@@ -114,21 +107,13 @@ export const postBuySell = (type,requestData) => function (dispatch) {
 export const getUserAmount = (tiker) => function (dispatch) {
     intercept.get(`/api/account/balance/${tiker}`
     ).then((response) => {
-        console.log('자산조회')
-        const newAmount = {
-            buyAmount: response.data.accountBalance,
-            sellAmount: 0,
-        }
-        console.log(response.data)
         dispatch(Amounts(response.data))
     })
 }
 
 export const PostServer = (url,requestData) => function (dispatch) {
-console.log(requestData)
 intercept.post(url,requestData
 ).then((response) => {
-    console.log(response);
 })
 }
 

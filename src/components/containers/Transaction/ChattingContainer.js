@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { addChat } from "../../../state/reducer/transaction/chat";
 import Rooms from "../../presentations/transaction/chatting/rooms";
 import socketClient from "../../../share/socket";
+import { getCookie } from "../../../share/cookie"
+
+const usertoken = getCookie({name: 'corinne'})
 
 function ChattingContainer() {
     const userinfo = useSelector((state) => state.user)
@@ -32,7 +35,7 @@ function ChattingContainer() {
     }
 
     React.useEffect(() => {
-        socketClient.connect({token: "BEARER eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJFWFBJUkVEX0RBVEUiOjE2NTI1MDE4MDEsImlzcyI6InNwYXJ0YSIsIlVTRVJfSUQiOjF9.WHQYMiQ6jPAoDfBYUsaXREIAdywtW6k53343Ks7Gz34"}, () => {
+        socketClient.connect({token: `BEARER ${usertoken}`}, () => {
             socketClient.subscribe("/sub/topic/corinnechat" , (message) => {
                 const ChatData = JSON.parse(message.body);
                 const updateChat = {
@@ -60,7 +63,7 @@ function ChattingContainer() {
                 // 컴포넌트 종료 시 채팅 구독 취소 / 웹소켓 연결 종료
                 socketClient.disconnect(() => {
                     // socketClient.unsubscribe('sub-0');
-                  },{token: "BEARER eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJFWFBJUkVEX0RBVEUiOjE2NTI1MDE4MDEsImlzcyI6InNwYXJ0YSIsIlVTRVJfSUQiOjF9.WHQYMiQ6jPAoDfBYUsaXREIAdywtW6k53343Ks7Gz34"});
+                  },{token: `BEARER ${usertoken}`});
             }
         }
     },[])
