@@ -1,3 +1,38 @@
-export default function Home() {
-  return <div>안녕하세요</div>
+import axios from "axios";
+import { useRouter } from "next/router"
+import { useEffect, useRef } from "react"
+import { useDispatch } from "react-redux";
+import { setCookie } from "../../../src/share/cookie";
+import { isFirstLogin } from "../../../src/state/reducer/user";
+
+export default function KakaoCallback() {
+    const router = useRouter();
+    const dispatch = useDispatch();
+    console.log("테스트");
+    const { code } = router.query;
+    useEffect(() => {
+        if(code !== undefined){
+            console.log(code);
+            console.log("테스트");
+            axios({
+                baseURL: "https://gyuwony.shop/user/kakao/callback",
+                headers: {
+                    "content-type" : "application/json; charset=UTF-8",
+                    accept : "application/json",
+                },
+                withCredentials: false,
+                method: 'post',
+                data: {
+                    authCode: code,
+                }
+            }).then((res) => {
+                const token = res.headers.authorization.split(' ')[1]
+                dispatch(isFirstLogin(res.data));
+                setCookie({name: 'corinne', value: token });
+                router.push('/login');
+            }
+            )
+        }
+    }, [router, code])
+    return null;
 }
