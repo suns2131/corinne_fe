@@ -2,6 +2,7 @@ export default function handler(req, res) {
     if(req.method === 'GET'){
         // GET 요청 처리
         res.status(200).json({
+             userId : 1,
              imageUrl: '/images/cat.png',
              nickname: '테스트계정',
              exp: 29000,

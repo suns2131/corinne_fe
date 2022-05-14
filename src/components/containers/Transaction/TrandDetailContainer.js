@@ -13,6 +13,8 @@ function TrandDetailContainer() {
     const [buysellState,setBuysellState] = useState(true);
     const SelectCoin = useSelector((state) => state.trans.tikerinfo);
     const userAmount = useSelector((state) => state.trans.userAmount);
+    const buyPoint = useSelector((state) => state.trans.buyPoint);
+    const sellPoint = useSelector((state) => state.trans.sellPoint);
     const currentMount = useSelector((state) => state.chart.getCurrentMonut);
 
     const [page, setPage] = useState(1)
@@ -21,12 +23,12 @@ function TrandDetailContainer() {
 		const sellRef = useRef(null);
     const [infinitiRef,inView] = useInView();
     const [buyRequest, setBuyRequest] = React.useState({
-        'leverage' : 0,
+        'leverage' : 1,
         'tradePrice' : 0,
         'buyAmount' : 0
     })
     const [sellRequest, setSellRequest] = React.useState({
-      'leverage' : 0,
+      'leverage' : 1,
       'tradePrice' : 0,
       'sellAmount' : 0
     })
@@ -55,7 +57,6 @@ function TrandDetailContainer() {
       }
       else if(type === "sell"){
 
-        
         setSellRequest({
           ...sellRequest,
           'leverage': newValue
@@ -77,6 +78,7 @@ function TrandDetailContainer() {
               'buyAmount': Number(buyRef.current.value),
               'tiker': SelectCoin.tiker
             }
+            console.log(newRequest);
             dispatch(postBuySell("buy",newRequest))
           }
           
@@ -90,8 +92,11 @@ function TrandDetailContainer() {
             'sellAmount': Number(sellRef.current.value),
             'tiker': SelectCoin.tiker
           }
+          console.log(newRequest);
           dispatch(postBuySell("sell",newRequest))
         }    
+        
+
     }
 
     // 매수 금액 버튼 클릭시 자동 계산함수
@@ -223,6 +228,8 @@ function TrandDetailContainer() {
             currentMount={currentMount}
             setSellPrice={setSellPrice}
             sellPrice={sellPrice}
+            buyPoint={buyPoint}
+            sellPoint={sellPoint}
             />
     );
 }

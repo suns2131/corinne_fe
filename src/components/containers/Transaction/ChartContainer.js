@@ -72,7 +72,9 @@ function ChartContainer() {
           const mm = ChartData.tradeTime.toString().length > 5 ? ChartData.tradeTime.toString().substring(2,4) : ChartData.tradeTime.toString().substring(1,3);
           const ss = ChartData.tradeTime.toString().length > 5 ? ChartData.tradeTime.toString().substring(4,6) : ChartData.tradeTime.toString().substring(3,5);
           const dateNew = new Date(`${month}/${day}/${year} ${hh}:${mm}:${ss} UTC`)
-          DataSetting(`${dateNew.getHours()}:${dateNew.getMinutes()} `, ChartData);
+          const newHour = dateNew.getHours().toString().length > 1 ? dateNew.getHours() : `0${dateNew.getHours()}`;
+          const newMinute = dateNew.getMinutes().toString().length > 1 ? dateNew.getMinutes() : `0${dateNew.getMinutes()}`;
+          DataSetting(`${newHour}:${newMinute} `, ChartData);
           dispatch(getCurMonut(ChartData.tradePrice));
       })}
       dispatch(getLoadChart(selectInfo.tiker, chartType))

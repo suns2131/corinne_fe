@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Slider from '@mui/material/Slider';
+import { useDispatch, useSelector } from 'react-redux';
 import {createTheme, ThemeProvider} from '@mui/material/styles'
+import { updateSell } from '../../../../state/reducer/transaction/trans';
 
-function TransProgressbar({ buyRequest, setBuyRequest ,sellRequest ,setSellRequest, type, currentMount, userAmount, setSellPrice}) {
+function TransProgressbar({ buyRequest, setBuyRequest ,sellRequest ,setSellRequest, type, userAmount, setSellPrice}) {
+    const dispatch = useDispatch();
     const marker = [{value : 1},{value: 25},{value: 50,},{value: 75,},{value: 100,}]
+    const currentMount = useSelector((state) => state.chart.getCurrentMonut);
     const [leverage, setLeverage] = React.useState(1);
     const sliderTheme = createTheme({
       palette : {
@@ -15,6 +19,25 @@ function TransProgressbar({ buyRequest, setBuyRequest ,sellRequest ,setSellReque
         }
       }
     })
+
+    useEffect(() => {
+      if(userAmount?.coins !== undefined)
+      {
+      const sell = userAmount.coins.filter((el) => el.leverage === leverage);
+      if(sell.length > 0)
+      {
+        console.log(sell[0].buyPrice)
+        console.log(sell[0].amount)
+        const bPrice = sell[0].buyPrice;
+        const account = sell[0].amount
+        console.log(bPrice);
+        const yieldSell = ((currentMount - bPrice) / bPrice) * account
+        const sellmonut = Math.floor((yieldSell * leverage) + account);
+        console.log(sellmonut) ;
+        dispatch(updateSell(sellmonut));
+      } 
+    }
+    },[currentMount])
 
     const handleChange = (event, newValue) => {
       setLeverage(newValue);
@@ -28,25 +51,21 @@ function TransProgressbar({ buyRequest, setBuyRequest ,sellRequest ,setSellReque
       else if(type === "sell"){
 
         const sell = userAmount.coins.filter((el) => el.leverage === newValue);
-
-        console.log('매도 가능금액계산')
-        console.log(sell);
         if(sell.length > 0)
         {
-          console.log(sell[0].buyPrice)
-          console.log(sell[0].amount)
           const bPrice = sell[0].buyPrice;
           const account = sell[0].amount
-          console.log(bPrice);
           const yieldSell = ((currentMount - bPrice) / bPrice) * account
           const sellmonut = Math.floor((yieldSell * newValue) + account);
-          console.log(  sellmonut) ;
-          setSellPrice(sellmonut);
           setSellRequest({
             ...sellRequest,
             'leverage': newValue
           })
+          dispatch(updateSell(sellmonut));
         } 
+        else{
+          dispatch(updateSell(0));
+        }
         
       }
       
@@ -65,7 +84,7 @@ function TransProgressbar({ buyRequest, setBuyRequest ,sellRequest ,setSellReque
             color = "customPurple"
             sx={{ width: 213, height: 7}}
             aria-label = "Restricted values"
-            defaultValue={0}
+            defaultValue={1}
             valueLabelFormat={valueLabelFormat}
             getAriaValueText={valueText}
             step={null}
@@ -84,7 +103,7 @@ function TransProgressbar({ buyRequest, setBuyRequest ,sellRequest ,setSellReque
             color = "customOrange"
             sx={{ width: 213, height: 7}}
             aria-label = "Restricted values"
-            defaultValue={0}
+            defaultValue={1}
             valueLabelFormat={valueLabelFormat}
             getAriaValueText={valueText}
             step={null}

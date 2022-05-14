@@ -9,6 +9,9 @@ const initialState = {
     tikerList : [],
     transDetail : [],
     tikerinfo: {},
+    userAmount: {},
+    buyPoint: 0,    // 코인별 매수 가능금액
+    sellPoint: 0,   // 코인별 매도 가능금액
 }
 
 const { actions, reducer } = createSlice({
@@ -24,6 +27,10 @@ const { actions, reducer } = createSlice({
             arrays.unshift(payload);
             // eslint-disable-next-line no-param-reassign
             state.transDetail = arrays
+            // eslint-disable-next-line no-param-reassign
+            state.buyPoint = payload.buyPoint;
+            // eslint-disable-next-line no-param-reassign
+            state.sellPoint = payload.sellPoint;
         },
         tikerList : (state, {payload}) => {
             // eslint-disable-next-line no-param-reassign
@@ -32,11 +39,21 @@ const { actions, reducer } = createSlice({
         infos: (state, {payload}) => {
             // eslint-disable-next-line no-param-reassign
             state.tikerinfo = payload
-        }
+        },
+        Amounts: (state,{payload}) => {
+             // eslint-disable-next-line no-param-reassign
+             state.userAmount = payload
+             // eslint-disable-next-line no-param-reassign
+             state.buyPoint = payload.accountBalance;
+        },
+        updateSell: (state, {payload}) => {
+             // eslint-disable-next-line no-param-reassign
+             state.sellPoint = payload;
+        }   
     }
 })
 
-export const {detailList,tikerList,infos,addDetail,Amounts} = actions;
+export const {detailList,tikerList,infos,addDetail,Amounts,updateSell} = actions;
 
 // 코인 정보리스트
 export const getTikerList = () => function (dispatch){
@@ -85,14 +102,18 @@ export const getDetail = (tiker,page) => function (dispatch) {
 
 // 매수 매도 처리 
 export const postBuySell = (type,requestData) => function (dispatch) {
+    console.log(requestData)
     intercept.post(`/api/transaction/${type}`,requestData
     ).then((response)=>{
+        console.log(response.data);
         const newArray = {
             amount: response.data.amount,
             price: response.data.type ==="buy"? response.data.buyPrice: response.data.sellPrice,
             tradeAt: response.data.tradeAt,
             leverage: response.data.leverage,
-            type: response.data.type
+            type: response.data.type,
+            buyPoint: response.data.accountBalance,
+            sellPoint: response.data?.leftover !== undefined ? response.data?.leftover : 0
         }
         dispatch(addDetail(newArray));
     })
@@ -102,6 +123,7 @@ export const postBuySell = (type,requestData) => function (dispatch) {
 export const getUserAmount = (tiker) => function (dispatch) {
     intercept.get(`/api/account/balance/${tiker}`
     ).then((response) => {
+        console.log(response.data);
         dispatch(Amounts(response.data))
     })
 }

@@ -4,6 +4,7 @@ import BuySellContainer from './Transaction/TrandDetailContainer';
 import ChattingContainer from './Transaction/chattingContainer';
 import RankContanier from './Transaction/RankContainer';
 import TikerListContainer from './Transaction/TikerListContainer';
+import ChartContainer from './Transaction/ChartContainer';
 
 function TransContainer() {
     return (
@@ -15,6 +16,7 @@ function TransContainer() {
                     <ChattingContainer />
                 </div>
                 <div>
+                    <ChartContainer />
                     <BuySellContainer />
                 </div>
             </div>

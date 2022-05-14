@@ -5,7 +5,7 @@ import styles from './TradeDetail.module.css'
 // eslint-disable-next-line import/no-named-as-default
 import TransProgressbar from './TransProgressbar';
 
-function TradeDetail({infinitiRef, items, buysellState, buyRequest,setBuyRequest, sellRequest,setSellRequest, setBuysellState , buySellClick, buyRef, sellRef , btnSet,userAmount, handleChange ,currentMount, sellPrice, setSellPrice}) {
+function TradeDetail({infinitiRef, items, buysellState, buyRequest,setBuyRequest, sellRequest,setSellRequest, setBuysellState , buySellClick, buyRef, sellRef , btnSet,userAmount, handleChange ,currentMount, sellPrice, setSellPrice, buyPoint,sellPoint}) {
     return (
         <div className=' font-Pretendard flex justify-center items-center'>
           {buysellState ?
@@ -28,7 +28,7 @@ function TradeDetail({infinitiRef, items, buysellState, buyRequest,setBuyRequest
               <div className='w-[339px] h-[188px] flex flex-col items-start mb-[77px]'>
                 <div className='w-full flex justify-between items-center mb-[33px]'>
                   <p className='font-normal text-[14px] flex items-center text-[#33323f]'>매수 가능 금액</p>
-                  <p className='font-bold text-[14px flex items-center]'>{Won(userAmount?.accountBalance !== undefined ?userAmount.accountBalance: 0)}원</p>
+                  <p className='font-bold text-[14px flex items-center]'>{Won(buyPoint)}원</p>
                 </div>
                 <TransProgressbar type='buy' handleChange={handleChange} buyRequest={buyRequest} setBuyRequest={setBuyRequest} currentMount={currentMount}  />
                 <div className='w-full h-[88px] flex justify-between items-center '>
@@ -121,7 +121,7 @@ function TradeDetail({infinitiRef, items, buysellState, buyRequest,setBuyRequest
                 <div className='w-[339px] h-[188px] flex flex-col items-start mb-[77px]'>
                   <div className='w-full flex justify-between items-center mb-[33px]'>
                     <p className='font-normal text-[14px] flex items-center text-[#33323f]'>매도 가능 금액</p>
-                    <p className='font-bold text-[14px flex items-center]'>{Won(sellPrice)}원</p>
+                    <p className='font-bold text-[14px flex items-center]'>{Won(sellPoint)}원</p>
                   </div>
                   <TransProgressbar type='sell' handleChange={handleChange} sellRequest={sellRequest} setSellRequest={setSellRequest} currentMount={currentMount} userAmount={userAmount} setSellPrice={setSellPrice}/>
                   <div className='w-full h-[88px] flex justify-between items-center '>

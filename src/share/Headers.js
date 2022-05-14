@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
+import socketClient from './socket';
+import { getCookie } from './cookie';
+
+const usertoken = getCookie({name: 'corinne'})
 
 export default function Headers() {
     const router = useRouter();
     const tf = true;
+
+    useEffect(() => {
+      socketClient.connect({token: `BEARER ${usertoken}`}, ()=> {
+        socketClient.subscribe("/sub/topic/corinnechat" , (message) => {
+          const AlramData = JSON.parse(message.body);
+          console.log(AlramData);
+        })
+      })
+    },[])
+
     if(tf){
       return (
         <div className=' font-Gmarket Sans w-full h-headers py-4 flex justify-between items-center '>
