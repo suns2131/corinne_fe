@@ -1,7 +1,6 @@
 
 import React, { useEffect } from 'react'
-
-import Headers from '../../share/Headers'
+import Headers from '../../share/headers/Headers'
 
 function Wrapper({children}) {
     return (

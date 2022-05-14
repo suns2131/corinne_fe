@@ -98,7 +98,7 @@ module.exports = {
           scrollbar: ['dark']
         },
         boxShadow: {
-          '008': '0px 0px 8px rgba(0,0,0,0.07)',
+          'box': '0px 0px 8px 0px rgba(0,0,0,0.07)',
         },
       },
       
