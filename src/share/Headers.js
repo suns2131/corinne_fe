@@ -8,21 +8,21 @@ const usertoken = getCookie({name: 'corinne'})
 
 export default function Headers() {
     const router = useRouter();
-    const tf = true;
+    const islogin = true;
 
     useEffect(() => {
       socketClient.connect({token: `BEARER ${usertoken}`}, ()=> {
         socketClient.subscribe("/sub/topic/corinnechat" , (message) => {
           const AlramData = JSON.parse(message.body);
-          console.log(AlramData);
+          console.log(AlramData); // 알림 로직 체크
         })
       })
     },[])
 
-    if(tf){
+    if(islogin){
       return (
         <div className=' font-Gmarket Sans w-full h-headers py-4 flex justify-between items-center '>
-          <div className=' text-logos text-curp font-bold' >
+          <div className=' text-logos text-Primary-Purple font-bold' >
             corinne
           </div>
             <nav className=' '>
