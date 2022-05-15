@@ -22,8 +22,21 @@ export const getUserBalance = createAsyncThunk('user/getUserBalance', async () =
   return response.data;
 });
 
-export const getUserTransaction = createAsyncThunk('user/getUserTransaction', async ({ page }) => {
-  const response = await axiosInstance.get(`/api/transaction/${page}`);
+export const getUserTransaction = createAsyncThunk(
+  'user/getUserTransaction',
+  async ({ page }, thunkApi) => {
+    const { userTransaction } = thunkApi.getState().user;
+    const { data } = await axiosInstance.get(`/api/transaction/${page}`);
 
-  return response.data;
-});
+    if (userTransaction === null) {
+      return data;
+    }
+    const newContent = [...data.content, ...userTransaction.content];
+    const newData = {
+      ...data,
+      content: newContent,
+    };
+
+    return newData;
+  },
+);

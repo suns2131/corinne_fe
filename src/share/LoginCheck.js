@@ -11,9 +11,6 @@ export default function LoginCheck({ children }) {
   const isFirstLogin = useSelector(selectedIsFirstLogin);
 
   useLayoutEffect(() => {
-    // if(token !== undefined) {
-    //     router.push('/');
-    // }
     if (isFirstLogin) {
       router.push('/');
     }

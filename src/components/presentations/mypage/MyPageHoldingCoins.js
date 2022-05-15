@@ -1,18 +1,19 @@
 import { memo } from 'react';
 
-function MyPageHoldingCoins({ data, userBalance }) {
+function MyPageHoldingCoins({ userBalance }) {
   if (!userBalance) return null;
+  const { coins } = userBalance;
   return (
-    <div className="text-center shadow-md rounded-lg p-5">
-      <section>
+    <div className="shadow-box rounded-lg">
+      <section className="shadow-box h-[70px] p-5">
         <h1>보유코인</h1>
       </section>
-      <section>
-        {data.map(({ coin, balance }) => (
-          <div className="flex justify-between">
-            <div>
+      <section className="px-5">
+        {coins.map(({ coin, tradePrice, importanceRate }) => (
+          <div className="flex justify-between my-5">
+            <div className="flex items-center">
               <svg
-                className="inline-block"
+                className="mr-3"
                 width="21"
                 height="20"
                 viewBox="0 0 21 20"
@@ -24,9 +25,16 @@ function MyPageHoldingCoins({ data, userBalance }) {
                   fill="#FFCE85"
                 />
               </svg>
-              <span>{coin}</span>
+              <img className="mr-2" src="/icons/icon_sol.png" alt="아이콘이미지" />
+              <div className="text-left">
+                <p className="font-bold">{coin.split('-')[1]}</p>
+                <p className="text-sm">{tradePrice.toLocaleString()}</p>
+              </div>
             </div>
-            <div>{balance}</div>
+            <div className="text-right">
+              <p className="text-Primary-purple2 font-bold">+100000원</p>
+              <p className="text-Neutrals-lightGray">{importanceRate}%</p>
+            </div>
           </div>
         ))}
       </section>
