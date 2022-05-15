@@ -98,6 +98,7 @@ module.exports = {
       },
       boxShadow: {
         box: '0px 0px 8px 0px rgba(0,0,0,0.07)',
+        help: '0px 0px 20px rgba(0,0,0,0.3)',
       },
     },
   },
