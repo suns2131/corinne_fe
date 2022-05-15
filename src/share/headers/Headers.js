@@ -34,7 +34,7 @@ export default function Headers({ handleRouter }) {
 
   if (islogin) {
     return (
-      <div className="w-container h-headers flex justify-between items-center shadow-box">
+      <div className="w-container h-headers flex justify-between items-center shadow-box mb-5">
         <div className="h-[36px] text-[30px] font-bold text-left text-Primary-purple flex justify-start items-center">
           <Link href="/">corinne</Link>
         </div>
@@ -57,9 +57,9 @@ export default function Headers({ handleRouter }) {
                 </Link>
               </li>
             )}
-            {router.pathname === '/RankPage' ? (
+            {router.pathname === '/rankpage' ? (
               <li className="w-[68px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px]">
-                <Link href="/RankPage">
+                <Link href="/rankpage">
                   <span className="w-[52px] h-[18px] grow-0 font-Pretendard text-[15px] font-bold text-center text-Primary-purple">
                     랭킹
                   </span>
@@ -67,7 +67,7 @@ export default function Headers({ handleRouter }) {
               </li>
             ) : (
               <li className="w-[68px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px]">
-                <Link href="/RankPage">
+                <Link href="/rankpage">
                   <span className="w-[52px] h-[18px] grow-0 font-Pretendard text-[15px] font-normal text-center text-Neutrals-gray">
                     랭킹
                   </span>

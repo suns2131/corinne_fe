@@ -4,7 +4,7 @@ import styles from './Rank.module.css';
 import { getMyRank, getTop3Rank, getRealRank } from '../../../state/reducer/rank/rank';
 import RankTop3 from './RankTop3';
 import RankList from './RankList';
-import RankUserinfo from './RankUserInfo';
+import UserInfo from './userinfo/UserInfo';
 import RankMatch from './RankMatch';
 import RankFollow from './RankFollow';
 
@@ -162,7 +162,7 @@ function Rank() {
         </div>
       </div>
       <div className=" w-[387px] ">
-        <RankUserinfo />
+        <UserInfo />
         <RankMatch />
         <div className=" w-full h-[618px] rounded-[10px] shadow-008">
           <div className="w-[347px] h-[84px] m-5 flex justify-between items-center ">

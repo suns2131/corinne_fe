@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Help.module.css';
 
 function Help({ type }) {
-  const helptype = 'match';
+  const helptype = type;
   if (helptype === 'prevRank') {
     return (
       <div className="flex justify-center items-start ">
