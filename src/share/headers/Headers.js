@@ -57,9 +57,9 @@ export default function Headers({ handleRouter }) {
                 </Link>
               </li>
             )}
-            {router.pathname === '/rankpage' ? (
+            {router.pathname === '/RankPage' ? (
               <li className="w-[68px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px]">
-                <Link href="/rankpage">
+                <Link href="/RankPage">
                   <span className="w-[52px] h-[18px] grow-0 font-Pretendard text-[15px] font-bold text-center text-Primary-purple">
                     랭킹
                   </span>
@@ -67,7 +67,7 @@ export default function Headers({ handleRouter }) {
               </li>
             ) : (
               <li className="w-[68px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px]">
-                <Link href="/rankpage">
+                <Link href="/RankPage">
                   <span className="w-[52px] h-[18px] grow-0 font-Pretendard text-[15px] font-normal text-center text-Neutrals-gray">
                     랭킹
                   </span>
