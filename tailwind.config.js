@@ -8,14 +8,34 @@ module.exports = {
     theme: {
       extend: {
         colors : {
-          'curp' : '#6800BA',
-          'curr' : '#E5606B',
-          'curb' : '#4380F8',
-          'neutrals1' : '#33323F',
-          'neutrals2' : '#45425E',
-          'neutrals3' : '#777777',
-          'neutrals4' : '#CECECE',
-          'neutrals5' : '#FFFFFF',
+          'Primary': {
+            purple: '#6800BA',
+            purple2: '#A634FF',
+            lightPurple: '#BF6FFF',
+          },
+          'Neutrals':{
+            white: '#FFF',
+            black: '#33323F',
+            lightGray: '#cecece',
+            lightGray2: '#eeeeee',
+            ivory: '#fbfbfb',
+            gray: '#777',
+            deepGray: '#434051',
+            whiteGray: 'f6f6f6',
+          },
+          'Secondary':{
+            orange: '#ff9e0d',
+            lightOrange: '#ffce85',
+          },
+          'Level': {
+            red: '#e05656',
+            orange: '#fcb370',
+            yellow: '#efd886',
+            green: '#c1dc95',
+            sky: '#a1c7f4',
+            navy: '#5760b1',
+            whitePurple: '#fbf6ff'
+          }
         },
         padding : {
           auto : 'auto',
@@ -78,7 +98,7 @@ module.exports = {
           scrollbar: ['dark']
         },
         boxShadow: {
-          '008': '0px 0px 8px rgba(0,0,0,0.07)',
+          'box': '0px 0px 8px 0px rgba(0,0,0,0.07)',
         },
       },
       

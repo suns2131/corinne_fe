@@ -1,0 +1,99 @@
+.TikerDiv{
+    width: 387px;
+    height: 472px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.07);
+    border-radius: 0px 0px 10px 10px;
+}
+
+.TikerDiv::-webkit-scrollbar{
+    width: 5px;
+}
+
+.TikerDiv::-webkit-scrollbar-thumb{
+    height: 50px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+}
+
+.TikerDiv::-webkit-scrollbar-track{
+    background-color: transparent;
+}
+
+.Tikeritem{
+    width: 387px;
+    height: 90px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 66px;
+}
+
+.Tikeritem:hover{
+    background: #fbf6ff;
+}
+
+.TikeritemDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 14px;
+    gap: 66px;
+    width: 347px;
+    height: 50px;
+}
+
+.TikeritemDiv1{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 10px;
+    height: 50px;
+}
+
+.TikeritemDiv2{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 9px;
+    height: 50px;
+}
+
+.TikeritemTitle{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    width: 100px;
+    height: 50px;
+
+}
+
+.TikeritemPrice{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 0px;
+    width: 130px;
+    height: 50px;
+}
+
+.TikerSelectitem{
+    width: 387px;
+    height: 90px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 66px;
+    background-color: aliceblue;
+    border: 2px solid #6800BA;
+    border-radius: 10px;
+}

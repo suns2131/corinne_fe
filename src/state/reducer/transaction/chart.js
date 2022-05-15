@@ -1,5 +1,6 @@
+/* eslint-disable no-param-reassign */
 import { createSlice, current } from "@reduxjs/toolkit"
-import intercept from "../../../data/intercept"
+import intercept from "../../../data/axios"
 
 // 초기 state값
 const initialState = {
@@ -7,23 +8,6 @@ const initialState = {
     selectChartInfo : {},
     getChart : [],
 }
-
-export const getServer = (url,requestData) => function (dispatch, getState){
-    console.log(url);
-     intercept.get(url,requestData
-    ).then((response) => {
-        const reusltData  = response.data.content;
-        console.log(reusltData);
-        // const newChartData = {
-        //     x : response.data.content.tradeTime,
-        //     y : []
-        // }
-
-        // eslint-disable-next-line no-use-before-define
-        // dispatch(tikerData(reusltData)); 
-    })
-}
-
 
 const { actions, reducer } = createSlice({
     name : 'chatting',
@@ -35,9 +19,11 @@ const { actions, reducer } = createSlice({
                 {
                     if(payload.x !== prevArray[prevArray.length-1].x)
                     {
-                        const array = [...state.getChart,payload];
+                        const array = [...state.getChart];
+                        array.shift();
+                        const array1 = [...array,payload];
                         // eslint-disable-next-line no-param-reassign
-                        state.getChart = array
+                        state.getChart = array1
                     }
                     else
                     {
@@ -59,15 +45,16 @@ const { actions, reducer } = createSlice({
                     }
                 }
                 else{
-                    const array = [...state.getChart,payload];
+                    const array = [...state.getChart];
+                    array.shift();
+                    const array1 = [...array,payload];
                     // eslint-disable-next-line no-param-reassign
-                    state.getChart = array
+                    state.getChart = array1
                 }
                 
         },
-        updateChart: (state, {payload}) => {
-            console.log(payload);
-            // const array = [...state.getChart].findIndex(el => el.x === payload.x)
+        getChart: (state, {payload}) => {
+            state.getChart = payload;
         },
         getCurMonut: (state, {payload}) => {
             // eslint-disable-next-line no-param-reassign
@@ -80,6 +67,27 @@ const { actions, reducer } = createSlice({
     }
 })
 
-export const {addChart,updateChart,getCurMonut} = actions;
+export const {addChart,updateChart,getCurMonut,getChart} = actions;
+
+// 차트 정보 조회 
+export const getLoadChart = (tiker,chartType) => function (dispatch) {
+    console.log(tiker, chartType)
+    intercept.get( chartType? `/api/price/date/${tiker}` : `/api/price/minute/${tiker}`
+    ).then((response) => {
+        console.log(response.data);
+        const arrays = response.data.filter((el,idx) => idx > (response.data.length -31));
+        console.log(arrays)
+        const newChart = arrays.map((el) => {
+            const chartdt = {
+                x: el?.tradeTime !== undefined ? el.tradeTime: el.tradeDate ,
+                y: [el.startPrice,el.highPrice,el.lowPrice,el.endPrice],
+            }
+            return  chartdt;
+            }
+        )
+        console.log(newChart);
+        dispatch(getChart(newChart));
+    })
+}
 
 export default reducer;
