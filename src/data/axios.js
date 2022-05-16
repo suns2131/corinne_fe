@@ -4,7 +4,7 @@ import { getCookie } from '../share/cookie';
 const token = getCookie({ name: 'corinne' });
 
 const axiosInstance = axios.create({
-  baseURL: 'http://13.125.232.165',
+  baseURL: 'http://13.125.232.165:8081',
   headers: {
     'content-type': 'application/json; charset=UTF-8',
     accept: 'application/json',

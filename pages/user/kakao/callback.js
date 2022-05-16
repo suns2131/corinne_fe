@@ -14,7 +14,7 @@ export default function KakaoCallback() {
     if (code !== undefined) {
       console.log(code);
       axios({
-        baseURL: 'http://13.125.232.165/user/kakao/callback',
+        baseURL: 'http://13.125.232.165:8081/user/kakao/callback',
         headers: {
           'content-type': 'application/json; charset=UTF-8',
           accept: 'application/json',
