@@ -1,58 +1,47 @@
 import React from 'react';
 
-function Level({ level }) {
-  const jugment = level;
+function Level({ Exp }) {
+  const jugment = Exp;
   let colors = '';
-  if (jugment >= 320000) colors = 'purple';
-  else if (jugment >= 160000) colors = 'navy';
-  else if (jugment >= 80000) colors = 'sky';
-  else if (jugment >= 50000) colors = 'green';
-  else if (jugment >= 30000) colors = 'yellow';
-  else if (jugment >= 5000) colors = 'orange';
-  else colors = 'red';
+  let colorName = '';
+  if (jugment >= 350000) {
+    colors = 'bg-Primary-purple';
+    colorName = '퍼플';
+  } else if (jugment >= 200000) {
+    colors = 'bg-Level-navy';
+    colorName = '네이비';
+  } else if (jugment >= 100000) {
+    colors = 'bg-Level-sky';
+    colorName = '스카이';
+  } else if (jugment >= 60000) {
+    colors = 'bg-Level-green';
+    colorName = '그린';
+  } else if (jugment >= 30000) {
+    colors = 'bg-Level-yellow';
+    colorName = '옐로우';
+  } else if (jugment >= 5000) {
+    colors = 'bg-Level-orange';
+    colorName = '오렌지';
+  } else {
+    colors = 'bg-Level-red';
+    colorName = '레드';
+  }
 
   return (
     <div>
-      {colors === 'purple' && (
-        <div className="w-[74px] h-[26px] border border-solid border-[#e4e4e4] rounded-[20px] flex justify-center items-center mr-[8px] bg-[#e4e4e4]">
-          <div className="w-[14px] h-[14px] bg-[#6800BA] rounded-full mr-[4px]" />
-          <p className=" font-normal text-[12px]">Lv.퍼플</p>
+      {colorName.length > 2 ? (
+        <div className="w-[84px] h-[26px] flex justify-center items-center gap-[4px] p-[6px,10px] rounded-[20px] border border-solid border-[#e4e4e4] bg-Neutrals-white ">
+          <div className={`w-[14px] h-[14px] ${colors} rounded-full flex-grow-0`} />
+          <span className="w-[46px] h-[20px] flex-grow-0 flex justify-center items-center font-Pretendard text-[12px] text-left text-Neutrals-black">
+            Lv.{colorName}
+          </span>
         </div>
-      )}
-      {colors === 'navy' && (
-        <div className="w-[74px] h-[26px] border border-solid border-[#e4e4e4] rounded-[20px] flex justify-center items-center mr-[8px] bg-[#e4e4e4]">
-          <div className="w-[14px] h-[14px] bg-[#5760B1] rounded-full mr-[4px]" />
-          <p className=" font-normal text-[12px]">Lv.네이비</p>
-        </div>
-      )}
-      {colors === 'sky' && (
-        <div className="w-[74px] h-[26px] border border-solid border-[#e4e4e4] rounded-[20px] flex justify-center items-center mr-[8px] bg-[#e4e4e4]">
-          <div className="w-[14px] h-[14px] bg-[#A1C7F4] rounded-full mr-[4px]" />
-          <p className=" font-normal text-[12px]">Lv.스카이</p>
-        </div>
-      )}
-      {colors === 'green' && (
-        <div className="w-[74px] h-[26px] border border-solid border-[#e4e4e4] rounded-[20px] flex justify-center items-center mr-[8px] bg-[#e4e4e4]">
-          <div className="w-[14px] h-[14px] bg-[#c1dc95] rounded-full mr-[4px]" />
-          <p className=" font-normal text-[12px]">Lv.그린</p>
-        </div>
-      )}
-      {colors === 'yellow' && (
-        <div className="w-[74px] h-[26px] border border-solid border-[#e4e4e4] rounded-[20px] flex justify-center items-center mr-[8px] bg-[#e4e4e4]">
-          <div className="w-[14px] h-[14px] bg-[#efd886] rounded-full mr-[4px]" />
-          <p className=" font-normal text-[12px]">Lv.옐로우</p>
-        </div>
-      )}
-      {colors === 'orange' && (
-        <div className="w-[74px] h-[26px] border border-solid border-[#e4e4e4] rounded-[20px] flex justify-center items-center mr-[8px] bg-[#e4e4e4]">
-          <div className="w-[14px] h-[14px] bg-[#ff9e0d] rounded-full mr-[4px]" />
-          <p className=" font-normal text-[12px]">Lv.오렌지</p>
-        </div>
-      )}
-      {colors === 'red' && (
-        <div className="w-[74px] h-[26px] border border-solid border-[#e4e4e4] rounded-[20px] flex justify-center items-center mr-[8px] bg-[#e4e4e4]">
-          <div className="w-[14px] h-[14px] bg-[#e05656] rounded-full mr-[4px]" />
-          <p className=" font-normal text-[12px]">Lv.레드</p>
+      ) : (
+        <div className="w-[74px] h-[26px] flex justify-center items-center gap-[4px] p-[6px,10px] rounded-[20px] border border-solid border-[#e4e4e4] bg-Neutrals-white ">
+          <div className={`w-[14px] h-[14px] ${colors} rounded-full flex-grow-0`} />
+          <span className="w-[36px] h-[20px] flex-grow-0 flex justify-center items-center font-Pretendard text-[12px] text-left text-Neutrals-black">
+            Lv.{colorName}
+          </span>
         </div>
       )}
     </div>
