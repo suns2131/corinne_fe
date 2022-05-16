@@ -1,7 +1,7 @@
 import React from 'react';
 
-function Level({ level }) {
-  const jugment = level;
+function Level({ Exp }) {
+  const jugment = Exp;
   let colors = '';
   let colorName = '';
   if (jugment >= 350000) {

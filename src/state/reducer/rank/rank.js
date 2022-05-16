@@ -28,6 +28,11 @@ const { actions, reducer } = createSlice({
       // eslint-disable-next-line no-param-reassign
       state.realRank = payload;
     },
+    addrank: (state, { payload }) => {
+      const array = [...state.realRank].concat(payload);
+      // eslint-disable-next-line no-param-reassign
+      state.realRank = array;
+    },
     infos: (state, { payload }) => {
       // eslint-disable-next-line no-param-reassign
       state.userInfo = payload;
@@ -42,7 +47,7 @@ const { actions, reducer } = createSlice({
     },
   },
 });
-export const { myRank, topRank, rankList, infos, matchup, followList } = actions;
+export const { myRank, topRank, rankList, infos, matchup, followList, addrank } = actions;
 
 // 나의 랭크
 export const getMyRank = (url, requestData) =>
@@ -100,10 +105,12 @@ export const getTop3Rank = () =>
 export const getRealRank = (Page) =>
   function (dispatch) {
     console.log(`/api/rank/${Page}`);
-    intercept.get(`/api/rank/${Page}`).then((response) => {
+    axios.get(`/api/rank/${Page}`).then((response) => {
+      // intercept.get(`/api/rank/${Page}`).then((response) => {
       const reusltData = response.data;
       console.log(reusltData);
-      dispatch(rankList(reusltData));
+      if (Page === 1) dispatch(rankList(reusltData));
+      else dispatch(addrank(reusltData));
     });
   };
 
@@ -126,12 +133,11 @@ export const getMatchUp = () =>
 // 팔로워 랭킹리스트
 export const getfollwerRank = () =>
   function (dispatch) {
-    // intercept.get(`/api/rank/`
-    // ).then((response) => {
-    //     const reusltData  = response.data.content;
-    //     console.log(reusltData);
-    //     dispatch(myRank(reusltData))
-    // })
+    // intercept.get(`/api/rank/`).then((response) => {
+    //   const reusltData = response.data.content;
+    //   console.log(reusltData);
+    //   dispatch(myRank(reusltData));
+    // });
     axios.get('/api/rank/follow').then((response) => {
       console.log(response.data);
       dispatch(followList(response.data));

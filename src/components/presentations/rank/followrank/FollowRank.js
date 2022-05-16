@@ -20,6 +20,7 @@ function FollowRank() {
       </div>
       <div className="w-[387px] h-[746px] flex-grow-0 flex flex-col justify-start items-stretch gap-[30px] p-5 shadow-box bg-Neutrals-white rounded-b-[10px]">
         <Follower />
+        <div />
       </div>
     </div>
   );

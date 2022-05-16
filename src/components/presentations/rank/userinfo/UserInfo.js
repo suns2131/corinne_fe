@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserInfo } from '../../../../state/reducer/rank/rank';
 import { maxExp } from '../../../../share/exp';
-import Level from '../../../../share/level';
+import Level from '../../../../share/Level';
 import { Won } from '../../../../share/convertWon';
 import ExpBar from './ExpBar';
 
@@ -26,7 +26,7 @@ function Userinfo() {
                 alt={userData.nickname}
               />
               <div className=" absolute top-[176px]">
-                <Level level={userData.exp} />
+                <Level Exp={userData.exp} />
               </div>
             </div>
             <div className="h-[69px] flex-grow flex flex-col justify-center items-start gap-[12px]">

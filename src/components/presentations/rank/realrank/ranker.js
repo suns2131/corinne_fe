@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
-import Level from '../../../../share/level';
+import Level from '../../../../share/Level';
 import Reset from '../../../../../public/icons/reset.svg';
+import { Won } from '../../../../share/convertWon';
 
-function Ranker({ type }) {
+function Ranker({ type, rankerData }) {
   const [btns, setBtns] = useState(false);
   let bgColors = '';
   let textColors = '';
@@ -24,10 +25,11 @@ function Ranker({ type }) {
   } else {
     bgColors = 'bg-Neutrals-whiteGray';
     textColors = 'text-Neutrals-black';
-    rankText = '04위';
+    rankText = `${rankerData.id}위`;
   }
   return (
     <div
+      key={type}
       className={`w-[753px] h-[64px] flex justify-between items-center p-5 rounded-[10px] ${bgColors}`}
     >
       <span
@@ -45,15 +47,15 @@ function Ranker({ type }) {
         <span
           className={`flex-grow-0 font-Pretendard text-[15px] font-bold text-left ${textColors}`}
         >
-          닉네임
+          {rankerData.nickname}
         </span>
       </div>
-      <Level level={20000} />
+      <Level Exp={20000} />
       <span className="flex-grow-0 font-Pretendard text-[15px] font-bold text-right text-Primary-lightPurple">
-        +00.00%
+        {rankerData.fluctuationRate}%
       </span>
       <span className={`flex-grow-0 font-Pretendard text-[15px] text-right ${textColors}`}>
-        100,000,000원
+        {Won(rankerData?.totalBalance !== undefined ? rankerData.totalBalance : 0)}원
       </span>
       <div className="flex-grow-0 flex justify-end items-center gap-[4px]">
         <div className="w-[16px] h-[16px]">

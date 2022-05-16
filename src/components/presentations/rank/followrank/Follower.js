@@ -28,7 +28,7 @@ function Follower() {
         </div>
       </div>
       <div className="h-[66px] flex-grow-0 flex-col justify-start items-end gap-[5px]">
-        <Level level={2000} />
+        <Level Exp={2000} />
         <span className="flex-grow-0 font-Pretendard text-[12px] flex justify-end items-center text-right text-Neutrals-lightGray mt-[7px] mb-[4px]">
           +0.00%
           <br />

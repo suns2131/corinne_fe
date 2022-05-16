@@ -22,7 +22,7 @@ function PrevModal({ setModal }) {
       </div>
       <div className="flex-grow flex flex-col justify-start items-stretch p-5 shadow-box bg-Neutrals-white rounded-b-[10px]">
         <div className="w-[781px] h-[742px] flex flex-col justify-start items-end overscroll-none gap-[15px] ">
-          <Ranker />
+          {/* <Ranker /> */}
           <div />
         </div>
         <button
