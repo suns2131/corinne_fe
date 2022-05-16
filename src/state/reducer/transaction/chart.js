@@ -33,6 +33,10 @@ const { actions, reducer } = createSlice({
               payload.y[2] < lastdata.y[2] ? payload.y[2] : lastdata.y[2],
               payload.y[3],
             ],
+            volume: {
+              x: lastdata.x,
+              y: payload.volume.y,
+            },
           };
           const index = array.findIndex((el) => el.x === payload.x);
           array.splice(index, 1, newPayload);
@@ -77,6 +81,10 @@ export const getLoadChart = (tiker, chartType) =>
           const chartdt = {
             x: el?.tradeTime !== undefined ? el.tradeTime : el.tradeDate,
             y: [el.startPrice, el.highPrice, el.lowPrice, el.endPrice],
+            volume: {
+              x: el?.tradeTime !== undefined ? el.tradeTime : el.tradeDate,
+              y: 0,
+            },
           };
           return chartdt;
         });

@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import socketClient from '../../../share/socket';
 import CoinChart from '../../presentations/transaction/chart/CoinChart';
 import { getLoadChart, addChart, getCurMonut } from '../../../state/reducer/transaction/chart';
+import VolumeChart from '../../presentations/transaction/chart/VolumeChart';
+import Barchart from '../../presentations/transaction/chart/barchart';
 
 function ChartContainer() {
   const dispatch = useDispatch();
@@ -30,12 +32,20 @@ function ChartContainer() {
             realData.tradePrice < chartData.y[2] ? realData.tradePrice : chartData.y[2],
             realData.tradePrice,
           ],
+          volume: {
+            x: chartData.x,
+            y: realData.tradeVolume,
+          },
         };
         // dispatch(updateChart(updateData))
       } else {
         const inputData = {
           x: date.trim(),
           y: [realData.tradePrice, realData.tradePrice, realData.tradePrice, realData.tradePrice],
+          volume: {
+            x: date.trim(),
+            y: realData.tradeVolume,
+          },
         };
         dispatch(addChart(inputData));
       }
@@ -43,6 +53,10 @@ function ChartContainer() {
       const inputData = {
         x: date.trim(),
         y: [realData.tradePrice, realData.tradePrice, realData.tradePrice, realData.tradePrice],
+        volume: {
+          x: date.trim(),
+          y: realData.tradeVolume,
+        },
       };
       dispatch(addChart(inputData));
     }
@@ -87,13 +101,46 @@ function ChartContainer() {
     dispatch(getLoadChart(selectInfo.tiker, chartType));
   }, [selectInfo]);
 
+  const VolumeProps = {
+    date: [
+      '0403',
+      '0404',
+      '0405',
+      '0406',
+      '0407',
+      '0408',
+      '0409',
+      '0410',
+      '0411',
+      '0412',
+      '0413',
+      '0414',
+      '0415',
+      '0416',
+      '0417',
+      '0418',
+      '0419',
+      '0420',
+      '0421',
+      '0422',
+      '0423',
+    ],
+    volume: [
+      110, 80, 60, 50, 100, 150, 200, 110, 80, 60, 50, 100, 150, 200, 110, 80, 60, 50, 100, 150,
+      200,
+    ],
+  };
+  console.log(chartData.volume);
   return (
-    <CoinChart
-      setChartType={setChartType}
-      selectInfo={selectInfo}
-      currentMount={currentMount}
-      chartData={chartData}
-    />
+    <div>
+      <CoinChart
+        setChartType={setChartType}
+        selectInfo={selectInfo}
+        currentMount={currentMount}
+        chartData={chartData}
+        VolumeData={chartData.volume}
+      />
+    </div>
   );
 }
 
