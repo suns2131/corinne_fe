@@ -11,7 +11,7 @@ function FollowRank() {
             팔로잉 랭킹
           </span>
           <div className="w-[216px] h-[44px] flex-grow-0 flex justify-between items-center py-[4px] px-[15px] rounded-[10px] bg-Neutrals-whiteGray ">
-            <input className=" outline-none" type="text" placeholder="닉네임 검색" />
+            <input className=" outline-none bg-transparent" type="text" placeholder="닉네임 검색" />
             <button type="button">
               <SearchGlass />
             </button>
@@ -19,9 +19,6 @@ function FollowRank() {
         </div>
       </div>
       <div className="w-[387px] h-[746px] flex-grow-0 flex flex-col justify-start items-stretch gap-[30px] p-5 shadow-box bg-Neutrals-white rounded-b-[10px]">
-        <Follower />
-        <Follower />
-        <Follower />
         <Follower />
       </div>
     </div>

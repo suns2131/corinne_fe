@@ -19,7 +19,7 @@ function Userinfo() {
       {userData && (
         <div className="w-[347px] h-[305px] flex-grow-0 flex flex-col justify-start items-center gap-[30px]">
           <div className="h-[94px] self-stretch flex-grow-0 flex justify-start items-center gap-[20px]">
-            <div>
+            <div className=" z-[2]">
               <img
                 className="w-[87px] h-[87px] rounded-full relative"
                 src={userData?.imageUrl}

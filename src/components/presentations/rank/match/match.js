@@ -43,15 +43,15 @@ function MatchOne() {
           onMouseEnter={() => setMatchRank((prev) => !prev)}
           onMouseLeave={() => setMatchRank((prev) => !prev)}
         >
-          {matchRank ? <Hoveron /> : <Hoveroff />}
+          <Hoveroff />
+          {/* {matchRank ? <Hoveron /> : <Hoveroff />} */}
         </div>
-
-        {matchRank && (
-          <div className=" absolute left-[-10px] top-[-80px]">
-            <Help type="match" />
-          </div>
-        )}
       </div>
+      {matchRank && (
+        <div className=" absolute left-[1550px] top-[420px]">
+          <Help type="match" />
+        </div>
+      )}
     </div>
   );
 }

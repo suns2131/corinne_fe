@@ -21,7 +21,8 @@ module.exports = {
           ivory: '#fbfbfb',
           gray: '#777',
           deepGray: '#434051',
-          whiteGray: 'f6f6f6',
+          whiteGray: '#f6f6f6',
+          whiteGray2: '#f9f9f9',
         },
         Secondary: {
           orange: '#ff9e0d',
@@ -34,7 +35,14 @@ module.exports = {
           green: '#c1dc95',
           sky: '#a1c7f4',
           navy: '#5760b1',
+        },
+        Etc: {
           whitePurple: '#fbf6ff',
+        },
+        Coin: {
+          sol: '#8669d2',
+          btc: '#e2923b',
+          doge: '#b19947',
         },
       },
       padding: {
