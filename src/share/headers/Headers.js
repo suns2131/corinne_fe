@@ -12,7 +12,7 @@ const usertoken = getCookie({ name: 'corinne' });
 
 export default function Headers({ handleRouter }) {
   const router = useRouter();
-  const islogin = true;
+  const islogin = usertoken !== undefined;
   const [alarmState, setAlarmState] = useState(0);
   const clickAlram = () => {
     setAlarmState((prev) => (prev > 1 ? 0 : prev + 1));

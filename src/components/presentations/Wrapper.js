@@ -13,13 +13,21 @@ function Wrapper({ children }) {
     [router],
   );
   return (
-    <div className="w-full h-full bg-[#fbfbfb]">
-      <div className=" w-container m-auto bg-[#ffffff] ">
+    <div className="w-full h-full">
+      <div className=" w-container m-auto">
         <div className=" h-header" />
         <Headers handleRouter={handleRouter} router={router} />
         <div>{children}</div>
       </div>
-      <Footers />
+      <div className={router.pathname === '/' ? 'hidden' : ''}>
+        <Footers />
+      </div>
+      <div
+        className={
+          router.pathname === '/' ? 'absolute top-0 min-w-full min-h-full -z-50' : 'hidden'
+        }
+        style={{ backgroundImage: "url('/images/corinne_background.gif')" }}
+      />
     </div>
   );
 }
