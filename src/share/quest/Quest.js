@@ -1,28 +1,30 @@
 import React from 'react';
 
-function Quest({ type }) {
+function Quest({ type, resultQuest }) {
   if (type === 1) {
     return (
-      <div className="flex ">
+      <div className="flex mb-[12px] ">
         <div className="w-[327px] h-[118px] flex-grow-0 flex flex-col justify-start items-stretch gap-[10px] p-5 bg-Neutrals-whiteGray">
           <div className="h-[78px] self-stretch flex-grow-0 flex flex-col justify-start items-start gap-[12px]">
             <span className="w-[291px] h-[18px] flex-grow-0 font-Pretendard text-[15px] font-bold text-left text-Neutrals-black">
-              퀘스트명
+              {resultQuest.questTitle}
             </span>
-            <span className="w-[291px] flex-grow-0 font-Pretendard text-left text-Neutrals-black">
-              퀘스트 설명
+            <span className="w-[291px] flex-grow-0 font-Pretendard text-[12px] text-left text-Neutrals-black">
+              {resultQuest.questDesc}
             </span>
             <div className="w-[144px] h-[20px] flex-grow-0 flex justify-start items-start gap-[6px]">
               <div className="w-[69px] h-[20px] flex-grow-0 flex justify-center items-center gap-[2px] rounded-[15px] border border-solid border-Primary-purple">
                 <span className="flex-grow-0 text-[12px] text-center text-Primary-purple">
-                  +10,000
+                  {resultQuest.CompensationExp}
                 </span>
               </div>
-              <div className="w-[69px] h-[20px] flex-grow-0 flex justify-center items-center gap-[2px] rounded-[15px] border border-solid border-Primary-purple">
-                <span className="flex-grow-0 text-[12px] text-center text-Primary-purple">
-                  +10,000
-                </span>
-              </div>
+              {resultQuest.CompensationPoint !== 0 && (
+                <div className="w-[69px] h-[20px] flex-grow-0 flex justify-center items-center gap-[2px] rounded-[15px] border border-solid border-Primary-purple">
+                  <span className="flex-grow-0 text-[12px] text-center text-Primary-purple">
+                    {resultQuest.CompensationPoint}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -36,26 +38,28 @@ function Quest({ type }) {
   }
   if (type === 2) {
     return (
-      <div className="flex ">
+      <div className="flex  mb-[12px]">
         <div className="w-[327px] h-[118px] flex-grow-0 flex flex-col justify-start items-stretch gap-[10px] p-5 bg-Neutrals-whiteGray">
           <div className="h-[78px] self-stretch flex-grow-0 flex flex-col justify-start items-start gap-[12px]">
             <span className="w-[291px] h-[18px] flex-grow-0 font-Pretendard text-[15px] font-bold text-left text-Neutrals-black">
-              퀘스트명
+              {resultQuest.questTitle}
             </span>
-            <span className="w-[291px] flex-grow-0 font-Pretendard text-left text-Neutrals-black">
-              퀘스트 설명
+            <span className="w-[291px] flex-grow-0 font-Pretendard text-[12px] text-left text-Neutrals-black">
+              {resultQuest.questDesc}
             </span>
             <div className="w-[144px] h-[20px] flex-grow-0 flex justify-start items-start gap-[6px]">
               <div className="w-[69px] h-[20px] flex-grow-0 flex justify-center items-center gap-[2px] rounded-[15px] bg-Primary-purple">
                 <span className="flex-grow-0 text-[12px] text-center text-Neutrals-white">
-                  +10,000
+                  {resultQuest.CompensationExp}
                 </span>
               </div>
-              <div className="w-[69px] h-[20px] flex-grow-0 flex justify-center items-center gap-[2px] rounded-[15px] bg-Primary-purple">
-                <span className="flex-grow-0 text-[12px] text-center text-Neutrals-white">
-                  +10,000
-                </span>
-              </div>
+              {resultQuest.CompensationPoint > 0 && (
+                <div className="w-[69px] h-[20px] flex-grow-0 flex justify-center items-center gap-[2px] rounded-[15px] border border-solid border-Primary-purple">
+                  <span className="flex-grow-0 text-[12px] text-center text-Primary-purple">
+                    {resultQuest.CompensationPoint}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -68,26 +72,28 @@ function Quest({ type }) {
     );
   }
   return (
-    <div className="flex ">
+    <div className="flex mb-[12px] ">
       <div className="w-[327px] h-[118px] flex-grow-0 flex flex-col justify-start items-stretch gap-[10px] p-5 bg-Neutrals-whiteGray">
         <div className="h-[78px] self-stretch flex-grow-0 flex flex-col justify-start items-start gap-[12px]">
           <span className="w-[291px] h-[18px] flex-grow-0 font-Pretendard text-[15px] font-bold text-left text-Neutrals-gray">
-            퀘스트명
+            {resultQuest.questTitle}
           </span>
           <span className="w-[291px] flex-grow-0 font-Pretendard text-left text-Neutrals-gray">
-            퀘스트 설명
+            {resultQuest.questDesc}
           </span>
           <div className="w-[144px] h-[20px] flex-grow-0 flex justify-start items-start gap-[6px]">
             <div className="w-[69px] h-[20px] flex-grow-0 flex justify-center items-center gap-[2px] rounded-[15px] bg-Neutrals-lightGray">
               <span className="flex-grow-0 text-[12px] text-center text-Neutrals-white">
-                +10,000
+                {resultQuest.CompensationExp}
               </span>
             </div>
-            <div className="w-[69px] h-[20px] flex-grow-0 flex justify-center items-center gap-[2px] rounded-[15px] bg-Neutrals-lightGray">
-              <span className="flex-grow-0 text-[12px] text-center text-Neutrals-white">
-                +10,000
-              </span>
-            </div>
+            {resultQuest.CompensationPoint > 0 && (
+              <div className="w-[69px] h-[20px] flex-grow-0 flex justify-center items-center gap-[2px] rounded-[15px] border border-solid border-Primary-purple">
+                <span className="flex-grow-0 text-[12px] text-center text-Primary-purple">
+                  {resultQuest.CompensationPoint}
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </div>

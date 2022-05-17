@@ -1,0 +1,45 @@
+.arrow {
+  border-top: 10px solid #fff;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 0px solid transparent;
+  content: '';
+  margin-right: 68px;
+  transform: rotate(-180deg);
+  width: 8px;
+  height: 16px;
+}
+
+.arrowprev,
+.arrownext {
+  position: relative;
+  float: left;
+  /* border: 1px solid #000; */
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.arrowprev::after {
+  position: absolute;
+  left: 5px;
+  top: 0px;
+  content: '';
+  width: 15px; /* 사이즈 */
+  height: 15px; /* 사이즈 */
+  border-top: 2px solid #cecece; /* 선 두께 */
+  border-right: 2px solid #cecece; /* 선 두께 */
+  transform: rotate(225deg); /* 각도 */
+}
+
+.arrownext::after {
+  position: absolute;
+  left: 10px;
+  top: 20px;
+  content: '';
+  width: 50px; /* 사이즈 */
+  height: 50px; /* 사이즈 */
+  border-top: 5px solid #cecece; /* 선 두께 */
+  border-right: 5px solid #cecece; /* 선 두께 */
+  transform: rotate(45deg); /* 각도 */
+}

@@ -22,9 +22,9 @@ function TrandDetailContainer() {
   const sellRef = useRef(null);
   const [infinitiRef, inView] = useInView();
   const [buyRequest, setBuyRequest] = React.useState({
-    leverage: 1,
-    tradePrice: 0,
-    buyAmount: 0,
+    leverage: 100,
+    tradePrice: 570,
+    buyAmount: 1000000,
   });
   const [sellRequest, setSellRequest] = React.useState({
     leverage: 1,
@@ -63,10 +63,16 @@ function TrandDetailContainer() {
   const buySellClick = (type) => {
     if (type === 'buy') {
       if (SelectCoin?.tiker !== undefined) {
+        // const newRequest = {
+        //   ...buyRequest,
+        //   tradePrice: currentMount,
+        //   buyAmount: Number(buyRef.current.value),
+        //   tiker: SelectCoin.tiker,
+        // };
         const newRequest = {
           ...buyRequest,
-          tradePrice: currentMount,
-          buyAmount: Number(buyRef.current.value),
+          tradePrice: '800',
+          buyAmount: '100000',
           tiker: SelectCoin.tiker,
         };
         console.log(newRequest);
