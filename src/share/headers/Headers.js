@@ -23,7 +23,8 @@ export default function Headers({ handleRouter }) {
   const islogin = true;
   const [alarmState, setAlarmState] = useState(0);
   const clickAlram = () => {
-    setAlarmState((prev) => (prev > 1 ? 0 : prev + 1));
+    if (alarmState === 2) setAlarmState(0);
+    setAlarmState(2);
   };
 
   useLayoutEffect(() => {
@@ -41,14 +42,15 @@ export default function Headers({ handleRouter }) {
 
   useEffect(() => {
     if (usertoken !== undefined) {
+      console.log(`BEARER ${usertoken}`);
       // api/user/info에서 조회한 내정보의 userid로 알림 소켓 구독.
       socketClient.connect({ token: `BEARER ${usertoken}` }, () => {
         socketClient.subscribe(`/sub/topic/12`, (message) => {
           const AlramData = JSON.parse(message.body);
-          alert(AlramData);
+          // alert(AlramData);
           // 알림 로직 체크
           // 새로운 알림이 생길경우 1 / 알림이 없을 경우 0 / 알림 클릭시 2
-          if (AlramData.type) setAlarmState(1);
+          if (AlramData.type === 'BANKRUPTCY') setAlarmState(1);
         });
       });
     }

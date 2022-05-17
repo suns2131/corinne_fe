@@ -12,6 +12,7 @@ import Wrapper from '../presentations/Wrapper';
 import { selectedUserInfo } from '../../state/reducer/user/selectors';
 import { getUserInfo } from '../../state/reducer/user/thunk';
 import { getRealRank } from '../../state/reducer/rank/rank';
+import UserProfile from '../presentations/rank/modal/UserProfile';
 
 function RankContainer() {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ function RankContainer() {
   const [page, setPage] = useState(1);
   const prevRankTop3Data = useTop3();
   const [modal, setModal] = useState(false);
+  const [callUser, setCallUser] = useState(true);
   const userInfo = useSelector(selectedUserInfo);
   const [infiniteRef, inView] = useInView();
 
@@ -76,6 +78,11 @@ function RankContainer() {
       {modal && (
         <div className="w-full h-screen fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-40 text-center z-40">
           <PrevModal setModal={setModal} />
+        </div>
+      )}
+      {callUser && (
+        <div className="w-full h-screen fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-40 text-center z-40">
+          <UserProfile />
         </div>
       )}
     </div>
