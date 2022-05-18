@@ -1,10 +1,11 @@
+/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import { getUserInfo, signUp, getUserBalance, getUserTransaction } from './thunk';
+import { getUserInfo, signUp, getUserBalance, getUserTransaction, changeImage } from './thunk';
 
 const initialState = {
   name: '',
   isFirstLogin: false,
-  status: 'success',
+  status: 'fail',
   userInfo: null,
   userBalance: null,
   userTransaction: null,
@@ -22,12 +23,25 @@ const { actions, reducer } = createSlice({
       ...state,
       isFirstLogin: payload,
     }),
-  },
-  extraReducers: (builder) => {
-    builder.addCase(signUp.fulfilled, (state, { payload }) => ({
+    initializeLoginStatus: (state, { payload }) => ({
       ...state,
       status: payload,
-    }));
+    }),
+  },
+  extraReducers: (builder) => {
+    builder.addCase(signUp.fulfilled, (state, { payload }) => {
+      state.status = payload.status;
+      state.userInfo = {
+        ...state.userInfo,
+        nickname: payload.nickname,
+      };
+    });
+    builder.addCase(changeImage.fulfilled, (state, { payload }) => {
+      state.userInfo = {
+        ...state.userInfo,
+        imageUrl: payload.imageUrl,
+      };
+    });
     builder.addCase(getUserInfo.fulfilled, (state, { payload }) => ({
       ...state,
       userInfo: payload,
@@ -43,6 +57,6 @@ const { actions, reducer } = createSlice({
   },
 });
 
-export const { login, isFirstLogin } = actions;
+export const { login, isFirstLogin, initializeLoginStatus } = actions;
 
 export default reducer;

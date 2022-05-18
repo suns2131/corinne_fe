@@ -1,9 +1,10 @@
 import { memo } from 'react';
 
-function MyPageHoldings({ userBalance }) {
+function MyPageHoldings({ userBalance, profitOrLossCheck }) {
   if (!userBalance) return null;
 
   const { accountBalance, totalBalance } = userBalance;
+  const upDownCheck = profitOrLossCheck({ account: totalBalance, profit: accountBalance });
   return (
     <div className="shadow-box rounded-lg">
       <section className="shadow-box h-[70px] p-5">
@@ -69,7 +70,7 @@ function MyPageHoldings({ userBalance }) {
           </p>
           <div className="text-right">
             <p className="text-[24px] font-bold">{totalBalance.toLocaleString()}원</p>
-            <p className="text-Primary-purple2 font-bold">+100000원</p>
+            <p className={upDownCheck.property}>{upDownCheck.result}</p>
           </div>
         </div>
         <div className="flex justify-between mt-10">

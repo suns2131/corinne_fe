@@ -3,13 +3,20 @@ import { memo } from 'react';
 function MyPageHoldingCoins({ userBalance }) {
   if (!userBalance) return null;
   const { coins } = userBalance;
+  const upDownCheck = (data) => {
+    const exp = /-/;
+    if (exp.test(data)) {
+      return 'text-Secondary-orange font-bold';
+    }
+    return 'text-Primary-purple2 font-bold';
+  };
   return (
     <div className="shadow-box rounded-lg">
       <section className="shadow-box h-[70px] p-5">
         <h1>보유코인</h1>
       </section>
       <section className="px-5">
-        {coins.map(({ coin, tradePrice, importanceRate }) => (
+        {coins.map(({ coin, fluctuation, amount, buyPrice, importanceRate }) => (
           <div className="flex justify-between my-5">
             <div className="flex items-center">
               <svg
@@ -28,11 +35,11 @@ function MyPageHoldingCoins({ userBalance }) {
               <img className="mr-2" src="/icons/icon_sol.png" alt="아이콘이미지" />
               <div className="text-left">
                 <p className="font-bold">{coin.split('-')[1]}</p>
-                <p className="text-sm">{tradePrice.toLocaleString()}</p>
+                <p className="text-sm">{amount.toLocaleString()}원</p>
               </div>
             </div>
             <div className="text-right">
-              <p className="text-Primary-purple2 font-bold">+100000원</p>
+              <p className={upDownCheck(fluctuation)}>{fluctuation.toLocaleString()}원</p>
               <p className="text-Neutrals-lightGray">{importanceRate}%</p>
             </div>
           </div>

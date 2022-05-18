@@ -13,7 +13,7 @@ export default function KakaoCallback() {
   useEffect(() => {
     if (code !== undefined) {
       axios({
-        baseURL: 'http://13.125.232.165:8082/user/kakao/callback',
+        baseURL: `${process.env.NEXT_PUBLIC_API_SERVER_MAIN}/user/kakao/callback`,
         headers: {
           'content-type': 'application/json; charset=UTF-8',
           accept: 'application/json',
@@ -26,15 +26,12 @@ export default function KakaoCallback() {
       }).then((res) => {
         const token = res.headers.authorization.split(' ')[1];
         dispatch(isFirstLogin(res.data));
-        console.log(res.data);
+        console.log(token);
         setCookie({ name: 'corinne', value: token });
         if (res.data) {
-          router.push('/');
+          window.location.href = '/';
         } else {
-          router.push({
-            pathname: '/',
-            query: { progress: 'image' },
-          });
+          window.location.href = '/?progress=image';
         }
       });
     }

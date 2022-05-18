@@ -17,7 +17,7 @@ function MyPageTransactionHistory({ userTransaction, lastScrollRef }) {
               ) : (
                 <p className="text-Primary-purple2 font-bold">매수</p>
               )}
-              <p className="text-Neutrals-lightGray text-sm">{tradeAt}</p>
+              <p className="text-Neutrals-lightGray text-sm">{tradeAt.split(',')}</p>
             </div>
             <div className="flex justify-between">
               <p className="text-Neutrals-lightGray">종목명</p>
@@ -33,7 +33,7 @@ function MyPageTransactionHistory({ userTransaction, lastScrollRef }) {
             </div>
             <div className="flex justify-between">
               <p className="text-Neutrals-lightGray">레버리지</p>
-              <p>{leverage}x</p>
+              <p>x{leverage}</p>
             </div>
           </div>
         ))}

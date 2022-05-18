@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useLayoutEffect, useCallback } from 'react';
+import React, { useEffect, useState, useLayoutEffect, useCallback } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,22 +17,39 @@ import MyPageHoldings from '../presentations/mypage/MyPageHoldings';
 import MyPageHoldingCoins from '../presentations/mypage/MyPageHoldingCoins';
 import MyPageHoldingPortfolio from '../presentations/mypage/MyPageHoldingPortfolio';
 import MyPageTransactionHistory from '../presentations/mypage/MyPageTransactionHistory';
+import LoginContainer from './LoginContainer';
 
 export default function MyPageContainer() {
   const dispatch = useDispatch();
-  const router = useRouter();
   const [lastScrollRef, inView] = useInView();
-
-  const [page, setPage] = useState(1);
+  const router = useRouter();
 
   const userInfo = useSelector(selectedUserInfo);
   const userBalance = useSelector(selectedUserBalance);
   const userTransaction = useSelector(selectedUserTransaction);
 
+  const [page, setPage] = useState(1);
+
   const goChangeProfile = useCallback(() => {
     // dispatch()
-    router.push('/login');
+    router.push({
+      pathname: router.pathname,
+      query: { progress: 'image' },
+    });
   }, [router]);
+
+  const profitOrLossCheck = ({ account, profit }) => {
+    if (account - profit > 0) {
+      return {
+        result: `+${Number(account - profit).toLocaleString()}원`,
+        property: 'text-Primary-purple font-bold',
+      };
+    }
+    return {
+      result: `-${Number(profit - account).toLocaleString()}원`,
+      property: 'text-Secondary-orange font-bold',
+    };
+  };
 
   useLayoutEffect(() => {
     dispatch(getUserInfo());
@@ -53,11 +70,12 @@ export default function MyPageContainer() {
     <Wrapper>
       <div className="grid grid-cols-3 gap-2">
         <MyPageProfile userInfo={userInfo} goChangeProfile={goChangeProfile} />
-        <MyPageHoldings userBalance={userBalance} />
+        <MyPageHoldings userBalance={userBalance} profitOrLossCheck={profitOrLossCheck} />
         <MyPageHoldingCoins userBalance={userBalance} />
         <MyPageHoldingPortfolio userBalance={userBalance} />
         <MyPageTransactionHistory lastScrollRef={lastScrollRef} userTransaction={userTransaction} />
       </div>
+      <LoginContainer />
     </Wrapper>
   );
 }

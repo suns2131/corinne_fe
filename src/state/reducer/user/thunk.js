@@ -1,13 +1,20 @@
 /* eslint-disable import/prefer-default-export */
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axiosInstance from '../../../data/axios';
+import axiosInstance, { axiosImgInstance } from '../../../data/axios';
 
-export const signUp = createAsyncThunk('user/signUp', async (data, thunkApi) => {
+export const signUp = createAsyncThunk('user/signUp', async (data, { getState }) => {
+  const { user } = getState();
   const response = await axiosInstance.patch('/user/signup', { nickname: data });
-  if (response.status === 200) {
-    return 'success';
+  if (response.data === '중복된 닉네임이 존재합니다') {
+    return { status: 'fail', nickname: user.userInfo.nickname };
   }
-  return 'fail';
+  return { status: 'success', nickname: user.name };
+});
+
+export const changeImage = createAsyncThunk('user/image', async (data) => {
+  const response = await axiosImgInstance.patch('/api/user/image', { image: data });
+
+  return response.data;
 });
 
 export const getUserInfo = createAsyncThunk('user/getUserInfo', async () => {
