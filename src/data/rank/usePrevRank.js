@@ -7,9 +7,9 @@ export function usePrvRank() {
   useEffect(() => {
     axiosInstance.get('/api/rank/lastweek/1').then((response) => {
       console.log(response.data);
-      // setMatchs(response.data);
+      setPrevRank(response.data);
     });
-  });
+  }, []);
 
   return prevRank;
 }

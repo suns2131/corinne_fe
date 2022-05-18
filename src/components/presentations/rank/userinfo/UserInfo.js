@@ -1,19 +1,10 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getUserInfo } from '../../../../state/reducer/rank/rank';
 import { maxExp } from '../../../../share/exp';
 import Level from '../../../../share/Level';
 import { Won } from '../../../../share/convertWon';
 import ExpBar from './ExpBar';
 
 function Userinfo({ Info }) {
-  const userData = useSelector((state) => state.rank.userInfo);
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    dispatch(getUserInfo(1));
-  }, [dispatch]);
-
   return (
     <div className="w-[387px] h-[345px] flex justify-start items-start gap-[10px] m-[20px,360px,3px,20px] p-5 rounded-[10px] shadow-box bg-Neutrals-white">
       {Info && (

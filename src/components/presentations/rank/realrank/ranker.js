@@ -25,7 +25,7 @@ function Ranker({ type, rankerData }) {
   } else {
     bgColors = 'bg-Neutrals-whiteGray';
     textColors = 'text-Neutrals-black';
-    rankText = `${rankerData.id}위`;
+    rankText = `${type}위`;
   }
   return (
     <div

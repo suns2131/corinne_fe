@@ -54,6 +54,18 @@ export default function Headers({ handleRouter }) {
         });
       });
     }
+
+    return () => {
+      if (socketClient.connected) {
+        // 컴포넌트 종료 시 채팅 구독 취소 / 웹소켓 연결 종료
+        socketClient.disconnect(
+          () => {
+            // socketClient.unsubscribe('sub-0');
+          },
+          { token: `BEARER ${usertoken}` },
+        );
+      }
+    };
   }, [userInfo]);
 
   if (islogin) {

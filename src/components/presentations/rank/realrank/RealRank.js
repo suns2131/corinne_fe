@@ -2,7 +2,7 @@ import React from 'react';
 import SearchGlass from '../../../../../public/icons/Search.svg';
 import Ranker from './ranker';
 
-function RealRank({ RealRankData, infiniteRef, Searchnick }) {
+function RealRank({ RealRankData, infiniteRef, searchNickname }) {
   return (
     <div>
       <div className="w-[793px] h-[84px] flex justify-start items-start p-5 shadow-box bg-Neutrals-white rounded-t-[10px]">
@@ -15,7 +15,7 @@ function RealRank({ RealRankData, infiniteRef, Searchnick }) {
               className="bg-transparent text-[15px]"
               type="text"
               placeholder="닉네임 검색"
-              onKeyUp={Searchnick}
+              onKeyUp={searchNickname}
             />
             <button type="button">
               <SearchGlass />
@@ -27,7 +27,7 @@ function RealRank({ RealRankData, infiniteRef, Searchnick }) {
         <div className="w-[793px] h-[839px] flex flex-col justify-start items-start gap-[10px] px-5 py-[19px] shadow-box bg-Neutrals-white rounded-b-[10px] overflow-x-hidden overflow-y-auto">
           {RealRankData.map((el, idx) => (
             <div>
-              <Ranker type={el.id} rankerData={el} />
+              <Ranker type={idx + 1} rankerData={el} />
             </div>
           ))}
           <div ref={infiniteRef} />

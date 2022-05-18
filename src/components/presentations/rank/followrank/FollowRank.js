@@ -2,7 +2,7 @@ import React from 'react';
 import SearchGlass from '../../../../../public/icons/Search.svg';
 import Follower from './Follower';
 
-function FollowRank() {
+function FollowRank({ followlist }) {
   return (
     <div className=" mt-[20px]">
       <div className="w-[387px] h-[84px] flex-grow-0 justify-start items-start p-5 shadow-box bg-Neutrals-white rounded-t-[10px]">
@@ -19,7 +19,8 @@ function FollowRank() {
         </div>
       </div>
       <div className="w-[387px] h-[746px] flex-grow-0 flex flex-col justify-start items-stretch gap-[30px] p-5 shadow-box bg-Neutrals-white rounded-b-[10px]">
-        <Follower />
+        {/* {followlist && followlist.map((el) => <Follower followData={el} />)} */}
+
         <div />
       </div>
     </div>

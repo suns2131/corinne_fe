@@ -3,7 +3,7 @@ import React from 'react';
 import defalutProfile from '../../../../../public/images/defaultProfile/defalutProfile60.png';
 import Level from '../../../../share/Level';
 
-function Follower() {
+function Follower({ followData }) {
   return (
     <div className="w-[347px] h-[74px] self-stretch flex-grow-0 flex justify-between items-center">
       <div className="w-[148px] h-[74px] flex-grow-0 flex justify-start items-center gap-[11px]">

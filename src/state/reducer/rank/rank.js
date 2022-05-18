@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import intercept from '../../../data/intercept';
+import { getRealRank, getFollowlist, getPrevRank } from './thunk';
 
 // 초기 state값
 const initialState = {
@@ -8,7 +9,11 @@ const initialState = {
   userInfo: {},
   top3Rank: [],
   realRank: [],
+  realRankTotalPage: 0,
   followRank: [],
+  followRankTotalPage: 0,
+  prevRank: [],
+  prevRankTotalPage: 0,
   matchup: {},
 };
 
@@ -45,6 +50,25 @@ const { actions, reducer } = createSlice({
       // eslint-disable-next-line no-param-reassign
       state.followRank = payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(getRealRank.fulfilled, (state, { payload }) => {
+      console.log(payload);
+      // eslint-disable-next-line no-param-reassign
+      state.realRank = state.realRank.concat(payload.rank);
+      // eslint-disable-next-line no-param-reassign
+      state.realRankTotalPage = payload.totalPage;
+    });
+
+    builder.addCase(getFollowlist.fulfilled, (state, { payload }) => {
+      // eslint-disable-next-line no-param-reassign
+      state.followRank = payload;
+    });
+
+    builder.addCase(getPrevRank.fulfilled, (state, { payload }) => {
+      // eslint-disable-next-line no-param-reassign
+      state.prevRank = payload;
+    });
   },
 });
 export const { myRank, topRank, rankList, infos, matchup, followList, addrank } = actions;
@@ -101,19 +125,6 @@ export const getTop3Rank = () =>
     });
   };
 
-// 유저랭킹리스트
-export const getRealRank = (Page) =>
-  function (dispatch) {
-    console.log(`/api/rank/${Page}`);
-    axios.get(`/api/rank/${Page}`).then((response) => {
-      // intercept.get(`/api/rank/${Page}`).then((response) => {
-      const reusltData = response.data;
-      console.log(reusltData);
-      if (Page === 1) dispatch(rankList(reusltData));
-      else dispatch(addrank(reusltData));
-    });
-  };
-
 // 유저인포
 export const getUserInfo = () =>
   function (dispatch) {
@@ -143,5 +154,11 @@ export const getfollwerRank = () =>
       dispatch(followList(response.data));
     });
   };
+
+// export const postFollow = (userId) => {
+//   function (dispatch) {
+
+//   }
+// }
 
 export default reducer;

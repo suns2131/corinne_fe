@@ -2,7 +2,7 @@ import React from 'react';
 import Closeicon from '../../../../../public/icons/close.svg';
 import Ranker from '../realrank/ranker';
 
-function PrevModal({ setModal }) {
+function PrevModal({ setModal, PrevRanks }) {
   return (
     <div>
       <div className=" h-[69px] self-stretch flex-grow-0 flex justify-start items-start p-5 sahdow-box bg-Neutrals-white rounded-t-[10px] z-50">
@@ -21,8 +21,9 @@ function PrevModal({ setModal }) {
         </button>
       </div>
       <div className="flex-grow flex flex-col justify-start items-stretch p-5 shadow-box bg-Neutrals-white rounded-b-[10px]">
-        <div className="w-[781px] h-[742px] flex flex-col justify-start items-end overscroll-none gap-[15px] ">
-          {/* <Ranker /> */}
+        <div className="w-[781px] h-[742px] flex flex-col justify-start items-end overflow-y-auto gap-[15px] ">
+          {PrevRanks && PrevRanks.rank.map((el, idx) => <Ranker type={idx + 1} rankerData={el} />)}
+
           <div />
         </div>
         <button
