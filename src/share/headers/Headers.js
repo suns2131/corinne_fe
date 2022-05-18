@@ -9,9 +9,9 @@ import AlarmClick from '../../../public/icons/header/alarm_click.svg';
 import socketClient from '../socket';
 import { getCookie } from '../cookie';
 import MyAlarm from '../myalarm/MyAlarm';
-import { selectedUserInfo } from '../../state/reducer/user/selectors';
 import { getUserInfo } from '../../state/reducer/user/thunk';
 import axiosInstance from '../../data/axios';
+import Modal from '../modal/Modal';
 
 const usertoken = getCookie({ name: 'corinne' });
 
@@ -19,12 +19,17 @@ export default function Headers({ handleRouter }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const userInfo = useSelector((state) => state.user.userInfo);
-  console.log(userInfo);
-  const islogin = true;
   const [alarmState, setAlarmState] = useState(0);
+  const [emergency, setEmergency] = useState({
+    emState: false,
+    title: '',
+    desc: '',
+  });
+  const islogin = true;
+
   const clickAlram = () => {
     if (alarmState === 2) setAlarmState(0);
-    setAlarmState(2);
+    else setAlarmState(2);
   };
 
   useLayoutEffect(() => {
@@ -33,24 +38,29 @@ export default function Headers({ handleRouter }) {
     }
   }, [dispatch]);
 
-  const clickevent = () => {
-    console.log(`test 전송`);
-    axiosInstance.get('/api/test').then((response) => {
-      console.log(response);
-    });
-  };
+  // const clickevent = () => {
+  //   console.log(`test 전송`);
+  //   axiosInstance.get('/api/test').then((response) => {
+  //     console.log(response);
+  //   });
+  // };
 
   useEffect(() => {
     if (usertoken !== undefined) {
-      console.log(`BEARER ${usertoken}`);
       // api/user/info에서 조회한 내정보의 userid로 알림 소켓 구독.
       socketClient.connect({ token: `BEARER ${usertoken}` }, () => {
         socketClient.subscribe(`/sub/topic/12`, (message) => {
           const AlramData = JSON.parse(message.body);
-          // alert(AlramData);
           // 알림 로직 체크
           // 새로운 알림이 생길경우 1 / 알림이 없을 경우 0 / 알림 클릭시 2
-          if (AlramData.type === 'BANKRUPTCY') setAlarmState(1);
+          if (AlramData.type === 'BANKRUPTCY') {
+            setAlarmState(1);
+            setEmergency({
+              emState: true,
+              title: '파산 알림',
+              desc: AlramData.message,
+            });
+          }
         });
       });
     }
@@ -127,8 +137,8 @@ export default function Headers({ handleRouter }) {
               </li>
               <li
                 role="presentation"
-                // onClick={handleRouter('/mypage')}
-                onClick={clickevent}
+                onClick={handleRouter('/mypage')}
+                // onClick={clickevent}
                 className="w-[40px] h-[36px] grow-0 flex justify-center items-center"
               >
                 <Image
@@ -145,6 +155,17 @@ export default function Headers({ handleRouter }) {
           <div className=" relative">
             <div className=" absolute left-[773px] top-[-30px]">
               <MyAlarm />
+            </div>
+          </div>
+        )}
+        {emergency.emState && (
+          <div className=" relative">
+            <div className=" absolute left-[403px] top-[-30px]">
+              <Modal title={emergency.title} setClose={setEmergency} btnView>
+                <div className="w-[392px] font-Pretendard text-[16px] text-left text-Neutrals-black">
+                  {emergency.desc};
+                </div>
+              </Modal>
             </div>
           </div>
         )}
