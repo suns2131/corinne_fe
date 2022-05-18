@@ -13,15 +13,19 @@ import { selectedUserInfo } from '../../state/reducer/user/selectors';
 import { getUserInfo } from '../../state/reducer/user/thunk';
 import { getRealRank } from '../../state/reducer/rank/rank';
 import UserProfile from '../presentations/rank/modal/UserProfile';
+import { useMatch } from '../../data/rank/useMatch';
+import { usePrvRank } from '../../data/rank/usePrevRank';
 
 function RankContainer() {
   const dispatch = useDispatch();
   const RealRankData = useSelector((state) => state.rank.realRank);
+  const matchs = useMatch();
+  const PrevRanks = usePrvRank();
   const [item, setItem] = useState(RealRankData);
   const [page, setPage] = useState(1);
   const prevRankTop3Data = useTop3();
   const [modal, setModal] = useState(false);
-  const [callUser, setCallUser] = useState(true);
+  const [callUser, setCallUser] = useState(false);
   const userInfo = useSelector(selectedUserInfo);
   const [infiniteRef, inView] = useInView();
 
@@ -69,8 +73,8 @@ function RankContainer() {
             />
           </div>
           <div>
-            <Userinfo />
-            <MatchOne />
+            <Userinfo Info={userInfo} />
+            <MatchOne Info={userInfo} matchs={matchs} />
             <FollowRank />
           </div>
         </div>

@@ -6,7 +6,7 @@ import Level from '../../../../share/Level';
 import { Won } from '../../../../share/convertWon';
 import ExpBar from './ExpBar';
 
-function Userinfo() {
+function Userinfo({ Info }) {
   const userData = useSelector((state) => state.rank.userInfo);
   const dispatch = useDispatch();
 
@@ -16,28 +16,37 @@ function Userinfo() {
 
   return (
     <div className="w-[387px] h-[345px] flex justify-start items-start gap-[10px] m-[20px,360px,3px,20px] p-5 rounded-[10px] shadow-box bg-Neutrals-white">
-      {userData && (
+      {Info && (
         <div className="w-[347px] h-[305px] flex-grow-0 flex flex-col justify-start items-center gap-[30px]">
           <div className="h-[94px] self-stretch flex-grow-0 flex justify-start items-center gap-[20px]">
             <div className=" z-[2]">
               <img
                 className="w-[87px] h-[87px] rounded-full relative"
-                src={userData?.imageUrl}
-                alt={userData.nickname}
+                src={
+                  // eslint-disable-next-line no-nested-ternary
+                  Info.imageUrl !== undefined
+                    ? Info.imageUrl !== 'null'
+                      ? Info.imageUrl
+                      : '/images/defaultProfile/defalutProfile96.png'
+                    : '/images/defaultProfile/defalutProfile96.png'
+                }
+                alt={Info.nickname}
               />
               <div className=" absolute top-[176px]">
-                <Level Exp={userData.exp} />
+                <Level Exp={Info?.exp !== undefined ? Info.exp : 0} />
               </div>
             </div>
             <div className="h-[69px] flex-grow flex flex-col justify-center items-start gap-[12px]">
               <span className="h-[29px] flex-grow-0 font-Pretendard text-[24px] font-bold text-left text-Neutrals-deepGray">
-                {userData.nickname}
+                {Info?.nickname !== undefined ? Info.nickname : 0}
               </span>
               <div className="h-[28px] self-stretch flex-grow-0 flex flex-col justify-start items-start">
-                <ExpBar exp={userData.exp} />
+                <ExpBar exp={Info?.exp !== undefined ? Info.exp : 0} />
                 <span className="h-[20px] flex-grow-0 font-Pretendard text-[12px] text-right text-Neutrals-gray">
-                  <span className="text-Neutrals-black">{userData.exp}xp</span>/{' '}
-                  {maxExp(userData.exp)}
+                  <span className="text-Neutrals-black">
+                    {Info?.exp !== undefined ? Info.exp : 0}xp
+                  </span>
+                  /{maxExp(Info?.exp !== undefined ? Info.exp : 0)}
                   xp
                 </span>
               </div>
@@ -46,7 +55,7 @@ function Userinfo() {
           <div className="w-[304px] h-[48px] flex-grow-0 flex justify-start items-start gap-[32px]">
             <div className="w-[52px] h-[48px] flex-grow-0 flex flex-col justify-start items-center gap-[10px]">
               <span className="h-[18px]  flex-grow-0 font-Pretendard text-[15px] font-bold text-center text-Primary-purple">
-                {userData.myRank}위
+                {Info?.myRank !== undefined ? Info.myRank : 0}위
               </span>
               <span className="h-[20px] flex-grow-0 font-Pretendard text-[12px] text-center text-Neutrals-gray">
                 현재랭킹
@@ -54,7 +63,7 @@ function Userinfo() {
             </div>
             <div className="w-[52px] h-[48px] flex-grow-0 flex flex-col justify-start items-center gap-[10px]">
               <span className="h-[18px]  flex-grow-0 font-Pretendard text-[15px] font-bold text-center text-Neutrals-black">
-                {userData.BestRank}위
+                {Info?.highRank !== undefined ? Info.highRank : 0}위
               </span>
               <span className="h-[20px] flex-grow-0 font-Pretendard text-[12px] text-center text-Neutrals-gray">
                 최고 기록
@@ -62,7 +71,7 @@ function Userinfo() {
             </div>
             <div className="w-[52px] h-[48px] flex-grow-0 flex flex-col justify-start items-center gap-[10px]">
               <span className="h-[18px]  flex-grow-0 font-Pretendard text-[15px] font-bold text-center text-Neutrals-black">
-                {userData.follower}
+                {Info?.follower !== undefined ? Info.follower : 0}
               </span>
               <span className="h-[20px] flex-grow-0 font-Pretendard text-[12px] text-center text-Neutrals-gray">
                 팔로워
@@ -70,7 +79,7 @@ function Userinfo() {
             </div>
             <div className="w-[52px] h-[48px] flex-grow-0 flex flex-col justify-start items-center gap-[10px]">
               <span className="h-[18px]  flex-grow-0 font-Pretendard text-[15px] font-bold text-center text-Neutrals-black">
-                {userData.following}
+                {Info?.following !== undefined ? Info.following : 0}
               </span>
               <span className="h-[20px] flex-grow-0 font-Pretendard text-[12px] text-center text-Neutrals-gray">
                 팔로잉
@@ -91,13 +100,13 @@ function Userinfo() {
             </div>
             <div className="h-[66px] flex-grow flex flex-col justify-between items-end">
               <span className="h-[15px] flex-grow-0 font-Pretendard text-[15px] font-bold text-right text-Primary-purple2">
-                {userData.fluctuationRate}%
+                {Info?.fluctuationRate !== undefined ? Info.fluctuationRate : 0}%
               </span>
               <span className="h-[15px] flex-grow-0 font-Pretendard text-[15px] text-right text-Neutrals-black">
-                {Won(userData?.totalBalance !== undefined ? userData.totalBalance : 0)}원
+                {Won(Info?.totalBalance !== undefined ? Info.totalBalance : 0)}원
               </span>
               <span className="h-[15px] flex-grow-0 font-Pretendard text-[15px] text-right text-Neutrals-lightGray ">
-                {userData.resetCount}
+                {Info?.resetCount !== undefined ? Info.resetCount : 0}
               </span>
             </div>
           </div>

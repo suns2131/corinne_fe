@@ -18,7 +18,7 @@ function UserProfile() {
                   src="/images/defaultProfile/defalutProfile96.png"
                   alt="defaultProfile"
                 />
-                <div className=" absolute top-[176px] left-[47px]">
+                <div className=" absolute top-[550px] left-[940px]">
                   <Level Exp={2000} />
                 </div>
               </div>

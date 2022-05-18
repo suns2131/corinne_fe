@@ -4,7 +4,7 @@ import { getCookie } from '../share/cookie';
 const token = getCookie({ name: 'corinne' });
 
 const axiosInstance = axios.create({
-  baseURL: 'http://13.125.232.165:8082',
+  baseURL: 'https://gyuwony.shop',
   headers: {
     'content-type': 'application/json; charset=UTF-8',
     accept: 'application/json',
