@@ -23,7 +23,7 @@ function Modal({ title, setClose, children, btnView }) {
         {children}
         {btnView && (
           <button
-            className="w-full h-[48px] self-stretch flex-grow-0 flex justify-center items-center gap-[10px] rounded-[10px] bg-Primary-purple"
+            className="w-full h-[48px] self-stretch flex-grow-0 flex justify-center items-center gap-[10px] rounded-[10px] bg-Primary-purple mt-[20px]"
             type="button"
             onClick={() => {
               setClose(false);
