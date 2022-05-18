@@ -9,7 +9,6 @@ import AlarmClick from '../../../public/icons/header/alarm_click.svg';
 import socketClient from '../socket';
 import { getCookie } from '../cookie';
 import MyAlarm from '../myalarm/MyAlarm';
-import { selectedUserInfo } from '../../state/reducer/user/selectors';
 import { getUserInfo } from '../../state/reducer/user/thunk';
 import axiosInstance from '../../data/axios';
 import Modal from '../modal/Modal';
@@ -29,7 +28,6 @@ export default function Headers({ handleRouter }) {
   const islogin = true;
 
   const clickAlram = () => {
-    console.log(`alarmState : ${alarmState}`);
     if (alarmState === 2) setAlarmState(0);
     else setAlarmState(2);
   };
@@ -40,21 +38,19 @@ export default function Headers({ handleRouter }) {
     }
   }, [dispatch]);
 
-  const clickevent = () => {
-    console.log(`test 전송`);
-    axiosInstance.get('/api/test').then((response) => {
-      console.log(response);
-    });
-  };
+  // const clickevent = () => {
+  //   console.log(`test 전송`);
+  //   axiosInstance.get('/api/test').then((response) => {
+  //     console.log(response);
+  //   });
+  // };
 
   useEffect(() => {
     if (usertoken !== undefined) {
-      console.log(`BEARER ${usertoken}`);
       // api/user/info에서 조회한 내정보의 userid로 알림 소켓 구독.
       socketClient.connect({ token: `BEARER ${usertoken}` }, () => {
         socketClient.subscribe(`/sub/topic/12`, (message) => {
           const AlramData = JSON.parse(message.body);
-          // alert(AlramData);
           // 알림 로직 체크
           // 새로운 알림이 생길경우 1 / 알림이 없을 경우 0 / 알림 클릭시 2
           if (AlramData.type === 'BANKRUPTCY') {
@@ -141,8 +137,8 @@ export default function Headers({ handleRouter }) {
               </li>
               <li
                 role="presentation"
-                // onClick={handleRouter('/mypage')}
-                onClick={clickevent}
+                onClick={handleRouter('/mypage')}
+                // onClick={clickevent}
                 className="w-[40px] h-[36px] grow-0 flex justify-center items-center"
               >
                 <Image
