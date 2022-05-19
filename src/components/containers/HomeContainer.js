@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import Wrapper from '../presentations/Wrapper';
 import Login from '../presentations/login/Login';
-import HomeText from '../presentations/home/homeText';
+import HomeText from '../presentations/home/HomeText';
 import LoginContainer from './LoginContainer';
 import { getCookie } from '../../share/cookie';
 
