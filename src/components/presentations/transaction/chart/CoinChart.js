@@ -4,7 +4,7 @@ import { Won } from '../../../../share/convertWon';
 
 const ApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
-function CoinChart({ setChartType, selectInfo, currentMount, chartData }) {
+function CoinChart({ setChartType, selectInfo, currentMount, chartData, VolumeData }) {
   const dState = {
     options: {
       chart: {},
@@ -16,6 +16,28 @@ function CoinChart({ setChartType, selectInfo, currentMount, chartData }) {
           },
         },
       },
+      yaxis: {
+        opposite: true,
+      },
+      toolbar: {
+        tools: {
+          reset: false,
+        },
+      },
+      export: {
+        autoSeleted: 'selection',
+      },
+    },
+    series: [
+      {
+        data: chartData,
+      },
+    ],
+  };
+
+  const bState = {
+    options: {
+      chart: {},
       yaxis: {
         opposite: true,
       },
@@ -146,7 +168,15 @@ function CoinChart({ setChartType, selectInfo, currentMount, chartData }) {
           yaxis={dState.yaxis}
           type="candlestick"
           width="753px"
-          height="472px"
+          height="272px"
+        />
+        <ApexChart
+          options={bState.options}
+          series={bState.series}
+          yaxis={dState.yaxis}
+          type="bar"
+          width="753px"
+          height="200px"
         />
       </div>
     </div>
