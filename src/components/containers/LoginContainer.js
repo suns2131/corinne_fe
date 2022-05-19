@@ -1,22 +1,35 @@
-import React, { useCallback, useState, useEffect, useRef } from 'react';
+import React, { useCallback, useState, useEffect, useMemo, useRef } from 'react';
 
+import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { login } from '../../state/reducer/user';
+import { initializeLoginStatus, login } from '../../state/reducer/user';
 import { selectedUserName, selectLoginStatus } from '../../state/reducer/user/selectors';
-import { signUp } from '../../state/reducer/user/thunk';
+import { changeImage, signUp } from '../../state/reducer/user/thunk';
 
-import LoginCheck from '../../share/LoginCheck';
 import FirstLoginForm from '../presentations/login/FirstLoginForm';
+import ChangeNickname from '../presentations/login/ChangeNickname';
 
 function LoginContainer() {
   const dispatch = useDispatch();
+  const router = useRouter();
+  const profileImgRef = useRef();
+
+  const { progress } = router.query;
 
   const status = useSelector(selectLoginStatus);
   const selectUserName = useSelector(selectedUserName);
 
   const [loginStatusText, setLoginStatusText] = useState('');
   const [loginStatus, setLoginStatus] = useState(false);
+  const [profileImgPreview, setProfileImgPreview] = useState();
+
+  const goNextProgress = useCallback(() => {
+    router.push({
+      pathname: router.pathname,
+      query: { progress: 'nickname' },
+    });
+  }, [router]);
 
   const handleClickLoginSuccess = useCallback(() => {
     if (selectUserName.length < 2 || selectUserName.length > 8) {
@@ -33,6 +46,24 @@ function LoginContainer() {
     [dispatch],
   );
 
+  const handleProfileImgUpload = useCallback(() => {
+    const fileReader = new FileReader();
+    const file = profileImgRef.current.files[0];
+
+    const imgFormData = new FormData();
+    imgFormData.append('image', file);
+
+    fileReader.readAsDataURL(file);
+    fileReader.onloadend = () => {
+      setProfileImgPreview(fileReader.result);
+      dispatch(changeImage(imgFormData));
+    };
+  }, [dispatch]);
+
+  const handleClickProfileImg = useCallback(() => {
+    profileImgRef.current.click();
+  }, [profileImgRef]);
+
   useEffect(() => {
     if (selectUserName.length > 2 && selectUserName.length < 8) {
       setLoginStatus(true);
@@ -46,20 +77,46 @@ function LoginContainer() {
       setLoginStatusText('닉네임이 중복입니다.');
     }
     if (status === 'success') {
-      setLoginStatusText('');
+      dispatch(initializeLoginStatus('fail'));
+      router.push({
+        pathname: router.pathname,
+      });
     }
-  }, [loginStatus, status]);
+  }, [dispatch, loginStatus, router, status]);
 
-  return (
-    <LoginCheck>
-      <FirstLoginForm
-        handeChangeUserName={handeChangeUserName}
-        handleClickLoginSuccess={handleClickLoginSuccess}
-        loginStatus={loginStatus}
-        loginStatusText={loginStatusText}
-      />
-    </LoginCheck>
+  const loginModalContainers = useMemo(
+    () => ({
+      image: (
+        <FirstLoginForm
+          profileImgRef={profileImgRef}
+          profileImgPreview={profileImgPreview}
+          handleProfileImgUpload={handleProfileImgUpload}
+          handleClickProfileImg={handleClickProfileImg}
+          goNextProgress={goNextProgress}
+        />
+      ),
+      nickname: (
+        <ChangeNickname
+          handeChangeUserName={handeChangeUserName}
+          handleClickLoginSuccess={handleClickLoginSuccess}
+          loginStatus={loginStatus}
+          loginStatusText={loginStatusText}
+        />
+      ),
+    }),
+    [
+      goNextProgress,
+      handeChangeUserName,
+      handleClickLoginSuccess,
+      handleClickProfileImg,
+      handleProfileImgUpload,
+      loginStatus,
+      loginStatusText,
+      profileImgPreview,
+    ],
   );
+
+  return progress !== undefined ? loginModalContainers[progress] : null;
 }
 
 export default LoginContainer;

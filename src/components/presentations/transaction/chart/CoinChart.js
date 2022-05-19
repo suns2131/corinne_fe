@@ -48,7 +48,6 @@ function CoinChart({ setChartType, selectInfo, currentMount, chartData, VolumeDa
       },
     ],
   };
-
   return (
     <div className=" font-Pretendard">
       <div className="w-[793px] h-[90px] bg-[#ffffff] flex flex-col items-start p-5 shadow-008 rounded-[10px] mb-5">

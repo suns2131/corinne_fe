@@ -18,6 +18,7 @@ const usertoken = getCookie({ name: 'corinne' });
 export default function Headers({ handleRouter }) {
   const dispatch = useDispatch();
   const router = useRouter();
+  const islogin = usertoken !== undefined;
   const userInfo = useSelector((state) => state.user.userInfo);
   const [alarmState, setAlarmState] = useState(0);
   const [emergency, setEmergency] = useState({
@@ -25,7 +26,6 @@ export default function Headers({ handleRouter }) {
     title: '',
     desc: '',
   });
-  const islogin = true;
 
   const clickAlram = () => {
     if (alarmState === 2) setAlarmState(0);

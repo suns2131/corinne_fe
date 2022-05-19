@@ -12,9 +12,8 @@ export default function KakaoCallback() {
   const { code } = router.query;
   useEffect(() => {
     if (code !== undefined) {
-      console.log(code);
       axios({
-        baseURL: 'https://gyuwony.shop/user/kakao/callback',
+        baseURL: `${process.env.NEXT_PUBLIC_API_SERVER_MAIN}/user/kakao/callback`,
         headers: {
           'content-type': 'application/json; charset=UTF-8',
           accept: 'application/json',
@@ -28,9 +27,13 @@ export default function KakaoCallback() {
         const token = res.headers.authorization.split(' ')[1];
         dispatch(isFirstLogin(res.data));
         setCookie({ name: 'corinne', value: token });
-        router.push('/login');
+        if (res.data) {
+          window.location.href = '/';
+        } else {
+          window.location.href = '/?progress=image';
+        }
       });
     }
-  }, [router, code]);
+  }, [router, code, dispatch]);
   return null;
 }
