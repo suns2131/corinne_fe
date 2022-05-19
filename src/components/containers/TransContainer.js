@@ -1,5 +1,5 @@
 import React from 'react';
-import Wrapper from "../presentations/Wrapper";
+import Wrapper from '../presentations/Wrapper';
 import BuySellContainer from './Transaction/TrandDetailContainer';
 import ChattingContainer from './Transaction/ChattingContainer';
 import RankContanier from './Transaction/RankContainer';
@@ -23,6 +23,5 @@ function TransContainer() {
         </Wrapper>
     );
 }
-
 
 export default TransContainer;

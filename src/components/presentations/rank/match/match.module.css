@@ -1,0 +1,22 @@
+.lefts {
+  width: 222.5px;
+  height: 100px;
+  flex-grow: 0;
+  background-color: #6800ba;
+}
+
+.Rectangles {
+  width: 387px;
+  height: 100px;
+  flex-grow: 0;
+  padding: 0 21px 0 0;
+  border-radius: 10px;
+  background-color: #33323f;
+}
+
+.matchs {
+  width: 0px;
+  height: 0px;
+  border-top: 100px solid #6800ba;
+  border-right: 100px solid #33323f;
+}

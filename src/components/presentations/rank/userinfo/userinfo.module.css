@@ -1,0 +1,81 @@
+/* webkit */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .progressRed {
+    height: 8px;
+  }
+  .progressOrange {
+    height: 8px;
+  }
+  .progressYello {
+    height: 8px;
+  }
+  .progressGreen {
+    height: 8px;
+  }
+  .progressSky {
+    height: 8px;
+  }
+  .progressNavy {
+    height: 8px;
+  }
+  .progressPurple {
+    height: 8px;
+  }
+}
+.progressRed::-webkit-progress-bar {
+  background: #eeeeee;
+  border-radius: 8px;
+}
+.progressOrange::-webkit-progress-bar {
+  background: #eeeeee;
+  border-radius: 8px;
+}
+.progressYello::-webkit-progress-bar {
+  background: #eeeeee;
+  border-radius: 8px;
+}
+.progressGreen::-webkit-progress-bar {
+  background: #eeeeee;
+  border-radius: 8px;
+}
+.progressSky::-webkit-progress-bar {
+  background: #eeeeee;
+  border-radius: 8px;
+}
+.progressNavy::-webkit-progress-bar {
+  background: #eeeeee;
+  border-radius: 8px;
+}
+.progressPurple::-webkit-progress-bar {
+  background: #eeeeee;
+  border-radius: 8px;
+}
+
+.progressRed::-webkit-progress-value {
+  border-radius: 8px;
+  background: #e05656;
+}
+.progressOrange::-webkit-progress-value {
+  border-radius: 8px;
+  background: #fcb370;
+}
+.progressYello::-webkit-progress-value {
+  border-radius: 8px;
+  background: #efd886;
+}
+.progressGreen::-webkit-progress-value {
+  border-radius: 8px;
+  background: #c1dc95;
+}
+.progressSky::-webkit-progress-value {
+  border-radius: 8px;
+  background: #a1c7f4;
+}
+.progressNavy::-webkit-progress-value {
+  border-radius: 8px;
+  background: #5760b1;
+}
+.progressPurple::-webkit-progress-value {
+  border-radius: 8px;
+  background: #6800ba;
+}

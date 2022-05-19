@@ -4,9 +4,11 @@ module.exports = {
     es2021: true,
   },
   extends: [
+    'eslint:recommended',
     'plugin:react/recommended',
     'airbnb',
     'prettier',
+    'plugin:prettier/recommended',
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -15,10 +17,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-    'react-hooks',
-  ],
+  plugins: ['react', 'react-hooks'],
   rules: {
     'react/react-in-jsx-scope': 0, // 'React' must be in scope when using JSX 에러 제거
     'linebreak-style': 0, // 개행문자 에러 제거

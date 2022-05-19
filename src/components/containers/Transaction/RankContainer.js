@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useLayoutEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectedUserInfo } from '../../../state/reducer/user/selectors';
+import { getUserInfo } from '../../../state/reducer/user/thunk';
+import MyRank from '../../presentations/transaction/myrank/MyRank';
 
 function RankContanier() {
-    // const userinfo = useSelector((state) => state.user.)
-    return(
-        <div className="w-[387px] h-61px p-5 gap-[10px] bg-[#6800BA] shadow-008 rounded-[10px] font-Pretendard mb-5">
-            <p className="font-bold text-[18px] text-[#ffffff]">채채님의 현재 랭킹은 <span />위 입니다 🎉</p>
-        </div>
-    );
+  const dispatch = useDispatch();
+  const userInfo = useSelector(selectedUserInfo);
+
+  useLayoutEffect(() => {
+    dispatch(getUserInfo());
+  }, [dispatch]);
+
+  return <MyRank userInfo={userInfo} />;
 }
 
 export default RankContanier;

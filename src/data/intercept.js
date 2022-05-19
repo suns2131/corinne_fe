@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 const intercept = axios.create({
     baseURL: "https://gyuwony.shop",
