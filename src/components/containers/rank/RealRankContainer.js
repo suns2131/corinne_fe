@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
 import { getRealRank } from '../../../state/reducer/rank/thunk';
 import RealRank from '../../presentations/rank/realrank/RealRank';
+import { postFollow } from '../../../state/reducer/rank/rank';
 
 function RealRankContainer() {
   const dispatch = useDispatch();
@@ -31,11 +32,19 @@ function RealRankContainer() {
     setList(realRankState.filter((el) => el.nickname.includes(e.target.value)));
   };
 
-  const followBtn = useCallback((userId) => {
+  const followBtn = useCallback((userId, followStat) => {
     console.log(userId);
+    dispatch(postFollow(userId, followStat));
   }, []);
 
-  return <RealRank RealRankData={list} infiniteRef={infiniteRef} searchNickname={searchNickname} />;
+  return (
+    <RealRank
+      RealRankData={list}
+      infiniteRef={infiniteRef}
+      searchNickname={searchNickname}
+      followBtn={followBtn}
+    />
+  );
 }
 
 export default RealRankContainer;

@@ -28,7 +28,7 @@ function FollowContainer() {
   }, [inView]);
 
   const searchNickname = (e) => {
-    // setList(followRankState.rank.filter((el) => el.nickname.includes(e.target.value)));
+    setList(followRankState.filter((el) => el.nickname.includes(e.target.value)));
   };
 
   return <FollowRank followlist={list} infiniteRef={infiniteRef} searchNickname={searchNickname} />;

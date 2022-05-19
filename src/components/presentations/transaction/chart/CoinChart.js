@@ -1,10 +1,18 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { Won } from '../../../../share/convertWon';
 
 const ApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
-function CoinChart({ setChartType, selectInfo, currentMount, chartData, VolumeData }) {
+function CoinChart({
+  setChartType,
+  selectInfo,
+  currentMount,
+  chartData,
+  VolumeData,
+  bookMarkClick,
+}) {
   const dState = {
     options: {
       chart: {},
@@ -59,7 +67,12 @@ function CoinChart({ setChartType, selectInfo, currentMount, chartData, VolumeDa
                 <div className="w-[77px] h-[29px] gap-[5px] flex flex-row justify-start items-center ">
                   <p className="text-[24px] text-[#333234f] font-bold ">{selectInfo.unit}</p>
                   {selectInfo.favorite ? (
-                    <button type="button">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        bookMarkClick(selectInfo.tiker, selectInfo.favorite);
+                      }}
+                    >
                       <svg
                         width="21"
                         height="20"
@@ -74,7 +87,12 @@ function CoinChart({ setChartType, selectInfo, currentMount, chartData, VolumeDa
                       </svg>
                     </button>
                   ) : (
-                    <button type="button">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        bookMarkClick(selectInfo.tiker, selectInfo.favorite);
+                      }}
+                    >
                       <svg
                         width="21"
                         height="20"
@@ -105,26 +123,38 @@ function CoinChart({ setChartType, selectInfo, currentMount, chartData, VolumeDa
               </div>
             </div>
           )}
-          {selectInfo && (
-            <div className="w-[270px] h-[50px] flex flex-col items-end ">
-              <div className="w-[270px] h-[29px] flex flex-row justify-end items-center gap-[3px] text-[12px] font-normal">
+          <div className="w-[270px] h-[50px] flex flex-col items-end ">
+            <div className="w-[270px] h-[29px] flex flex-row justify-end items-center gap-[3px] text-[12px] font-normal">
+              {currentMount && (
                 <div>
-                  0.1%
-                  {selectInfo.prevPrice - currentMount > 0 ? (
-                    <span>( ▼ {selectInfo.prevPrice - currentMount})</span>
+                  <span>
+                    {currentMount?.signedChangeRate !== undefined
+                      ? currentMount?.signedChangeRate
+                      : 0}
+                    %
+                  </span>
+                  {currentMount?.signedChangePrice !== undefined ? (
+                    currentMount.signedChangePrice > 0 ? (
+                      <span>▲ {currentMount.signedChangePrice}</span>
+                    ) : (
+                      <span>▼ {currentMount.signedChangePrice}</span>
+                    )
                   ) : (
-                    <span>( ▲ {selectInfo.prevPrice - currentMount})</span>
+                    0
                   )}
                 </div>
-                <div className="font-bold text-[24px] text-[#A634ff]">{Won(currentMount)}원</div>
+              )}
+
+              <div className="font-bold text-[24px] text-[#A634ff]">
+                {Won(currentMount?.tradePrice !== undefined ? currentMount.tradePrice : 0)}원
               </div>
-              <p className="font-normal text-[14px] text-[#cecece]">1.00 {selectInfo.unit}</p>
             </div>
-          )}
+            <p className="font-normal text-[14px] text-[#cecece]">1.00 {selectInfo.unit}</p>
+          </div>
         </div>
       </div>
       <div className="w-[793px] h-[558px] shadow-008 rounded-[10px] p-5 mb-[24px]">
-        <div className="w-[646px] h-[32px] flex justify-center items-center mb-[10px]">
+        <div className="w-[710px] h-[32px] flex justify-center items-center mb-[10px]">
           <div className="w-[70px] h-[32px] gap-[7px] flex justify-start items-center mr-[15px]">
             <button
               className="w-[32px] h-[32px] flex justify-center items-center rounded-[6px] border border-solid border-[#eeeeee] bg-[#ffffff] text-[12px] font-normal text-[#777777]"
@@ -141,20 +171,37 @@ function CoinChart({ setChartType, selectInfo, currentMount, chartData, VolumeDa
               분
             </button>
           </div>
-          <div className="w-[557px] h-[26px] flex justify-center items-center gap-[10px] ">
-            <div className="w-[97px] h-[20px] font-normal text-[12px]">
-              고가 <span className="text-[#A634FF]">{Won(50000000)}</span>원
+          <div className="w-[557px] h-[26px] flex justify-center items-center">
+            <div className="w-[113px] h-[20px] font-normal text-[12px]">
+              고가
+              <span className="text-[#A634FF]">
+                {Won(currentMount?.highPrice !== undefined ? currentMount.highPrice : 0)}
+              </span>
+              원
             </div>
-            <div className="w-[97px] h-[20px] font-normal text-[12px]">
-              저가 <span className="text-[#FF9E0D]">{Won(50000000)}</span>원
+            <div className="w-[113px] h-[20px] font-normal text-[12px]">
+              저가
+              <span className="text-[#FF9E0D]">
+                {Won(currentMount?.lowPrice !== undefined ? currentMount.lowPrice : 0)}
+              </span>
+              원
             </div>
-            <div className="w-[107px] h-[20px] font-normal text-[12px]">
-              전일가 <span className="text-[#33323f]">{Won(50000000)}</span>원
+            <div className="w-[123px] h-[20px] font-normal text-[12px]">
+              전일가
+              <span className="text-[#33323f]">
+                {Won(
+                  currentMount?.prevClosingPrice !== undefined ? currentMount.prevClosingPrice : 0,
+                )}
+              </span>
+              원
             </div>
-            <div className="w-[118px] h-[20px] font-normal text-[12px]">
-              거래대금 <span className="text-[#33323f]">{Won(50000000)}</span>원
+            <div className="w-[160px] h-[20px] font-normal text-[12px]">
+              거래대금
+              <span className="text-[#33323f]">
+                {Won(currentMount?.tradeVolume !== undefined ? currentMount.tradeVolume : 0)}
+              </span>
             </div>
-            <div className="w-[98px] h-[26px] bg-[#ffffff] border border-solid border-[#eeeeee] rounded-[6px] px-[6px] py-[3px] ">
+            <div className="w-[115px] h-[26px] bg-[#ffffff] border border-solid border-[#eeeeee] rounded-[6px] px-[6px] py-[3px] ">
               <p className="font-normal text-[12px] text-[#777777]">
                 금주 매수회원<span className="text-[#A634FF]">8</span>명
               </p>
@@ -168,15 +215,7 @@ function CoinChart({ setChartType, selectInfo, currentMount, chartData, VolumeDa
           yaxis={dState.yaxis}
           type="candlestick"
           width="753px"
-          height="272px"
-        />
-        <ApexChart
-          options={bState.options}
-          series={bState.series}
-          yaxis={dState.yaxis}
-          type="bar"
-          width="753px"
-          height="200px"
+          height="472px"
         />
       </div>
     </div>

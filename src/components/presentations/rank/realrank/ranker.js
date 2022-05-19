@@ -4,7 +4,7 @@ import Level from '../../../../share/Level';
 import Reset from '../../../../../public/icons/reset.svg';
 import { Won } from '../../../../share/convertWon';
 
-function Ranker({ type, rankerData }) {
+function Ranker({ type, rankerData, followBtn }) {
   const [btns, setBtns] = useState(false);
   let bgColors = '';
   let textColors = '';
@@ -65,11 +65,11 @@ function Ranker({ type, rankerData }) {
           100
         </span>
       </div>
-      {btns ? (
+      {rankerData.follow ? (
         <button
           className="w-[60px] h-[32px] flex-grow-0 flex justify-center items-center gap-[2px] p-[5px] rounded-[8px] bg-Neutrals-black active:bg-Neutrals-deepGray"
           onClick={() => {
-            setBtns((prev) => !prev);
+            followBtn(rankerData.userId, rankerData.follow);
           }}
           type="button"
         >
@@ -82,7 +82,7 @@ function Ranker({ type, rankerData }) {
           className="w-[60px] h-[32px] flex-grow-0 flex justify-center items-center gap-[2px] p-[5px] rounded-[8px] bg-Primary-purple2 active:bg-Primary-lightPurple"
           type="button"
           onClick={() => {
-            setBtns((prev) => !prev);
+            followBtn(rankerData.userId, rankerData.follow);
           }}
         >
           <span className="flex-grow-0 font-Pretendard text-[12px] text-center text-Neutrals-white">

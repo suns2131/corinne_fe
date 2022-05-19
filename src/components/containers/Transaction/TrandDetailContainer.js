@@ -63,19 +63,12 @@ function TrandDetailContainer() {
   const buySellClick = (type) => {
     if (type === 'buy') {
       if (SelectCoin?.tiker !== undefined) {
-        // const newRequest = {
-        //   ...buyRequest,
-        //   tradePrice: currentMount,
-        //   buyAmount: Number(buyRef.current.value),
-        //   tiker: SelectCoin.tiker,
-        // };
         const newRequest = {
           ...buyRequest,
-          tradePrice: '800',
-          buyAmount: '100000',
+          tradePrice: currentMount.tradePrice,
+          buyAmount: Number(buyRef.current.value),
           tiker: SelectCoin.tiker,
         };
-        console.log(newRequest);
         dispatch(postBuySell('buy', newRequest));
       }
     } else if (type === 'sell') {
@@ -86,7 +79,6 @@ function TrandDetailContainer() {
         sellAmount: Number(sellRef.current.value),
         tiker: SelectCoin.tiker,
       };
-      console.log(newRequest);
       dispatch(postBuySell('sell', newRequest));
     }
   };

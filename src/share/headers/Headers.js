@@ -47,10 +47,12 @@ export default function Headers({ handleRouter }) {
 
   useEffect(() => {
     if (usertoken !== undefined) {
+      console.log(`BEARER ${usertoken}`);
       // api/user/info에서 조회한 내정보의 userid로 알림 소켓 구독.
       socketClient.connect({ token: `BEARER ${usertoken}` }, () => {
         socketClient.subscribe(`/sub/topic/12`, (message) => {
           const AlramData = JSON.parse(message.body);
+          console.log(AlramData);
           // 알림 로직 체크
           // 새로운 알림이 생길경우 1 / 알림이 없을 경우 0 / 알림 클릭시 2
           if (AlramData.type === 'BANKRUPTCY') {
@@ -66,15 +68,15 @@ export default function Headers({ handleRouter }) {
     }
 
     return () => {
-      if (socketClient.connected) {
-        // 컴포넌트 종료 시 채팅 구독 취소 / 웹소켓 연결 종료
-        socketClient.disconnect(
-          () => {
-            // socketClient.unsubscribe('sub-0');
-          },
-          { token: `BEARER ${usertoken}` },
-        );
-      }
+      // if (socketClient.connected) {
+      //   // 컴포넌트 종료 시 채팅 구독 취소 / 웹소켓 연결 종료
+      //   socketClient.disconnect(
+      //     () => {
+      //       // socketClient.unsubscribe('sub-0');
+      //     },
+      //     { token: `BEARER ${usertoken}` },
+      //   );
+      // }
     };
   }, [userInfo]);
 
@@ -163,7 +165,7 @@ export default function Headers({ handleRouter }) {
             <div className=" absolute left-[403px] top-[-30px]">
               <Modal title={emergency.title} setClose={setEmergency} btnView>
                 <div className="w-[392px] font-Pretendard text-[16px] text-left text-Neutrals-black">
-                  {emergency.desc};
+                  {emergency.desc}
                 </div>
               </Modal>
             </div>

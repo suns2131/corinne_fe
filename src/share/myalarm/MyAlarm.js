@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Quest from '../quest/Quest';
 import Alarms from './Alarms';
 import styles from './MyAlarm.module.css';
 import { QuestData } from '../quest/questData';
+import axiosInstance from '../../data/axios';
+import { getUserAlarm } from '../../state/reducer/rank/thunk';
 
 function MyAlarm() {
-  const [type, setType] = useState(false);
+  const dispatch = useDispatch();
+  const [type, setType] = useState(true);
+  const AlramData = useSelector((state) => state.rank.userAlarm);
+  const QuestNo = useSelector((state) => state.rank.userQuest);
+  console.log(AlramData);
+  console.log(QuestNo);
+  useEffect(() => {
+    dispatch(getUserAlarm());
+    dispatch(getUserAlarm());
+  }, [dispatch]);
+
   return (
     <div className="w-[440px] h-[560px] flex flex-col items-end relative z-50 ">
       <div className={styles.arrow} />
@@ -28,16 +41,7 @@ function MyAlarm() {
               </div>
             </button>
             <div className="w-[440px] h-[472px] bg-red-100 overflow-y-auto overflow-x-hidden">
-              <Alarms />
-              <Alarms />
-              <Alarms />
-              <Alarms />
-              <Alarms />
-              <Alarms />
-              <Alarms />
-              <Alarms />
-              <Alarms />
-              <Alarms />
+              {AlramData && AlramData.map((el) => <Alarms />)}
             </div>
           </div>
         </div>
