@@ -6,7 +6,7 @@ import UserInfnoContainer from '../../containers/rank/UserInfoContainer';
 import Wrapper from '../Wrapper';
 import PrevModal from './rankmodal/PrevModal';
 
-function Rank({ modal, setModal, PrevRanks, followClick }) {
+function Rank({ modal, setModal, PrevRanks }) {
   return (
     <div>
       <Wrapper>

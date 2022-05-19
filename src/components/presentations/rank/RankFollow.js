@@ -1,15 +1,15 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Level from '../../../share/Level';
-import { getfollwerRank } from '../../../state/reducer/rank/rank';
 import { Won } from '../../../share/convertWon';
+import { getFollowlist } from '../../../state/reducer/rank/thunk';
 
 function RankFollow() {
   const dispatch = useDispatch();
   const followData = useSelector((state) => state.rank.followRank);
 
   React.useEffect(() => {
-    dispatch(getfollwerRank());
+    dispatch(getFollowlist());
   }, [dispatch]);
 
   return (

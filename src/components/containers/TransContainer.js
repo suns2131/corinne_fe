@@ -7,21 +7,21 @@ import TikerListContainer from './Transaction/TikerListContainer';
 import ChartContainer from './Transaction/ChartContainer';
 
 function TransContainer() {
-    return (
-        <Wrapper >
-            <div className='flex '>
-                <div className='mr-5'>
-                    <RankContanier />
-                    <TikerListContainer />
-                    <ChattingContainer />
-                </div>
-                <div>
-                    <ChartContainer />
-                    <BuySellContainer />
-                </div>
-            </div>
-        </Wrapper>
-    );
+  return (
+    <Wrapper>
+      <div className="flex ">
+        <div className="mr-5">
+          <RankContanier />
+          <TikerListContainer />
+          <ChattingContainer />
+        </div>
+        <div>
+          <ChartContainer />
+          <BuySellContainer />
+        </div>
+      </div>
+    </Wrapper>
+  );
 }
 
 export default TransContainer;

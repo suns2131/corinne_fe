@@ -1,10 +1,9 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addChat } from "../../../state/reducer/transaction/chat";
-import Rooms from "../../presentations/transaction/chatting/Rooms";
-import socketClient from "../../../share/socket";
-import { getCookie } from "../../../share/cookie"
-
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addChat } from '../../../state/reducer/transaction/chat';
+import Rooms from '../../presentations/transaction/chatting/Rooms';
+import socketClient from '../../../share/socket';
+import { getCookie } from '../../../share/cookie';
 
 const usertoken = getCookie({ name: 'corinne' });
 
