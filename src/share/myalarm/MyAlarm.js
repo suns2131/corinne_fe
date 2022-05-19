@@ -40,7 +40,7 @@ function MyAlarm() {
                 <span>&gt;</span>
               </div>
             </button>
-            <div className="w-[440px] h-[472px] bg-red-100 overflow-y-auto overflow-x-hidden">
+            <div className="w-[440px] h-[472px] overflow-y-auto overflow-x-hidden">
               {AlramData && AlramData.map((el) => <Alarms />)}
             </div>
           </div>

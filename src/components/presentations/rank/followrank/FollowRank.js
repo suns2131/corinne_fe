@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchGlass from '../../../../../public/icons/Search.svg';
+import SearchGlass from '../../../../../public/icons/search.svg';
 import Follower from './Follower';
 
 function FollowRank({ followlist, searchNickname }) {

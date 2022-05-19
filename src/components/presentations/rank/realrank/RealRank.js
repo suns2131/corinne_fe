@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchGlass from '../../../../../public/icons/Search.svg';
+import SearchGlass from '../../../../../public/icons/search.svg';
 import Ranker from './ranker';
 
 function RealRank({ RealRankData, infiniteRef, searchNickname, followBtn }) {
