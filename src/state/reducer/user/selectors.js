@@ -29,3 +29,8 @@ export const selectedUserTransaction = createSelector(
   (state) => state.user.userTransaction,
   (v) => v,
 );
+
+export const selectedResetSuccessModal = createSelector(
+  (state) => state.user.resetStatus,
+  (v) => v,
+);

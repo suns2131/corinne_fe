@@ -17,16 +17,23 @@ function ChangeNickname({
           left: '50%',
           transform: 'translate(-50%, -50%)',
         }}
-        className="top-0 absolute mx-auto w-[400px] h-[253px] bg-white p-5 shadow-box rounded-[10px]"
+        className="top-0 absolute mx-auto w-[400px] h-[253px] bg-white shadow-box rounded-[10px]"
       >
-        <h1>프로필 이미지</h1>
-        <span>설정 후 마이페이지에서 재변경이 가능합니다.</span>
-        <input
-          onChange={handeChangeUserName}
-          className="w-[340px] mx-auto block my-5"
-          placeholder="닉네입 입력하기"
-        />
-        <p>한글 or 영문 최소 2자, 최대 8자 입력 가능</p>
+        <div className="h-[93px] border-b">
+          <div className="p-5">
+            <h1 className="font-bold">
+              닉네임<span className="text-Primary-purple">(필수)</span>
+            </h1>
+            <pre>설정 후 마이페이지에서 재변경이 가능합니다.</pre>
+          </div>
+        </div>
+        <div className="h-[52px] border border-Neutrals-lightGray2 m-5 rounded-[10px] flex items-center">
+          <input
+            onChange={handeChangeUserName}
+            className="w-[340px] mx-auto block my-5"
+            placeholder="닉네입 입력하기"
+          />
+        </div>
         <p>{loginStatusText}</p>
         <button
           onClick={handleClickLoginSuccess}

@@ -18,10 +18,16 @@ function FirstLoginForm({
           left: '50%',
           transform: 'translate(-50%, -50%)',
         }}
-        className="top-0 absolute mx-auto w-[440px] h-[381px] bg-white p-5 shadow-box rounded-[10px]"
+        className="top-0 absolute mx-auto w-[440px] h-[381px] bg-white shadow-box rounded-[10px]"
       >
-        <h1>프로필 이미지</h1>
-        <span>설정 후 마이페이지에서 재변경이 가능합니다.</span>
+        <div className="h-[93px] border-b">
+          <div className="p-5">
+            <h1 className="font-bold">
+              닉네임<span className="text-Primary-purple">(필수)</span>
+            </h1>
+            <pre className="text-Nuetrals-black">설정 후 마이페이지에서 재변경이 가능합니다.</pre>
+          </div>
+        </div>
         <div className="w-[180px] h-[180px] rounded-full mx-auto bg-gray-50 my-5">
           <img
             className="w-[180px] h-[180px] rounded-full"
@@ -39,13 +45,15 @@ function FirstLoginForm({
             style={{ display: 'none' }}
           />
         </div>
-        <button
-          onClick={goNextProgress}
-          type="button"
-          className="bg-[#6800BA] block w-[340px] h-[45px] mx-auto text-white rounded-[10px]"
-        >
-          다음
-        </button>
+        <div className="px-5">
+          <button
+            onClick={goNextProgress}
+            type="button"
+            className="bg-[#6800BA] w-full h-[45px] mx-auto text-white rounded-[10px]"
+          >
+            다음
+          </button>
+        </div>
       </div>
     </div>
   );

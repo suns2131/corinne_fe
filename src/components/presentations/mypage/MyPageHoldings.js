@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-function MyPageHoldings({ userBalance, profitOrLossCheck }) {
+function MyPageHoldings({ openResetModal, userBalance, profitOrLossCheck }) {
   if (!userBalance) return null;
 
   const { accountBalance, totalBalance } = userBalance;
@@ -14,6 +14,8 @@ function MyPageHoldings({ userBalance, profitOrLossCheck }) {
         <div className="flex justify-between">
           <p className="flex items-center">
             <svg
+              onClick={openResetModal}
+              className="cursor-pointer"
               width="16"
               height="17"
               viewBox="0 0 16 17"

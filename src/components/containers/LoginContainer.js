@@ -9,6 +9,7 @@ import { changeImage, signUp } from '../../state/reducer/user/thunk';
 
 import FirstLoginForm from '../presentations/login/FirstLoginForm';
 import ChangeNickname from '../presentations/login/ChangeNickname';
+import LoginSuccess from '../presentations/login/LoginSuccess';
 
 function LoginContainer() {
   const dispatch = useDispatch();
@@ -24,10 +25,20 @@ function LoginContainer() {
   const [loginStatus, setLoginStatus] = useState(false);
   const [profileImgPreview, setProfileImgPreview] = useState();
 
-  const goNextProgress = useCallback(() => {
+  const goNextProgress = useCallback(
+    (query) => () => {
+      console.log(query);
+      router.push({
+        pathname: router.pathname,
+        query,
+      });
+    },
+    [router],
+  );
+
+  const goBackPage = useCallback(() => {
     router.push({
       pathname: router.pathname,
-      query: { progress: 'nickname' },
     });
   }, [router]);
 
@@ -77,12 +88,10 @@ function LoginContainer() {
       setLoginStatusText('닉네임이 중복입니다.');
     }
     if (status === 'success') {
+      goNextProgress({ progress: 'success' })();
       dispatch(initializeLoginStatus('fail'));
-      router.push({
-        pathname: router.pathname,
-      });
     }
-  }, [dispatch, loginStatus, router, status]);
+  }, [dispatch, goNextProgress, loginStatus, router, status]);
 
   const loginModalContainers = useMemo(
     () => ({
@@ -92,7 +101,7 @@ function LoginContainer() {
           profileImgPreview={profileImgPreview}
           handleProfileImgUpload={handleProfileImgUpload}
           handleClickProfileImg={handleClickProfileImg}
-          goNextProgress={goNextProgress}
+          goNextProgress={goNextProgress({ progress: 'nickname' })}
         />
       ),
       nickname: (
@@ -103,8 +112,10 @@ function LoginContainer() {
           loginStatusText={loginStatusText}
         />
       ),
+      success: <LoginSuccess goBackPage={goBackPage} />,
     }),
     [
+      goBackPage,
       goNextProgress,
       handeChangeUserName,
       handleClickLoginSuccess,
