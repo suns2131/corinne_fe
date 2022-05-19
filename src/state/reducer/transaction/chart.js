@@ -1,12 +1,17 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, current } from '@reduxjs/toolkit';
 import intercept from '../../../data/axios';
+import { postBookmark } from './thunk';
 
 // 초기 state값
 const initialState = {
-  getCurrentMonut: 0,
-  selectChartInfo: {},
-  getChart: [],
+  getCurrentMonut: {}, // 현재가
+  selectChartInfo: {}, // 선택한 코인 정보
+  getChart: [], // 선택한 코인 차트 정보(시가, 고가, 저가 , 종가)
+  prevHighPrice: 0, // 전일 고가
+  prevLowPrice: 0, // 전일 저가
+  volume: 0, // 거래대금
+  customer: 0, // 매수 회원 카운트
 };
 
 const { actions, reducer } = createSlice({
@@ -70,7 +75,6 @@ export const { addChart, updateChart, getCurMonut, getChart } = actions;
 // 차트 정보 조회
 export const getLoadChart = (tiker, chartType) =>
   function (dispatch) {
-    console.log(tiker, chartType);
     intercept
       .get(chartType ? `/api/price/date/${tiker}` : `/api/price/minute/${tiker}`)
       .then((response) => {

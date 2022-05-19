@@ -1,20 +1,27 @@
 import Image from 'next/image';
 import React from 'react';
 import defalutProfile from '../../../../../public/images/defaultProfile/defalutProfile60.png';
+import { Won } from '../../../../share/convertWon';
 import Level from '../../../../share/Level';
 
 function Follower({ followData }) {
+  if (!followData) return null;
   return (
     <div className="w-[347px] h-[74px] self-stretch flex-grow-0 flex justify-between items-center">
       <div className="w-[148px] h-[74px] flex-grow-0 flex justify-start items-center gap-[11px]">
-        <Image src={defalutProfile} width="60px" height="60px" objectFit="contain" />
+        <Image
+          src={followData.imageUrl !== 'null' ? followData.imageUrl : defalutProfile}
+          width="60px"
+          height="60px"
+          objectFit="contain"
+        />
         <div className="w-[77px] h-[74px] flex-grow-0 flex flex-col justify-start items-start gap-[11px]">
           <div>
             <span className="flex-gorw-0 font-Pretendard text-[15px] font-bold text-left text-Primary-purple mr-[5px]">
-              00위
+              {followData.rank}위
             </span>
             <span className="flex-gorw-0 font-Pretendard text-[15px] font-bold text-left text-Neutrals-black">
-              닉네임
+              {followData.nickname}
             </span>
           </div>
           <div className="h-[45px] flex-grow-0 flex flex-col justify-start items-start gap-[5px]">
@@ -28,13 +35,13 @@ function Follower({ followData }) {
         </div>
       </div>
       <div className="h-[66px] flex-grow-0 flex-col justify-start items-end gap-[5px]">
-        <Level Exp={2000} />
+        <Level Exp={followData.Exp} />
         <span className="flex-grow-0 font-Pretendard text-[12px] flex justify-end items-center text-right text-Neutrals-lightGray mt-[7px] mb-[4px]">
-          +0.00%
+          {followData.fluctuationRate}%
           <br />
         </span>
         <span className="flex-grow-0 font-Pretendard text-[12px] flex justify-end items-center text-right text-Neutrals-lightGray">
-          0,000,000원
+          {Won(followData.fluctuationRate)}원
         </span>
       </div>
     </div>

@@ -8,6 +8,7 @@ import { useMatch } from '../../data/rank/useMatch';
 import { usePrvRank } from '../../data/rank/usePrevRank';
 import { useFollow } from '../../data/rank/useFollow';
 import Rank from '../presentations/rank/Rank';
+import { postFollow } from '../../state/reducer/rank/rank';
 
 function RankContainer() {
   const dispatch = useDispatch();

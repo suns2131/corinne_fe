@@ -16,3 +16,13 @@ export const getPrevRank = createAsyncThunk('/api/rank/lastweek', async ({ page 
   const response = await axiosInstance.get(`/api/rank/lastweek/${page}`);
   return response.data;
 });
+
+export const getUserAlarm = createAsyncThunk('/api/user/alarm', async () => {
+  const response = await axiosInstance.get(`/api/user/alarm`);
+  return response.data;
+});
+
+export const getUserQuest = createAsyncThunk('/api/user/quest', async () => {
+  const response = await axiosInstance.get(`/api/user/quest`);
+  return response.data;
+});

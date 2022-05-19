@@ -3,22 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import socketClient from '../../../share/socket';
 import CoinChart from '../../presentations/transaction/chart/CoinChart';
 import { getLoadChart, addChart, getCurMonut } from '../../../state/reducer/transaction/chart';
-import VolumeChart from '../../presentations/transaction/chart/VolumeChart';
-import Barchart from '../../presentations/transaction/chart/barchart';
+import { deleteBookmark, postBookmark } from '../../../state/reducer/transaction/thunk';
 
 function ChartContainer() {
   const dispatch = useDispatch();
   const selectInfo = useSelector((state) => state.trans.tikerinfo);
-  const [chartType, setChartType] = useState(false); // false 분봉 / true 일봉
   const chartData = useSelector((state) => state.chart.getChart);
-
   const currentMount = useSelector((state) => state.chart.getCurrentMonut);
+  const [chartType, setChartType] = useState(false); // false 분봉 / true 일봉
   const subNum = useRef(''); // 구독취소할 subscribe id 저장변수
 
   // 차트 타입 변경될때마다 Chart state초기화
   React.useEffect(() => {
     dispatch(getLoadChart(selectInfo.tiker, chartType));
-  }, [chartType]);
+  }, [chartType, dispatch]);
 
   // 차트 데이터 검사 로직
   const DataSetting = (date, realData) => {
@@ -64,9 +62,10 @@ function ChartContainer() {
 
   // info 변경될때마다 API 갱신 웹소켓 연결 체크
   React.useEffect(() => {
-    if (selectInfo?.tiker !== undefined) {
+    if (selectInfo?.tiker !== undefined && socketClient.connected) {
       socketClient.unsubscribe(subNum.current);
     }
+    dispatch(getLoadChart(selectInfo.tiker, chartType));
 
     if (selectInfo?.tiker !== undefined && socketClient.connected) {
       socketClient.subscribe(`/sub/topic/${selectInfo.tiker}`, (message) => {
@@ -95,42 +94,26 @@ function ChartContainer() {
             ? dateNew.getMinutes()
             : `0${dateNew.getMinutes()}`;
         DataSetting(`${newHour}:${newMinute} `, ChartData);
-        dispatch(getCurMonut(ChartData.tradePrice));
+
+        const newCurrentData = {
+          tradePrice: ChartData.tradePrice,
+          highPrice: ChartData.highPrice,
+          lowPrice: ChartData.lowPrice,
+          prevClosingPrice: ChartData.prevClosingPrice,
+          signedChangePrice: ChartData.signedChangePrice,
+          signedChangeRate: Math.round((ChartData.signedChangeRate + Number.EPSILON) * 100) / 100,
+          tradeVolume: ChartData.tradeVolume,
+        };
+        dispatch(getCurMonut(newCurrentData));
       });
     }
-    dispatch(getLoadChart(selectInfo.tiker, chartType));
   }, [selectInfo]);
 
-  const VolumeProps = {
-    date: [
-      '0403',
-      '0404',
-      '0405',
-      '0406',
-      '0407',
-      '0408',
-      '0409',
-      '0410',
-      '0411',
-      '0412',
-      '0413',
-      '0414',
-      '0415',
-      '0416',
-      '0417',
-      '0418',
-      '0419',
-      '0420',
-      '0421',
-      '0422',
-      '0423',
-    ],
-    volume: [
-      110, 80, 60, 50, 100, 150, 200, 110, 80, 60, 50, 100, 150, 200, 110, 80, 60, 50, 100, 150,
-      200,
-    ],
+  const bookMarkClick = (tiker, type) => {
+    if (type) dispatch(deleteBookmark(tiker));
+    else dispatch(postBookmark(tiker));
   };
-  console.log(chartData.volume);
+
   return (
     <div>
       <CoinChart
@@ -139,6 +122,7 @@ function ChartContainer() {
         currentMount={currentMount}
         chartData={chartData}
         VolumeData={chartData.volume}
+        bookMarkClick={bookMarkClick}
       />
     </div>
   );

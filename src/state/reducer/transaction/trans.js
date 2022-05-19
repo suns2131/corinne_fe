@@ -1,13 +1,21 @@
 /* eslint-disable no-shadow */
 import { createSlice } from '@reduxjs/toolkit';
 import intercept from '../../../data/axios';
+import { deleteBookmark, postBookmark } from './thunk';
 
 // 초기 state값
 const initialState = {
   tikername_en: '',
   tikerList: [],
   transDetail: [],
-  tikerinfo: {},
+  tikerinfo: {
+    imageUrl: null, // 코인 이미지 주소
+    tiker: '', // 코인 id
+    tikername: '', // 코인이름
+    favorite: false, // 즐겨찾기
+    unit: '', // 단위
+    prevPrice: 0, // 전일가
+  },
   userAmount: {},
   buyPoint: 0, // 코인별 매수 가능금액
   sellPoint: 0, // 코인별 매도 가능금액
@@ -49,10 +57,31 @@ const { actions, reducer } = createSlice({
       // eslint-disable-next-line no-param-reassign
       state.sellPoint = payload;
     },
+    updateFavorite: (state, { payload }) => {
+      // eslint-disable-next-line no-param-reassign
+      state.tikerinfo.favorite = payload;
+    },
+  },
+  extraReducers: (bulider) => {
+    bulider.addCase(postBookmark.fulfilled, (state, { payload }) => {
+      // eslint-disable-next-line no-param-reassign
+      state.tikerinfo = {
+        ...state.tikerinfo,
+        favorite: true,
+      };
+    });
+    // bulider.addCase(deleteBookmark.fulfilled, (state, { payload }) => {
+    //   // eslint-disable-next-line no-param-reassign
+    //   state.tikerinfo = {
+    //     ...state.tikerinfo,
+    //     favorite: false,
+    //   };
+    // });
   },
 });
 
-export const { detailList, tikerList, infos, addDetail, Amounts, updateSell } = actions;
+export const { detailList, tikerList, infos, addDetail, Amounts, updateSell, updateFavorite } =
+  actions;
 
 // 코인 정보리스트
 export const getTikerList = () =>
