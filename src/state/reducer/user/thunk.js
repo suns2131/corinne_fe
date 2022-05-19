@@ -17,6 +17,14 @@ export const changeImage = createAsyncThunk('user/image', async (data) => {
   return response.data;
 });
 
+export const postResetBalance = createAsyncThunk('user/reset', async () => {
+  const response = await axiosInstance.put('/api/account/reset');
+  if (response.status === 200) {
+    return true;
+  }
+  return response.data;
+});
+
 export const getUserInfo = createAsyncThunk('user/getUserInfo', async () => {
   const response = await axiosInstance.get('/api/user/info');
 

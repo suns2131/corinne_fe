@@ -1,11 +1,19 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import { getUserInfo, signUp, getUserBalance, getUserTransaction, changeImage } from './thunk';
+import {
+  getUserInfo,
+  signUp,
+  getUserBalance,
+  getUserTransaction,
+  changeImage,
+  postResetBalance,
+} from './thunk';
 
 const initialState = {
   name: '',
   isFirstLogin: false,
   status: 'fail',
+  resetStatus: false,
   userInfo: null,
   userBalance: null,
   userTransaction: null,
@@ -27,6 +35,10 @@ const { actions, reducer } = createSlice({
       ...state,
       status: payload,
     }),
+    setResetStatus: (state, { payload }) => ({
+      ...state,
+      resetStatus: payload,
+    }),
   },
   extraReducers: (builder) => {
     builder.addCase(signUp.fulfilled, (state, { payload }) => {
@@ -36,6 +48,10 @@ const { actions, reducer } = createSlice({
         nickname: payload.nickname,
       };
     });
+    builder.addCase(postResetBalance.fulfilled, (state, { payload }) => ({
+      ...state,
+      resetStatus: payload,
+    }));
     builder.addCase(changeImage.fulfilled, (state, { payload }) => {
       state.userInfo = {
         ...state.userInfo,
@@ -57,6 +73,6 @@ const { actions, reducer } = createSlice({
   },
 });
 
-export const { login, isFirstLogin, initializeLoginStatus } = actions;
+export const { login, isFirstLogin, initializeLoginStatus, setResetStatus } = actions;
 
 export default reducer;
