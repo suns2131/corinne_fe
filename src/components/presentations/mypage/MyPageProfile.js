@@ -3,11 +3,11 @@ import styles from './mypage.module.css';
 
 function MyPageProfile({ userInfo, goChangeProfile }) {
   if (!userInfo) return null;
-  const { userEmail, nickname, exp } = userInfo;
+  const { userEmail, nickname, exp, imageUrl } = userInfo;
   return (
     <div className="flex col-span-2 shadow-box rounded-lg p-5">
-      <section className="w-[182px] h-[182px] bg-slate-400 rounded-full">
-        <img alt="프로필 이미지" />
+      <section className="w-[182px] h-[182px] rounded-full">
+        <img className="w-[182px] h-[182px] rounded-full" alt="프로필 이미지" src={imageUrl} />
       </section>
       <section className="ml-5">
         <p className="text-Neutrals-deepGray text-bold text-[32px] ">{nickname}</p>

@@ -12,7 +12,7 @@ export const signUp = createAsyncThunk('user/signUp', async (data, { getState })
 });
 
 export const changeImage = createAsyncThunk('user/image', async (data) => {
-  const response = await axiosImgInstance.patch('/api/user/image', { image: data });
+  const response = await axiosImgInstance.patch('/api/user/image', data);
 
   return response.data;
 });

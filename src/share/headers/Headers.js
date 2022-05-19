@@ -34,7 +34,7 @@ export default function Headers({ handleRouter }) {
 
   if (islogin) {
     return (
-      <div className="w-container h-headers flex justify-between items-center shadow-box">
+      <div className="w-container h-headers flex justify-between items-center">
         <div className="h-[36px] text-[30px] font-bold text-left text-Primary-purple flex justify-start items-center">
           <Link href="/">corinne</Link>
         </div>

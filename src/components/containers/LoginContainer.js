@@ -49,11 +49,13 @@ function LoginContainer() {
   const handleProfileImgUpload = useCallback(() => {
     const fileReader = new FileReader();
     const file = profileImgRef.current.files[0];
+
     const imgFormData = new FormData();
+    imgFormData.append('image', file);
+
     fileReader.readAsDataURL(file);
     fileReader.onloadend = () => {
       setProfileImgPreview(fileReader.result);
-      imgFormData.append('file', file);
       dispatch(changeImage(imgFormData));
     };
   }, [dispatch]);

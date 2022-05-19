@@ -12,16 +12,16 @@ function MyPageHoldingPortfolio({ userBalance }) {
         <div className="mx-auto">
           <PortfolioDonutChart userBalance={userBalance} colorArray={colorArray} />
         </div>
-        <ul className="grid grid-cols-2 gap-4 w-[222px] mx-auto mt-[80px]">
+        <ul className="grid grid-cols-2 w-[280px] place-items-center mx-auto mt-[80px]">
           {coins.map(({ coin, importanceRate }, index) => (
-            <li className="flex items-center w-[111px]">
+            <li className="flex items-center w-[120px]">
               <div
                 style={{ backgroundColor: colorArray[index] }}
                 className="w-[14px] h-[14px] rounded-full"
               />
-              <span className="ml-3 text-[13px]">
+              <pre className="ml-3 text-[13px]">
                 {coin.split('-')[1]} ({importanceRate}%)
-              </span>
+              </pre>
             </li>
           ))}
         </ul>
