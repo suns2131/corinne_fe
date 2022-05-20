@@ -12,6 +12,7 @@ import MyAlarm from '../myalarm/MyAlarm';
 import { getUserInfo } from '../../state/reducer/user/thunk';
 import axiosInstance from '../../data/axios';
 import Modal from '../modal/Modal';
+import { selectedUserInfo } from '../../state/reducer/user/selectors';
 
 const usertoken = getCookie({ name: 'corinne' });
 
@@ -19,7 +20,7 @@ export default function Headers({ handleRouter }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const islogin = usertoken !== undefined;
-  const userInfo = useSelector((state) => state.user.userInfo);
+  const userInfo = useSelector(selectedUserInfo);
   const [alarmState, setAlarmState] = useState(0);
   const [emergency, setEmergency] = useState({
     emState: false,
@@ -50,7 +51,7 @@ export default function Headers({ handleRouter }) {
       console.log(`BEARER ${usertoken}`);
       // api/user/info에서 조회한 내정보의 userid로 알림 소켓 구독.
       socketClient.connect({ token: `BEARER ${usertoken}` }, () => {
-        socketClient.subscribe(`/sub/topic/12`, (message) => {
+        socketClient.subscribe(`/sub/topic/${userInfo.userId}`, (message) => {
           const AlramData = JSON.parse(message.body);
           console.log(AlramData);
           // 알림 로직 체크
@@ -68,15 +69,15 @@ export default function Headers({ handleRouter }) {
     }
 
     return () => {
-      // if (socketClient.connected) {
-      //   // 컴포넌트 종료 시 채팅 구독 취소 / 웹소켓 연결 종료
-      //   socketClient.disconnect(
-      //     () => {
-      //       // socketClient.unsubscribe('sub-0');
-      //     },
-      //     { token: `BEARER ${usertoken}` },
-      //   );
-      // }
+      if (socketClient.connected) {
+        // 컴포넌트 종료 시 채팅 구독 취소 / 웹소켓 연결 종료
+        socketClient.disconnect(
+          () => {
+            // socketClient.unsubscribe('sub-0');
+          },
+          { token: `BEARER ${usertoken}` },
+        );
+      }
     };
   }, [userInfo]);
 

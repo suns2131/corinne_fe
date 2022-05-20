@@ -41,7 +41,7 @@ function MyAlarm() {
               </div>
             </button>
             <div className="w-[440px] h-[472px] overflow-y-auto overflow-x-hidden">
-              {AlramData && AlramData.map((el) => <Alarms />)}
+              {AlramData && AlramData.map((el) => <Alarms alData={el} />)}
             </div>
           </div>
         </div>

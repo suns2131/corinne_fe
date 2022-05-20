@@ -14,6 +14,7 @@ function TradeDetail({
   sellRequest,
   setSellRequest,
   setBuysellState,
+  changebuysell,
   buySellClick,
   buyRef,
   sellRef,
@@ -33,14 +34,14 @@ function TradeDetail({
           <div className="flex">
             <button
               className="w-[193px] h-[69px] bg-[#FFFFFF] shadow-008 rounded-t-[10px] flex flex-row justify-center items-center p-5 font-bold text-[16px] text-[#33323F]"
-              onClick={() => setBuysellState(true)}
+              onClick={() => changebuysell('buy')}
               type="button"
             >
               매수
             </button>
             <button
               className="w-[193px] h-[69px] bg-[#EEEEEE] shadow-008 rounded-t-[10px] flex flex-row justify-center items-center p-5 font-bold text-[16px] text-[#CECECE]"
-              onClick={() => setBuysellState(false)}
+              onClick={() => changebuysell('sell')}
               type="button"
             >
               매도

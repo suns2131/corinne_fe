@@ -15,11 +15,11 @@ function Ranker({ type, rankerData, followBtn }) {
     textColors = 'text-Neutrals-white';
     rankText = '🥇1위';
   } else if (type === 2) {
-    bgColors = 'bg-Neutrals-black';
+    bgColors = 'bg-Neutrals-deepGray';
     textColors = 'text-Neutrals-white';
     rankText = '🥈2위';
   } else if (type === 3) {
-    bgColors = 'bg-Neutrals-black';
+    bgColors = 'bg-Neutrals-deepGray';
     textColors = 'text-Neutrals-white';
     rankText = '🥉3위';
   } else {

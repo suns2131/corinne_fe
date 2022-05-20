@@ -8,6 +8,10 @@ function TikerListContainer() {
   const list = useSelector((state) => state.trans.tikerList);
   const defaultList = list;
   const [coinList, setCoinList] = useState(defaultList);
+  const [btnStat, setBtnStat] = useState({
+    all: 'bg-[#eeeeee]',
+    favor: 'bg-[#ffffff]',
+  });
 
   const itemClick = (selectinfo) => {
     dispatch(SelectingTiker(selectinfo));
@@ -32,6 +36,8 @@ function TikerListContainer() {
       setCoinList={setCoinList}
       itemClick={itemClick}
       changeCoinList={changeCoinList}
+      btnStat={btnStat}
+      setBtnStat={setBtnStat}
     />
   );
 }

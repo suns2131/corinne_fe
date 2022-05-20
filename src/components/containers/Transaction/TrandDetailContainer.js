@@ -34,9 +34,11 @@ function TrandDetailContainer() {
 
   const getitem = useCallback(async () => {
     if (SelectCoin?.tiker !== undefined) {
-      await intercept.get(`/api/transaction/${SelectCoin.tiker}/${page}`).then((response) => {
-        setItem((prevItem) => [...prevItem].concat(response.data.content));
-      });
+      if (SelectCoin.tiker !== '') {
+        await intercept.get(`/api/transaction/${SelectCoin.tiker}/${page}`).then((response) => {
+          setItem((prevItem) => [...prevItem].concat(response.data.content));
+        });
+      }
     }
   }, [page]);
 
@@ -183,6 +185,13 @@ function TrandDetailContainer() {
     setItem(BuySellData);
   }, [BuySellData]);
 
+  const changebuysell = (type) => {
+    if (type === 'buy') setBuysellState(true);
+    else setBuysellState(false);
+
+    dispatch(getDetail(SelectCoin.tiker, page));
+  };
+
   return (
     <TradeDetail
       infinitiRef={infinitiRef}
@@ -190,6 +199,7 @@ function TrandDetailContainer() {
       buysellState={buysellState}
       buyRequest={buyRequest}
       setBuyRequest={setBuyRequest}
+      changebuysell={changebuysell}
       sellRequest={sellRequest}
       setSellRequest={setSellRequest}
       setBuysellState={setBuysellState}

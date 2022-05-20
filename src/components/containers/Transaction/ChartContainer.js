@@ -1,21 +1,31 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import socketClient from '../../../share/socket';
 import CoinChart from '../../presentations/transaction/chart/CoinChart';
 import { getLoadChart, addChart, getCurMonut } from '../../../state/reducer/transaction/chart';
-import { deleteBookmark, postBookmark } from '../../../state/reducer/transaction/thunk';
+import {
+  deleteBookmark,
+  getbuyCount,
+  postBookmark,
+} from '../../../state/reducer/transaction/thunk';
+import { getTikerList } from '../../../state/reducer/transaction/trans';
 
 function ChartContainer() {
   const dispatch = useDispatch();
   const selectInfo = useSelector((state) => state.trans.tikerinfo);
   const chartData = useSelector((state) => state.chart.getChart);
   const currentMount = useSelector((state) => state.chart.getCurrentMonut);
+  const customer = useSelector((state) => state.chart.customer);
   const [chartType, setChartType] = useState(false); // false 분봉 / true 일봉
   const subNum = useRef(''); // 구독취소할 subscribe id 저장변수
 
   // 차트 타입 변경될때마다 Chart state초기화
   React.useEffect(() => {
-    dispatch(getLoadChart(selectInfo.tiker, chartType));
+    if (selectInfo?.tiker !== undefined) {
+      if (selectInfo.tiker !== '') {
+        dispatch(getLoadChart(selectInfo.tiker, chartType));
+      }
+    }
   }, [chartType, dispatch]);
 
   // 차트 데이터 검사 로직
@@ -105,13 +115,20 @@ function ChartContainer() {
           tradeVolume: ChartData.tradeVolume,
         };
         dispatch(getCurMonut(newCurrentData));
+        dispatch(getTikerList());
+        if (selectInfo?.tiker !== undefined) dispatch(getbuyCount(selectInfo.tiker));
       });
     }
   }, [selectInfo]);
 
   const bookMarkClick = (tiker, type) => {
-    if (type) dispatch(deleteBookmark(tiker));
-    else dispatch(postBookmark(tiker));
+    if (type) {
+      console.log('delete!');
+      dispatch(deleteBookmark(tiker));
+    } else {
+      console.log('post!');
+      dispatch(postBookmark(tiker));
+    }
   };
 
   return (
@@ -123,6 +140,7 @@ function ChartContainer() {
         chartData={chartData}
         VolumeData={chartData.volume}
         bookMarkClick={bookMarkClick}
+        customer={customer}
       />
     </div>
   );

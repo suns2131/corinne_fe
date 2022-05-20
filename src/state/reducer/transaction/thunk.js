@@ -7,12 +7,19 @@ export const getLoadChart = createAsyncThunk('/api/rank/', async (tiker, chartTy
   return response.data;
 });
 
-export const postBookmark = createAsyncThunk('/api/account/bookmark/', async (tiker) => {
+export const postBookmark = createAsyncThunk('/api/account/bookmark', async (tiker) => {
   const response = await axiosInstance.get(`/api/account/bookmark/${tiker}`);
   return response.data;
 });
 
-export const deleteBookmark = createAsyncThunk('/api/account/bookmark/', async (tiker) => {
-  const response = await axiosInstance.delete(`/api/account/bookmark/${tiker}`);
+export const deleteBookmark = createAsyncThunk('/api/account/bookmark', async (tikername) => {
+  const response = await axiosInstance.delete(`/api/account/bookmark`, {
+    data: { tiker: tikername },
+  });
+  return response.data;
+});
+
+export const getbuyCount = createAsyncThunk('/api/transaction/buycount', async (tiker) => {
+  const response = await axiosInstance.get(`/api/transaction/buycount/${tiker}`);
   return response.data;
 });
