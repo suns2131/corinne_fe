@@ -3,7 +3,6 @@ import React from 'react';
 
 function Alarms({ alData }) {
   if (!alData) return null;
-  console.log(alData.alarmNo);
   if (alData.alarmNo === 'RESULT') {
     return (
       <div className="w-[440px] h-[108px] flex-grow-0 flex flex-col justify-center items-stretch gap-[10px] px-5 bg-Neutrals-white">

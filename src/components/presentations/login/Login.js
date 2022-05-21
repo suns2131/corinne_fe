@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Login({ kakaoRedirectUrl, isLogin, goToTransaction, modal, setModal }) {
-  console.log(modal);
   return (
     <div>
       {isLogin ? (
