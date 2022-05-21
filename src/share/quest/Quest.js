@@ -1,7 +1,7 @@
 import React from 'react';
 
-function Quest({ type, resultQuest }) {
-  if (type === 1) {
+function Quest({ type, resultQuest, questResult, questNo }) {
+  if (type === false) {
     return (
       <div className="flex mb-[12px] ">
         <div className="w-[327px] h-[118px] flex-grow-0 flex flex-col justify-start items-stretch gap-[10px] p-5 bg-Neutrals-whiteGray">
@@ -36,7 +36,7 @@ function Quest({ type, resultQuest }) {
       </div>
     );
   }
-  if (type === 2) {
+  if (type === true) {
     return (
       <div className="flex  mb-[12px]">
         <div className="w-[327px] h-[118px] flex-grow-0 flex flex-col justify-start items-stretch gap-[10px] p-5 bg-Neutrals-whiteGray">
@@ -64,9 +64,16 @@ function Quest({ type, resultQuest }) {
           </div>
         </div>
         <div className="w-[72px] h-[118px] flex-grow-0 flex flex-col justify-center items-start gap-[10px] py-[44px] px-[15px] bg-Primary-purple rounded-tr-[10px] rounded-br-[10px]">
-          <span className="flex-grow font-Pretendard text-[12px] text-center text-Neutrals-white">
-            보상받기 🎉
-          </span>
+          <button
+            type="button"
+            onClick={() => {
+              questResult(questNo);
+            }}
+          >
+            <span className="flex-grow font-Pretendard text-[12px] text-center text-Neutrals-white">
+              보상받기 🎉
+            </span>
+          </button>
         </div>
       </div>
     );

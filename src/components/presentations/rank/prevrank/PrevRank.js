@@ -5,13 +5,13 @@ import Hoveroff from '../../../../../public/icons/help/helpnone.svg';
 import { Won } from '../../../../share/convertWon';
 import Help from '../help/Help';
 
-function PrevRank({ setModal, prevRankTop3 }) {
+function PrevRank({ setModal, prevRankTop3, setCallUser }) {
   const [help, sethelp] = useState(false);
   const now = dayjs();
   const mon = now.set('d', 1);
   const prevMon = mon.add(-7, 'd').format('YYYY.MM.DD');
   const prevSun = mon.add(-1, 'd').format('YYYY.MM.DD');
-  const type = false;
+  const type = true;
   if (type) {
     return (
       <div className="w-[793px] h-[372px] flex-grow-0 pl-5 pt-5 rounded-[10px] bg-[url('/images/corinne_back.png')] bg-cover bg-center mb-5">
@@ -50,12 +50,19 @@ function PrevRank({ setModal, prevRankTop3 }) {
               )}
 
               <div className="mb-[18px]">
-                <Image
-                  src="/images/defaultProfile/defalutProfile96.png"
-                  alt="defalutProfile"
-                  width="84px"
-                  height="84px"
-                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCallUser({ isopen: true, userId: prevRankTop3.states[1].userId });
+                  }}
+                >
+                  <Image
+                    src="/images/defaultProfile/defalutProfile96.png"
+                    alt="defalutProfile"
+                    width="84px"
+                    height="84px"
+                  />
+                </button>
               </div>
               <div className="w-[118px] h-[78px] flex-grow-0 px-[26px] pt-[14px]  bg-Neutrals-black rounded-t-[10px] ">
                 <div className="flex flex-col justify-center items-center font-Pretendard text-[12px] font-bold text-center text-Primary-lightPurple">
@@ -80,13 +87,20 @@ function PrevRank({ setModal, prevRankTop3 }) {
                   : ''}
               </span>
               <div className="mb-[18px]">
-                <Image
-                  className=" border border-solid border-Neutrals-lightGray"
-                  src="/images/defaultProfile/defalutProfile120.png"
-                  alt="defalutProfile"
-                  width="110px"
-                  height="110px"
-                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCallUser({ isopen: true, userId: prevRankTop3.states[0].userId });
+                  }}
+                >
+                  <Image
+                    className=" border border-solid border-Neutrals-lightGray"
+                    src="/images/defaultProfile/defalutProfile120.png"
+                    alt="defalutProfile"
+                    width="110px"
+                    height="110px"
+                  />
+                </button>
               </div>
               <div className="w-[140px] h-[108px] flex-grow-0 px-[26px] pt-[14px] bg-Neutrals-deepGray rounded-t-[10px] ">
                 <div className="flex flex-col justify-center items-center font-Pretendard text-[12px] font-bold text-center text-Primary-lightPurple">
@@ -111,12 +125,19 @@ function PrevRank({ setModal, prevRankTop3 }) {
                   : ''}
               </span>
               <div className="mb-[18px]">
-                <Image
-                  src="/images/defaultProfile/defalutProfile96.png"
-                  alt="defalutProfile"
-                  width="84px"
-                  height="84px"
-                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCallUser({ isopen: true, userId: prevRankTop3.states[2].userId });
+                  }}
+                >
+                  <Image
+                    src="/images/defaultProfile/defalutProfile96.png"
+                    alt="defalutProfile"
+                    width="84px"
+                    height="84px"
+                  />
+                </button>
               </div>
               <div className="w-[118px] h-[78px] flex-grow-0 px-[26px] pt-[14px]  bg-Neutrals-black rounded-t-[10px] ">
                 <div className="flex flex-col justify-center items-center font-Pretendard text-[12px] font-bold text-center text-Primary-lightPurple">

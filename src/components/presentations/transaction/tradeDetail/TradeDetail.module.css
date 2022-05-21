@@ -38,7 +38,7 @@
   border-radius: 10px;
 }
 
-.slidersbuy:focus {
+.slidersbuy::--wsli .slidersbuy:focus {
   outline: none;
 }
 

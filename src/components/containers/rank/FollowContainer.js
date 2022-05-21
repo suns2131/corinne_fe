@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { getFollowlist } from '../../../state/reducer/rank/thunk';
 import FollowRank from '../../presentations/rank/followrank/FollowRank';
 
-function FollowContainer() {
+function FollowContainer({ setCallUser }) {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [list, setList] = useState();
@@ -31,7 +31,14 @@ function FollowContainer() {
     setList(followRankState.filter((el) => el.nickname.includes(e.target.value)));
   };
 
-  return <FollowRank followlist={list} infiniteRef={infiniteRef} searchNickname={searchNickname} />;
+  return (
+    <FollowRank
+      followlist={list}
+      infiniteRef={infiniteRef}
+      searchNickname={searchNickname}
+      setCallUser={setCallUser}
+    />
+  );
 }
 
 export default FollowContainer;

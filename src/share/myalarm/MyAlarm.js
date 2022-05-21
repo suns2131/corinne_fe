@@ -5,7 +5,7 @@ import Alarms from './Alarms';
 import styles from './MyAlarm.module.css';
 import { QuestData } from '../quest/questData';
 import axiosInstance from '../../data/axios';
-import { getUserAlarm } from '../../state/reducer/rank/thunk';
+import { getUserAlarm, getUserQuest, patchQuest } from '../../state/reducer/rank/thunk';
 
 function MyAlarm() {
   const dispatch = useDispatch();
@@ -16,8 +16,13 @@ function MyAlarm() {
   console.log(QuestNo);
   useEffect(() => {
     dispatch(getUserAlarm());
-    dispatch(getUserAlarm());
+    dispatch(getUserQuest());
   }, [dispatch]);
+
+  const questResult = (questNo) => {
+    console.log(`questNo: ${questNo}`);
+    dispatch(patchQuest(questNo));
+  };
 
   return (
     <div className="w-[440px] h-[560px] flex flex-col items-end relative z-50 ">
@@ -58,15 +63,15 @@ function MyAlarm() {
               <div className={styles.arrowprev} />
             </button>
             <div className="w-[400px] h-[472px] overflow-y-auto overflow-x-hidden">
-              <Quest type={1} resultQuest={QuestData(1)} />
-              <Quest type={1} resultQuest={QuestData(2)} />
-              <Quest type={1} resultQuest={QuestData(3)} />
-              <Quest type={1} resultQuest={QuestData(4)} />
-              <Quest type={1} resultQuest={QuestData(5)} />
-              <Quest type={1} resultQuest={QuestData(6)} />
-              <Quest type={1} resultQuest={QuestData(7)} />
-              <Quest type={1} resultQuest={QuestData(8)} />
-              <Quest type={1} resultQuest={QuestData(9)} />
+              {QuestNo &&
+                QuestNo.map((el) => (
+                  <Quest
+                    type={el.clear}
+                    resultQuest={QuestData(el.questNo)}
+                    questResult={questResult}
+                    questNo={el.questNo}
+                  />
+                ))}
             </div>
           </div>
         </div>

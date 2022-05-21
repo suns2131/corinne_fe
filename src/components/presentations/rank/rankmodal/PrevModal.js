@@ -1,5 +1,6 @@
 import React from 'react';
 import Closeicon from '../../../../../public/icons/close.svg';
+import Searchicon from '../../../../../public/icons/search.svg';
 import Ranker from '../realrank/ranker';
 
 function PrevModal({ setModal, PrevRanks, followClick }) {
@@ -11,14 +12,22 @@ function PrevModal({ setModal, PrevRanks, followClick }) {
             지난주 전체 랭킹
           </span>
         </div>
-        <button
-          type="button"
-          onClick={() => {
-            setModal(false);
-          }}
-        >
-          <Closeicon />
-        </button>
+        <div className="flex">
+          <div className="w-[216px] h-[44px] px-[4px] py-[15px] bg-Neutrals-lightGray rounded-[10px] flex justify-center items-center">
+            {/* <input className=" outline-none" type="text" placeholder="닉네임 검색" /> */}
+            <button type="button">
+              <Searchicon />
+            </button>
+          </div>
+          <button
+            type="button"
+            onClick={() => {
+              setModal(false);
+            }}
+          >
+            <Closeicon />
+          </button>
+        </div>
       </div>
       <div className="flex-grow flex flex-col justify-start items-stretch p-5 shadow-box bg-Neutrals-white rounded-b-[10px]">
         <div className="w-[781px] h-[742px] flex flex-col justify-start items-end overflow-y-auto gap-[15px] ">

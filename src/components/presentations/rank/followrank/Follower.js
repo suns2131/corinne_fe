@@ -4,17 +4,25 @@ import defalutProfile from '../../../../../public/images/defaultProfile/defalutP
 import { Won } from '../../../../share/convertWon';
 import Level from '../../../../share/Level';
 
-function Follower({ followData }) {
+function Follower({ followData, setCallUser }) {
   if (!followData) return null;
   return (
     <div className="w-[347px] h-[74px] self-stretch flex-grow-0 flex justify-between items-center">
       <div className="w-[148px] h-[74px] flex-grow-0 flex justify-start items-center gap-[11px]">
-        <Image
-          src={followData.imageUrl !== 'null' ? followData.imageUrl : defalutProfile}
-          width="60px"
-          height="60px"
-          objectFit="contain"
-        />
+        <button
+          type="button"
+          onClick={() => {
+            setCallUser({ isopen: true, userId: followData.userId });
+          }}
+        >
+          <Image
+            src={followData.imageUrl !== 'null' ? followData.imageUrl : defalutProfile}
+            width="60px"
+            height="60px"
+            objectFit="contain"
+          />
+        </button>
+
         <div className="w-[77px] h-[74px] flex-grow-0 flex flex-col justify-start items-start gap-[11px]">
           <div>
             <span className="flex-gorw-0 font-Pretendard text-[15px] font-bold text-left text-Primary-purple mr-[5px]">
@@ -35,7 +43,7 @@ function Follower({ followData }) {
         </div>
       </div>
       <div className="h-[66px] flex-grow-0 flex-col justify-start items-end gap-[5px]">
-        <Level Exp={followData.Exp} />
+        <Level Exp={followData.exp} />
         <span className="flex-grow-0 font-Pretendard text-[12px] flex justify-end items-center text-right text-Neutrals-lightGray mt-[7px] mb-[4px]">
           {followData.fluctuationRate}%
           <br />
