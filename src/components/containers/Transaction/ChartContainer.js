@@ -19,6 +19,10 @@ function ChartContainer() {
   const [chartType, setChartType] = useState(false); // false 분봉 / true 일봉
   const subNum = useRef(''); // 구독취소할 subscribe id 저장변수
 
+  socketClient.debug = (str) => {
+    console.log(`debugString: ${str}`);
+  };
+
   // 차트 타입 변경될때마다 Chart state초기화
   React.useEffect(() => {
     if (selectInfo?.tiker !== undefined) {
