@@ -77,7 +77,9 @@ function MyPageHoldings({ openResetModal, userBalance, profitOrLossCheck }) {
         </div>
         <div className="flex justify-between mt-10">
           <p className="text-[14px] text-Neutrals-black">매수한 자산</p>
-          <p className="font-bold text-[15px]">{accountBalance.toLocaleString()}원</p>
+          <p className="font-bold text-[15px]">
+            {(totalBalance - accountBalance).toLocaleString()}원
+          </p>
         </div>
         <div className="flex justify-between">
           <p className="text-[14px] text-Neutrals-black">원화 자산</p>
