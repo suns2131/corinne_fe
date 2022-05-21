@@ -17,11 +17,11 @@ function ChartContainer() {
   const currentMount = useSelector((state) => state.chart.getCurrentMonut);
   const customer = useSelector((state) => state.chart.customer);
   const [chartType, setChartType] = useState(false); // false 분봉 / true 일봉
-  const subNum = useRef(''); // 구독취소할 subscribe id 저장변수
+  const subNum = useRef(1); // 구독취소할 subscribe id 저장변수
 
-  socketClient.debug = (str) => {
-    console.log(`debugString: ${str}`);
-  };
+  // socketClient.debug = (str) => {
+  //   // console.log(`debugString: ${str}`);
+  // };
 
   // 차트 타입 변경될때마다 Chart state초기화
   React.useEffect(() => {
@@ -76,12 +76,13 @@ function ChartContainer() {
 
   // info 변경될때마다 API 갱신 웹소켓 연결 체크
   React.useEffect(() => {
-    console.log(`연결 id : ${socketClient.subscribe().id}`);
     dispatch(getLoadChart(selectInfo.tiker, chartType));
+
     if (selectInfo?.tiker !== undefined && socketClient.connected) {
+      console.log(`subNum: ${subNum.current}`);
       socketClient.unsubscribe(subNum.current);
-      socketClient.subscribe(`/sub/topic/${selectInfo.tiker}`, (message) => {
-        subNum.current = message.headers.subscription;
+      subNum.current = socketClient.subscribe(`/sub/topic/${selectInfo.tiker}`, (message) => {
+        //  = message.headers.subscription;
         const ChartData = JSON.parse(message.body);
         const year = ChartData.tradeDate.toString().substring(0, 4);
         const month = ChartData.tradeDate.toString().substring(4, 6);
@@ -119,7 +120,7 @@ function ChartContainer() {
         dispatch(getCurMonut(newCurrentData));
         dispatch(getTikerList());
         if (selectInfo?.tiker !== undefined) dispatch(getbuyCount(selectInfo.tiker));
-      });
+      }).id;
     }
   }, [selectInfo]);
 

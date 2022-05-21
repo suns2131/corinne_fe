@@ -1,12 +1,14 @@
 import React, { useLayoutEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { usePrvRank } from '../../data/rank/usePrevRank';
+import { selectedUserInfo } from '../../state/reducer/user/selectors';
 import { getUserInfo } from '../../state/reducer/user/thunk';
 import Rank from '../presentations/rank/Rank';
 import Wrapper from '../presentations/Wrapper';
 
 function RankContainer() {
   const dispatch = useDispatch();
+  const userinfos = useSelector(selectedUserInfo);
   const PrevRanks = usePrvRank();
   const [page, setPage] = useState(1);
   const [modal, setModal] = useState(false);

@@ -17,7 +17,7 @@ function TransProgressbar({
   const currentMount = useSelector((state) => state.chart.getCurrentMonut.tradePrice);
   console.log(currentMount);
   const sliderRef = useRef(null);
-  const [leverage, setLeverage] = React.useState(0);
+  const [leverage, setLeverage] = React.useState(1);
   // const sliderTheme = createTheme({
   //   palette : {
   //     customPurple: {
@@ -88,7 +88,7 @@ function TransProgressbar({
             type="range"
             min="0"
             max="100"
-            defaultValue={0}
+            defaultValue={1}
             onChange={handleChange}
             step={25}
           />
@@ -103,7 +103,7 @@ function TransProgressbar({
             type="range"
             min="0"
             max="100"
-            defaultValue={0}
+            defaultValue={1}
             onChange={handleChange}
             step={25}
           />

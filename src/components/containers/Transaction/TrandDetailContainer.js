@@ -77,7 +77,7 @@ function TrandDetailContainer() {
       // 레버리지값으로 coins에서 필터링한 buyprice 값으로 계산하여 sellAmount 값 계산
       const newRequest = {
         ...sellRequest,
-        tradePrice: currentMount,
+        tradePrice: currentMount.tradePrice,
         sellAmount: Number(sellRef.current.value),
         tiker: SelectCoin.tiker,
       };

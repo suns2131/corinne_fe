@@ -1,14 +1,15 @@
 import React from 'react';
+import CloseIcon from '../../../../public/icons/close.svg';
 
 function Login({ kakaoRedirectUrl, isLogin, goToTransaction, modal, setModal }) {
   return (
     <div>
       {isLogin ? (
-        <div>
+        <div className="mt-[189px]">
           <button
             type="button"
             onClick={goToTransaction}
-            className="bg-white text-Primary-purple text-sm w-[183px] h-[45px] mt-[189px] cursor-pointer rounded-[10px]"
+            className="bg-white text-Primary-purple text-sm w-[183px] h-[45px] cursor-pointer rounded-[10px] font-Pretendard"
           >
             모의투자 바로가기
           </button>
@@ -21,7 +22,7 @@ function Login({ kakaoRedirectUrl, isLogin, goToTransaction, modal, setModal }) 
                     type="button"
                     onClick={() => setModal(false)}
                   >
-                    X
+                    <CloseIcon />
                   </button>
                 </div>
                 <div className="flex">

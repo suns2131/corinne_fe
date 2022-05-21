@@ -61,6 +61,7 @@ const { actions, reducer } = createSlice({
     builder.addCase(getUserInfo.fulfilled, (state, { payload }) => ({
       ...state,
       userInfo: payload,
+      isFirstLogin: payload.firstLogin,
     }));
     builder.addCase(getUserBalance.fulfilled, (state, { payload }) => ({
       ...state,
