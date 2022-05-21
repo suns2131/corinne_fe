@@ -5,7 +5,7 @@ import Headers from '../../share/headers/Headers';
 
 const headerMenu = [
   { key: 'transaction', pathname: '/transaction', menu: '모의투자' },
-  { key: 'rankpage', pathname: '/rankpage', menu: '랭킹' },
+  { key: 'rankpage', pathname: '/RankPage', menu: '랭킹' },
 ];
 
 function Wrapper({ children }) {
