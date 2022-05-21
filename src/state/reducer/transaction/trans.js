@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
 import { createSlice } from '@reduxjs/toolkit';
 import intercept from '../../../data/axios';
-import { deleteBookmark, postBookmark } from './thunk';
+import { postBookmark } from './thunk';
 
 // 초기 state값
 const initialState = {
@@ -67,16 +67,9 @@ const { actions, reducer } = createSlice({
       // eslint-disable-next-line no-param-reassign
       state.tikerinfo = {
         ...state.tikerinfo,
-        favorite: true,
+        favorite: !state.tikerinfo.favorite,
       };
     });
-    // bulider.addCase(deleteBookmark.fulfilled, (state, { payload }) => {
-    //   // eslint-disable-next-line no-param-reassign
-    //   state.tikerinfo = {
-    //     ...state.tikerinfo,
-    //     favorite: false,
-    //   };
-    // });
   },
 });
 
@@ -128,9 +121,13 @@ export const SelectingTiker = (selectInfo) =>
 // 거래내역 조회
 export const getDetail = (tiker, page) =>
   function (dispatch) {
-    intercept.get(`/api/transaction/${tiker}/${page}`).then((response) => {
-      dispatch(detailList(response.data.content));
-    });
+    console.log(`detailtiker: ${tiker}`);
+    if (tiker !== '') {
+      console.log(`detailtiker2: ${tiker}`);
+      intercept.get(`/api/transaction/${tiker}/${page}`).then((response) => {
+        dispatch(detailList(response.data.content));
+      });
+    }
   };
 
 // 매수 매도 처리

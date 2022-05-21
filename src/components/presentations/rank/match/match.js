@@ -14,11 +14,11 @@ function MatchOne({ Info, matchs }) {
       <div className="w-[143px] h-[100px] bg-Primary-purple rounded-tl-[10px] rounded-bl-[10px] flex flex-col justify-center items-center">
         <div className="flex justify-center item_center">
           <img
-            className="w-[16px] h-[16px] rounded-full relative"
+            className="w-[16px] h-[16px] rounded-full mr-[4px] relative"
             src={
               // eslint-disable-next-line no-nested-ternary
               matchs.imageUrl !== undefined
-                ? matchs.imageUrl !== null
+                ? matchs.imageUrl !== 'null'
                   ? matchs.imageUrl
                   : '/images/defaultProfile/defalutProfile96.png'
                 : '/images/defaultProfile/defalutProfile96.png'

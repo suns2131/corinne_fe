@@ -2,7 +2,15 @@ import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import axiosInstance from '../../../data/axios';
 import intercept from '../../../data/intercept';
-import { getRealRank, getFollowlist, getPrevRank, getUserAlarm, getUserQuest } from './thunk';
+import {
+  getRealRank,
+  getFollowlist,
+  getPrevRank,
+  getUserAlarm,
+  getUserQuest,
+  getMatch,
+  getTargetInfo,
+} from './thunk';
 
 // 초기 state값
 const initialState = {
@@ -18,6 +26,7 @@ const initialState = {
   matchup: {},
   userAlarm: [],
   userQuest: [],
+  targetInfo: {},
 };
 
 const { actions, reducer } = createSlice({
@@ -55,13 +64,11 @@ const { actions, reducer } = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getRealRank.fulfilled, (state, { payload }) => {
-      console.log(payload);
-      // eslint-disable-next-line no-param-reassign
-      state.realRank = state.realRank.concat(payload.rank);
-      // eslint-disable-next-line no-param-reassign
-      state.realRankTotalPage = payload.totalPage;
-    });
+    builder.addCase(getRealRank.fulfilled, (state, { payload }) => ({
+      ...state,
+      realRank: payload.rank,
+      realRankTotalPage: payload.totalPage,
+    }));
 
     builder.addCase(getFollowlist.fulfilled, (state, { payload }) => {
       console.log(payload);
@@ -82,6 +89,16 @@ const { actions, reducer } = createSlice({
     builder.addCase(getUserQuest.fulfilled, (state, { payload }) => ({
       ...state,
       userQuest: payload,
+    }));
+
+    builder.addCase(getMatch.fulfilled, (state, { payload }) => ({
+      ...state,
+      matchup: payload,
+    }));
+
+    builder.addCase(getTargetInfo.fulfilled, (state, { payload }) => ({
+      ...state,
+      targetInfo: payload,
     }));
   },
 });
@@ -159,11 +176,13 @@ export const postFollow = (userId, followStat) =>
   function (dispatch) {
     if (followStat) {
       axiosInstance.delete(`/api/follow/${userId}`).then(() => {
-        dispatch(getRealRank(1));
+        const page = 1;
+        dispatch(getRealRank({ page }));
       });
     } else {
       axiosInstance.post(`/api/follow/${userId}`).then(() => {
-        dispatch(getRealRank(1));
+        const page = 1;
+        dispatch(getRealRank({ page }));
       });
     }
   };

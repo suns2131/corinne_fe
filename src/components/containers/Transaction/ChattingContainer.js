@@ -4,11 +4,12 @@ import { addChat } from '../../../state/reducer/transaction/chat';
 import Rooms from '../../presentations/transaction/chatting/Rooms';
 import socketClient from '../../../share/socket';
 import { getCookie } from '../../../share/cookie';
+import { selectedUserInfo } from '../../../state/reducer/user/selectors';
 
 const usertoken = getCookie({ name: 'corinne' });
 
 function ChattingContainer() {
-  const userinfo = useSelector((state) => state.user);
+  const userinfo = useSelector(selectedUserInfo);
   const dispatch = useDispatch();
   const sendPath = `/pub/chat/message`;
   const [inputMessage, setInputMessage] = React.useState('');
@@ -67,7 +68,7 @@ function ChattingContainer() {
         );
       }
     };
-  }, []);
+  }, [userinfo]);
   return <Rooms sendMessage={sendMessage} setInputMessage={setInputMessage} />;
 }
 export default ChattingContainer;

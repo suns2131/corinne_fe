@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, current } from '@reduxjs/toolkit';
 import intercept from '../../../data/axios';
-import { postBookmark } from './thunk';
+import { getbuyCount, postBookmark } from './thunk';
 
 // 초기 state값
 const initialState = {
@@ -68,6 +68,12 @@ const { actions, reducer } = createSlice({
       state.selectChartInfo = payload;
     },
   },
+  extraReducers: (bulider) => {
+    bulider.addCase(getbuyCount.fulfilled, (state, { payload }) => {
+      // eslint-disable-next-line no-param-reassign
+      state.customer = payload.buyCount;
+    });
+  },
 });
 
 export const { addChart, updateChart, getCurMonut, getChart } = actions;
@@ -75,26 +81,47 @@ export const { addChart, updateChart, getCurMonut, getChart } = actions;
 // 차트 정보 조회
 export const getLoadChart = (tiker, chartType) =>
   function (dispatch) {
-    intercept
-      .get(chartType ? `/api/price/date/${tiker}` : `/api/price/minute/${tiker}`)
-      .then((response) => {
-        console.log(response.data);
-        const arrays = response.data.filter((el, idx) => idx > response.data.length - 31);
-        console.log(arrays);
-        const newChart = arrays.map((el) => {
-          const chartdt = {
-            x: el?.tradeTime !== undefined ? el.tradeTime : el.tradeDate,
-            y: [el.startPrice, el.highPrice, el.lowPrice, el.endPrice],
-            volume: {
+    if (tiker !== '') {
+      intercept
+        .get(chartType ? `/api/price/date/${tiker}` : `/api/price/minute/${tiker}`)
+        .then((response) => {
+          console.log(response.data);
+          const arrays = response.data.filter((el, idx) => idx > response.data.length - 31);
+          console.log(arrays);
+          const newChart = arrays.map((el) => {
+            const chartdt = {
               x: el?.tradeTime !== undefined ? el.tradeTime : el.tradeDate,
-              y: 0,
-            },
-          };
-          return chartdt;
+              y: [el.startPrice, el.highPrice, el.lowPrice, el.endPrice],
+              volume: {
+                x: el?.tradeTime !== undefined ? el.tradeTime : el.tradeDate,
+                y: 0,
+              },
+            };
+            return chartdt;
+          });
+          console.log(newChart);
+          dispatch(getChart(newChart));
         });
-        console.log(newChart);
-        dispatch(getChart(newChart));
-      });
+    }
   };
+
+// export const deleteBMark = (tikername) =>
+//   function (dispatch) {
+//     console.log(tikername);
+//     if (tikername !== '') {
+//       intercept
+//         .delete('/api/account/bookmark', {
+//           data: {
+//             tiker: tikername,
+//           },
+//         })
+//         .then((response) => {
+//           console.log(response);
+//         })
+//         .catch((error) => {
+//           console.log(error);
+//         });
+//     }
+//   };
 
 export default reducer;

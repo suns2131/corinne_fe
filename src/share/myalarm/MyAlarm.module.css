@@ -25,8 +25,8 @@
   left: 5px;
   top: 0px;
   content: '';
-  width: 15px; /* 사이즈 */
-  height: 15px; /* 사이즈 */
+  width: 11px; /* 사이즈 */
+  height: 11px; /* 사이즈 */
   border-top: 2px solid #cecece; /* 선 두께 */
   border-right: 2px solid #cecece; /* 선 두께 */
   transform: rotate(225deg); /* 각도 */
@@ -37,8 +37,8 @@
   left: 10px;
   top: 20px;
   content: '';
-  width: 50px; /* 사이즈 */
-  height: 50px; /* 사이즈 */
+  width: 16px; /* 사이즈 */
+  height: 16px; /* 사이즈 */
   border-top: 5px solid #cecece; /* 선 두께 */
   border-right: 5px solid #cecece; /* 선 두께 */
   transform: rotate(45deg); /* 각도 */

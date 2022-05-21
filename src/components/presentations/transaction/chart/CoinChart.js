@@ -12,6 +12,7 @@ function CoinChart({
   chartData,
   VolumeData,
   bookMarkClick,
+  customer,
 }) {
   const dState = {
     options: {
@@ -128,16 +129,29 @@ function CoinChart({
               {currentMount && (
                 <div>
                   <span>
-                    {currentMount?.signedChangeRate !== undefined
-                      ? currentMount?.signedChangeRate
-                      : 0}
-                    %
+                    {currentMount?.signedChangeRate !== undefined ? (
+                      currentMount.signedChangeRate > 0 ? (
+                        <span className="text-Primary-purple2">
+                          {currentMount.signedChangeRate}%
+                        </span>
+                      ) : (
+                        <span className=" text-Secondary-orange">
+                          {currentMount.signedChangeRate}%
+                        </span>
+                      )
+                    ) : (
+                      0
+                    )}
                   </span>
                   {currentMount?.signedChangePrice !== undefined ? (
                     currentMount.signedChangePrice > 0 ? (
-                      <span>▲ {currentMount.signedChangePrice}</span>
+                      <span className=" text-Primary-purple2">
+                        ▲ {currentMount.signedChangePrice}
+                      </span>
                     ) : (
-                      <span>▼ {currentMount.signedChangePrice}</span>
+                      <span className=" text-Secondary-orange">
+                        ▼ {currentMount.signedChangePrice}
+                      </span>
                     )
                   ) : (
                     0
@@ -145,7 +159,7 @@ function CoinChart({
                 </div>
               )}
 
-              <div className="font-bold text-[24px] text-[#A634ff]">
+              <div className="font-bold text-[24px] text-Primary-purple2">
                 {Won(currentMount?.tradePrice !== undefined ? currentMount.tradePrice : 0)}원
               </div>
             </div>
@@ -203,7 +217,7 @@ function CoinChart({
             </div>
             <div className="w-[115px] h-[26px] bg-[#ffffff] border border-solid border-[#eeeeee] rounded-[6px] px-[6px] py-[3px] ">
               <p className="font-normal text-[12px] text-[#777777]">
-                금주 매수회원<span className="text-[#A634FF]">8</span>명
+                금주 매수회원<span className="text-[#A634FF]">{customer}</span>명
               </p>
             </div>
           </div>

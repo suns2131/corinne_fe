@@ -4,17 +4,18 @@ import { useInView } from 'react-intersection-observer';
 import { getRealRank } from '../../../state/reducer/rank/thunk';
 import RealRank from '../../presentations/rank/realrank/RealRank';
 import { postFollow } from '../../../state/reducer/rank/rank';
+import { selectRankState } from '../../../state/reducer/rank/selector';
 
-function RealRankContainer() {
+function RealRankContainer({ setCallUser }) {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [list, setList] = useState();
-  const realRankState = useSelector((state) => state.rank.realRank);
+  const realRankState = useSelector(selectRankState);
   const totalPage = useSelector((state) => state.rank.totalPage);
   const [infiniteRef, inView] = useInView();
 
   useEffect(() => {
-    dispatch(getRealRank(page));
+    dispatch(getRealRank({ page }));
   }, [page, dispatch]);
 
   useEffect(() => {
@@ -33,7 +34,6 @@ function RealRankContainer() {
   };
 
   const followBtn = useCallback((userId, followStat) => {
-    console.log(userId);
     dispatch(postFollow(userId, followStat));
   }, []);
 
@@ -43,6 +43,7 @@ function RealRankContainer() {
       infiniteRef={infiniteRef}
       searchNickname={searchNickname}
       followBtn={followBtn}
+      setCallUser={setCallUser}
     />
   );
 }

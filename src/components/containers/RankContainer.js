@@ -10,13 +10,24 @@ function RankContainer() {
   const PrevRanks = usePrvRank();
   const [page, setPage] = useState(1);
   const [modal, setModal] = useState(false);
-  const [callUser, setCallUser] = useState(false);
+  const [callUser, setCallUser] = useState({
+    isopen: false,
+    userid: '',
+  });
 
   useLayoutEffect(() => {
     dispatch(getUserInfo());
   }, [dispatch]);
 
-  return <Rank modal={modal} setModal={setModal} PrevRanks={PrevRanks} />;
+  return (
+    <Rank
+      modal={modal}
+      setModal={setModal}
+      PrevRanks={PrevRanks}
+      callUser={callUser}
+      setCallUser={setCallUser}
+    />
+  );
 }
 
 export default RankContainer;
