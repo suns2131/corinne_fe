@@ -24,6 +24,12 @@ function MessageBox() {
           <ul>
             {userinfo.nickname === el.nickname ? (
               // eslint-disable-next-line react/no-array-index-key
+              <div key={idx} className={styles.Audience}>
+                <p className={styles.MyMessageTime}>{el.time}</p>
+                <div className={styles.AudienceMsg}>{el.message}</div>
+              </div>
+            ) : (
+              // eslint-disable-next-line react/no-array-index-key
               <div key={idx} className={styles.MyMessage}>
                 <div className={styles.MyMessageImage} />
                 <div>
@@ -33,12 +39,6 @@ function MessageBox() {
                     <p className={styles.MyMessageTime}>{el.time}</p>
                   </div>
                 </div>
-              </div>
-            ) : (
-              // eslint-disable-next-line react/no-array-index-key
-              <div key={idx} className={styles.Audience}>
-                <p className={styles.MyMessageTime}>{el.time}</p>
-                <div className={styles.AudienceMsg}>{el.message}</div>
               </div>
             )}
           </ul>

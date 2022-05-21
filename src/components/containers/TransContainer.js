@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Wrapper from '../presentations/Wrapper';
 import BuySellContainer from './Transaction/TrandDetailContainer';
 import ChattingContainer from './Transaction/ChattingContainer';
@@ -7,6 +7,7 @@ import TikerListContainer from './Transaction/TikerListContainer';
 import ChartContainer from './Transaction/ChartContainer';
 
 function TransContainer() {
+  const [loading, setloading] = useState(false);
   return (
     <Wrapper>
       <div className="flex ">

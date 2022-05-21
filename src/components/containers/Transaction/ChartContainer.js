@@ -72,12 +72,10 @@ function ChartContainer() {
 
   // info 변경될때마다 API 갱신 웹소켓 연결 체크
   React.useEffect(() => {
+    console.log(`연결 id : ${socketClient.subscribe}`);
+    dispatch(getLoadChart(selectInfo.tiker, chartType));
     if (selectInfo?.tiker !== undefined && socketClient.connected) {
       socketClient.unsubscribe(subNum.current);
-    }
-    dispatch(getLoadChart(selectInfo.tiker, chartType));
-
-    if (selectInfo?.tiker !== undefined && socketClient.connected) {
       socketClient.subscribe(`/sub/topic/${selectInfo.tiker}`, (message) => {
         subNum.current = message.headers.subscription;
         const ChartData = JSON.parse(message.body);
