@@ -27,7 +27,6 @@ function LoginContainer() {
 
   const goNextProgress = useCallback(
     (query) => () => {
-      console.log(query);
       router.push({
         pathname: router.pathname,
         query,
