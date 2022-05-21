@@ -99,7 +99,7 @@ export default function MyPageContainer() {
 
   return (
     <Wrapper>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-3 gap-2 mb-[90px]">
         <MyPageProfile userInfo={userInfo} goChangeProfile={goChangeProfile} />
         <MyPageHoldings
           openResetModal={openResetModal}

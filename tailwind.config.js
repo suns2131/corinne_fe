@@ -66,8 +66,20 @@ module.exports = {
         logos: ['30px', '30px'],
       },
       fontFamily: {
-        Pretendard: 'Pretendard',
-        'Gmarket Sans': 'Gmarket Sans',
+        Pretendard: [
+          'Pretendard',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'system-ui',
+          'Roboto',
+          'Helvetica Neue',
+          'Segoe UI',
+          'Apple SD Gothic Neo',
+          'Noto Sans KR',
+          'Malgun Gothic',
+          'sans-serif',
+        ],
+        'Gmarket-Sans': 'GmarketSansBold',
       },
       height: {
         headers: '60px',
