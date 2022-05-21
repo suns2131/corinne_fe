@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
+import cn from 'classnames';
 import AlarmNone from '../../../public/icons/header/alarm_none.svg';
 import AlarmRing from '../../../public/icons/header/alarm_ring.svg';
 import AlarmClick from '../../../public/icons/header/alarm_click.svg';
@@ -10,12 +11,11 @@ import socketClient from '../socket';
 import { getCookie } from '../cookie';
 import MyAlarm from '../myalarm/MyAlarm';
 import { getUserInfo } from '../../state/reducer/user/thunk';
-import axiosInstance from '../../data/axios';
 import Modal from '../modal/Modal';
 
 const usertoken = getCookie({ name: 'corinne' });
 
-export default function Headers({ handleRouter }) {
+export default function Headers({ handleRouter, headerMenu }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const islogin = usertoken !== undefined;
@@ -89,40 +89,23 @@ export default function Headers({ handleRouter }) {
           </div>
           <nav>
             <ul className="w-[450px] h-[36px] grow-0 flex justify-center items-center gap-[25px]">
-              {router.pathname === '/transaction' ? (
-                <li className="w-[68px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px]">
-                  <Link href="/transaction">
-                    <span className="w-[52px] h-[18px] grow-0 font-Pretendard text-[15px] font-bold text-center text-Primary-purple">
-                      모의투자
+              {headerMenu.map(({ key, pathname, menu }) => (
+                <li
+                  key={key}
+                  className="w-[68px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px]"
+                >
+                  <Link href={pathname}>
+                    <span
+                      className={cn(
+                        pathname === router.pathname ? 'text-Primary-purple' : 'text-Neutrals-gray',
+                        'w-[52px] h-[18px] grow-0 font-Pretendard text-[15px] font-bold text-center ',
+                      )}
+                    >
+                      {menu}
                     </span>
                   </Link>
                 </li>
-              ) : (
-                <li className="w-[68px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px]">
-                  <Link href="/transaction">
-                    <span className="w-[52px] h-[18px] grow-0 font-Pretendard text-[15px] font-normal text-center text-Neutrals-gray">
-                      모의투자
-                    </span>
-                  </Link>
-                </li>
-              )}
-              {router.pathname === '/rankpage' ? (
-                <li className="w-[68px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px]">
-                  <Link href="/rankpage">
-                    <span className="w-[52px] h-[18px] grow-0 font-Pretendard text-[15px] font-bold text-center text-Primary-purple">
-                      랭킹
-                    </span>
-                  </Link>
-                </li>
-              ) : (
-                <li className="w-[68px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px]">
-                  <Link href="/rankpage">
-                    <span className="w-[52px] h-[18px] grow-0 font-Pretendard text-[15px] font-normal text-center text-Neutrals-gray">
-                      랭킹
-                    </span>
-                  </Link>
-                </li>
-              )}
+              ))}
               <li className="w-[68px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px]">
                 <Link href="/">
                   <span className="w-[52px] h-[18px] grow-0 font-Pretendard text-[15px] font-normal text-center text-Neutrals-gray">
