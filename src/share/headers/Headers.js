@@ -149,7 +149,7 @@ export default function Headers({ handleRouter, headerMenu }) {
                   onClick={handleRouter('/mypage')}
                   className="w-[40px] h-[36px] grow-0 flex justify-center items-center cursor-pointer"
                 >
-                  <Image
+                  <img
                     src={
                       userInfo?.imageUrl !== undefined
                         ? userInfo.imageUrl !== 'null'
