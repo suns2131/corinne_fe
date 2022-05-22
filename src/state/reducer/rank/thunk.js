@@ -14,12 +14,15 @@ export const getRealRank = createAsyncThunk('rank/getRealRank', async ({ page },
   if (RealRank == null) {
     return data;
   }
-  const newContent = [...getState().rank.realRank, ...data.rank];
-  const newData = {
-    ...data,
-    rank: newContent,
-  };
-  return newData;
+  if (page > 1) {
+    const newContent = [...getState().rank.realRank, ...data.rank];
+    const newData = {
+      ...data,
+      rank: newContent,
+    };
+    return newData;
+  }
+  return data;
 });
 
 export const getFollowlist = createAsyncThunk('/api/follow', async () => {

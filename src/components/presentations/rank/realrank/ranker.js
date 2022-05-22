@@ -86,7 +86,7 @@ function Ranker({ type, rankerData, followBtn, setCallUser }) {
           <Reset />
         </div>
         <span className="flex-grow-0 font-Pretendard text-[15px] text-right text-Neutrals-lightGray">
-          100
+          {rankerData?.resetCount}
         </span>
       </div>
       {rankerData.follow ? (
