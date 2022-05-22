@@ -125,7 +125,8 @@ function TrandDetailContainer() {
       }
     } else if (type === 'sell') {
       const sell = sellRef.current.value;
-      const sellPercent = sellPrice;
+      const sellPercent = sellPoint;
+      console.log(`sells: ${sell}`);
       switch (sign) {
         case '-':
           if (sell - 50000 > 0) sellRef.current.value = sell - 50000;
