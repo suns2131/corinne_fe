@@ -200,38 +200,38 @@ function CoinChart({
             </button>
           </div>
           <div className="w-[557px] h-[26px] flex justify-center items-center">
-            <div className="w-[113px] h-[20px] font-normal text-[12px]">
+            <div className="w-[113px] h-[20px] font-normal text-[12px] text-Neutrals-gray">
               고가
-              <span className="text-[#A634FF]">
+              <span className=" text-Primary-purple2">
                 {Won(currentMount?.highPrice !== undefined ? currentMount.highPrice : 0)}
               </span>
               원
             </div>
-            <div className="w-[113px] h-[20px] font-normal text-[12px]">
+            <div className="w-[113px] h-[20px] font-normal text-[12px] text-Neutrals-gray">
               저가
-              <span className="text-[#FF9E0D]">
+              <span className=" text-Secondary-orange">
                 {Won(currentMount?.lowPrice !== undefined ? currentMount.lowPrice : 0)}
               </span>
               원
             </div>
-            <div className="w-[123px] h-[20px] font-normal text-[12px]">
+            <div className="w-[123px] h-[20px] font-normal text-[12px] text-Neutrals-gray">
               전일가
-              <span className="text-[#33323f]">
+              <span className=" text-Neutrals-black">
                 {Won(
                   currentMount?.prevClosingPrice !== undefined ? currentMount.prevClosingPrice : 0,
                 )}
               </span>
               원
             </div>
-            <div className="w-[160px] h-[20px] font-normal text-[12px]">
+            <div className="w-[160px] h-[20px] font-normal text-[12px] text-Neutrals-gray">
               거래대금
-              <span className="text-[#33323f]">
+              <span className=" text-Neutrals-black">
                 {Won(currentMount?.tradeVolume !== undefined ? currentMount.tradeVolume : 0)}
               </span>
             </div>
             <div className="w-[115px] h-[26px] bg-[#ffffff] border border-solid border-[#eeeeee] rounded-[6px] px-[6px] py-[3px] ">
               <p className="font-normal text-[12px] text-[#777777]">
-                금주 매수회원<span className="text-[#A634FF]">{customer}</span>명
+                금주 매수회원<span className=" text-Primary-purple2">{customer}</span>명
               </p>
             </div>
           </div>
