@@ -150,6 +150,7 @@ export default function Headers({ handleRouter, headerMenu }) {
                   className="w-[40px] h-[36px] grow-0 flex justify-center items-center cursor-pointer"
                 >
                   <img
+                    className=" rounded-full"
                     src={
                       userInfo?.imageUrl !== undefined
                         ? userInfo.imageUrl !== 'null'

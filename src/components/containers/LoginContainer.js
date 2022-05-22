@@ -52,7 +52,7 @@ function LoginContainer() {
   }, [router]);
 
   const handleClickLoginSuccess = useCallback(() => {
-    if (selectUserName.length < 2 || selectUserName.length > 8) {
+    if (selectUserName.length < 2 || selectUserName.length > 6) {
       setLoginStatusText('글자수를 확인해주세요');
     } else {
       dispatch(signUp(selectUserName));
@@ -85,7 +85,7 @@ function LoginContainer() {
   }, [profileImgRef]);
 
   useEffect(() => {
-    if (selectUserName.length > 2 && selectUserName.length < 8) {
+    if (selectUserName.length > 1 && selectUserName.length < 7) {
       setLoginStatus(true);
     } else {
       setLoginStatus(false);
