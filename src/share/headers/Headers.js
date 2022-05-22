@@ -190,7 +190,7 @@ export default function Headers({ handleRouter, headerMenu }) {
                   key={key}
                   role="presentation"
                   onClick={handleRouter(pathname)}
-                  className="w-[68px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px] cursor-pointer"
+                  className="w-[90px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px] cursor-pointer"
                 >
                   <span
                     className={cn(
