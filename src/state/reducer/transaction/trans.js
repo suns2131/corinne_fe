@@ -20,6 +20,11 @@ const initialState = {
   userAmount: {},
   buyPoint: 0, // 코인별 매수 가능금액
   sellPoint: 0, // 코인별 매도 가능금액
+  callResultModal: {
+    isopen: false,
+    type: '',
+    desc: '',
+  },
 };
 
 const { actions, reducer } = createSlice({
@@ -66,6 +71,10 @@ const { actions, reducer } = createSlice({
       // eslint-disable-next-line no-param-reassign
       state.tikerinfo.favorite = payload;
     },
+    Modals: (state, { payload }) => {
+      // eslint-disable-next-line no-param-reassign
+      state.callResultModal = payload;
+    },
   },
   extraReducers: (bulider) => {
     bulider.addCase(postBookmark.fulfilled, (state, { payload }) => {
@@ -78,8 +87,16 @@ const { actions, reducer } = createSlice({
   },
 });
 
-export const { detailList, tikerList, infos, addDetail, Amounts, updateSell, updateFavorite } =
-  actions;
+export const {
+  detailList,
+  tikerList,
+  infos,
+  addDetail,
+  Amounts,
+  updateSell,
+  updateFavorite,
+  Modals,
+} = actions;
 
 // 코인 정보리스트
 export const getTikerList = () =>
@@ -150,7 +167,14 @@ export const postBuySell = (type, requestData) =>
         buyPoint: response.data.accountBalance,
         sellPoint: response.data?.leftover !== undefined ? response.data?.leftover : 0,
       };
+      const modalData = {
+        isopen: true,
+        type: newArray.type,
+        desc: newArray,
+      };
+      console.log(modalData);
       dispatch(addDetail(newArray));
+      dispatch(Modals(modalData));
     });
   };
 
