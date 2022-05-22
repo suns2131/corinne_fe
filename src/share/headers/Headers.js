@@ -190,14 +190,14 @@ export default function Headers({ handleRouter, headerMenu }) {
                   key={key}
                   role="presentation"
                   onClick={handleRouter(pathname)}
-                  className="w-[90px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px] cursor-pointer"
+                  className="w-[120px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px] cursor-pointer"
                 >
                   <span
                     className={cn(
                       pathname === router.pathname
                         ? 'text-Primary-purple font-bold'
                         : 'text-Neutrals-white font-normal',
-                      'w-[90px] h-[18px] grow-0 font-Pretendard text-[15px]  text-center ',
+                      'w-[120px] h-[18px] grow-0 font-Pretendard text-[15px]  text-center ',
                     )}
                   >
                     {menu}
