@@ -53,6 +53,9 @@ const { actions, reducer } = createSlice({
         nickname: payload.nickname,
       };
     });
+    builder.addCase(signUp.rejected, (state, { payload }) => {
+      console.log(payload);
+    });
     builder.addCase(postResetBalance.fulfilled, (state, { payload }) => ({
       ...state,
       resetStatus: payload,

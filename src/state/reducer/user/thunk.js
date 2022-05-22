@@ -4,7 +4,15 @@ import axiosInstance, { axiosImgInstance } from '../../../data/axios';
 
 export const signUp = createAsyncThunk('user/signUp', async (data, { getState }) => {
   const { user } = getState();
-  const response = await axiosInstance.patch('/user/signup', { nickname: data });
+  const response = await axiosInstance.patch('/user/signup', { nickname: data }).catch((error) => {
+    if (error.response.data.status === 400) {
+      alert(error.response.data.message);
+    }
+  });
+  if (response.status === '400') {
+    alert(response.data.message);
+    return { status: 'fail', nickname: '' };
+  }
 
   if (response.data.message === '중복된 닉네임이 존재합니다.') {
     alert(response.data.message);
