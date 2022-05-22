@@ -60,7 +60,7 @@ function MatchOne({ Info, matchs }) {
         </div>
       </div>
       {matchRank && (
-        <div className=" absolute left-[1550px] top-[420px]">
+        <div className=" absolute left-[1533px] top-[400px]">
           <Help type="match" />
         </div>
       )}
