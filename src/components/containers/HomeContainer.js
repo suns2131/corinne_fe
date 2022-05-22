@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import Wrapper from '../presentations/Wrapper';
 import Login from '../presentations/login/Login';
 import HomeText from '../presentations/home/HomeText';
@@ -13,6 +13,7 @@ const kakaoRedirectUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${pr
 export default function HomeContainer() {
   const router = useRouter();
   const isLogin = usertoken !== undefined;
+  const [modal, setModal] = useState(true);
 
   const goToTransaction = useCallback(() => {
     router.push('/transaction');
@@ -24,6 +25,8 @@ export default function HomeContainer() {
         isLogin={isLogin}
         kakaoRedirectUrl={kakaoRedirectUrl}
         goToTransaction={goToTransaction}
+        modal={modal}
+        setModal={setModal}
       />
       <LoginContainer />
     </Wrapper>

@@ -1,23 +1,28 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addChat } from '../../../state/reducer/transaction/chat';
 import Rooms from '../../presentations/transaction/chatting/Rooms';
 import socketClient from '../../../share/socket';
 import { getCookie } from '../../../share/cookie';
+import { selectedUserInfo } from '../../../state/reducer/user/selectors';
 
 const usertoken = getCookie({ name: 'corinne' });
 
-function ChattingContainer() {
-  const userinfo = useSelector((state) => state.user);
+function ChattingContainer({ userInfos }) {
+  console.log(`userInfos`);
+  console.log(userInfos);
+  const userinfo = useSelector(selectedUserInfo);
   const dispatch = useDispatch();
   const sendPath = `/pub/chat/message`;
   const [inputMessage, setInputMessage] = React.useState('');
+  const connectCheckRef = useRef(null);
+  const messageRef = useRef(null);
 
   // 메세지 전송
   const sendMessage = (e) => {
     const today = new Date();
-    const sendTm = `${today.getMinutes()}:${today.getSeconds()}`;
-
+    const sendTm = `${today.getHours()}:${today.getMinutes()}`;
+    console.log(sendTm);
     if (e.key === 'Enter') {
       const SendData = {
         type: 'TALK',
@@ -33,28 +38,66 @@ function ChattingContainer() {
     }
   };
 
-  React.useEffect(() => {
-    socketClient.connect({ token: `BEARER ${usertoken}` }, () => {
-      socketClient.subscribe('/sub/topic/corinnechat', (message) => {
-        const ChatData = JSON.parse(message.body);
-        const updateChat = {
-          nickname: ChatData.nickname,
-          message: ChatData.message,
-        };
-        dispatch(addChat(updateChat));
-      });
+  const sendBtn = () => {
+    const today = new Date();
+    const sendTm = `${today.getHours()}:${today.getMinutes()}`;
 
-      const connectEnter = {
-        type: 'ENTER',
-        topicName: 'corinnechat',
-        nickname: userinfo.nickname,
-        imageUrl: '',
-        exp: 0,
-        sendTime: '',
-        message: '',
+    const SendData = {
+      type: 'TALK',
+      topicName: 'corinnechat',
+      nickname: userinfo.nickname,
+      imageUrl: userinfo.imageUrl,
+      exp: userinfo.exp,
+      sendTime: sendTm,
+      message: inputMessage,
+    };
+    socketClient.send(sendPath, {}, JSON.stringify(SendData));
+    messageRef.current.value = null;
+  };
+
+  const subscribeConnect = () => {
+    console.log(`timer2`);
+    console.log(userInfos);
+    connectCheckRef.current = true;
+    socketClient.subscribe('/sub/topic/corinnechat', (message) => {
+      const ChatData = JSON.parse(message.body);
+      const updateChat = {
+        nickname: ChatData.nickname,
+        time: ChatData.sendTime,
+        imageUrl:
+          ChatData.imageUrl === 'null'
+            ? '/images/defaultProfile/defalutProfile32.png'
+            : ChatData.imageUrl,
+        message: ChatData.message,
       };
-      socketClient.send(sendPath, {}, JSON.stringify(connectEnter));
+      dispatch(addChat(updateChat));
     });
+    const today = new Date();
+    const sendTm = `${today.getHours()}:${today.getMinutes()}`;
+    const connectEnter = {
+      type: 'ENTER',
+      topicName: 'corinnechat',
+      nickname: userInfos.nickname,
+      imageUrl:
+        userInfos.imageUrl === 'null'
+          ? '/images/defaultProfile/defalutProfile32.png'
+          : userInfos.imageUrl,
+      exp: userInfos.exp,
+      sendTime: sendTm,
+      message: '',
+    };
+    socketClient.send(sendPath, {}, JSON.stringify(connectEnter));
+  };
+
+  React.useEffect(() => {
+    const intervals = setInterval(() => {
+      if (userInfos !== null) {
+        // if (usertoken !== '' && socketClient.connected === true) console.log('tytt');
+        if (usertoken !== '' && socketClient.connected === true) {
+          if (connectCheckRef.current === null) subscribeConnect();
+        }
+      }
+    }, 1000);
 
     return () => {
       if (socketClient.connected) {
@@ -66,8 +109,17 @@ function ChattingContainer() {
           { token: `BEARER ${usertoken}` },
         );
       }
+      clearTimeout(intervals);
     };
-  }, []);
-  return <Rooms sendMessage={sendMessage} setInputMessage={setInputMessage} />;
+  }, [dispatch, userinfo]);
+
+  return (
+    <Rooms
+      sendMessage={sendMessage}
+      setInputMessage={setInputMessage}
+      sendBtn={sendBtn}
+      messageRef={messageRef}
+    />
+  );
 }
 export default ChattingContainer;

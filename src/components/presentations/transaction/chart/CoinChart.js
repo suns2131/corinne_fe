@@ -12,6 +12,9 @@ function CoinChart({
   chartData,
   VolumeData,
   bookMarkClick,
+  customer,
+  btnStat,
+  setBtnStat,
 }) {
   const dState = {
     options: {
@@ -58,7 +61,7 @@ function CoinChart({
   };
   return (
     <div className=" font-Pretendard">
-      <div className="w-[793px] h-[90px] bg-[#ffffff] flex flex-col items-start p-5 shadow-008 rounded-[10px] mb-5">
+      <div className="w-[793px] h-[90px] bg-[#ffffff] flex flex-col items-start p-5 shadow-box rounded-[10px] mb-5">
         <div className="w-[753px] h-[50px] flex justify-between items-center ">
           {selectInfo && (
             <div className="w-[130px] h-[50px] flex flex-row justify-center items-center gap-[11px] ">
@@ -128,16 +131,29 @@ function CoinChart({
               {currentMount && (
                 <div>
                   <span>
-                    {currentMount?.signedChangeRate !== undefined
-                      ? currentMount?.signedChangeRate
-                      : 0}
-                    %
+                    {currentMount?.signedChangeRate !== undefined ? (
+                      currentMount.signedChangeRate > 0 ? (
+                        <span className="text-Primary-purple2">
+                          {currentMount.signedChangeRate}%
+                        </span>
+                      ) : (
+                        <span className=" text-Secondary-orange">
+                          {currentMount.signedChangeRate}%
+                        </span>
+                      )
+                    ) : (
+                      0
+                    )}
                   </span>
                   {currentMount?.signedChangePrice !== undefined ? (
                     currentMount.signedChangePrice > 0 ? (
-                      <span>▲ {currentMount.signedChangePrice}</span>
+                      <span className=" text-Primary-purple2">
+                        ▲ {currentMount.signedChangePrice}
+                      </span>
                     ) : (
-                      <span>▼ {currentMount.signedChangePrice}</span>
+                      <span className=" text-Secondary-orange">
+                        ▼ {currentMount.signedChangePrice}
+                      </span>
                     )
                   ) : (
                     0
@@ -145,65 +161,85 @@ function CoinChart({
                 </div>
               )}
 
-              <div className="font-bold text-[24px] text-[#A634ff]">
-                {Won(currentMount?.tradePrice !== undefined ? currentMount.tradePrice : 0)}원
+              <div className={`font-bold text-[24px] `}>
+                {currentMount?.tradePrice !== undefined ? (
+                  currentMount.signedChangePrice > 0 ? (
+                    <span className=" text-Primary-purple2">{Won(currentMount.tradePrice)}원</span>
+                  ) : (
+                    <span className=" text-Secondary-orange">{Won(currentMount.tradePrice)}원</span>
+                  )
+                ) : (
+                  0
+                )}
               </div>
             </div>
             <p className="font-normal text-[14px] text-[#cecece]">1.00 {selectInfo.unit}</p>
           </div>
         </div>
       </div>
-      <div className="w-[793px] h-[558px] shadow-008 rounded-[10px] p-5 mb-[24px]">
+      <div className="w-[793px] h-[558px] shadow-box rounded-[10px] p-5 mb-[24px]">
         <div className="w-[710px] h-[32px] flex justify-center items-center mb-[10px]">
           <div className="w-[70px] h-[32px] gap-[7px] flex justify-start items-center mr-[15px]">
             <button
-              className="w-[32px] h-[32px] flex justify-center items-center rounded-[6px] border border-solid border-[#eeeeee] bg-[#ffffff] text-[12px] font-normal text-[#777777]"
-              onClick={() => [setChartType(true)]}
+              className={`w-[32px] h-[32px] flex justify-center items-center rounded-[6px] border border-solid border-[#eeeeee] ${btnStat.today} text-[12px] font-normal text-[#777777]`}
+              onClick={() => {
+                setBtnStat({
+                  stat: true,
+                  today: 'bg-[#eeeeee]',
+                  minute: 'bg-[#ffffff]',
+                });
+              }}
               type="button"
             >
               일
             </button>
             <button
-              className="w-[32px] h-[32px] flex justify-center items-center rounded-[6px] border border-solid border-[#eeeeee] bg-[#EEEEEE] text-[12px] font-normal text-[#777777]"
-              onClick={() => [setChartType(false)]}
+              className={`w-[32px] h-[32px] flex justify-center items-center rounded-[6px] border border-solid border-[#eeeeee] ${btnStat.minute} text-[12px] font-normal text-[#777777]`}
+              onClick={() => {
+                setBtnStat({
+                  stat: false,
+                  today: 'bg-[#ffffff]',
+                  minute: 'bg-[#eeeeee]',
+                });
+              }}
               type="button"
             >
               분
             </button>
           </div>
           <div className="w-[557px] h-[26px] flex justify-center items-center">
-            <div className="w-[113px] h-[20px] font-normal text-[12px]">
+            <div className="w-[113px] h-[20px] font-normal text-[12px] text-Neutrals-gray">
               고가
-              <span className="text-[#A634FF]">
+              <span className=" text-Primary-purple2">
                 {Won(currentMount?.highPrice !== undefined ? currentMount.highPrice : 0)}
               </span>
               원
             </div>
-            <div className="w-[113px] h-[20px] font-normal text-[12px]">
+            <div className="w-[113px] h-[20px] font-normal text-[12px] text-Neutrals-gray">
               저가
-              <span className="text-[#FF9E0D]">
+              <span className=" text-Secondary-orange">
                 {Won(currentMount?.lowPrice !== undefined ? currentMount.lowPrice : 0)}
               </span>
               원
             </div>
-            <div className="w-[123px] h-[20px] font-normal text-[12px]">
+            <div className="w-[123px] h-[20px] font-normal text-[12px] text-Neutrals-gray">
               전일가
-              <span className="text-[#33323f]">
+              <span className=" text-Neutrals-black">
                 {Won(
                   currentMount?.prevClosingPrice !== undefined ? currentMount.prevClosingPrice : 0,
                 )}
               </span>
               원
             </div>
-            <div className="w-[160px] h-[20px] font-normal text-[12px]">
+            <div className="w-[160px] h-[20px] font-normal text-[12px] text-Neutrals-gray">
               거래대금
-              <span className="text-[#33323f]">
+              <span className=" text-Neutrals-black">
                 {Won(currentMount?.tradeVolume !== undefined ? currentMount.tradeVolume : 0)}
               </span>
             </div>
             <div className="w-[115px] h-[26px] bg-[#ffffff] border border-solid border-[#eeeeee] rounded-[6px] px-[6px] py-[3px] ">
               <p className="font-normal text-[12px] text-[#777777]">
-                금주 매수회원<span className="text-[#A634FF]">8</span>명
+                금주 매수회원<span className=" text-Primary-purple2">{customer}</span>명
               </p>
             </div>
           </div>

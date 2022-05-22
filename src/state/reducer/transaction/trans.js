@@ -1,7 +1,8 @@
 /* eslint-disable no-shadow */
 import { createSlice } from '@reduxjs/toolkit';
 import intercept from '../../../data/axios';
-import { deleteBookmark, postBookmark } from './thunk';
+import { getCurMonut } from './chart';
+import { postBookmark } from './thunk';
 
 // 초기 state값
 const initialState = {
@@ -9,16 +10,21 @@ const initialState = {
   tikerList: [],
   transDetail: [],
   tikerinfo: {
-    imageUrl: null, // 코인 이미지 주소
-    tiker: '', // 코인 id
-    tikername: '', // 코인이름
     favorite: false, // 즐겨찾기
-    unit: '', // 단위
+    imageUrl: '/icons/icon_btc.png', // 코인 이미지 주소
     prevPrice: 0, // 전일가
+    tiker: 'KRW-BTC', // 코인 id
+    tikername: '비트코인', // 코인이름
+    unit: 'BTC', // 단위
   },
   userAmount: {},
   buyPoint: 0, // 코인별 매수 가능금액
   sellPoint: 0, // 코인별 매도 가능금액
+  callResultModal: {
+    isopen: false,
+    type: '',
+    desc: '',
+  },
 };
 
 const { actions, reducer } = createSlice({
@@ -42,6 +48,10 @@ const { actions, reducer } = createSlice({
     tikerList: (state, { payload }) => {
       // eslint-disable-next-line no-param-reassign
       state.tikerList = payload;
+      // console.log(`tikerinfo ${state.tikerinfo.tiker}`);
+      // console.log(`payload ${payload}`);
+      // // eslint-disable-next-line no-param-reassign
+      // if (state.tikerinfo.tiker === payload.tiker) state.tikerinfo.favorite = payload.favorite;
     },
     infos: (state, { payload }) => {
       // eslint-disable-next-line no-param-reassign
@@ -61,27 +71,32 @@ const { actions, reducer } = createSlice({
       // eslint-disable-next-line no-param-reassign
       state.tikerinfo.favorite = payload;
     },
+    Modals: (state, { payload }) => {
+      // eslint-disable-next-line no-param-reassign
+      state.callResultModal = payload;
+    },
   },
   extraReducers: (bulider) => {
     bulider.addCase(postBookmark.fulfilled, (state, { payload }) => {
       // eslint-disable-next-line no-param-reassign
       state.tikerinfo = {
         ...state.tikerinfo,
-        favorite: true,
+        favorite: !state.tikerinfo.favorite,
       };
     });
-    // bulider.addCase(deleteBookmark.fulfilled, (state, { payload }) => {
-    //   // eslint-disable-next-line no-param-reassign
-    //   state.tikerinfo = {
-    //     ...state.tikerinfo,
-    //     favorite: false,
-    //   };
-    // });
   },
 });
 
-export const { detailList, tikerList, infos, addDetail, Amounts, updateSell, updateFavorite } =
-  actions;
+export const {
+  detailList,
+  tikerList,
+  infos,
+  addDetail,
+  Amounts,
+  updateSell,
+  updateFavorite,
+  Modals,
+} = actions;
 
 // 코인 정보리스트
 export const getTikerList = () =>
@@ -128,9 +143,13 @@ export const SelectingTiker = (selectInfo) =>
 // 거래내역 조회
 export const getDetail = (tiker, page) =>
   function (dispatch) {
-    intercept.get(`/api/transaction/${tiker}/${page}`).then((response) => {
-      dispatch(detailList(response.data.content));
-    });
+    console.log(`detailtiker: ${tiker}`);
+    if (tiker !== '') {
+      console.log(`detailtiker2: ${tiker}`);
+      intercept.get(`/api/transaction/${tiker}/${page}`).then((response) => {
+        dispatch(detailList(response.data.content));
+      });
+    }
   };
 
 // 매수 매도 처리
@@ -148,7 +167,14 @@ export const postBuySell = (type, requestData) =>
         buyPoint: response.data.accountBalance,
         sellPoint: response.data?.leftover !== undefined ? response.data?.leftover : 0,
       };
+      const modalData = {
+        isopen: true,
+        type: newArray.type,
+        desc: newArray,
+      };
+      console.log(modalData);
       dispatch(addDetail(newArray));
+      dispatch(Modals(modalData));
     });
   };
 
@@ -159,6 +185,28 @@ export const getUserAmount = (tiker) =>
       console.log(response.data);
       dispatch(Amounts(response.data));
     });
+  };
+
+export const postTikerListFavor = (tiker) =>
+  function (dispatch) {
+    console.log(`/api/account/bookmark/${tiker}`);
+    intercept.get(`/api/account/bookmark/${tiker}`).then((response) => {
+      console.log(response);
+      dispatch(updateFavorite(true));
+      dispatch(getTikerList());
+    });
+  };
+
+export const deleteTikerListFavor = (tikername) =>
+  function (dispatch) {
+    intercept
+      .delete(`/api/account/bookmark`, {
+        data: { tiker: tikername },
+      })
+      .then((response) => {
+        dispatch(updateFavorite(false));
+        dispatch(getTikerList());
+      });
   };
 
 export const PostServer = (url, requestData) =>

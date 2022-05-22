@@ -4,26 +4,36 @@ import Level from '../../../../share/Level';
 import { Won } from '../../../../share/convertWon';
 import ExpBar from './ExpBar';
 
-function Userinfo({ Info }) {
+function Userinfo({ Info, setCallUser }) {
   return (
     <div className="w-[387px] h-[345px] flex justify-start items-start gap-[10px] m-[20px,360px,3px,20px] p-5 rounded-[10px] shadow-box bg-Neutrals-white">
       {Info && (
         <div className="w-[347px] h-[305px] flex-grow-0 flex flex-col justify-start items-center gap-[30px]">
           <div className="h-[94px] self-stretch flex-grow-0 flex justify-start items-center gap-[20px]">
-            <div className=" z-[2]">
-              <img
-                className="w-[87px] h-[87px] rounded-full relative"
-                src={
-                  // eslint-disable-next-line no-nested-ternary
-                  Info.imageUrl !== undefined
-                    ? Info.imageUrl !== 'null'
-                      ? Info.imageUrl
+            <div className=" z-[2] relative">
+              <button
+                type="button"
+                onClick={() => {
+                  setCallUser({
+                    isopen: true,
+                    userId: Info.userId,
+                  });
+                }}
+              >
+                <img
+                  className="w-[87px] h-[87px] rounded-full"
+                  src={
+                    // eslint-disable-next-line no-nested-ternary
+                    Info.imageUrl !== undefined
+                      ? Info.imageUrl !== 'null'
+                        ? Info.imageUrl
+                        : '/images/defaultProfile/defalutProfile96.png'
                       : '/images/defaultProfile/defalutProfile96.png'
-                    : '/images/defaultProfile/defalutProfile96.png'
-                }
-                alt={Info.nickname}
-              />
-              <div className=" absolute top-[176px]">
+                  }
+                  alt={Info.nickname}
+                />
+              </button>
+              <div className=" absolute left-[5px] top-[65px]">
                 <Level Exp={Info?.exp !== undefined ? Info.exp : 0} />
               </div>
             </div>

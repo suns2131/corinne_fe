@@ -4,7 +4,7 @@ import Level from '../../../../share/Level';
 import Reset from '../../../../../public/icons/reset.svg';
 import { Won } from '../../../../share/convertWon';
 
-function Ranker({ type, rankerData, followBtn }) {
+function Ranker({ type, rankerData, followBtn, setCallUser }) {
   const [btns, setBtns] = useState(false);
   let bgColors = '';
   let textColors = '';
@@ -15,11 +15,11 @@ function Ranker({ type, rankerData, followBtn }) {
     textColors = 'text-Neutrals-white';
     rankText = '🥇1위';
   } else if (type === 2) {
-    bgColors = 'bg-Neutrals-black';
+    bgColors = 'bg-Neutrals-deepGray';
     textColors = 'text-Neutrals-white';
     rankText = '🥈2위';
   } else if (type === 3) {
-    bgColors = 'bg-Neutrals-black';
+    bgColors = 'bg-Neutrals-deepGray';
     textColors = 'text-Neutrals-white';
     rankText = '🥉3위';
   } else {
@@ -37,22 +37,38 @@ function Ranker({ type, rankerData, followBtn }) {
       >
         {rankText}
       </span>
-      <div className="w-[68px] h-[24px] flex-grow-0 flex justify-end items-center gap-[5px]">
-        <Image
-          src="/images/defaultProfile/defalutProfile24.png"
-          alt="defalutProfile"
-          width="24px"
-          height="24px"
-        />
+      <div className="w-[68px] h-[24px] flex-grow-0 flex justify-start items-center gap-[5px]">
+        <button
+          type="button"
+          onClick={() => {
+            setCallUser({
+              isopen: true,
+              userId: rankerData.userId,
+            });
+          }}
+        >
+          <Image
+            src="/images/defaultProfile/defalutProfile24.png"
+            alt="defalutProfile"
+            width="24px"
+            height="24px"
+          />
+        </button>
         <span
           className={`flex-grow-0 font-Pretendard text-[15px] font-bold text-left ${textColors}`}
         >
           {rankerData.nickname}
         </span>
       </div>
-      <Level Exp={20000} />
-      <span className="flex-grow-0 font-Pretendard text-[15px] font-bold text-right text-Primary-lightPurple">
-        {rankerData.fluctuationRate}%
+      <div className="w-[84px] flex justify-start items-center">
+        <Level Exp={rankerData.exp} />
+      </div>
+      <span className="w-[50px] flex justify-start items-center flex-grow-0 font-Pretendard text-[15px] font-bold text-right text-Primary-lightPurple">
+        {rankerData.fluctuationRate >= 0 ? (
+          <span className=" text-Primary-purple2">{rankerData.fluctuationRate}%</span>
+        ) : (
+          <span className=" text-Secondary-orange">{rankerData.fluctuationRate}%</span>
+        )}
       </span>
       <span className={`flex-grow-0 font-Pretendard text-[15px] text-right ${textColors}`}>
         {Won(rankerData?.totalBalance !== undefined ? rankerData.totalBalance : 0)}원

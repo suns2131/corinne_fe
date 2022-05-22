@@ -1,10 +1,12 @@
 import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
+import { selectedUserInfo } from '../../../../state/reducer/user/selectors';
 import styles from './Messages.module.css';
 
-function MessageBox({ nickname }) {
+function MessageBox() {
   const chattingData = useSelector((state) => state.chat.ChatMessage);
-  const username = nickname;
+  const userinfo = useSelector(selectedUserInfo);
+  console.log(userinfo);
   const scrollref = useRef(null);
 
   const scrollToBottom = () => {
@@ -20,10 +22,16 @@ function MessageBox({ nickname }) {
       {chattingData &&
         chattingData.map((el, idx) => (
           <ul>
-            {username === el.nickname ? (
+            {userinfo.nickname === el.nickname ? (
+              // eslint-disable-next-line react/no-array-index-key
+              <div key={idx} className={styles.Audience}>
+                <p className={styles.MyMessageTime}>{el.time}</p>
+                <div className={styles.AudienceMsg}>{el.message}</div>
+              </div>
+            ) : (
               // eslint-disable-next-line react/no-array-index-key
               <div key={idx} className={styles.MyMessage}>
-                <div className={styles.MyMessageImage} />
+                <img className={styles.MyMessageImage} src={el.imageUrl} alt={el.nickname} />
                 <div>
                   <p className={styles.MyMessageNickname}>{el.nickname}</p>
                   <div className={styles.MyMessageDiv1}>
@@ -31,12 +39,6 @@ function MessageBox({ nickname }) {
                     <p className={styles.MyMessageTime}>{el.time}</p>
                   </div>
                 </div>
-              </div>
-            ) : (
-              // eslint-disable-next-line react/no-array-index-key
-              <div key={idx} className={styles.Audience}>
-                <p className={styles.MyMessageTime}>{el.time}</p>
-                <div className={styles.AudienceMsg}>{el.message}</div>
               </div>
             )}
           </ul>

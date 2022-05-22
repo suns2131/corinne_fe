@@ -34,9 +34,11 @@ function TrandDetailContainer() {
 
   const getitem = useCallback(async () => {
     if (SelectCoin?.tiker !== undefined) {
-      await intercept.get(`/api/transaction/${SelectCoin.tiker}/${page}`).then((response) => {
-        setItem((prevItem) => [...prevItem].concat(response.data.content));
-      });
+      if (SelectCoin.tiker !== '') {
+        await intercept.get(`/api/transaction/${SelectCoin.tiker}/${page}`).then((response) => {
+          setItem((prevItem) => [...prevItem].concat(response.data.content));
+        });
+      }
     }
   }, [page]);
 
@@ -75,7 +77,7 @@ function TrandDetailContainer() {
       // 레버리지값으로 coins에서 필터링한 buyprice 값으로 계산하여 sellAmount 값 계산
       const newRequest = {
         ...sellRequest,
-        tradePrice: currentMount,
+        tradePrice: currentMount.tradePrice,
         sellAmount: Number(sellRef.current.value),
         tiker: SelectCoin.tiker,
       };
@@ -123,7 +125,8 @@ function TrandDetailContainer() {
       }
     } else if (type === 'sell') {
       const sell = sellRef.current.value;
-      const sellPercent = sellPrice;
+      const sellPercent = sellPoint;
+      console.log(`sells: ${sell}`);
       switch (sign) {
         case '-':
           if (sell - 50000 > 0) sellRef.current.value = sell - 50000;
@@ -183,6 +186,13 @@ function TrandDetailContainer() {
     setItem(BuySellData);
   }, [BuySellData]);
 
+  const changebuysell = (type) => {
+    if (type === 'buy') setBuysellState(true);
+    else setBuysellState(false);
+
+    dispatch(getDetail(SelectCoin.tiker, page));
+  };
+
   return (
     <TradeDetail
       infinitiRef={infinitiRef}
@@ -190,6 +200,7 @@ function TrandDetailContainer() {
       buysellState={buysellState}
       buyRequest={buyRequest}
       setBuyRequest={setBuyRequest}
+      changebuysell={changebuysell}
       sellRequest={sellRequest}
       setSellRequest={setSellRequest}
       setBuysellState={setBuysellState}

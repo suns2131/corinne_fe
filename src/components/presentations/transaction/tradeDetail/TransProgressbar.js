@@ -14,9 +14,10 @@ function TransProgressbar({
 }) {
   const dispatch = useDispatch();
   const marker = [{ value: 1 }, { value: 25 }, { value: 50 }, { value: 75 }, { value: 100 }];
-  const currentMount = useSelector((state) => state.chart.getCurrentMonut);
+  const currentMount = useSelector((state) => state.chart.getCurrentMonut.tradePrice);
+  console.log(currentMount);
   const sliderRef = useRef(null);
-  const [leverage, setLeverage] = React.useState(0);
+  const [leverage, setLeverage] = React.useState(1);
   // const sliderTheme = createTheme({
   //   palette : {
   //     customPurple: {
@@ -30,10 +31,11 @@ function TransProgressbar({
 
   useEffect(() => {
     if (userAmount?.coins !== undefined) {
-      const sell = userAmount.coins.filter((el) => el.leverage === leverage);
+      const sell = userAmount.coins.filter((el) => el.leverage === Number(sliderRef.current.value));
       if (sell.length > 0) {
         const bPrice = sell[0].buyPrice;
         const account = sell[0].amount;
+        console.log(currentMount);
         const yieldSell = ((currentMount - bPrice) / bPrice) * account;
         const sellmonut = Math.floor(yieldSell * leverage + account);
         dispatch(updateSell(sellmonut));
@@ -41,7 +43,7 @@ function TransProgressbar({
     }
   }, [currentMount]);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = () => {
     setLeverage(sliderRef.current.value);
     if (type === 'buy') {
       setBuyRequest({
@@ -49,16 +51,25 @@ function TransProgressbar({
         leverage: sliderRef.current.value,
       });
     } else if (type === 'sell') {
-      const sell = userAmount.coins.filter((el) => el.leverage === sliderRef.current.value);
+      const sell = userAmount.coins.filter((el) => el.leverage === Number(sliderRef.current.value));
+      // console.log(userAmount);
+      // console.log(sliderRef.current.value);
+      // console.log(`sell: ${sell}`);
       if (sell.length > 0) {
         const bPrice = sell[0].buyPrice;
         const account = sell[0].amount;
         const yieldSell = ((currentMount - bPrice) / bPrice) * account;
+        // console.log(yieldSell);
         const sellmonut = Math.floor(yieldSell * sliderRef.current.value + account);
+        // console.log(`yieldSell: ${yieldSell}`);
+        // console.log(`sliderRef.current.value: ${sliderRef.current.value}`);
+        // console.log(`account: ${account}`);
+
         setSellRequest({
           ...sellRequest,
           leverage: sliderRef.current.value,
         });
+
         dispatch(updateSell(sellmonut));
       } else {
         dispatch(updateSell(0));
@@ -77,6 +88,7 @@ function TransProgressbar({
             type="range"
             min="0"
             max="100"
+            defaultValue={1}
             onChange={handleChange}
             step={25}
           />
@@ -91,6 +103,7 @@ function TransProgressbar({
             type="range"
             min="0"
             max="100"
+            defaultValue={1}
             onChange={handleChange}
             step={25}
           />
