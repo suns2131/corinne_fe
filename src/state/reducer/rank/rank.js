@@ -178,11 +178,13 @@ export const postFollow = (userId, followStat) =>
       axiosInstance.delete(`/api/follow/${userId}`).then(() => {
         const page = 1;
         dispatch(getRealRank({ page }));
+        dispatch(getFollowlist());
       });
     } else {
       axiosInstance.post(`/api/follow/${userId}`).then(() => {
         const page = 1;
         dispatch(getRealRank({ page }));
+        dispatch(getFollowlist());
       });
     }
   };
