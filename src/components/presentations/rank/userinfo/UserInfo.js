@@ -62,7 +62,7 @@ function Userinfo({ Info, setCallUser }) {
                 현재랭킹
               </span>
             </div>
-            <div className="w-[52px] h-[48px] flex-grow-0 flex flex-col justify-start items-center gap-[10px]">
+            <div className="w-[80px] h-[48px] flex-grow-0 flex flex-col justify-start items-center gap-[10px]">
               <span className="h-[18px]  flex-grow-0 font-Pretendard text-[15px] font-bold text-center text-Neutrals-black">
                 {Info?.highRank !== undefined ? Info.highRank : 0}위
               </span>
