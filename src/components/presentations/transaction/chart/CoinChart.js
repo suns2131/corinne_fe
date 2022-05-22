@@ -13,6 +13,8 @@ function CoinChart({
   VolumeData,
   bookMarkClick,
   customer,
+  btnStat,
+  setBtnStat,
 }) {
   const dState = {
     options: {
@@ -171,15 +173,27 @@ function CoinChart({
         <div className="w-[710px] h-[32px] flex justify-center items-center mb-[10px]">
           <div className="w-[70px] h-[32px] gap-[7px] flex justify-start items-center mr-[15px]">
             <button
-              className="w-[32px] h-[32px] flex justify-center items-center rounded-[6px] border border-solid border-[#eeeeee] bg-[#ffffff] text-[12px] font-normal text-[#777777]"
-              onClick={() => [setChartType(true)]}
+              className={`w-[32px] h-[32px] flex justify-center items-center rounded-[6px] border border-solid border-[#eeeeee] ${btnStat.today} text-[12px] font-normal text-[#777777]`}
+              onClick={() => {
+                setBtnStat({
+                  stat: true,
+                  today: 'bg-[#eeeeee]',
+                  minute: 'bg-[#ffffff]',
+                });
+              }}
               type="button"
             >
               일
             </button>
             <button
-              className="w-[32px] h-[32px] flex justify-center items-center rounded-[6px] border border-solid border-[#eeeeee] bg-[#EEEEEE] text-[12px] font-normal text-[#777777]"
-              onClick={() => [setChartType(false)]}
+              className={`w-[32px] h-[32px] flex justify-center items-center rounded-[6px] border border-solid border-[#eeeeee] ${btnStat.minute} text-[12px] font-normal text-[#777777]`}
+              onClick={() => {
+                setBtnStat({
+                  stat: false,
+                  today: 'bg-[#ffffff]',
+                  minute: 'bg-[#eeeeee]',
+                });
+              }}
               type="button"
             >
               분

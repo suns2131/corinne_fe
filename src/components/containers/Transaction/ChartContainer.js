@@ -17,6 +17,11 @@ function ChartContainer() {
   const currentMount = useSelector((state) => state.chart.getCurrentMonut);
   const customer = useSelector((state) => state.chart.customer);
   const [chartType, setChartType] = useState(false); // false 분봉 / true 일봉
+  const [btnStat, setBtnStat] = useState({
+    stat: false,
+    today: 'bg-[#ffffff]',
+    minute: 'bg-[#eeeeee]',
+  });
   const subNum = useRef(1); // 구독취소할 subscribe id 저장변수
 
   // socketClient.debug = (str) => {
@@ -27,10 +32,10 @@ function ChartContainer() {
   React.useEffect(() => {
     if (selectInfo?.tiker !== undefined) {
       if (selectInfo.tiker !== '') {
-        dispatch(getLoadChart(selectInfo.tiker, chartType));
+        dispatch(getLoadChart(selectInfo.tiker, btnStat.stat));
       }
     }
-  }, [chartType, dispatch]);
+  }, [btnStat.stat, dispatch, selectInfo.tiker]);
 
   // 차트 데이터 검사 로직
   const DataSetting = (date, realData) => {
@@ -76,7 +81,7 @@ function ChartContainer() {
 
   // info 변경될때마다 API 갱신 웹소켓 연결 체크
   React.useEffect(() => {
-    dispatch(getLoadChart(selectInfo.tiker, chartType));
+    dispatch(getLoadChart(selectInfo.tiker, btnStat.stat));
 
     if (selectInfo?.tiker !== undefined && socketClient.connected) {
       console.log(`subNum: ${subNum.current}`);
@@ -144,6 +149,8 @@ function ChartContainer() {
         VolumeData={chartData.volume}
         bookMarkClick={bookMarkClick}
         customer={customer}
+        btnStat={btnStat}
+        setBtnStat={setBtnStat}
       />
     </div>
   );
