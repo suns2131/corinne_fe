@@ -32,7 +32,11 @@ function MyPageHoldingCoins({ userBalance }) {
                   fill="#FFCE85"
                 />
               </svg>
-              <img className="mr-2" src="/icons/icon_sol.png" alt="아이콘이미지" />
+              <img
+                className="mr-2"
+                src={`/icons/icon_${coin.split('-')[1].toLowerCase()}.png`}
+                alt="아이콘이미지"
+              />
               <div className="text-left">
                 <p className="font-bold">{coin.split('-')[1]}</p>
                 <p className="text-sm">{amount.toLocaleString()}원</p>

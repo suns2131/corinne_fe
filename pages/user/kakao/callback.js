@@ -28,9 +28,9 @@ export default function KakaoCallback() {
         dispatch(isFirstLogin(res.data));
         setCookie({ name: 'corinne', value: token });
         if (res.data) {
-          window.location.href = '/';
-        } else {
           window.location.href = '/?progress=image';
+        } else {
+          window.location.href = '/';
         }
       });
     }
