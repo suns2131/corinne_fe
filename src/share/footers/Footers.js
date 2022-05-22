@@ -84,8 +84,6 @@ function Footers() {
             <br />
             redux-Tookit
             <br />
-            redux-saga
-            <br />
             sockjs
             <br />
             stompjs
@@ -101,17 +99,21 @@ function Footers() {
             Back-End
           </span>
           <span className="w-[108px] h-[117px] flex-grow-0 text-[12px] font-Pretendard text-left text-Neutrals-lightGray">
-            Figma
+            Spring-Boot
             <br />
-            ProtoPie
+            Socket.io
             <br />
-            Zeplin
+            MySQL
             <br />
-            Adobe Photoshop
+            Redis
             <br />
-            Adobe Illustrator
+            AWS S3
             <br />
-            Adobe Premiere Pro
+            GitAction
+            <br />
+            AWS CodeDeploy
+            <br />
+            NginX
             <br />
           </span>
         </div>
