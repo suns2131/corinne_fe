@@ -59,7 +59,7 @@ function CoinChart({
   };
   return (
     <div className=" font-Pretendard">
-      <div className="w-[793px] h-[90px] bg-[#ffffff] flex flex-col items-start p-5 shadow-008 rounded-[10px] mb-5">
+      <div className="w-[793px] h-[90px] bg-[#ffffff] flex flex-col items-start p-5 shadow-box rounded-[10px] mb-5">
         <div className="w-[753px] h-[50px] flex justify-between items-center ">
           {selectInfo && (
             <div className="w-[130px] h-[50px] flex flex-row justify-center items-center gap-[11px] ">
@@ -167,7 +167,7 @@ function CoinChart({
           </div>
         </div>
       </div>
-      <div className="w-[793px] h-[558px] shadow-008 rounded-[10px] p-5 mb-[24px]">
+      <div className="w-[793px] h-[558px] shadow-box rounded-[10px] p-5 mb-[24px]">
         <div className="w-[710px] h-[32px] flex justify-center items-center mb-[10px]">
           <div className="w-[70px] h-[32px] gap-[7px] flex justify-start items-center mr-[15px]">
             <button

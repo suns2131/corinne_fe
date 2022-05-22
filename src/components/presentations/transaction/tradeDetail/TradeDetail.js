@@ -33,21 +33,21 @@ function TradeDetail({
         <div className="w-[386px] h-[464px] flex flex-col mr-5">
           <div className="flex">
             <button
-              className="w-[193px] h-[69px] bg-[#FFFFFF] shadow-008 rounded-t-[10px] flex flex-row justify-center items-center p-5 font-bold text-[16px] text-[#33323F]"
+              className="w-[193px] h-[69px] bg-[#FFFFFF] shadow-box rounded-t-[10px] flex flex-row justify-center items-center p-5 font-bold text-[16px] text-[#33323F]"
               onClick={() => changebuysell('buy')}
               type="button"
             >
               매수
             </button>
             <button
-              className="w-[193px] h-[69px] bg-[#EEEEEE] shadow-008 rounded-t-[10px] flex flex-row justify-center items-center p-5 font-bold text-[16px] text-[#CECECE]"
+              className="w-[193px] h-[69px] bg-[#EEEEEE] shadow-box rounded-t-[10px] flex flex-row justify-center items-center p-5 font-bold text-[16px] text-[#CECECE]"
               onClick={() => changebuysell('sell')}
               type="button"
             >
               매도
             </button>
           </div>
-          <div className="w-[386px] h-[395px] flex flex-col justify-center items-center p-5 shadow-008 rounded-b-[10]px">
+          <div className="w-[386px] h-[395px] flex flex-col justify-center items-center p-5 shadow-box rounded-b-[10]px">
             <div className="w-[339px] h-[188px] flex flex-col items-start mb-[77px]">
               <div className="w-full flex justify-between items-center mb-[33px]">
                 <p className="font-normal text-[14px] flex items-center text-[#33323f]">
@@ -162,21 +162,21 @@ function TradeDetail({
         <div className="w-[386px] h-[464px] flex flex-col mr-5">
           <div className="flex">
             <button
-              className="w-[193px] h-[69px] bg-[#EEEEEE] shadow-008 rounded-t-[10px] flex flex-row justify-center items-center p-5 font-bold text-[16px] text-[#CECECE]"
+              className="w-[193px] h-[69px] bg-[#EEEEEE] shadow-box rounded-t-[10px] flex flex-row justify-center items-center p-5 font-bold text-[16px] text-[#CECECE]"
               onClick={() => setBuysellState(true)}
               type="button"
             >
               매수
             </button>
             <button
-              className="w-[193px] h-[69px] bg-[#FFFFFF] shadow-008 rounded-t-[10px] flex flex-row justify-center items-center p-5 font-bold text-[16px] text-[#33323F]"
+              className="w-[193px] h-[69px] bg-[#FFFFFF] shadow-box rounded-t-[10px] flex flex-row justify-center items-center p-5 font-bold text-[16px] text-[#33323F]"
               onClick={() => setBuysellState(false)}
               type="button"
             >
               매도
             </button>
           </div>
-          <div className="w-[386px] h-[395px] flex flex-col justify-center items-center p-5 shadow-008 rounded-b-[10]px">
+          <div className="w-[386px] h-[395px] flex flex-col justify-center items-center p-5 shadow-box rounded-b-[10]px">
             <div className="w-[339px] h-[188px] flex flex-col items-start mb-[77px]">
               <div className="w-full flex justify-between items-center mb-[33px]">
                 <p className="font-normal text-[14px] flex items-center text-[#33323f]">
@@ -292,7 +292,7 @@ function TradeDetail({
       )}
 
       <div className="w-[386px] h-[464px]">
-        <div className="w-[386px] h-[69px] bg-[#ffffff] shadow-008 rounded-t-[10px] p-5 font-bold text-[16px] text-[#33323f]">
+        <div className="w-[386px] h-[69px] bg-[#ffffff] shadow-box rounded-t-[10px] p-5 font-bold text-[16px] text-[#33323f]">
           거래내역
         </div>
         <div className={styles.contestDiv}>

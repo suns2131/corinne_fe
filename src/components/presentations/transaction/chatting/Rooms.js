@@ -4,10 +4,10 @@ import MessageBox from './MessageBox';
 function Rooms({ sendMessage, setInputMessage }) {
   return (
     <div className=" font-Pretendard">
-      <div className=" w-[387px] h-[69px] bg-[#FFFFFF] rounded-t-[10px] shadow-008 p-5">
+      <div className=" w-[387px] h-[69px] bg-[#FFFFFF] rounded-t-[10px] shadow-box p-5">
         <p className="font-bold text-[16px] text-[#33323F]">채팅</p>
       </div>
-      <div className="bg-[#FFFFFF] w-[387px] h-[396px] rounded-b-[10px] shadow-008 px-5 pb-5">
+      <div className="bg-[#FFFFFF] w-[387px] h-[396px] rounded-b-[10px] shadow-box px-5 pb-5">
         <MessageBox />
         <div className="w-[347px] h-[32px] px-[15px] py-[8px] bg-[#f9f9f9] rounded-[22px] mt-[20px] flex ">
           <input

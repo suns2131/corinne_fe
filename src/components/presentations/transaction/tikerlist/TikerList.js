@@ -15,7 +15,7 @@ function TikerList({
   return (
     <div className=" font-Pretendard mb-5">
       {/* 헤더 */}
-      <div className=" w-[387px] h-[114px] flex flex-col items-start p-5 gap-[10px]  shadow-008 rounded-t-[10px]">
+      <div className=" w-[387px] h-[114px] flex flex-col items-start p-5 gap-[10px] shadow-box rounded-t-[10px] bg-Neutrals-white">
         <div className="w-[347px] h-[74px] mb-[10px]">
           <div className="flex mb-[10px]">
             <button
