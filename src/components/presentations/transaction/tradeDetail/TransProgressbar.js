@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateSell } from '../../../../state/reducer/transaction/trans';
+import { getUserAmount, updateSell } from '../../../../state/reducer/transaction/trans';
 import styles from './TradeDetail.module.css';
 
 function TransProgressbar({
@@ -45,6 +45,8 @@ function TransProgressbar({
 
   const handleChange = () => {
     setLeverage(sliderRef.current.value);
+    dispatch(getUserAmount());
+
     if (type === 'buy') {
       setBuyRequest({
         ...buyRequest,
@@ -52,18 +54,18 @@ function TransProgressbar({
       });
     } else if (type === 'sell') {
       const sell = userAmount.coins.filter((el) => el.leverage === Number(sliderRef.current.value));
-      // console.log(userAmount);
-      // console.log(sliderRef.current.value);
-      // console.log(`sell: ${sell}`);
+      console.log(userAmount);
+      console.log(sliderRef.current.value);
+      console.log(`sell: ${sell}`);
       if (sell.length > 0) {
         const bPrice = sell[0].buyPrice;
         const account = sell[0].amount;
         const yieldSell = ((currentMount - bPrice) / bPrice) * account;
-        // console.log(yieldSell);
+        console.log(yieldSell);
         const sellmonut = Math.floor(yieldSell * sliderRef.current.value + account);
-        // console.log(`yieldSell: ${yieldSell}`);
-        // console.log(`sliderRef.current.value: ${sliderRef.current.value}`);
-        // console.log(`account: ${account}`);
+        console.log(`yieldSell: ${yieldSell}`);
+        console.log(`sliderRef.current.value: ${sliderRef.current.value}`);
+        console.log(`account: ${account}`);
 
         setSellRequest({
           ...sellRequest,
@@ -86,7 +88,7 @@ function TransProgressbar({
             ref={sliderRef}
             className={styles.slidersbuy}
             type="range"
-            min="0"
+            min="1"
             max="100"
             defaultValue={1}
             onChange={handleChange}
@@ -101,7 +103,7 @@ function TransProgressbar({
             ref={sliderRef}
             className={styles.sliderssell}
             type="range"
-            min="0"
+            min="1"
             max="100"
             defaultValue={1}
             onChange={handleChange}

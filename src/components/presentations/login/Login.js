@@ -1,7 +1,7 @@
 import React from 'react';
 import CloseIcon from '../../../../public/icons/close.svg';
 
-function Login({ kakaoRedirectUrl, isLogin, goToTransaction, modal, setModal }) {
+function Login({ kakaoRedirectUrl, isLogin, goToTransaction, isModal, openEvent }) {
   return (
     <div>
       {isLogin ? (
@@ -13,14 +13,14 @@ function Login({ kakaoRedirectUrl, isLogin, goToTransaction, modal, setModal }) 
           >
             모의투자 바로가기
           </button>
-          {modal && (
+          {isModal && (
             <div className="w-full h-screen fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-40 text-center z-40">
               <div className="w-[600px] h-[600px] bg-[url('/images/eventpopup600.png')] bg-cover bg-center p-5 flex flex-col justify-start items-center">
                 <div className="w-[560px] mb-[495px] flex justify-end items-center ">
                   <button
                     className="text-Neutrals-white font-Pretendard"
                     type="button"
-                    onClick={() => setModal(false)}
+                    onClick={openEvent}
                   >
                     <CloseIcon />
                   </button>

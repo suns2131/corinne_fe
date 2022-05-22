@@ -17,6 +17,7 @@ const initialState = {
   userInfo: null,
   userBalance: null,
   userTransaction: null,
+  eventModal: false,
 };
 
 const { actions, reducer } = createSlice({
@@ -38,6 +39,10 @@ const { actions, reducer } = createSlice({
     setResetStatus: (state, { payload }) => ({
       ...state,
       resetStatus: payload,
+    }),
+    setEventModal: (state, { payload }) => ({
+      ...state,
+      eventModal: payload,
     }),
   },
   extraReducers: (builder) => {
@@ -74,6 +79,7 @@ const { actions, reducer } = createSlice({
   },
 });
 
-export const { login, isFirstLogin, initializeLoginStatus, setResetStatus } = actions;
+export const { login, isFirstLogin, initializeLoginStatus, setResetStatus, setEventModal } =
+  actions;
 
 export default reducer;

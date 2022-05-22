@@ -190,7 +190,11 @@ function TrandDetailContainer() {
     if (type === 'buy') setBuysellState(true);
     else setBuysellState(false);
 
-    dispatch(getDetail(SelectCoin.tiker, page));
+    // 매수 매도 금액 갱신 추가
+    
+
+    // page 정보 1로 갱신
+    setPage(1);
   };
 
   return (

@@ -3,7 +3,7 @@ import React, { useCallback, useState, useEffect, useMemo, useRef } from 'react'
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { initializeLoginStatus, login } from '../../state/reducer/user';
+import { initializeLoginStatus, login, setEventModal } from '../../state/reducer/user';
 import { selectedUserName, selectLoginStatus } from '../../state/reducer/user/selectors';
 import { changeImage, signUp } from '../../state/reducer/user/thunk';
 
@@ -36,6 +36,9 @@ function LoginContainer() {
   );
 
   const goBackPage = useCallback(() => {
+    if (router.pathname === '/') {
+      dispatch(setEventModal(true));
+    }
     router.push({
       pathname: router.pathname,
     });

@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setCookie } from '../../../src/share/cookie';
-import { isFirstLogin } from '../../../src/state/reducer/user';
+import { isFirstLogin, setEventModal } from '../../../src/state/reducer/user';
 
 export default function KakaoCallback() {
   const router = useRouter();
@@ -28,7 +28,8 @@ export default function KakaoCallback() {
         dispatch(isFirstLogin(res.data));
         setCookie({ name: 'corinne', value: token });
         if (!res.data) {
-          window.location.href = '/';
+          dispatch(setEventModal(true));
+          router.push('/');
         } else {
           window.location.href = '/?progress=image';
         }

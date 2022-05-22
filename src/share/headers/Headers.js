@@ -45,9 +45,9 @@ export default function Headers({ handleRouter, headerMenu }) {
 
   useEffect(() => {
     if (usertoken !== undefined) {
-      // console.log(`BEARER ${usertoken}`);
-      // console.log(socketClient.connected);
-      // console.log(userInfo);
+      console.log(`BEARER ${usertoken}`);
+      console.log(socketClient.connected);
+      console.log(userInfo);
       if (socketClient.connected === false && userInfo !== null) {
         // api/user/info에서 조회한 내정보의 userid로 알림 소켓 구독.
         // console.log(`소켓연결`);
@@ -85,7 +85,9 @@ export default function Headers({ handleRouter, headerMenu }) {
           },
           { token: `BEARER ${usertoken}` },
         );
-        window.location.replace(window.location.pathname);
+        if (window.location.pathname === '/transaction') {
+          window.location.replace(window.location.pathname);
+        }
       }
     };
   }, [dispatch, userInfo]);
