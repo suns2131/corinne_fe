@@ -1,7 +1,7 @@
 import React from 'react';
 import MessageBox from './MessageBox';
 
-function Rooms({ sendMessage, setInputMessage }) {
+function Rooms({ sendMessage, setInputMessage, sendBtn, messageRef }) {
   return (
     <div className=" font-Pretendard">
       <div className=" w-[387px] h-[69px] bg-[#FFFFFF] rounded-t-[10px] shadow-box p-5">
@@ -14,6 +14,7 @@ function Rooms({ sendMessage, setInputMessage }) {
             type="text"
             className="w-[300px] h-[18px] text-[15px] outline-none bg-transparent"
             placeholder="채팅을 입력해주세요"
+            ref={messageRef}
             onChange={(e) => {
               setInputMessage(e.target.value);
             }}
@@ -24,6 +25,7 @@ function Rooms({ sendMessage, setInputMessage }) {
           <button
             className="w-[47px] h-[18px] bg-transparent flex justify-center items-center "
             type="button"
+            onClick={sendBtn}
           >
             <svg
               width="14"

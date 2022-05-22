@@ -31,7 +31,7 @@ function MessageBox() {
             ) : (
               // eslint-disable-next-line react/no-array-index-key
               <div key={idx} className={styles.MyMessage}>
-                <div className={styles.MyMessageImage} />
+                <img className={styles.MyMessageImage} src={el.imageUrl} alt={el.nickname} />
                 <div>
                   <p className={styles.MyMessageNickname}>{el.nickname}</p>
                   <div className={styles.MyMessageDiv1}>
