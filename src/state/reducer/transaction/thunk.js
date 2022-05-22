@@ -23,3 +23,8 @@ export const getbuyCount = createAsyncThunk('/api/transaction/buycount', async (
   const response = await axiosInstance.get(`/api/transaction/buycount/${tiker}`);
   return response.data;
 });
+
+// export const getTradePrice = createAsyncThunk('/api/price/tradeprice', async (tiker) => {
+//   const response = await axiosInstance.get(`/api/price/tradeprice/${tiker}`);
+//   return response.data;
+// });

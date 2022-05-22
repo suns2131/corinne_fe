@@ -241,10 +241,8 @@ export default function Headers({ handleRouter, headerMenu }) {
           </nav>
         </div>
         {alarmState === 2 && (
-          <div className=" relative">
-            <div className=" absolute left-[773px] top-[-30px]">
-              <MyAlarm />
-            </div>
+          <div className=" absolute left-[1080px] top-[50px]">
+            <MyAlarm />
           </div>
         )}
         {emergency.emState && (

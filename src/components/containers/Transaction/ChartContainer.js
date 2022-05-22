@@ -6,6 +6,7 @@ import { getLoadChart, addChart, getCurMonut } from '../../../state/reducer/tran
 import {
   deleteBookmark,
   getbuyCount,
+  getTradePrice,
   postBookmark,
 } from '../../../state/reducer/transaction/thunk';
 import { getTikerList } from '../../../state/reducer/transaction/trans';

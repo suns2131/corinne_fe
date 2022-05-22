@@ -1,3 +1,5 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable react/jsx-no-comment-textnodes */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from '../../../../share/modal/Modal';
@@ -156,10 +158,27 @@ function UserProfile({ profile, setClose }) {
                   {Won(targetinfo?.accountBalance !== undefined ? targetinfo.accountBalance : 0)}원
                 </span>
                 <span className="h-[21px] flex-grow-0 font-Pretendard text-[15px] text-right text-Neutrals-black">
-                  0무 0승 0패
+                  {targetinfo?.draw !== undefined
+                    ? targetinfo.draw !== null
+                      ? targetinfo.draw
+                      : 0
+                    : 0}
+                  무
+                  {targetinfo?.win !== undefined
+                    ? targetinfo.win !== null
+                      ? targetinfo.win
+                      : 0
+                    : 0}
+                  승{' '}
+                  {targetinfo?.lose !== undefined
+                    ? targetinfo.lose !== null
+                      ? targetinfo.lose
+                      : 0
+                    : 0}
+                  패
                 </span>
                 <span className="h-[21px] flex-grow-0 font-Pretendard text-[15px] text-right text-Neutrals-black">
-                  0회
+                  {targetinfo.participation}회
                 </span>
                 <span className="h-[21px] flex-grow-0 font-Pretendard text-[15px] text-right text-Neutrals-lightGray ">
                   {targetinfo.resetCount}

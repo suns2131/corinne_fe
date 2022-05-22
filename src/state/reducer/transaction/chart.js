@@ -73,10 +73,34 @@ const { actions, reducer } = createSlice({
       // eslint-disable-next-line no-param-reassign
       state.customer = payload.buyCount;
     });
+
+    // bulider.addCase(getTradePrice.fulfilled, (state, { payload }) => {
+    //   // eslint-disable-next-line no-param-reassign
+    //   state.getCurrentMonut = payload.buyCount;
+    // });
   },
 });
 
 export const { addChart, updateChart, getCurMonut, getChart } = actions;
+
+export const getTradePrice = (tiker) =>
+  function (dispatch) {
+    intercept.get(`/api/price/tradeprice/${tiker}`).then((res) => {
+      console.log('tradeprice API');
+      console.log(res.data);
+      const TradeData = res.data;
+      const newCurrentData = {
+        tradePrice: TradeData.tradePrice,
+        highPrice: TradeData.highPrice,
+        lowPrice: TradeData.lowPrice,
+        prevClosingPrice: TradeData.prevClosingPrice,
+        signedChangePrice: TradeData.signedChangePrice,
+        signedChangeRate: Math.round((TradeData.signedChangeRate + Number.EPSILON) * 100) / 100,
+        tradeVolume: TradeData.tradeVolume,
+      };
+      dispatch(getCurMonut(newCurrentData));
+    });
+  };
 
 // 차트 정보 조회
 export const getLoadChart = (tiker, chartType) =>
@@ -101,6 +125,7 @@ export const getLoadChart = (tiker, chartType) =>
           });
           console.log(newChart);
           dispatch(getChart(newChart));
+          dispatch(getTradePrice(tiker));
         });
     }
   };

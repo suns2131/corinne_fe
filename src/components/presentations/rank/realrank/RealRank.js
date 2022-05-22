@@ -28,7 +28,7 @@ function RealRank({ RealRankData, infiniteRef, searchNickname, followBtn, setCal
           {RealRankData.map((el, idx) => (
             <div>
               <Ranker
-                type={idx + 1}
+                type={el.rank}
                 rankerData={el}
                 followBtn={followBtn}
                 setCallUser={setCallUser}
