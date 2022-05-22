@@ -237,7 +237,7 @@ function CoinChart({
                 {Won(currentMount?.tradeVolume !== undefined ? currentMount.tradeVolume : 0)}
               </span>
             </div>
-            <div className="w-[115px] h-[26px] bg-[#ffffff] border border-solid border-[#eeeeee] rounded-[6px] px-[6px] py-[3px] ">
+            <div className="h-[26px] bg-[#ffffff] border border-solid border-[#eeeeee] rounded-[6px] px-[6px] py-[3px] ">
               <p className="font-normal text-[12px] text-[#777777]">
                 금주 매수회원<span className=" text-Primary-purple2">{customer}</span>명
               </p>
