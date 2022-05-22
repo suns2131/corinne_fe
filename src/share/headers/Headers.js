@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -149,7 +150,13 @@ export default function Headers({ handleRouter, headerMenu }) {
                   className="w-[40px] h-[36px] grow-0 flex justify-center items-center cursor-pointer"
                 >
                   <Image
-                    src="/images/defaultProfile/defalutProfile32.png"
+                    src={
+                      userInfo?.imageUrl !== undefined
+                        ? userInfo.imageUrl !== 'null'
+                          ? userInfo.imageUrl
+                          : '/images/defaultProfile/defalutProfile32.png'
+                        : '/images/defaultProfile/defalutProfile32.png'
+                    }
                     alt="defaultProfile"
                     width="32px"
                     height="32px"
