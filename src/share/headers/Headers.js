@@ -105,14 +105,14 @@ export default function Headers({ handleRouter, headerMenu }) {
                     key={key}
                     role="presentation"
                     onClick={handleRouter(pathname)}
-                    className="w-[68px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px]"
+                    className="w-[90px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px]"
                   >
                     <span
                       className={cn(
                         pathname === router.pathname
                           ? 'text-Primary-purple font-bold'
                           : 'text-Neutrals-gray font-normal',
-                        'w-[52px] h-[18px] grow-0 font-Pretendard text-[15px]  text-center ',
+                        'w-[90px] h-[18px] grow-0 font-Pretendard text-[15px]  text-center ',
                       )}
                     >
                       {menu}
@@ -190,14 +190,14 @@ export default function Headers({ handleRouter, headerMenu }) {
                   key={key}
                   role="presentation"
                   onClick={handleRouter(pathname)}
-                  className="w-[120px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px] cursor-pointer"
+                  className="w-[90px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px] cursor-pointer"
                 >
                   <span
                     className={cn(
                       pathname === router.pathname
                         ? 'text-Primary-purple font-bold'
                         : 'text-Neutrals-white font-normal',
-                      'w-[120px] h-[18px] grow-0 font-Pretendard text-[15px]  text-center ',
+                      'w-[90px] h-[18px] grow-0 font-Pretendard text-[15px]  text-center ',
                     )}
                   >
                     {menu}
@@ -210,10 +210,10 @@ export default function Headers({ handleRouter, headerMenu }) {
                   removeCookie({ name: 'corinne' });
                   window.location.replace(window.location.pathname);
                 }}
-                className="w-[68px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px]"
+                className="w-[90px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px]"
               >
                 <Link href="/">
-                  <span className="w-[52px] h-[18px] grow-0 font-Pretendard text-[15px] font-normal text-center text-Neutrals-white cursor-pointer">
+                  <span className="w-[90px] h-[18px] grow-0 font-Pretendard text-[15px] font-normal text-center text-Neutrals-white cursor-pointer">
                     로그아웃
                   </span>
                 </Link>
