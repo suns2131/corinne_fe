@@ -1,7 +1,7 @@
 import React from 'react';
 import CloseIcon from '../../../../public/icons/close.svg';
 
-function Login({ kakaoRedirectUrl, isLogin, goToTransaction, isModal, openEvent }) {
+function Login({ kakaoRedirectUrl, isLogin, goToTransaction, isModal, openEvent, goSurvey }) {
   return (
     <div>
       {isLogin ? (
@@ -38,6 +38,7 @@ function Login({ kakaoRedirectUrl, isLogin, goToTransaction, isModal, openEvent 
                   <button
                     className="w-[273px] h-[48px] bg-Primary-purple rounded-[10px] flex items-center justify-center"
                     type="button"
+                    onClick={goSurvey}
                   >
                     <span className="w-[248px] h-[21px] font-Pretendard text-[14px] text-Neutrals-white flex flex-col justify-center items-center">
                       설문조사 바로가기

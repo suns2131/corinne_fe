@@ -167,10 +167,8 @@ export default function Headers({ handleRouter, headerMenu }) {
             </nav>
           </div>
           {alarmState === 2 && (
-            <div className=" relative">
-              <div className=" absolute left-[773px] top-[-30px]">
-                <MyAlarm />
-              </div>
+            <div className=" absolute left-[1115px] top-[50px]">
+              <MyAlarm />
             </div>
           )}
           {emergency.emState && (
@@ -241,8 +239,15 @@ export default function Headers({ handleRouter, headerMenu }) {
                 onClick={handleRouter('/mypage')}
                 className="w-[40px] h-[36px] grow-0 flex justify-center items-center cursor-pointer"
               >
-                <Image
-                  src="/images/defaultProfile/defalutProfile32.png"
+                <img
+                  className=" rounded-full"
+                  src={
+                    userInfo?.imageUrl !== undefined
+                      ? userInfo.imageUrl !== 'null'
+                        ? userInfo.imageUrl
+                        : '/images/defaultProfile/defalutProfile32.png'
+                      : '/images/defaultProfile/defalutProfile32.png'
+                  }
                   alt="defaultProfile"
                   width="32px"
                   height="32px"
@@ -252,7 +257,7 @@ export default function Headers({ handleRouter, headerMenu }) {
           </nav>
         </div>
         {alarmState === 2 && (
-          <div className=" absolute left-[1080px] top-[50px]">
+          <div className=" absolute left-[1115px] top-[50px]">
             <MyAlarm />
           </div>
         )}

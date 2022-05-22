@@ -27,6 +27,10 @@ export default function HomeContainer() {
     dispatch(setEventModal(false));
   };
 
+  const goSurvey = () => {
+    window.location.href = 'https://forms.gle/f7hsZ7iQrJfZnFND9';
+  };
+
   return (
     <Wrapper>
       <HomeText />
@@ -38,6 +42,7 @@ export default function HomeContainer() {
         setModal={setModal}
         isModal={isModal}
         openEvent={openEvent}
+        goSurvey={goSurvey}
       />
       <LoginContainer />
     </Wrapper>

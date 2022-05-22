@@ -6,7 +6,7 @@ import Hoveroff from '../../../../../public/icons/help/helpnone.svg';
 import { Won } from '../../../../share/convertWon';
 import Help from '../help/Help';
 
-function PrevRank({ setModal, prevRankTop3, setCallUser, type }) {
+function PrevRank({ setModal, prevRankTop3, setCallUser, type, goSurvey }) {
   const [help, sethelp] = useState(false);
   const now = dayjs();
   const mon = now.set('d', 1);
@@ -203,6 +203,7 @@ function PrevRank({ setModal, prevRankTop3, setCallUser, type }) {
         <button
           className="w-[248px] h-[48px] flex justify-end items-center bg-Primary-purple mb-[12px] mr-[12px] rounded-[10px] active:bg-Primary-purple2"
           type="button"
+          onClick={goSurvey}
         >
           <span className="w-[248px] h-[21px] font-Pretendard text-[14px] text-Neutrals-white flex flex-col justify-center items-center">
             설문조사 바로가기

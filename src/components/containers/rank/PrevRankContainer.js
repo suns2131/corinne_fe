@@ -6,7 +6,18 @@ function PrevRankContainer({ setModal, setCallUser }) {
   const prevRankTop3Data = useTop3();
   console.log(prevRankTop3Data);
 
-  return <PrevRank setModal={setModal} prevRankTop3={prevRankTop3Data} setCallUser={setCallUser} />;
+  const goSurvey = () => {
+    window.location.href = 'https://forms.gle/f7hsZ7iQrJfZnFND9';
+  };
+
+  return (
+    <PrevRank
+      setModal={setModal}
+      prevRankTop3={prevRankTop3Data}
+      setCallUser={setCallUser}
+      goSurvey={goSurvey}
+    />
+  );
 }
 
 export default PrevRankContainer;
