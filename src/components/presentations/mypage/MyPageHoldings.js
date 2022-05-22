@@ -4,7 +4,7 @@ function MyPageHoldings({ openResetModal, userBalance, profitOrLossCheck }) {
   if (!userBalance) return null;
 
   const { accountBalance, totalBalance } = userBalance;
-  const upDownCheck = profitOrLossCheck({ account: totalBalance, profit: accountBalance });
+  const upDownCheck = profitOrLossCheck({ account: totalBalance, profit: 1000000 });
   return (
     <div className="shadow-box rounded-lg">
       <section className="shadow-box h-[70px] p-5">
