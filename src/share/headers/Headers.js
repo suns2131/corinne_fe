@@ -126,16 +126,15 @@ export default function Headers({ handleRouter, headerMenu }) {
                 <li
                   role="presentation"
                   onClick={() => {
+                    console.log('쿠키삭제');
                     removeCookie({ name: 'corinne' });
-                    router.push('/');
+                    // window.location.replace('/');
                   }}
                   className="w-[90px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px]"
                 >
-                  <Link href="/">
-                    <span className="w-[90px] h-[18px] grow-0 font-Pretendard text-[15px] font-normal text-center text-Neutrals-gray cursor-pointer">
-                      로그아웃
-                    </span>
-                  </Link>
+                  <span className="w-[90px] h-[18px] grow-0 font-Pretendard text-[15px] font-normal text-center text-Neutrals-gray cursor-pointer">
+                    로그아웃
+                  </span>
                 </li>
                 <li className="w-[24px] h-[24px] grow-0 flex justify-center items-center">
                   <button type="button" onClick={clickAlram}>
@@ -185,95 +184,94 @@ export default function Headers({ handleRouter, headerMenu }) {
         </div>
       );
     }
-
-    return (
-      <div>
-        <div className="w-container h-headers flex justify-between items-center mb-5">
-          <div className="h-[36px] text-[30px] font-bold text-left text-Neutrals-white flex justify-start items-center">
-            <Link href="/">corinne</Link>
-          </div>
-          <nav>
-            <ul className="w-[450px] h-[36px] grow-0 flex justify-center items-center gap-[25px]">
-              {headerMenu.map(({ key, pathname, menu }) => (
-                <li
-                  key={key}
-                  role="presentation"
-                  onClick={handleRouter(pathname)}
-                  className="w-[90px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px] cursor-pointer"
-                >
-                  <span
-                    className={cn(
-                      pathname === router.pathname
-                        ? 'text-Primary-purple font-bold'
-                        : 'text-Neutrals-white font-normal',
-                      'w-[90px] h-[18px] grow-0 font-Pretendard text-[15px]  text-center ',
-                    )}
+    if (window.location.pathname === '/') {
+      return (
+        <div>
+          <div className="w-container h-headers flex justify-between items-center mb-5">
+            <div className="h-[36px] text-[30px] font-bold text-left text-Neutrals-white flex justify-start items-center">
+              <Link href="/">corinne</Link>
+            </div>
+            <nav>
+              <ul className="w-[450px] h-[36px] grow-0 flex justify-center items-center gap-[25px]">
+                {headerMenu.map(({ key, pathname, menu }) => (
+                  <li
+                    key={key}
+                    role="presentation"
+                    onClick={handleRouter(pathname)}
+                    className="w-[90px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px] cursor-pointer"
                   >
-                    {menu}
-                  </span>
-                </li>
-              ))}
-              <li
-                role="presentation"
-                onClick={() => {
-                  removeCookie({ name: 'corinne' });
-                  window.location.replace(window.location.pathname);
-                }}
-                className="w-[90px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px]"
-              >
-                <Link href="/">
+                    <span
+                      className={cn(
+                        pathname === router.pathname
+                          ? 'text-Primary-purple font-bold'
+                          : 'text-Neutrals-white font-normal',
+                        'w-[90px] h-[18px] grow-0 font-Pretendard text-[15px]  text-center ',
+                      )}
+                    >
+                      {menu}
+                    </span>
+                  </li>
+                ))}
+                <li
+                  role="presentation"
+                  onClick={() => {
+                    removeCookie({ name: 'corinne' });
+                    window.location.reload();
+                  }}
+                  className="w-[90px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px]"
+                >
                   <span className="w-[90px] h-[18px] grow-0 font-Pretendard text-[15px] font-normal text-center text-Neutrals-white cursor-pointer">
                     로그아웃
                   </span>
-                </Link>
-              </li>
-              <li className="w-[24px] h-[24px] grow-0 flex justify-center items-center">
-                <button type="button" onClick={clickAlram}>
-                  {alarmState === 0 && <AlarmWhite />}
-                  {alarmState === 1 && <AlarmRing />}
-                  {alarmState === 2 && <AlarmClick />}
-                </button>
-              </li>
-              <li
-                role="presentation"
-                onClick={handleRouter('/mypage')}
-                className="w-[40px] h-[36px] grow-0 flex justify-center items-center cursor-pointer"
-              >
-                <img
-                  className=" rounded-full"
-                  src={
-                    userInfo?.imageUrl !== undefined
-                      ? userInfo.imageUrl !== 'null'
-                        ? userInfo.imageUrl
+                </li>
+                <li className="w-[24px] h-[24px] grow-0 flex justify-center items-center">
+                  <button type="button" onClick={clickAlram}>
+                    {alarmState === 0 && <AlarmWhite />}
+                    {alarmState === 1 && <AlarmRing />}
+                    {alarmState === 2 && <AlarmClick />}
+                  </button>
+                </li>
+                <li
+                  role="presentation"
+                  onClick={handleRouter('/mypage')}
+                  className="w-[40px] h-[36px] grow-0 flex justify-center items-center cursor-pointer"
+                >
+                  <img
+                    className=" rounded-full"
+                    src={
+                      userInfo?.imageUrl !== undefined
+                        ? userInfo.imageUrl !== 'null'
+                          ? userInfo.imageUrl
+                          : '/images/defaultProfile/defalutProfile32.png'
                         : '/images/defaultProfile/defalutProfile32.png'
-                      : '/images/defaultProfile/defalutProfile32.png'
-                  }
-                  alt="defaultProfile"
-                  width="32px"
-                  height="32px"
-                />
-              </li>
-            </ul>
-          </nav>
-        </div>
-        {alarmState === 2 && (
-          <div className=" absolute left-[1115px] top-[50px]">
-            <MyAlarm />
+                    }
+                    alt="defaultProfile"
+                    width="32px"
+                    height="32px"
+                  />
+                </li>
+              </ul>
+            </nav>
           </div>
-        )}
-        {emergency.emState && (
-          <div className=" relative">
-            <div className=" absolute left-[403px] top-[-30px]">
-              <Modal title={emergency.title} setClose={setEmergency} btnView>
-                <div className="w-[392px] font-Pretendard text-[16px] text-left text-Neutrals-black">
-                  {emergency.desc}
-                </div>
-              </Modal>
+          {alarmState === 2 && (
+            <div className=" absolute left-[1115px] top-[50px]">
+              <MyAlarm />
             </div>
-          </div>
-        )}
-      </div>
-    );
+          )}
+          {emergency.emState && (
+            <div className=" relative">
+              <div className=" absolute left-[403px] top-[-30px]">
+                <Modal title={emergency.title} setClose={setEmergency} btnView>
+                  <div className="w-[392px] font-Pretendard text-[16px] text-left text-Neutrals-black">
+                    {emergency.desc}
+                  </div>
+                </Modal>
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
   }
 
   return (

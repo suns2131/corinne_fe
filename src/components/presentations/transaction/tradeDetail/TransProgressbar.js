@@ -37,6 +37,7 @@ function TransProgressbar({
 
   useEffect(() => {
     if (userAmount?.coins !== undefined) {
+      dispatch(getUserAmount(SelectCoin.tiker));
       const sell = userAmount.coins.filter((el) => el.leverage === Number(sellLeverage));
       if (sell.length > 0) {
         const bPrice = sell[0].buyPrice;
@@ -52,7 +53,8 @@ function TransProgressbar({
   useEffect(() => {
     setBuyLeverage(1);
     setSellLeverage(1);
-  }, [buysellState]);
+    dispatch(getUserAmount(SelectCoin.tiker));
+  }, [SelectCoin, buysellState]);
 
   const handleChange = (event, newValue) => {
     setBuyLeverage(newValue);
@@ -109,6 +111,7 @@ function TransProgressbar({
               sx={{ width: 213, height: 7 }}
               aria-label="Restricted values"
               defaultValue={1}
+              min={1}
               value={buyLeverage}
               valueLabelFormat={buyValueLabelFormat}
               getAriaValueText={buyValueText}
@@ -129,6 +132,7 @@ function TransProgressbar({
               sx={{ width: 213, height: 7 }}
               aria-label="Restricted values"
               defaultValue={1}
+              min={1}
               value={sellLeverage}
               valueLabelFormat={sellValueLabelFormat}
               getAriaValueText={sellValueText}
