@@ -26,6 +26,7 @@ function TradeDetail({
   setSellPrice,
   buyPoint,
   sellPoint,
+  SelectCoin,
 }) {
   return (
     <div className=" font-Pretendard flex justify-center items-center">
@@ -61,6 +62,7 @@ function TradeDetail({
                 buyRequest={buyRequest}
                 setBuyRequest={setBuyRequest}
                 currentMount={currentMount}
+                SelectCoin={SelectCoin}
               />
               <div className="w-full h-[88px] flex justify-between items-center ">
                 <div className="h-[88px] text-[14px] mt-[15px]">매수 금액</div>
@@ -192,6 +194,7 @@ function TradeDetail({
                 currentMount={currentMount}
                 userAmount={userAmount}
                 setSellPrice={setSellPrice}
+                SelectCoin={SelectCoin}
               />
               <div className="w-full h-[88px] flex justify-between items-center ">
                 <div className="h-[88px] text-[14px] mt-[15px]">매도 금액</div>

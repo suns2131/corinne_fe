@@ -4,7 +4,11 @@ import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { initializeLoginStatus, login, setEventModal } from '../../state/reducer/user';
-import { selectedUserName, selectLoginStatus } from '../../state/reducer/user/selectors';
+import {
+  selectedUserInfo,
+  selectedUserName,
+  selectLoginStatus,
+} from '../../state/reducer/user/selectors';
 import { changeImage, signUp } from '../../state/reducer/user/thunk';
 
 import FirstLoginForm from '../presentations/login/FirstLoginForm';
@@ -20,10 +24,13 @@ function LoginContainer() {
 
   const status = useSelector(selectLoginStatus);
   const selectUserName = useSelector(selectedUserName);
+  const userInfo = useSelector(selectedUserInfo);
 
   const [loginStatusText, setLoginStatusText] = useState('');
   const [loginStatus, setLoginStatus] = useState(false);
-  const [profileImgPreview, setProfileImgPreview] = useState();
+  const [profileImgPreview, setProfileImgPreview] = useState(
+    userInfo ? userInfo.imageUrl : './images/defaultProfile/defaultProfile180.png',
+  );
 
   const goNextProgress = useCallback(
     (query) => () => {
@@ -103,6 +110,7 @@ function LoginContainer() {
           profileImgPreview={profileImgPreview}
           handleProfileImgUpload={handleProfileImgUpload}
           handleClickProfileImg={handleClickProfileImg}
+          goBackPage={goBackPage}
           goNextProgress={goNextProgress({ progress: 'nickname' })}
         />
       ),
@@ -110,6 +118,7 @@ function LoginContainer() {
         <ChangeNickname
           handeChangeUserName={handeChangeUserName}
           handleClickLoginSuccess={handleClickLoginSuccess}
+          goBackPage={goBackPage}
           loginStatus={loginStatus}
           loginStatusText={loginStatusText}
         />

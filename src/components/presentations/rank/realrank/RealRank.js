@@ -12,7 +12,7 @@ function RealRank({ RealRankData, infiniteRef, searchNickname, followBtn, setCal
           </span>
           <div className="w-[216px] h-[44px] flex-grow-0 flex justify-between items-center px-[15px] py-[4px] rounded-[10px] bg-Neutrals-whiteGray2">
             <input
-              className="bg-transparent text-[15px]"
+              className="bg-transparent text-[15px] w-[180px]"
               type="text"
               placeholder="닉네임 검색"
               onChange={searchNickname}

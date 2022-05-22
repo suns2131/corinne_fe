@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import Image from 'next/image';
 import React, { useState } from 'react';
 import dayjs from 'dayjs';
@@ -56,8 +57,15 @@ function PrevRank({ setModal, prevRankTop3, setCallUser }) {
                     setCallUser({ isopen: true, userId: prevRankTop3.states[1].userId });
                   }}
                 >
-                  <Image
-                    src="/images/defaultProfile/defalutProfile96.png"
+                  <img
+                    className=" border border-solid border-Neutrals-lightGray rounded-full"
+                    src={
+                      prevRankTop3.states[1]?.imageUrl !== undefined
+                        ? prevRankTop3.states[1].imageUrl !== 'null'
+                          ? prevRankTop3.states[1].imageUrl
+                          : '/images/defaultProfile/defalutProfile96.png'
+                        : '/images/defaultProfile/defalutProfile96.png'
+                    }
                     alt="defalutProfile"
                     width="84px"
                     height="84px"
@@ -93,9 +101,15 @@ function PrevRank({ setModal, prevRankTop3, setCallUser }) {
                     setCallUser({ isopen: true, userId: prevRankTop3.states[0].userId });
                   }}
                 >
-                  <Image
-                    className=" border border-solid border-Neutrals-lightGray"
-                    src="/images/defaultProfile/defalutProfile120.png"
+                  <img
+                    className=" border border-solid border-Neutrals-lightGray rounded-full"
+                    src={
+                      prevRankTop3.states[0]?.imageUrl !== undefined
+                        ? prevRankTop3.states[0].imageUrl !== 'null'
+                          ? prevRankTop3.states[0].imageUrl
+                          : '/images/defaultProfile/defalutProfile96.png'
+                        : '/images/defaultProfile/defalutProfile96.png'
+                    }
                     alt="defalutProfile"
                     width="110px"
                     height="110px"
@@ -131,8 +145,15 @@ function PrevRank({ setModal, prevRankTop3, setCallUser }) {
                     setCallUser({ isopen: true, userId: prevRankTop3.states[2].userId });
                   }}
                 >
-                  <Image
-                    src="/images/defaultProfile/defalutProfile96.png"
+                  <img
+                    className=" border border-solid border-Neutrals-lightGray rounded-full"
+                    src={
+                      prevRankTop3.states[2]?.imageUrl !== undefined
+                        ? prevRankTop3.states[2].imageUrl !== 'null'
+                          ? prevRankTop3.states[2].imageUrl
+                          : '/images/defaultProfile/defalutProfile96.png'
+                        : '/images/defaultProfile/defalutProfile96.png'
+                    }
                     alt="defalutProfile"
                     width="84px"
                     height="84px"

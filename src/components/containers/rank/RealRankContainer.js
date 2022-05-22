@@ -11,7 +11,7 @@ function RealRankContainer({ setCallUser }) {
   const [page, setPage] = useState(1);
   const [list, setList] = useState();
   const realRankState = useSelector(selectRankState);
-  const totalPage = useSelector((state) => state.rank.totalPage);
+  const totalPage = useSelector((state) => state.rank.realRankTotalPage);
   const [infiniteRef, inView] = useInView();
 
   useEffect(() => {
@@ -25,7 +25,9 @@ function RealRankContainer({ setCallUser }) {
   React.useEffect(() => {
     if (inView) {
       console.log(`inView: ${inView}`);
-      if (page < totalPage) setPage((prevPage) => prevPage + 1);
+      console.log(`page: ${page}`);
+      console.log(`totalPage: ${totalPage}`);
+      if (page < totalPage) setPage(page + 1);
     }
   }, [inView]);
 

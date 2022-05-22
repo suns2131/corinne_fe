@@ -7,14 +7,14 @@ import axiosInstance from '../../../data/axios';
 //   return response.data;
 // });
 
-export const getRealRank = createAsyncThunk('rank/getRealRank', async ({ page }, thunkApi) => {
-  const { RealRank } = thunkApi.getState().rank;
+export const getRealRank = createAsyncThunk('rank/getRealRank', async ({ page }, { getState }) => {
+  const RealRank = getState().rank.realRank;
   const { data } = await axiosInstance.get(`/api/rank/${page}`);
 
   if (RealRank == null) {
     return data;
   }
-  const newContent = [...data.rank, ...RealRank.rank];
+  const newContent = [...getState().rank.realRank, ...data.rank];
   const newData = {
     ...data,
     rank: newContent,

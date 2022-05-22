@@ -9,6 +9,7 @@ const initialState = {
   tikername_en: '',
   tikerList: [],
   transDetail: [],
+  detailTotalpage: 0,
   tikerinfo: {
     favorite: false, // 즐겨찾기
     imageUrl: '/icons/icon_btc.png', // 코인 이미지 주소
@@ -48,6 +49,14 @@ const { actions, reducer } = createSlice({
     tikerList: (state, { payload }) => {
       // eslint-disable-next-line no-param-reassign
       state.tikerList = payload;
+      // console.log(`tikerinfo ${state.tikerinfo.tiker}`);
+      // console.log(`payload ${payload}`);
+      // // eslint-disable-next-line no-param-reassign
+      // if (state.tikerinfo.tiker === payload.tiker) state.tikerinfo.favorite = payload.favorite;
+    },
+    detilapage: (state, { payload }) => {
+      // eslint-disable-next-line no-param-reassign
+      state.detailTotalpage = payload;
       // console.log(`tikerinfo ${state.tikerinfo.tiker}`);
       // console.log(`payload ${payload}`);
       // // eslint-disable-next-line no-param-reassign
@@ -96,6 +105,7 @@ export const {
   updateSell,
   updateFavorite,
   Modals,
+  detilapage,
 } = actions;
 
 // 코인 정보리스트
@@ -142,12 +152,17 @@ export const SelectingTiker = (selectInfo) =>
 
 // 거래내역 조회
 export const getDetail = (tiker, page) =>
-  function (dispatch) {
+  function (dispatch, getState) {
     console.log(`detailtiker: ${tiker}`);
     if (tiker !== '') {
       console.log(`detailtiker2: ${tiker}`);
       intercept.get(`/api/transaction/${tiker}/${page}`).then((response) => {
-        dispatch(detailList(response.data.content));
+        console.log(response.data);
+        console.log();
+        // eslint-disable-next-line no-undef
+        const newArray = [...getState().trans.transDetail, ...response.data.content];
+        dispatch(detilapage(response.data.totalPages));
+        dispatch(detailList(newArray));
       });
     }
   };

@@ -15,6 +15,7 @@ function TrandDetailContainer() {
   const buyPoint = useSelector((state) => state.trans.buyPoint);
   const sellPoint = useSelector((state) => state.trans.sellPoint);
   const currentMount = useSelector((state) => state.chart.getCurrentMonut);
+  const detailPage = useSelector((state) => state.trans.detailTotalpage);
 
   const [page, setPage] = useState(1);
   const [sellPrice, setSellPrice] = useState(0);
@@ -32,15 +33,9 @@ function TrandDetailContainer() {
     sellAmount: 0,
   });
 
-  const getitem = useCallback(async () => {
-    if (SelectCoin?.tiker !== undefined) {
-      if (SelectCoin.tiker !== '') {
-        await intercept.get(`/api/transaction/${SelectCoin.tiker}/${page}`).then((response) => {
-          setItem((prevItem) => [...prevItem].concat(response.data.content));
-        });
-      }
-    }
-  }, [page]);
+  React.useEffect(() => {
+    dispatch(getDetail(SelectCoin.tiker, page));
+  }, [dispatch, page]);
 
   // 유저 자산 정보 조회
   React.useEffect(() => {
@@ -163,14 +158,9 @@ function TrandDetailContainer() {
     }
   };
 
-  // getitem 변경될때마다 실행.
-  React.useEffect(() => {
-    getitem();
-  }, [getitem]);
-
   // 사용자가 마지막 요소 조회시 page + 1
   React.useEffect(() => {
-    if (inView && SelectCoin?.tiker !== undefined) setPage((prevPage) => prevPage + 1);
+    if (inView && SelectCoin?.tiker !== undefined && detailPage > page) setPage(page + 1);
   }, [inView]);
 
   // info 변경될때마다 deatil 갱신
@@ -191,10 +181,8 @@ function TrandDetailContainer() {
     else setBuysellState(false);
 
     // 매수 매도 금액 갱신 추가
-    
 
     // page 정보 1로 갱신
-    setPage(1);
   };
 
   return (
@@ -219,6 +207,7 @@ function TrandDetailContainer() {
       sellPrice={sellPrice}
       buyPoint={buyPoint}
       sellPoint={sellPoint}
+      SelectCoin={SelectCoin}
     />
   );
 }

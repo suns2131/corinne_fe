@@ -12,7 +12,7 @@ function FollowRank({ followlist, searchNickname, setCallUser }) {
           </span>
           <div className="w-[216px] h-[44px] flex-grow-0 flex justify-between items-center py-[4px] px-[15px] rounded-[10px] bg-Neutrals-whiteGray ">
             <input
-              className=" outline-none bg-transparent"
+              className=" outline-none bg-transparent w-[180px]"
               type="text"
               placeholder="닉네임 검색"
               onChange={searchNickname}

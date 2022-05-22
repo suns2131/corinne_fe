@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import Image from 'next/image';
 import React from 'react';
 import defalutProfile from '../../../../../public/images/defaultProfile/defalutProfile60.png';
@@ -15,11 +16,19 @@ function Follower({ followData, setCallUser }) {
             setCallUser({ isopen: true, userId: followData.userId });
           }}
         >
-          <Image
-            src={followData.imageUrl !== 'null' ? followData.imageUrl : defalutProfile}
+          <img
+            className="rounded-full"
+            src={
+              followData?.imageUrl !== undefined
+                ? followData.imageUrl !== 'null'
+                  ? followData.imageUrl
+                  : '/images/defaultProfile/defalutProfile60.png'
+                : '/images/defaultProfile/defalutProfile60.png'
+            }
             width="60px"
             height="60px"
             objectFit="contain"
+            alt="df"
           />
         </button>
 

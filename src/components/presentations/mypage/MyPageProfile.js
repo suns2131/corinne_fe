@@ -1,4 +1,6 @@
 import { memo } from 'react';
+import { maxExp } from '../../../share/exp';
+import Level from '../../../share/Level';
 import styles from './mypage.module.css';
 
 function MyPageProfile({ userInfo, goChangeProfile }) {
@@ -15,13 +17,16 @@ function MyPageProfile({ userInfo, goChangeProfile }) {
       </section>
       <section className="ml-5">
         <p className="text-Neutrals-deepGray text-bold text-[32px] ">{nickname}</p>
-        <div className="border-[1px] flex w-[72px] items-center py-[3px] px-[6px] rounded-[20px] mt-5 mb-3">
+        <Level Exp={exp} />
+        {/* <div className="border-[1px] flex w-[72px] items-center py-[3px] px-[6px] rounded-[20px] mt-5 mb-3">
           <div className="w-[14px] h-[14px] bg-Level-red rounded-full inline-block" />
           <span className="text-[12px] ml-1 text-Neutrals-black">Lv.레드</span>
-        </div>
+        </div> */}
         <div className="flex items-center">
           <progress className={styles.progress} value={exp} max="320000" />
-          <p className="ml-3">{exp} / 320000xp</p>
+          <p className="ml-3">
+            {exp}xp / {maxExp(exp)}xp
+          </p>
         </div>
         <div className="inline-block text-Neutrals-black mt-10">
           <p>카카오 계정</p>

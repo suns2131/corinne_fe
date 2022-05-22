@@ -107,7 +107,7 @@ export default function Headers({ handleRouter, headerMenu }) {
                     key={key}
                     role="presentation"
                     onClick={handleRouter(pathname)}
-                    className="w-[90px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px]"
+                    className="w-[90px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px] cursor-pointer"
                   >
                     <span
                       className={cn(
@@ -130,7 +130,7 @@ export default function Headers({ handleRouter, headerMenu }) {
                   className="w-[90px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px]"
                 >
                   <Link href="/">
-                    <span className="w-[90px] h-[18px] grow-0 font-Pretendard text-[15px] font-normal text-center text-Neutrals-gray">
+                    <span className="w-[90px] h-[18px] grow-0 font-Pretendard text-[15px] font-normal text-center text-Neutrals-gray cursor-pointer">
                       로그아웃
                     </span>
                   </Link>
@@ -145,7 +145,7 @@ export default function Headers({ handleRouter, headerMenu }) {
                 <li
                   role="presentation"
                   onClick={handleRouter('/mypage')}
-                  className="w-[40px] h-[36px] grow-0 flex justify-center items-center"
+                  className="w-[40px] h-[36px] grow-0 flex justify-center items-center cursor-pointer"
                 >
                   <Image
                     src="/images/defaultProfile/defalutProfile32.png"

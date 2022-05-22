@@ -4,6 +4,7 @@ import PrevRank from '../../presentations/rank/prevrank/PrevRank';
 
 function PrevRankContainer({ setModal, setCallUser }) {
   const prevRankTop3Data = useTop3();
+  console.log(prevRankTop3Data);
 
   return <PrevRank setModal={setModal} prevRankTop3={prevRankTop3Data} setCallUser={setCallUser} />;
 }

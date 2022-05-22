@@ -5,7 +5,9 @@ import axiosInstance, { axiosImgInstance } from '../../../data/axios';
 export const signUp = createAsyncThunk('user/signUp', async (data, { getState }) => {
   const { user } = getState();
   const response = await axiosInstance.patch('/user/signup', { nickname: data });
-  if (response.data === '중복된 닉네임이 존재합니다') {
+
+  if (response.data.message === '중복된 닉네임이 존재합니다.') {
+    alert(response.data.message);
     return { status: 'fail', nickname: user.userInfo.nickname };
   }
   return { status: 'success', nickname: user.name };
@@ -41,6 +43,8 @@ export const getUserTransaction = createAsyncThunk(
   'user/getUserTransaction',
   async ({ page }, thunkApi) => {
     const { userTransaction } = thunkApi.getState().user;
+    console.log(`getUserTransaction조회 : ${page}`);
+    console.log(`getUserTransaction조회 : ${userTransaction}`);
     const { data } = await axiosInstance.get(`/api/transaction/${page}`);
 
     if (userTransaction === null) {

@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import PortfolioDonutChart from './PortfolioDonutChart';
 
-const colorArray = ['#e2929b', '#8669d2', '#b18847', 'black'];
+const colorArray = ['#8669d2', '#e2923b', '#b19947'];
 function MyPageHoldingPortfolio({ userBalance }) {
   if (!userBalance) return null;
   const { coins } = userBalance;

@@ -11,6 +11,7 @@ function TransProgressbar({
   type,
   userAmount,
   setSellPrice,
+  SelectCoin,
 }) {
   const dispatch = useDispatch();
   const marker = [{ value: 1 }, { value: 25 }, { value: 50 }, { value: 75 }, { value: 100 }];
@@ -45,7 +46,7 @@ function TransProgressbar({
 
   const handleChange = () => {
     setLeverage(sliderRef.current.value);
-    dispatch(getUserAmount());
+    dispatch(getUserAmount(SelectCoin.tiker));
 
     if (type === 'buy') {
       setBuyRequest({
@@ -88,7 +89,7 @@ function TransProgressbar({
             ref={sliderRef}
             className={styles.slidersbuy}
             type="range"
-            min="1"
+            min="0"
             max="100"
             defaultValue={1}
             onChange={handleChange}
@@ -103,7 +104,7 @@ function TransProgressbar({
             ref={sliderRef}
             className={styles.sliderssell}
             type="range"
-            min="1"
+            min="0"
             max="100"
             defaultValue={1}
             onChange={handleChange}

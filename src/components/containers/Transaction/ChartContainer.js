@@ -25,9 +25,9 @@ function ChartContainer() {
   });
   const subNum = useRef(1); // 구독취소할 subscribe id 저장변수
 
-  // socketClient.debug = (str) => {
-  //   // console.log(`debugString: ${str}`);
-  // };
+  socketClient.debug = (str) => {
+    // console.log(`debugString: ${str}`);
+  };
 
   // 차트 타입 변경될때마다 Chart state초기화
   React.useEffect(() => {

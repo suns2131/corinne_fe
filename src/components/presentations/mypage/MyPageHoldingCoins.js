@@ -3,6 +3,7 @@ import { memo } from 'react';
 function MyPageHoldingCoins({ userBalance }) {
   if (!userBalance) return null;
   const { coins } = userBalance;
+  console.log(coins);
   const upDownCheck = (data) => {
     const exp = /-/;
     if (exp.test(data)) {
@@ -16,7 +17,7 @@ function MyPageHoldingCoins({ userBalance }) {
         <h1>보유코인</h1>
       </section>
       <section className="px-5">
-        {coins.map(({ coin, fluctuation, amount, buyPrice, importanceRate }) => (
+        {coins.map(({ coin, fluctuation, amount, buyPrice, importanceRate, leverage }) => (
           <div className="flex justify-between my-5">
             <div className="flex items-center">
               <svg
@@ -45,6 +46,7 @@ function MyPageHoldingCoins({ userBalance }) {
             <div className="text-right">
               <p className={upDownCheck(fluctuation)}>{fluctuation.toLocaleString()}원</p>
               <p className="text-Neutrals-lightGray">{importanceRate}%</p>
+              <p className="text-Neutrals-lightGray">{leverage}x</p>
             </div>
           </div>
         ))}

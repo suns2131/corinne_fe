@@ -3,6 +3,7 @@ import { memo } from 'react';
 function ChangeNickname({
   handleClickLoginSuccess,
   handeChangeUserName,
+  goBackPage,
   loginStatusText,
   loginStatus,
 }) {
@@ -21,9 +22,14 @@ function ChangeNickname({
       >
         <div className="h-[93px] border-b">
           <div className="p-5">
-            <h1 className="font-bold">
-              닉네임<span className="text-Primary-purple">(필수)</span>
-            </h1>
+            <div className="flex justify-between items-center">
+              <h1 className="font-bold">
+                닉네임<span className="text-Primary-purple">(필수)</span>
+              </h1>
+              <button type="button" onClick={goBackPage}>
+                X
+              </button>
+            </div>
             <pre>설정 후 마이페이지에서 재변경이 가능합니다.</pre>
           </div>
         </div>

@@ -13,12 +13,10 @@ function PrevModal({ setModal, PrevRanks, followClick }) {
           </span>
         </div>
         <div className="flex">
-          <div className="w-[216px] h-[44px] px-[4px] py-[15px] bg-Neutrals-lightGray rounded-[10px] flex justify-center items-center">
-            {/* <input className=" outline-none" type="text" placeholder="닉네임 검색" /> */}
-            <button type="button">
-              <Searchicon />
-            </button>
-          </div>
+          {/* <div className="w-[216px] h-[44px] px-[4px] py-[15px] bg-Neutrals-lightGray rounded-[10px] flex justify-center items-center"> */}
+          {/* <input className=" outline-none" type="text" placeholder="닉네임 검색" /> */}
+          <button type="button">{/* <Searchicon /> */}</button>
+          {/* </div> */}
           <button
             type="button"
             onClick={() => {

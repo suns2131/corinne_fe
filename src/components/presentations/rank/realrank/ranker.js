@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import Image from 'next/image';
 import React, { useState } from 'react';
 import Level from '../../../../share/Level';
@@ -47,8 +48,15 @@ function Ranker({ type, rankerData, followBtn, setCallUser }) {
             });
           }}
         >
-          <Image
-            src="/images/defaultProfile/defalutProfile24.png"
+          <img
+            className="rounded-full"
+            src={
+              rankerData?.imageUrl !== undefined
+                ? rankerData.imageUrl !== 'null'
+                  ? rankerData.imageUrl
+                  : '/images/defaultProfile/defalutProfile24.png'
+                : '/images/defaultProfile/defalutProfile24.png'
+            }
             alt="defalutProfile"
             width="24px"
             height="24px"
