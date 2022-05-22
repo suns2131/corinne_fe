@@ -37,11 +37,11 @@ function TransProgressbar({
 
   useEffect(() => {
     if (userAmount?.coins !== undefined) {
-      const sell = userAmount.coins.filter((el) => el.leverage === Number(sliderRef.current.value));
+      const sell = userAmount.coins.filter((el) => el.leverage === Number(sellLeverage));
       if (sell.length > 0) {
         const bPrice = sell[0].buyPrice;
         const account = sell[0].amount;
-        console.log(currentMount);
+        // console.log(currentMount);
         const yieldSell = ((currentMount - bPrice) / bPrice) * account;
         const sellmonut = Math.floor(yieldSell * sellLeverage + account);
         dispatch(updateSell(sellmonut));
@@ -68,18 +68,18 @@ function TransProgressbar({
   const sellHandleChange = (event, newValue) => {
     setSellLeverage(newValue);
     const sell = userAmount.coins.filter((el) => el.leverage === Number(newValue));
-    console.log(userAmount);
-    console.log(newValue);
-    console.log(`sell: ${sell}`);
+    // console.log(userAmount);
+    // console.log(newValue);
+    // console.log(`sell: ${sell}`);
     if (sell.length > 0) {
       const bPrice = sell[0].buyPrice;
       const account = sell[0].amount;
       const yieldSell = ((currentMount - bPrice) / bPrice) * account;
-      console.log(yieldSell);
+      // console.log(yieldSell);
       const sellmonut = Math.floor(yieldSell * newValue + account);
-      console.log(`yieldSell: ${yieldSell}`);
-      console.log(`sliderRef.current.value: ${newValue}`);
-      console.log(`account: ${account}`);
+      // console.log(`yieldSell: ${yieldSell}`);
+      // console.log(`sliderRef.current.value: ${newValue}`);
+      // console.log(`account: ${account}`);
       setSellRequest({
         ...sellRequest,
         leverage: newValue,
