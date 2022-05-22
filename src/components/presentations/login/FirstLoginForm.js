@@ -42,7 +42,7 @@ function FirstLoginForm({
             className="w-[180px] h-[180px] rounded-full"
             role="presentation"
             onClick={handleClickProfileImg}
-            src={profileImgPreview || '/images/defaultProfile180.png'}
+            src={profileImgPreview || '/images/defaultProfile/defalutProfile180.png'}
             alt="프로필 이미지"
           />
           <input

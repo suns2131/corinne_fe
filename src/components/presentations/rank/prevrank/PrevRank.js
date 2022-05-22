@@ -6,13 +6,13 @@ import Hoveroff from '../../../../../public/icons/help/helpnone.svg';
 import { Won } from '../../../../share/convertWon';
 import Help from '../help/Help';
 
-function PrevRank({ setModal, prevRankTop3, setCallUser }) {
+function PrevRank({ setModal, prevRankTop3, setCallUser, type }) {
   const [help, sethelp] = useState(false);
   const now = dayjs();
   const mon = now.set('d', 1);
   const prevMon = mon.add(-7, 'd').format('YYYY.MM.DD');
   const prevSun = mon.add(-1, 'd').format('YYYY.MM.DD');
-  const type = true;
+
   if (type) {
     return (
       <div className="w-[793px] h-[372px] flex-grow-0 pl-5 pt-5 rounded-[10px] bg-[url('/images/corinne_back.png')] bg-cover bg-center mb-5">

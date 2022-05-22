@@ -29,7 +29,7 @@ function LoginContainer() {
   const [loginStatusText, setLoginStatusText] = useState('');
   const [loginStatus, setLoginStatus] = useState(false);
   const [profileImgPreview, setProfileImgPreview] = useState(
-    userInfo ? userInfo.imageUrl : './images/defaultProfile/defaultProfile180.png',
+    userInfo ? userInfo.imageUrl : '/images/defaultProfile/defalutProfile180.png',
   );
 
   const goNextProgress = useCallback(
