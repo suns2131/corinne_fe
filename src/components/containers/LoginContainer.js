@@ -56,6 +56,7 @@ function LoginContainer() {
       setLoginStatusText('글자수를 확인해주세요');
     } else {
       dispatch(signUp(selectUserName));
+      window.location.replace(window.location.pathname);
     }
   }, [dispatch, selectUserName]);
 
