@@ -7,7 +7,7 @@ function FollowRank({ followlist, searchNickname, setCallUser }) {
     <div className=" mt-[20px]">
       <div className="w-[387px] h-[84px] flex-grow-0 justify-start items-start p-5 shadow-box bg-Neutrals-white rounded-t-[10px]">
         <div className="h-[44px] flex-grow flex justify-between items-center">
-          <span className="w-[73px] h-[29px] flex-grow-0 font-Pretendard text-[16px] font-bold text-left text-Neutrals-black">
+          <span className="w-[100px] h-[29px] flex-grow-0 font-Pretendard text-[16px] font-bold text-left text-Neutrals-black">
             팔로잉 랭킹
           </span>
           <div className="w-[216px] h-[44px] flex-grow-0 flex justify-between items-center py-[4px] px-[15px] rounded-[10px] bg-Neutrals-whiteGray ">
