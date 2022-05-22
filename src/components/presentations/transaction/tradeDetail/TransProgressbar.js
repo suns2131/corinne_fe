@@ -21,7 +21,7 @@ function TransProgressbar({
   const sellMarker = [{ value: 1 }, { value: 25 }, { value: 50 }, { value: 75 }, { value: 100 }];
   const currentMount = useSelector((state) => state.chart.getCurrentMonut.tradePrice);
   console.log(currentMount);
-  const sliderRef = useRef(null);
+  // const sliderRef = useRef(null);
   const [buyLeverage, setBuyLeverage] = React.useState(1);
   const [sellLeverage, setSellLeverage] = React.useState(1);
   const sliderTheme = createTheme({
