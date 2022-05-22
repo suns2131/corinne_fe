@@ -87,8 +87,8 @@ function Userinfo({ Info, setCallUser }) {
               </span>
             </div>
           </div>
-          <div className="w-[347px] h-[109px] flex-grow-0 flex justify-center items-center gap-[140px] p-5 rounded-[10px] border border-solid border-Neutrals-lightGray2">
-            <div className="w-[52px] h-[69px] flex flex-col justify-between items-start">
+          <div className="w-[347px] h-[109px] flex-grow-0 flex justify-center items-center gap-[100px] p-5 rounded-[10px] border border-solid border-Neutrals-lightGray2">
+            <div className="w-[80px] h-[69px] flex flex-col justify-between items-start">
               <span className="h-[21px] flex-grow-0 font-Pretendard text-[14px] text-left text-Neutrals-gray">
                 수익률
               </span>
