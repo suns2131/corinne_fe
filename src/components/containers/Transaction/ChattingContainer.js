@@ -72,14 +72,18 @@ function ChattingContainer({ userInfos }) {
       };
       dispatch(addChat(updateChat));
     });
-
+    const today = new Date();
+    const sendTm = `${today.getHours()}:${today.getMinutes()}`;
     const connectEnter = {
       type: 'ENTER',
       topicName: 'corinnechat',
       nickname: userInfos.nickname,
-      imageUrl: '',
-      exp: 0,
-      sendTime: '',
+      imageUrl:
+        userInfos.imageUrl === 'null'
+          ? '/images/defaultProfile/defalutProfile32.png'
+          : userInfos.imageUrl,
+      exp: userInfos.exp,
+      sendTime: sendTm,
       message: '',
     };
     socketClient.send(sendPath, {}, JSON.stringify(connectEnter));
