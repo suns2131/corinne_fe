@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import TikerList from '../../presentations/transaction/tikerlist/TikerList';
-import { getTikerList, SelectingTiker } from '../../../state/reducer/transaction/trans';
+import {
+  deleteTikerListFavor,
+  getTikerList,
+  postTikerListFavor,
+  SelectingTiker,
+} from '../../../state/reducer/transaction/trans';
 
 function TikerListContainer() {
   const dispatch = useDispatch();
@@ -29,6 +34,16 @@ function TikerListContainer() {
     setCoinList(list);
   }, [list]);
 
+  const bookMarkClick = (tiker, favor) => {
+    if (favor) {
+      console.log(`delete!: ${tiker}`);
+      dispatch(deleteTikerListFavor(tiker));
+    } else {
+      console.log(`post!: ${tiker}`);
+      dispatch(postTikerListFavor(tiker));
+    }
+  };
+
   return (
     <TikerList
       defaultList={defaultList}
@@ -38,6 +53,7 @@ function TikerListContainer() {
       changeCoinList={changeCoinList}
       btnStat={btnStat}
       setBtnStat={setBtnStat}
+      bookMarkClick={bookMarkClick}
     />
   );
 }

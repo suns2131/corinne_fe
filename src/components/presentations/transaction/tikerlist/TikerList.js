@@ -11,6 +11,7 @@ function TikerList({
   changeCoinList,
   btnStat,
   setBtnStat,
+  bookMarkClick,
 }) {
   return (
     <div className=" font-Pretendard mb-5">
@@ -87,7 +88,13 @@ function TikerList({
                 <div className={styles.TikeritemDiv}>
                   <div className={styles.TikeritemDiv1}>
                     {el.favorite ? (
-                      <button className="mb-[6px]" type="button">
+                      <button
+                        className="mb-[6px]"
+                        type="button"
+                        onClick={() => {
+                          bookMarkClick(el.tiker, el.favorite);
+                        }}
+                      >
                         <svg
                           width="21"
                           height="20"
@@ -102,7 +109,13 @@ function TikerList({
                         </svg>
                       </button>
                     ) : (
-                      <button className="mb-[6px]" type="button">
+                      <button
+                        className="mb-[6px]"
+                        type="button"
+                        onClick={() => {
+                          bookMarkClick(el.tiker, el.favorite);
+                        }}
+                      >
                         <svg
                           width="21"
                           height="20"

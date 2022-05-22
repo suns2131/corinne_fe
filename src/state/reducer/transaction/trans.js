@@ -43,6 +43,10 @@ const { actions, reducer } = createSlice({
     tikerList: (state, { payload }) => {
       // eslint-disable-next-line no-param-reassign
       state.tikerList = payload;
+      // console.log(`tikerinfo ${state.tikerinfo.tiker}`);
+      // console.log(`payload ${payload}`);
+      // // eslint-disable-next-line no-param-reassign
+      // if (state.tikerinfo.tiker === payload.tiker) state.tikerinfo.favorite = payload.favorite;
     },
     infos: (state, { payload }) => {
       // eslint-disable-next-line no-param-reassign
@@ -157,6 +161,28 @@ export const getUserAmount = (tiker) =>
       console.log(response.data);
       dispatch(Amounts(response.data));
     });
+  };
+
+export const postTikerListFavor = (tiker) =>
+  function (dispatch) {
+    console.log(`/api/account/bookmark/${tiker}`);
+    intercept.get(`/api/account/bookmark/${tiker}`).then((response) => {
+      console.log(response);
+      dispatch(updateFavorite(true));
+      dispatch(getTikerList());
+    });
+  };
+
+export const deleteTikerListFavor = (tikername) =>
+  function (dispatch) {
+    intercept
+      .delete(`/api/account/bookmark`, {
+        data: { tiker: tikername },
+      })
+      .then((response) => {
+        dispatch(updateFavorite(false));
+        dispatch(getTikerList());
+      });
   };
 
 export const PostServer = (url, requestData) =>
