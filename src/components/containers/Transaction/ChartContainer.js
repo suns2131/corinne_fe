@@ -17,6 +17,7 @@ function ChartContainer() {
   const currentMount = useSelector((state) => state.chart.getCurrentMonut);
   const customer = useSelector((state) => state.chart.customer);
   const [chartType, setChartType] = useState(false); // false 분봉 / true 일봉
+  const connectRef = useRef(null);
   const [btnStat, setBtnStat] = useState({
     stat: false,
     today: 'bg-[#ffffff]',
@@ -79,55 +80,80 @@ function ChartContainer() {
     }
   };
 
+  const checkConnect = () => {
+    connectRef.current = true;
+    subNum.current = socketClient.subscribe(`/sub/topic/${selectInfo.tiker}`, (message) => {
+      //  = message.headers.subscription;
+      const ChartData = JSON.parse(message.body);
+      const year = ChartData.tradeDate.toString().substring(0, 4);
+      const month = ChartData.tradeDate.toString().substring(4, 6);
+      const day = ChartData.tradeDate.toString().substring(6, 8);
+      const hh =
+        ChartData.tradeTime.toString().length > 5
+          ? ChartData.tradeTime.toString().substring(0, 2)
+          : ChartData.tradeTime.toString().substring(0, 1);
+      const mm =
+        ChartData.tradeTime.toString().length > 5
+          ? ChartData.tradeTime.toString().substring(2, 4)
+          : ChartData.tradeTime.toString().substring(1, 3);
+      const ss =
+        ChartData.tradeTime.toString().length > 5
+          ? ChartData.tradeTime.toString().substring(4, 6)
+          : ChartData.tradeTime.toString().substring(3, 5);
+      const dateNew = new Date(`${month}/${day}/${year} ${hh}:${mm}:${ss} UTC`);
+      const newHour =
+        dateNew.getHours().toString().length > 1 ? dateNew.getHours() : `0${dateNew.getHours()}`;
+      const newMinute =
+        dateNew.getMinutes().toString().length > 1
+          ? dateNew.getMinutes()
+          : `0${dateNew.getMinutes()}`;
+      DataSetting(`${newHour}:${newMinute} `, ChartData);
+
+      const newCurrentData = {
+        tradePrice: ChartData.tradePrice,
+        highPrice: ChartData.highPrice,
+        lowPrice: ChartData.lowPrice,
+        prevClosingPrice: ChartData.prevClosingPrice,
+        signedChangePrice: ChartData.signedChangePrice,
+        signedChangeRate: Math.round((ChartData.signedChangeRate + Number.EPSILON) * 100) / 100,
+        tradeVolume: ChartData.tradeVolume,
+      };
+      dispatch(getCurMonut(newCurrentData));
+      dispatch(getTikerList());
+      if (selectInfo?.tiker !== undefined) dispatch(getbuyCount(selectInfo.tiker));
+    }).id;
+  };
+
   // info 변경될때마다 API 갱신 웹소켓 연결 체크
   React.useEffect(() => {
     dispatch(getLoadChart(selectInfo.tiker, btnStat.stat));
-
+    console.log(`chartCheck1: ${selectInfo.tiker}`);
+    console.log(`chartCheck2: ${socketClient.connected}`);
     if (selectInfo?.tiker !== undefined && socketClient.connected) {
       console.log(`subNum: ${subNum.current}`);
       socketClient.unsubscribe(subNum.current);
-      subNum.current = socketClient.subscribe(`/sub/topic/${selectInfo.tiker}`, (message) => {
-        //  = message.headers.subscription;
-        const ChartData = JSON.parse(message.body);
-        const year = ChartData.tradeDate.toString().substring(0, 4);
-        const month = ChartData.tradeDate.toString().substring(4, 6);
-        const day = ChartData.tradeDate.toString().substring(6, 8);
-        const hh =
-          ChartData.tradeTime.toString().length > 5
-            ? ChartData.tradeTime.toString().substring(0, 2)
-            : ChartData.tradeTime.toString().substring(0, 1);
-        const mm =
-          ChartData.tradeTime.toString().length > 5
-            ? ChartData.tradeTime.toString().substring(2, 4)
-            : ChartData.tradeTime.toString().substring(1, 3);
-        const ss =
-          ChartData.tradeTime.toString().length > 5
-            ? ChartData.tradeTime.toString().substring(4, 6)
-            : ChartData.tradeTime.toString().substring(3, 5);
-        const dateNew = new Date(`${month}/${day}/${year} ${hh}:${mm}:${ss} UTC`);
-        const newHour =
-          dateNew.getHours().toString().length > 1 ? dateNew.getHours() : `0${dateNew.getHours()}`;
-        const newMinute =
-          dateNew.getMinutes().toString().length > 1
-            ? dateNew.getMinutes()
-            : `0${dateNew.getMinutes()}`;
-        DataSetting(`${newHour}:${newMinute} `, ChartData);
-
-        const newCurrentData = {
-          tradePrice: ChartData.tradePrice,
-          highPrice: ChartData.highPrice,
-          lowPrice: ChartData.lowPrice,
-          prevClosingPrice: ChartData.prevClosingPrice,
-          signedChangePrice: ChartData.signedChangePrice,
-          signedChangeRate: Math.round((ChartData.signedChangeRate + Number.EPSILON) * 100) / 100,
-          tradeVolume: ChartData.tradeVolume,
-        };
-        dispatch(getCurMonut(newCurrentData));
-        dispatch(getTikerList());
-        if (selectInfo?.tiker !== undefined) dispatch(getbuyCount(selectInfo.tiker));
-      }).id;
+      checkConnect();
     }
   }, [selectInfo]);
+
+  React.useEffect(() => {
+    dispatch(getLoadChart(selectInfo.tiker, btnStat.stat));
+    console.log(`chartCheck1: ${selectInfo.tiker}`);
+    console.log(`chartCheck2: ${socketClient.connected}`);
+
+    const intervals = setInterval(() => {
+      if (selectInfo?.tiker !== undefined && socketClient.connected) {
+        // console.log(`subNum: ${subNum.current}`);
+        if (connectRef.current === null) {
+          checkConnect();
+        }
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(intervals);
+    };
+  }, []);
 
   const bookMarkClick = (tiker, type) => {
     if (type) {

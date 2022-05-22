@@ -1,6 +1,7 @@
 /* eslint-disable no-shadow */
 import { createSlice } from '@reduxjs/toolkit';
 import intercept from '../../../data/axios';
+import { getCurMonut } from './chart';
 import { postBookmark } from './thunk';
 
 // 초기 state값
@@ -9,12 +10,12 @@ const initialState = {
   tikerList: [],
   transDetail: [],
   tikerinfo: {
-    imageUrl: null, // 코인 이미지 주소
-    tiker: '', // 코인 id
-    tikername: '', // 코인이름
     favorite: false, // 즐겨찾기
-    unit: '', // 단위
+    imageUrl: '/icons/icon_btc.png', // 코인 이미지 주소
     prevPrice: 0, // 전일가
+    tiker: 'KRW-BTC', // 코인 id
+    tikername: '비트코인', // 코인이름
+    unit: 'BTC', // 단위
   },
   userAmount: {},
   buyPoint: 0, // 코인별 매수 가능금액

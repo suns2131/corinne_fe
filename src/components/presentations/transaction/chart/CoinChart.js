@@ -161,8 +161,16 @@ function CoinChart({
                 </div>
               )}
 
-              <div className="font-bold text-[24px] text-Primary-purple2">
-                {Won(currentMount?.tradePrice !== undefined ? currentMount.tradePrice : 0)}원
+              <div className={`font-bold text-[24px] `}>
+                {currentMount?.tradePrice !== undefined ? (
+                  currentMount.signedChangePrice > 0 ? (
+                    <span className=" text-Primary-purple2">{Won(currentMount.tradePrice)}원</span>
+                  ) : (
+                    <span className=" text-Secondary-orange">{Won(currentMount.tradePrice)}원</span>
+                  )
+                ) : (
+                  0
+                )}
               </div>
             </div>
             <p className="font-normal text-[14px] text-[#cecece]">1.00 {selectInfo.unit}</p>

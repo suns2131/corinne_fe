@@ -105,23 +105,4 @@ export const getLoadChart = (tiker, chartType) =>
     }
   };
 
-// export const deleteBMark = (tikername) =>
-//   function (dispatch) {
-//     console.log(tikername);
-//     if (tikername !== '') {
-//       intercept
-//         .delete('/api/account/bookmark', {
-//           data: {
-//             tiker: tikername,
-//           },
-//         })
-//         .then((response) => {
-//           console.log(response);
-//         })
-//         .catch((error) => {
-//           console.log(error);
-//         });
-//     }
-//   };
-
 export default reducer;
