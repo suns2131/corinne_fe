@@ -45,10 +45,13 @@ function LoginContainer() {
   const goBackPage = useCallback(() => {
     if (router.pathname === '/') {
       dispatch(setEventModal(true));
+    } else {
+      window.location.replace(window.location.pathname);
     }
-    router.push({
-      pathname: router.pathname,
-    });
+    // router.push({
+    //   pathname: router.pathname,
+
+    // });
   }, [router]);
 
   const handleClickLoginSuccess = useCallback(() => {
