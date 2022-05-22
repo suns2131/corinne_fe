@@ -72,14 +72,31 @@ function UserProfile({ profile, setClose }) {
                     <span className="h-[32px] flex-grow-0 font-Pretendard text-[24px] font-bold text-left text-Neutrals-deepGray">
                       {targetinfo.nickname}
                     </span>
-                    <button
-                      className="w-[60px] h-[32px] flex-grow-0 flex justify-center items-center gap-[2px] p-[5px] rounded-[8px] bg-Primary-purple2 active:bg-Primary-lightPurple"
-                      type="button"
-                    >
-                      <span className="flex-grow-0 font-Pretendard text-[12px] text-center text-Neutrals-white">
-                        팔로우
-                      </span>
-                    </button>
+                    {targetinfo.follow ? (
+                      <button
+                        className="w-[60px] h-[32px] flex-grow-0 flex justify-center items-center gap-[2px] p-[5px] rounded-[8px] bg-Neutrals-black active:bg-Neutrals-deepGray"
+                        onClick={() => {
+                          // followBtn(rankerData.userId, rankerData.follow);
+                        }}
+                        type="button"
+                      >
+                        <span className="flex-grow-0 font-Pretendard text-[12px] text-center text-Neutrals-white">
+                          팔로잉
+                        </span>
+                      </button>
+                    ) : (
+                      <button
+                        className="w-[60px] h-[32px] flex-grow-0 flex justify-center items-center gap-[2px] p-[5px] rounded-[8px] bg-Primary-purple2 active:bg-Primary-lightPurple"
+                        type="button"
+                        onClick={() => {
+                          // followBtn(rankerData.userId, rankerData.follow);
+                        }}
+                      >
+                        <span className="flex-grow-0 font-Pretendard text-[12px] text-center text-Neutrals-white">
+                          팔로우
+                        </span>
+                      </button>
+                    )}
                   </div>
                   <div className="h-[28px] self-stretch flex-grow-0 flex flex-col justify-start items-start">
                     <ExpBar exp={targetinfo.exp} />
