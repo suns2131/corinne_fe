@@ -38,7 +38,6 @@ function ChartContainer() {
     }
   }, [btnStat.stat, dispatch, selectInfo.tiker]);
 
-  // 차트 데이터 검사 로직
   const DataSetting = (date, realData) => {
     if (chartData.x !== undefined) {
       if (chartData.x === date) {
