@@ -197,7 +197,7 @@ export default function Headers({ handleRouter, headerMenu }) {
                       pathname === router.pathname
                         ? 'text-Primary-purple font-bold'
                         : 'text-Neutrals-white font-normal',
-                      'w-[70px] h-[18px] grow-0 font-Pretendard text-[15px]  text-center ',
+                      'w-[90px] h-[18px] grow-0 font-Pretendard text-[15px]  text-center ',
                     )}
                   >
                     {menu}
