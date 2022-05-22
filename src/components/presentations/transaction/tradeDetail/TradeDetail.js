@@ -63,6 +63,7 @@ function TradeDetail({
                 setBuyRequest={setBuyRequest}
                 currentMount={currentMount}
                 SelectCoin={SelectCoin}
+                buysellState={buysellState}
               />
               <div className="w-full h-[88px] flex justify-between items-center ">
                 <div className="h-[88px] text-[14px] mt-[15px]">매수 금액</div>
@@ -195,6 +196,7 @@ function TradeDetail({
                 userAmount={userAmount}
                 setSellPrice={setSellPrice}
                 SelectCoin={SelectCoin}
+                buysellState={buysellState}
               />
               <div className="w-full h-[88px] flex justify-between items-center ">
                 <div className="h-[88px] text-[14px] mt-[15px]">매도 금액</div>
@@ -303,9 +305,9 @@ function TradeDetail({
             items.map((el, idx) => (
               <div
                 key={idx}
-                className="w-[347px] h-[96px] flex flex-row justify-between items-start gap-[50px] mb-[24px]"
+                className="w-[347px] h-[96px] flex flex-row justify-between items-start mb-[24px]"
               >
-                <div className="w-[49px] flex flex-col items-start gap-1 font-normal text-[14px] text-[#cecece]">
+                <div className="flex flex-col items-start gap-1 font-normal text-[14px] text-[#cecece]">
                   {el.type === 'sell' ? (
                     <p className="font-bold text-[15px] text-[#ff9e0d] ">매도</p>
                   ) : (
@@ -315,8 +317,8 @@ function TradeDetail({
                   <p>체결금액</p>
                   <p>레버리지</p>
                 </div>
-                <div className="w-[117px] flex flex-col items-end gap-1 font-bold text-[15px] text-[#33323f] text-right ">
-                  <p className="w-[125px] font-normal text-[12px] text-[#cecece] flex items-end ">
+                <div className=" flex flex-col items-end gap-1 font-bold text-[15px] text-[#33323f] text-right ">
+                  <p className="font-normal text-[12px] text-[#cecece] flex items-end ">
                     {el.tradeAt}
                   </p>
                   <p>{el.price}원</p>
