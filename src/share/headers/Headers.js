@@ -85,10 +85,11 @@ export default function Headers({ handleRouter, headerMenu }) {
           },
           { token: `BEARER ${usertoken}` },
         );
-        if (window.location.pathname === '/transaction') {
-          window.location.replace(window.location.pathname);
-        }
       }
+      // }
+      // if (window.location.pathname === '/transaction') {
+      //   window.location.replace(window.location.pathname);
+      // }
     };
   }, [dispatch, userInfo]);
 
@@ -125,7 +126,7 @@ export default function Headers({ handleRouter, headerMenu }) {
                   role="presentation"
                   onClick={() => {
                     removeCookie({ name: 'corinne' });
-                    window.location.replace(window.location.pathname);
+                    router.push('/');
                   }}
                   className="w-[90px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px]"
                 >

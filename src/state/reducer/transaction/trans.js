@@ -158,11 +158,16 @@ export const getDetail = (tiker, page) =>
       console.log(`detailtiker2: ${tiker}`);
       intercept.get(`/api/transaction/${tiker}/${page}`).then((response) => {
         console.log(response.data);
-        console.log();
+        if (page !== 1) {
+          const newArray = [...getState().trans.transDetail, ...response.data.content];
+          dispatch(detilapage(response.data.totalPages));
+          dispatch(detailList(newArray));
+        } else {
+          const newArray = [...response.data.content];
+          dispatch(detilapage(response.data.totalPages));
+          dispatch(detailList(newArray));
+        }
         // eslint-disable-next-line no-undef
-        const newArray = [...getState().trans.transDetail, ...response.data.content];
-        dispatch(detilapage(response.data.totalPages));
-        dispatch(detailList(newArray));
       });
     }
   };

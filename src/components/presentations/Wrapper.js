@@ -13,7 +13,8 @@ function Wrapper({ children }) {
 
   const handleRouter = useCallback(
     (path) => () => {
-      router.push(path);
+      // router.push(path);
+      window.location.replace(path);
     },
     [router],
   );

@@ -38,7 +38,7 @@ function Ranker({ type, rankerData, followBtn, setCallUser }) {
       >
         {rankText}
       </span>
-      <div className="w-[68px] h-[24px] flex-grow-0 flex justify-start items-center gap-[5px]">
+      <div className="w-[130px] h-[24px] flex-grow-0 flex justify-start items-center gap-[5px]">
         <button
           type="button"
           onClick={() => {
