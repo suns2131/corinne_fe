@@ -1,7 +1,12 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
-import { getDetail, getUserAmount, postBuySell } from '../../../state/reducer/transaction/trans';
+import {
+  getDetail,
+  getUserAmount,
+  postBuySell,
+  updateSell,
+} from '../../../state/reducer/transaction/trans';
 import TradeDetail from '../../presentations/transaction/tradeDetail/TradeDetail';
 import intercept from '../../../data/intercept';
 
@@ -169,6 +174,7 @@ function TrandDetailContainer() {
       setPage(1);
       dispatch(getDetail(SelectCoin.tiker, page));
       dispatch(getUserAmount(SelectCoin.tiker));
+      dispatch(updateSell(0));
     }
   }, [SelectCoin]);
 
