@@ -74,7 +74,7 @@ export const getTargetInfo = createAsyncThunk('/api/user/info', async (userId) =
   return response.data;
 });
 
-export const patchQuest = createAsyncThunk('/api/quest', async (questId) => {
+export const patchQuest = createAsyncThunk('/api/quest', async (questId, { dispatch }) => {
   console.log(`thunkQuestid: ${questId}`);
   console.log(typeof questId);
   const datas = {
@@ -82,6 +82,8 @@ export const patchQuest = createAsyncThunk('/api/quest', async (questId) => {
   };
   console.log(datas);
   const response = await axiosInstance.patch(`/api/quest`, datas);
-
+  if (response.status === 200) {
+    dispatch(getUserQuest());
+  }
   return response.data;
 });

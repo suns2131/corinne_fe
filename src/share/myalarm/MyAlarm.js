@@ -22,6 +22,7 @@ function MyAlarm() {
   const questResult = (questNo) => {
     console.log(`questNo: ${questNo}`);
     dispatch(patchQuest(questNo));
+    dispatch(getUserQuest());
   };
 
   return (

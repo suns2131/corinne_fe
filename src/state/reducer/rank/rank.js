@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import axiosInstance from '../../../data/axios';
@@ -86,10 +87,9 @@ const { actions, reducer } = createSlice({
       userAlarm: payload,
     }));
 
-    builder.addCase(getUserQuest.fulfilled, (state, { payload }) => ({
-      ...state,
-      userQuest: payload,
-    }));
+    builder.addCase(getUserQuest.fulfilled, (state, { payload }) => {
+      state.userQuest = payload;
+    });
 
     builder.addCase(getMatch.fulfilled, (state, { payload }) => ({
       ...state,
