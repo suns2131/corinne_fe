@@ -26,14 +26,14 @@ function FirstLoginForm({
           <div className="p-5">
             <div className="flex justify-between items-center">
               <span className="font-bold">
-                닉네임<span className="text-Primary-purple">(필수)</span>
+                프로필 사진<span className="text-Primary-purple">(선택)</span>
               </span>
               <button type="button" onClick={goBackPage}>
                 X
               </button>
             </div>
             <pre className=" font-Pretendard text-Nuetrals-black">
-              설정 후 마이페이지에서 재변경이 가능합니다.
+              사진을 눌러 프로필사진을 변경해주세요.
             </pre>
           </div>
         </div>
