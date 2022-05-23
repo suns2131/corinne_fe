@@ -2,7 +2,6 @@ import Image from 'next/image';
 import React from 'react';
 import AlarmNone from '../../../public/icons/header/alarm_none.svg';
 import Box from '../../../public/images/boxsvg.svg';
-import Trophy from '../../../public/icons/Trophy.png';
 
 function Alarms({ alData }) {
   if (!alData) return null;
