@@ -126,10 +126,10 @@ function ChartContainer() {
   // info 변경될때마다 API 갱신 웹소켓 연결 체크
   React.useEffect(() => {
     dispatch(getLoadChart(selectInfo.tiker, btnStat.stat));
-    console.log(`chartCheck1: ${selectInfo.tiker}`);
-    console.log(`chartCheck2: ${socketClient.connected}`);
+    // console.log(`chartCheck1: ${selectInfo.tiker}`);
+    // console.log(`chartCheck2: ${socketClient.connected}`);
     if (selectInfo?.tiker !== undefined && socketClient.connected) {
-      console.log(`subNum: ${subNum.current}`);
+      // console.log(`subNum: ${subNum.current}`);
       socketClient.unsubscribe(subNum.current);
       checkConnect();
     }
@@ -137,8 +137,8 @@ function ChartContainer() {
 
   React.useEffect(() => {
     dispatch(getLoadChart(selectInfo.tiker, btnStat.stat));
-    console.log(`chartCheck1: ${selectInfo.tiker}`);
-    console.log(`chartCheck2: ${socketClient.connected}`);
+    // console.log(`chartCheck1: ${selectInfo.tiker}`);
+    // console.log(`chartCheck2: ${socketClient.connected}`);
 
     const intervals = setInterval(() => {
       if (selectInfo?.tiker !== undefined && socketClient.connected) {
