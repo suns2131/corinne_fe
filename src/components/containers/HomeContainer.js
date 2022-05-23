@@ -20,7 +20,8 @@ export default function HomeContainer() {
   const [modal, setModal] = useState(true);
 
   const goToTransaction = useCallback(() => {
-    router.push('/transaction');
+    // router.push('/transaction');
+    window.location.replace('/transaction');
   }, [router]);
 
   const openEvent = () => {
