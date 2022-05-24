@@ -1,31 +1,9 @@
 import React from 'react';
+import { checkLevelColor } from './exp';
 
 function Level({ Exp }) {
   const jugment = Exp;
-  let colors = '';
-  let colorName = '';
-  if (jugment >= 350000) {
-    colors = 'bg-Primary-purple';
-    colorName = '퍼플';
-  } else if (jugment >= 200000) {
-    colors = 'bg-Level-navy';
-    colorName = '네이비';
-  } else if (jugment >= 100000) {
-    colors = 'bg-Level-sky';
-    colorName = '스카이';
-  } else if (jugment >= 60000) {
-    colors = 'bg-Level-green';
-    colorName = '그린';
-  } else if (jugment >= 30000) {
-    colors = 'bg-Level-yellow';
-    colorName = '옐로우';
-  } else if (jugment >= 5000) {
-    colors = 'bg-Level-orange';
-    colorName = '오렌지';
-  } else {
-    colors = 'bg-Level-red';
-    colorName = '레드';
-  }
+  const { colors, colorName } = checkLevelColor(Exp);
 
   return (
     <div>

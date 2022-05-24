@@ -9,3 +9,39 @@ export function maxExp(currentExp) {
 
   return MaxData;
 }
+
+export function checkLevelColor(exp) {
+  let colors = '';
+  let colorName = '';
+  let colorCss = '';
+  if (exp >= 350000) {
+    colors = 'bg-Primary-purple';
+    colorCss = '#6800BA';
+    colorName = '퍼플';
+  } else if (exp >= 200000) {
+    colors = 'bg-Level-navy';
+    colorCss = '#5760b1';
+    colorName = '네이비';
+  } else if (exp >= 100000) {
+    colors = 'bg-Level-sky';
+    colorCss = '#a1c7f4';
+    colorName = '스카이';
+  } else if (exp >= 60000) {
+    colors = 'bg-Level-green';
+    colorCss = '#c1dc95';
+    colorName = '그린';
+  } else if (exp >= 30000) {
+    colors = 'bg-Level-yellow';
+    colorCss = '#efd886';
+    colorName = '옐로우';
+  } else if (exp >= 5000) {
+    colors = 'bg-Level-orange';
+    colorCss = '#fcb370';
+    colorName = '오렌지';
+  } else {
+    colors = 'bg-Level-red';
+    colorCss = '#e05656';
+    colorName = '레드';
+  }
+  return { colors, colorName, colorCss };
+}
