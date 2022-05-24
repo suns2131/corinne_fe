@@ -60,11 +60,17 @@ function UserProfile({ profile, setClose }) {
                 <div className=" z-[2] relative">
                   <img
                     className="w-[87px] h-[87px] rounded-full"
-                    src="/images/defaultProfile/defalutProfile96.png"
+                    src={
+                      targetinfo.imageUrl !== 'null'
+                        ? targetinfo.imageUrl
+                        : '/images/defaultProfile/defalutProfile180.png'
+                    }
                     alt="defaultProfile"
                   />
-                  <div className=" absolute top-[65px] left-[7px]">
-                    <Level Exp={targetinfo.exp} />
+                  <div className="absolute top-[75%] w-[100%]">
+                    <div className="flex justify-center items-center">
+                      <Level Exp={targetinfo.exp} />
+                    </div>
                   </div>
                 </div>
                 <div className="h-[69px] flex-grow flex flex-col justify-center items-start gap-[12px]">
@@ -127,7 +133,7 @@ function UserProfile({ profile, setClose }) {
                 </div>
                 <div className="w-[52px] h-[48px] flex-grow-0 flex flex-col justify-start items-center gap-[10px]">
                   <span className="h-[18px]  flex-grow-0 font-Pretendard text-[15px] font-bold text-center text-Neutrals-black">
-                    {targetinfo.follwer}
+                    {targetinfo.follower}
                   </span>
                   <span className="h-[20px] flex-grow-0 font-Pretendard text-[12px] text-center text-Neutrals-gray">
                     팔로워
@@ -135,7 +141,7 @@ function UserProfile({ profile, setClose }) {
                 </div>
                 <div className="w-[52px] h-[48px] flex-grow-0 flex flex-col justify-start items-center gap-[10px]">
                   <span className="h-[18px]  flex-grow-0 font-Pretendard text-[15px] font-bold text-center text-Neutrals-black">
-                    {targetinfo.follwing}
+                    {targetinfo.following}
                   </span>
                   <span className="h-[20px] flex-grow-0 font-Pretendard text-[12px] text-center text-Neutrals-gray">
                     팔로잉
