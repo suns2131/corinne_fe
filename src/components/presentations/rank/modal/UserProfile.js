@@ -43,9 +43,9 @@ function UserProfile({ profile, setClose }) {
         </button>
       </div>
       <div className="flex-grow flex flex-col justify-start items-stretch p-5 shadow-box bg-Neutrals-white rounded-b-[10px]">
-        <div className="w-[710px] h-[447px] flex-grow-0 flex flex-row justify-start items-start p-5">
+        <div className="w-[44.375em] h-[27.938em] flex-grow-0 flex flex-row justify-start items-start">
           <div className="flex flex-col">
-            <div className="w-[347px] h-[166px] flex flex-col justify-start items-center gap-[24px] ">
+            <div className="w-[21.688em] h-[10.375em] flex flex-col justify-start items-center gap-[1.875em] mr-5 ">
               <div className="h-[94px] self-stretch flex-grow-0 flex justify-start items-center gap-[20px] ">
                 <div className=" z-[2] relative">
                   <img
@@ -68,31 +68,6 @@ function UserProfile({ profile, setClose }) {
                     <span className="h-[32px] flex-grow-0 font-Pretendard text-[24px] font-bold text-left text-Neutrals-deepGray">
                       {targetinfo.nickname}
                     </span>
-                    {targetinfo.follow ? (
-                      <button
-                        className="w-[60px] h-[32px] flex-grow-0 flex justify-center items-center gap-[2px] p-[5px] rounded-[8px] bg-Neutrals-black active:bg-Neutrals-deepGray"
-                        onClick={() => {
-                          // followBtn(rankerData.userId, rankerData.follow);
-                        }}
-                        type="button"
-                      >
-                        <span className="flex-grow-0 font-Pretendard text-[12px] text-center text-Neutrals-white">
-                          팔로잉
-                        </span>
-                      </button>
-                    ) : (
-                      <button
-                        className="w-[60px] h-[32px] flex-grow-0 flex justify-center items-center gap-[2px] p-[5px] rounded-[8px] bg-Primary-purple2 active:bg-Primary-lightPurple"
-                        type="button"
-                        onClick={() => {
-                          // followBtn(rankerData.userId, rankerData.follow);
-                        }}
-                      >
-                        <span className="flex-grow-0 font-Pretendard text-[12px] text-center text-Neutrals-white">
-                          팔로우
-                        </span>
-                      </button>
-                    )}
                   </div>
                   <div className="h-[28px] self-stretch flex-grow-0 flex flex-col justify-start items-start">
                     <ExpBar exp={targetinfo.exp} />
@@ -104,7 +79,7 @@ function UserProfile({ profile, setClose }) {
                   </div>
                 </div>
               </div>
-              <div className="w-[304px] h-[48px] flex-grow-0 flex justify-start items-start gap-[32px]">
+              <div className="w-[347px] h-[48px] flex-grow-0 flex justify-center items-start gap-[32px]">
                 <div className="w-[52px] h-[48px] flex-grow-0 flex flex-col justify-start items-center gap-[10px]">
                   <span className="h-[18px]  flex-grow-0 font-Pretendard text-[15px] font-bold text-center text-Primary-purple">
                     {targetinfo.myRank}위
@@ -139,7 +114,7 @@ function UserProfile({ profile, setClose }) {
                 </div>
               </div>
             </div>
-            <div className="w-[347px] h-[211px] flex-grow-0 flex justify-start items-start gap-[13%] p-5 rounded-[10px] border border-solid border-Neutrals-lightGray2 mt-[30px]">
+            <div className="w-[21.688em] h-[13.188em] flex-grow-0 flex justify-start items-start gap-[13%] p-5 rounded-[10px] border border-solid border-Neutrals-lightGray2 mt-[1.875em]">
               <div className="w-[110px] h-[69px] flex flex-col justify-between items-start gap-[9px] ">
                 <span className="h-[21px] flex-grow-0 font-Pretendard text-[14px] text-left text-Neutrals-gray">
                   수익률

@@ -16,7 +16,7 @@ function TradeList({ type, tradeData }) {
         <p>레버리지</p>
       </div>
       <div className="flex flex-col items-end gap-1 font-bold text-[15px] text-Neutrals-black text-right  ">
-        <p className="font-normal text-[12px] text-[#cecece] text-right flex flex-col justify-start items-end">
+        <p className="font-normal text-[12px] text-Neutrals-gray text-right flex flex-col justify-start items-end">
           {tradeData?.tradeAt !== undefined ? tradeData.tradeAt : ''}
         </p>
         <p>{Tname(tradeData?.tiker !== undefined ? tradeData.tiker : '')}</p>
