@@ -149,7 +149,7 @@ function UserProfile({ profile, setClose }) {
                 </div>
               </div>
             </div>
-            <div className="w-[347px] h-[211px] flex-grow-0 flex justify-start items-start gap-[110px] p-5 rounded-[10px] border border-solid border-Neutrals-lightGray2 mt-[30px]">
+            <div className="w-[347px] h-[211px] flex-grow-0 flex justify-start items-start gap-[13%] p-5 rounded-[10px] border border-solid border-Neutrals-lightGray2 mt-[30px]">
               <div className="w-[110px] h-[69px] flex flex-col justify-between items-start gap-[9px] ">
                 <span className="h-[21px] flex-grow-0 font-Pretendard text-[14px] text-left text-Neutrals-gray">
                   수익률
@@ -170,7 +170,7 @@ function UserProfile({ profile, setClose }) {
                   리셋 횟수
                 </span>
               </div>
-              <div className="w-[110px] h-[69px] flex flex-col justify-between items-end gap-[9px] ">
+              <div className="w-[160px] h-[69px] flex flex-col justify-between items-end gap-[9px] ">
                 <span className="h-[21px] flex-grow-0 font-Pretendard text-[15px] font-bold text-right text-Primary-purple2">
                   {targetinfo.fluctuationRate}%
                 </span>
@@ -186,7 +186,7 @@ function UserProfile({ profile, setClose }) {
                       ? targetinfo.draw
                       : 0
                     : 0}
-                  무
+                  무{' '}
                   {targetinfo?.win !== undefined
                     ? targetinfo.win !== null
                       ? targetinfo.win
