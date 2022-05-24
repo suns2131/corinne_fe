@@ -7,6 +7,7 @@ import {
   getUserTransaction,
   changeImage,
   postResetBalance,
+  getTargetTransaction,
 } from './thunk';
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
   userInfo: null,
   userBalance: null,
   userTransaction: null,
+  targetTransaction: null,
   eventModal: false,
 };
 
@@ -78,6 +80,10 @@ const { actions, reducer } = createSlice({
     builder.addCase(getUserTransaction.fulfilled, (state, { payload }) => ({
       ...state,
       userTransaction: payload,
+    }));
+    builder.addCase(getTargetTransaction.fulfilled, (state, { payload }) => ({
+      ...state,
+      targetTransaction: payload,
     }));
   },
 });

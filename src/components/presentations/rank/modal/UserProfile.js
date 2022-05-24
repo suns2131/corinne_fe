@@ -10,22 +10,21 @@ import TradeList from '../../../../share/myalarm/tradelist';
 import Closeicon from '../../../../../public/icons/close.svg';
 import { getTargetInfo } from '../../../../state/reducer/rank/thunk';
 import { Won } from '../../../../share/convertWon';
-import { getUserTransaction } from '../../../../state/reducer/user/thunk';
-import { selectedUserTransaction } from '../../../../state/reducer/user/selectors';
+import { getTargetTransaction } from '../../../../state/reducer/user/thunk';
+import { selectedTargetTransaction } from '../../../../state/reducer/user/selectors';
 
 function UserProfile({ profile, setClose }) {
   const dispatch = useDispatch();
   const targetinfo = useSelector((state) => state.rank.targetInfo);
-  const userTransaction = useSelector(selectedUserTransaction);
+  const targetTransaction = useSelector(selectedTargetTransaction);
   console.log(targetinfo);
-  const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    dispatch(getUserTransaction({ page }));
-  }, [dispatch, page]);
+  useEffect(() => {}, [dispatch, targetinfo]);
 
   useEffect(() => {
     dispatch(getTargetInfo(profile.userId));
+    const followId = profile.userId;
+    dispatch(getTargetTransaction({ followId }));
   }, [dispatch, profile.userId]);
 
   // useEffect(() => {
@@ -209,9 +208,9 @@ function UserProfile({ profile, setClose }) {
               </div>
             </div>
           </div>
-          <div className="w-[303px] h-[407px] flex-grow-0 flex flex-col justify-start items-stretch gap-[10px] p-5 rounded-[10px] bg-Neutrals-whiteGray ml-[20px] overflow-x-hidden overflow-y-auto">
-            {userTransaction &&
-              userTransaction.content.map((el) => <TradeList type={el.type} tradeData={el} />)}
+          <div className="w-[303px] h-[407px] flex-grow-0 flex flex-col justify-start items-stretch gap-[10px] p-5 rounded-[10px] bg-Neutrals-whiteGray ml-[20px] overflow-x-hidden scrollbar-none">
+            {targetTransaction &&
+              targetTransaction.content.map((el) => <TradeList type={el.type} tradeData={el} />)}
           </div>
         </div>
       </div>
