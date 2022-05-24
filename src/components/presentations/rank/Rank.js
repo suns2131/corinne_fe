@@ -11,7 +11,7 @@ function Rank({ modal, setModal, PrevRanks, callUser, setCallUser }) {
   return (
     <div>
       <Wrapper>
-        <div className="flex">
+        <div className="flex mb-[90px]">
           <div className="mr-5">
             <PrevRankContainer setModal={setModal} setCallUser={setCallUser} />
             <RealRankContainer setCallUser={setCallUser} />

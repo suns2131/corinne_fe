@@ -99,7 +99,7 @@ export default function Headers({ handleRouter, headerMenu }) {
       return (
         <div>
           <div className="w-container h-headers flex justify-between items-center mb-5">
-            <div className="h-[36px] text-[30px] font-bold text-left text-Primary-purple flex justify-start items-center">
+            <div className="h-[36px] text-[30px] font-bold text-left text-Primary-purple flex justify-start items-center font-Gmarket-Sans">
               <Link href="/">corinne</Link>
             </div>
             <nav>
@@ -237,7 +237,7 @@ export default function Headers({ handleRouter, headerMenu }) {
                   className="w-[40px] h-[36px] grow-0 flex justify-center items-center cursor-pointer"
                 >
                   <img
-                    className=" rounded-full"
+                    className=" rounded-full w-[32px] h-[32px]"
                     src={
                       userInfo?.imageUrl !== undefined
                         ? userInfo.imageUrl !== 'null'

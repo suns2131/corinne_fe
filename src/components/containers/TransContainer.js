@@ -24,7 +24,7 @@ function TransContainer() {
   return (
     <div>
       <Wrapper>
-        <div className="flex ">
+        <div className="flex mb-[90px]">
           <div className="mr-5">
             <RankContanier />
             <TikerListContainer />
