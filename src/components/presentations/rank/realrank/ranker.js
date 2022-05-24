@@ -49,7 +49,7 @@ function Ranker({ type, rankerData, followBtn, setCallUser }) {
           }}
         >
           <img
-            className="rounded-full"
+            className="rounded-full w-[24px] h-[24px] object-cover"
             src={
               rankerData?.imageUrl !== undefined
                 ? rankerData.imageUrl !== 'null'
