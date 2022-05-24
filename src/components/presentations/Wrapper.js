@@ -19,7 +19,7 @@ function Wrapper({ children }) {
     [router],
   );
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full bg-Neutrals-ivory">
       <div className=" w-container m-auto">
         <div className=" h-header" />
         <Headers handleRouter={handleRouter} router={router} headerMenu={headerMenu} />
