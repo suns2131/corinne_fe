@@ -1,12 +1,10 @@
 /* eslint-disable no-nested-ternary */
-import Image from 'next/image';
-import React, { useState } from 'react';
+import React from 'react';
 import Level from '../../../../share/Level';
 import Reset from '../../../../../public/icons/reset.svg';
 import { Won } from '../../../../share/convertWon';
 
 function Ranker({ type, rankerData, followBtn, setCallUser }) {
-  const [btns, setBtns] = useState(false);
   let bgColors = '';
   let textColors = '';
   let rankText = '';
