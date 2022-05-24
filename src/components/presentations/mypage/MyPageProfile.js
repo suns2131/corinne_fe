@@ -2,7 +2,6 @@ import { memo } from 'react';
 import styled from '@emotion/styled';
 import { checkLevelColor, maxExp } from '../../../share/exp';
 import Level from '../../../share/Level';
-import styles from './mypage.module.css';
 
 function MyPageProfile({ userInfo, goChangeProfile }) {
   if (!userInfo) return null;

@@ -2,7 +2,6 @@ import React from 'react';
 import { checkLevelColor } from './exp';
 
 function Level({ Exp }) {
-  const jugment = Exp;
   const { colors, colorName } = checkLevelColor(Exp);
 
   return (

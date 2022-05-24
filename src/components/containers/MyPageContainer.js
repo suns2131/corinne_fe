@@ -40,6 +40,7 @@ export default function MyPageContainer() {
 
   const [page, setPage] = useState(1);
   const [resetModalOpen, setResetModalOpen] = useState(false);
+  const [isInfoOn, setIsInfoOn] = useState(false);
 
   const goChangeProfile = useCallback(() => {
     // dispatch()
@@ -74,6 +75,12 @@ export default function MyPageContainer() {
     setResetModalOpen(false);
   }, []);
 
+  const openInfo = useCallback(() => {
+    console.log('aa');
+    // eslint-disable-next-line no-shadow
+    setIsInfoOn((isInfoOn) => !isInfoOn);
+  }, []);
+
   const closeResetSuccessModal = useCallback(() => {
     dispatch(setResetStatus(false));
   }, [dispatch]);
@@ -97,6 +104,7 @@ export default function MyPageContainer() {
     }
   }, [inView]);
 
+  console.log(isInfoOn);
   return (
     <Wrapper>
       <div className="grid grid-cols-3 gap-2 mb-[90px]">
@@ -105,6 +113,8 @@ export default function MyPageContainer() {
           openResetModal={openResetModal}
           userBalance={userBalance}
           profitOrLossCheck={profitOrLossCheck}
+          isInfoOn={isInfoOn}
+          openInfo={openInfo}
         />
         <MyPageHoldingCoins userBalance={userBalance} />
         <MyPageHoldingPortfolio userBalance={userBalance} />

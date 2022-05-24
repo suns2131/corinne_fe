@@ -1,14 +1,27 @@
 import { memo } from 'react';
+import MyPageInfoHelp from './MyPageInfoHelp';
 
-function MyPageHoldings({ openResetModal, userBalance, profitOrLossCheck }) {
+function MyPageHoldings({ openResetModal, userBalance, profitOrLossCheck, isInfoOn, openInfo }) {
   if (!userBalance) return null;
 
   const { accountBalance, totalBalance } = userBalance;
   const upDownCheck = profitOrLossCheck({ account: totalBalance, profit: 1000000 });
   return (
     <div className="shadow-box rounded-lg">
-      <section className="shadow-box h-[70px] p-5">
-        <h1>보유자산</h1>
+      <section className="shadow-box h-[70px]">
+        <h1 className="inline-block p-5">보유자산</h1>
+        <div
+          onMouseEnter={openInfo}
+          onMouseLeave={openInfo}
+          className="inline-block w-[70px] h-[70px] float-right p-7"
+        >
+          <img
+            className="inline-block float-right w-4 h-4"
+            alt="안내사항"
+            src="/images/helpInfo.png"
+          />
+        </div>
+        {isInfoOn && <MyPageInfoHelp />}
       </section>
       <section className="p-5">
         <div className="flex justify-between">
