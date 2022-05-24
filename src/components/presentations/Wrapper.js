@@ -19,7 +19,7 @@ function Wrapper({ children }) {
     [router],
   );
   return (
-    <div className="w-full h-full bg-Neutrals-ivory">
+    <div className={router.pathname === '/' ? 'w-full h-full' : 'w-full h-full bg-Neutrals-ivory'}>
       <div className=" w-container m-auto">
         <div className=" h-header" />
         <Headers handleRouter={handleRouter} router={router} headerMenu={headerMenu} />
