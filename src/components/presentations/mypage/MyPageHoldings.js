@@ -1,9 +1,10 @@
 import { memo } from 'react';
 import MyPageInfoHelp from './MyPageInfoHelp';
 
-function MyPageHoldings({ openResetModal, userBalance, profitOrLossCheck, isInfoOn, openInfo }) {
+function MyPageHoldings({ openResetModal, userBalance, profitOrLossCheck, openInfo, isInfoOn }) {
   if (!userBalance) return null;
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { accountBalance, totalBalance } = userBalance;
   const upDownCheck = profitOrLossCheck({ account: totalBalance, profit: 1000000 });
   return (
@@ -13,13 +14,9 @@ function MyPageHoldings({ openResetModal, userBalance, profitOrLossCheck, isInfo
         <div
           onMouseEnter={openInfo}
           onMouseLeave={openInfo}
-          className="inline-block w-[70px] h-[70px] float-right p-7"
+          className="inline-block w-[70px] h-[70px] float-right p-7 cursor-pointer z-10"
         >
-          <img
-            className="inline-block float-right w-4 h-4"
-            alt="안내사항"
-            src="/images/helpInfo.png"
-          />
+          <img className="w-4 h-4 pointer-events-none" alt="안내사항" src="/images/helpInfo.png" />
         </div>
         {isInfoOn && <MyPageInfoHelp />}
       </section>

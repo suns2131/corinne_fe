@@ -27,6 +27,7 @@ import MyPageTransactionHistory from '../presentations/mypage/MyPageTransactionH
 import LoginContainer from './LoginContainer';
 import MyPageResetModal from '../presentations/mypage/MyPageResetModal';
 import ResetSuccessModal from '../presentations/mypage/ResetSuccessModal';
+import MyPageInfoHelp from '../presentations/mypage/MyPageInfoHelp';
 
 export default function MyPageContainer() {
   const dispatch = useDispatch();
@@ -75,8 +76,9 @@ export default function MyPageContainer() {
     setResetModalOpen(false);
   }, []);
 
-  const openInfo = useCallback(() => {
-    console.log('aa');
+  const openInfo = useCallback((e) => {
+    e.preventDefault();
+    e.stopPropagation();
     // eslint-disable-next-line no-shadow
     setIsInfoOn((isInfoOn) => !isInfoOn);
   }, []);
@@ -103,8 +105,6 @@ export default function MyPageContainer() {
       setPage(page + 1);
     }
   }, [inView]);
-
-  console.log(isInfoOn);
   return (
     <Wrapper>
       <div className="grid grid-cols-3 gap-2 mb-[90px]">
