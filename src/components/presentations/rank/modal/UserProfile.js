@@ -17,21 +17,12 @@ function UserProfile({ profile, setClose }) {
   const dispatch = useDispatch();
   const targetinfo = useSelector((state) => state.rank.targetInfo);
   const targetTransaction = useSelector(selectedTargetTransaction);
-  console.log(targetinfo);
-
-  useEffect(() => {}, [dispatch, targetinfo]);
 
   useEffect(() => {
     dispatch(getTargetInfo(profile.userId));
     const followId = profile.userId;
     dispatch(getTargetTransaction({ followId }));
   }, [dispatch, profile.userId]);
-
-  // useEffect(() => {
-  //   if (userTransaction.totalPages > page) {
-  //     setPage(page + 1);
-  //   }
-  // }, [page]);
 
   if (profile === null) return null;
   return (
@@ -52,7 +43,7 @@ function UserProfile({ profile, setClose }) {
         </button>
       </div>
       <div className="flex-grow flex flex-col justify-start items-stretch p-5 shadow-box bg-Neutrals-white rounded-b-[10px]">
-        <div className="w-[710px] h-[447px] flex-grow-0 flex flex-row justify-start items-start p-5 shadow-box ">
+        <div className="w-[710px] h-[447px] flex-grow-0 flex flex-row justify-start items-start p-5">
           <div className="flex flex-col">
             <div className="w-[347px] h-[166px] flex flex-col justify-start items-center gap-[24px] ">
               <div className="h-[94px] self-stretch flex-grow-0 flex justify-start items-center gap-[20px] ">
