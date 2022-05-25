@@ -45,6 +45,7 @@ function LoginContainer() {
   const goBackPage = useCallback(() => {
     if (router.pathname === '/') {
       dispatch(setEventModal(true));
+      window.location.replace(window.location.pathname);
     } else {
       window.location.replace(window.location.pathname);
     }
