@@ -8,7 +8,7 @@ function MyPageTransactionHistory({ userTransaction, lastScrollRef }) {
       <section className="shadow-box h-[70px] p-5">
         <h1>전체 거래내역</h1>
       </section>
-      <section className="h-[458px] px-5 overflow-auto">
+      <section className="h-[458px] px-5 overflow-auto scrollbar-none">
         {content.map(({ amount, leverage, price, tiker, tradeAt, type }) => (
           <div className="pt-5">
             <div className="flex justify-between">
