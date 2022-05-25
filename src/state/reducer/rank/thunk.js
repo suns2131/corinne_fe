@@ -7,22 +7,10 @@ import axiosInstance from '../../../data/axios';
 //   return response.data;
 // });
 
-export const getRealRank = createAsyncThunk('rank/getRealRank', async ({ page }, { getState }) => {
-  const RealRank = getState().rank.realRank;
-  const { data } = await axiosInstance.get(`/api/rank/${page}`);
+export const getRealRank = createAsyncThunk('rank/getRealRank', async () => {
+  const response = await axiosInstance.get(`/api/rank`);
 
-  if (RealRank == null) {
-    return data;
-  }
-  if (page > 1) {
-    const newContent = [...getState().rank.realRank, ...data.rank];
-    const newData = {
-      ...data,
-      rank: newContent,
-    };
-    return newData;
-  }
-  return data;
+  return response.data;
 });
 
 export const getFollowlist = createAsyncThunk('/api/follow', async () => {

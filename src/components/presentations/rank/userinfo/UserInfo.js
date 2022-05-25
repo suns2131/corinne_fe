@@ -72,8 +72,7 @@ function Userinfo({ Info, setCallUser }) {
             </div>
             <div className="w-[3.75em] h-[2.625em] flex-grow-0 flex flex-col justify-start items-center gap-[0.4em]">
               <span className="h-[18px]  flex-grow-0 font-Pretendard text-[0.938em] font-bold text-center text-Neutrals-black">
-                {/* {Info?.follower !== undefined ? Info.follower : 0} */}
-                9999
+                {Info?.follower !== undefined ? Info.follower : 0}
               </span>
               <span className="h-[1.25em] flex-grow-0 font-Pretendard text-[0.75em] text-center text-Neutrals-gray">
                 팔로워

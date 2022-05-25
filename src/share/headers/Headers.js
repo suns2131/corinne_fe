@@ -97,7 +97,7 @@ export default function Headers({ handleRouter, headerMenu }) {
               <Link href="/">corinne</Link>
             </div>
             <nav>
-              <ul className="w-[450px] h-[36px] grow-0 flex justify-end items-center gap-[2em]">
+              <ul className="h-[36px] grow-0 flex justify-end items-center gap-[2em]">
                 {headerMenu.map(({ key, pathname, menu }) => (
                   <li
                     key={key}
@@ -119,11 +119,20 @@ export default function Headers({ handleRouter, headerMenu }) {
                 ))}
                 <li
                   role="presentation"
+                  onClick={handleRouter('/mypage')}
+                  className=" h-[1.13em] grow-0 flex justify-center items-center gap-[10px] px-[8px]"
+                >
+                  <span className="h-[1.13em] grow-0 font-Pretendard text-[15px] font-normal text-center text-Neutrals-gray cursor-pointer">
+                    마이페이지
+                  </span>
+                </li>
+                <li
+                  role="presentation"
                   onClick={() => {
                     removeCookie({ name: 'corinne' });
                     window.location.replace('/');
                   }}
-                  className="w-[4.25em] h-[1.13em] grow-0 flex justify-center items-center gap-[10px] px-[8px]"
+                  className="h-[1.13em] grow-0 flex justify-center items-center gap-[10px] px-[8px]"
                 >
                   <span className="h-[1.13em] grow-0 font-Pretendard text-[15px] font-normal text-center text-Neutrals-gray cursor-pointer">
                     로그아웃
@@ -136,30 +145,11 @@ export default function Headers({ handleRouter, headerMenu }) {
                     {alarmState === 2 && <AlarmClick />}
                   </button>
                 </li>
-                <li
-                  role="presentation"
-                  onClick={handleRouter('/mypage')}
-                  className="w-[40px] h-[36px] grow-0 flex justify-center items-center cursor-pointer"
-                >
-                  <img
-                    className=" rounded-full"
-                    src={
-                      userInfo?.imageUrl !== undefined
-                        ? userInfo.imageUrl !== 'null'
-                          ? userInfo.imageUrl
-                          : '/images/defaultProfile/defalutProfile32.png'
-                        : '/images/defaultProfile/defalutProfile32.png'
-                    }
-                    alt="defaultProfile"
-                    width="32px"
-                    height="32px"
-                  />
-                </li>
               </ul>
             </nav>
           </div>
           {alarmState === 2 && (
-            <div className=" absolute left-[56.9vw] top-[5vh]">
+            <div className=" absolute left-[61.3vw] top-[5vh]">
               <MyAlarm />
             </div>
           )}
@@ -207,8 +197,16 @@ export default function Headers({ handleRouter, headerMenu }) {
                 ))}
                 <li
                   role="presentation"
+                  onClick={handleRouter('/mypage')}
+                  className=" h-[1.13em] grow-0 flex justify-center items-center gap-[10px] px-[8px]"
+                >
+                  <span className="h-[1.13em] grow-0 font-Pretendard text-[15px] font-normal text-center text-Neutrals-white cursor-pointer">
+                    마이페이지
+                  </span>
+                </li>
+                <li
+                  role="presentation"
                   onClick={() => {
-                    console.log('쿠키삭제');
                     removeCookie({ name: 'corinne' });
                     window.location.replace('/');
                   }}
@@ -225,30 +223,11 @@ export default function Headers({ handleRouter, headerMenu }) {
                     {alarmState === 2 && <AlarmWhite />}
                   </button>
                 </li>
-                <li
-                  role="presentation"
-                  onClick={handleRouter('/mypage')}
-                  className="w-[40px] h-[36px] grow-0 flex justify-center items-center cursor-pointer"
-                >
-                  <img
-                    className=" rounded-full"
-                    src={
-                      userInfo?.imageUrl !== undefined
-                        ? userInfo.imageUrl !== 'null'
-                          ? userInfo.imageUrl
-                          : '/images/defaultProfile/defalutProfile32.png'
-                        : '/images/defaultProfile/defalutProfile32.png'
-                    }
-                    alt="defaultProfile"
-                    width="32px"
-                    height="32px"
-                  />
-                </li>
               </ul>
             </nav>
           </div>
           {alarmState === 2 && (
-            <div className=" absolute left-[57.25vw] top-[5vh]">
+            <div className=" absolute left-[61.8vw] top-[5vh]">
               <MyAlarm />
             </div>
           )}

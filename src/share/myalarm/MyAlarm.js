@@ -46,7 +46,7 @@ function MyAlarm() {
                 <span>&gt;</span>
               </div>
             </button>
-            <div className="w-[440px] h-[472px] overflow-y-auto overflow-x-hidden">
+            <div className="w-[440px] h-[472px] overflow-y-auto overflow-x-hidden scrollbar-none">
               {AlramData && AlramData.map((el) => <Alarms alData={el} />)}
             </div>
           </div>
@@ -63,7 +63,7 @@ function MyAlarm() {
             >
               <div className={styles.arrowprev} />
             </button>
-            <div className="w-[400px] h-[472px] overflow-y-auto overflow-x-hidden">
+            <div className="w-[400px] h-[472px] overflow-y-auto overflow-x-hidden scrollbar-none">
               {QuestNo &&
                 QuestNo.map((el) => (
                   <Quest

@@ -17,7 +17,7 @@ function Follower({ followData, setCallUser }) {
           }}
         >
           <img
-            className="rounded-full"
+            className="rounded-full w-[60px] h-[60px]"
             src={
               followData?.imageUrl !== undefined
                 ? followData.imageUrl !== 'null'
@@ -32,7 +32,7 @@ function Follower({ followData, setCallUser }) {
           />
         </button>
 
-        <div className="w-[77px] h-[74px] flex-grow-0 flex flex-col justify-start items-start gap-[11px]">
+        <div className="w-[6rem] h-[74px] flex-grow-0 flex flex-col justify-start items-start gap-[11px]">
           <div>
             <span className="flex-gorw-0 font-Pretendard text-[15px] font-bold text-left text-Primary-purple mr-[5px]">
               {followData.rank}위
@@ -52,13 +52,15 @@ function Follower({ followData, setCallUser }) {
         </div>
       </div>
       <div className="h-[66px] flex-grow-0 flex-col justify-start items-end gap-[5px]">
-        <Level Exp={followData.exp} />
+        <div className="flex flex-col justify-end items-center">
+          <Level Exp={followData.exp} />
+        </div>
         <span className="flex-grow-0 font-Pretendard text-[12px] flex justify-end items-center text-right text-Neutrals-lightGray mt-[7px] mb-[4px]">
           {followData.fluctuationRate}%
           <br />
         </span>
         <span className="flex-grow-0 font-Pretendard text-[12px] flex justify-end items-center text-right text-Neutrals-lightGray">
-          {Won(followData.fluctuationRate)}원
+          {Won(followData.totalBalance)}원
         </span>
       </div>
     </div>

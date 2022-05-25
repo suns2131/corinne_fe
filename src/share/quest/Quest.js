@@ -4,7 +4,7 @@ function Quest({ type, resultQuest, questResult, questNo }) {
   if (type === false) {
     return (
       <div className="flex mb-[12px] ">
-        <div className="w-[327px] h-[118px] flex-grow-0 flex flex-col justify-start items-stretch gap-[10px] p-5 bg-Neutrals-whiteGray rounded-[10ox]">
+        <div className="w-[327px] h-[118px] flex-grow-0 flex flex-col justify-start items-stretch gap-[10px] p-5 bg-Neutrals-whiteGray rounded-[10px] ">
           <div className="h-[78px] self-stretch flex-grow-0 flex flex-col justify-start items-start gap-[12px]">
             <span className="w-[291px] h-[18px] flex-grow-0 font-Pretendard text-[15px] font-bold text-left text-Neutrals-black">
               {resultQuest.questTitle}
@@ -39,7 +39,7 @@ function Quest({ type, resultQuest, questResult, questNo }) {
   if (type === true) {
     return (
       <div className="flex  mb-[12px]">
-        <div className="w-[327px] h-[118px] flex-grow-0 flex flex-col justify-start items-stretch gap-[10px] p-5 bg-Neutrals-whiteGray">
+        <div className="w-[327px] h-[118px] flex-grow-0 flex flex-col justify-start items-stretch gap-[10px] p-5 bg-Neutrals-whiteGray rounded-[10px] ">
           <div className="h-[78px] self-stretch flex-grow-0 flex flex-col justify-start items-start gap-[12px]">
             <span className="w-[291px] h-[18px] flex-grow-0 font-Pretendard text-[15px] font-bold text-left text-Neutrals-black">
               {resultQuest.questTitle}
