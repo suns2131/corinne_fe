@@ -24,6 +24,10 @@ export const getbuyCount = createAsyncThunk('/api/transaction/buycount', async (
   return response.data;
 });
 
+export const checkSocket = createAsyncThunk('updateSocketstat', async (value) => {
+  return value;
+});
+
 // export const getTradePrice = createAsyncThunk('/api/price/tradeprice', async (tiker) => {
 //   const response = await axiosInstance.get(`/api/price/tradeprice/${tiker}`);
 //   return response.data;

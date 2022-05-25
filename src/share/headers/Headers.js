@@ -16,6 +16,7 @@ import MyAlarm from '../myalarm/MyAlarm';
 import { getUserInfo } from '../../state/reducer/user/thunk';
 import Modal from '../modal/Modal';
 import { selectedUserInfo } from '../../state/reducer/user/selectors';
+import { checkSocket } from '../../state/reducer/transaction/thunk';
 
 const usertoken = getCookie({ name: 'corinne' });
 
@@ -62,6 +63,7 @@ export default function Headers({ handleRouter, headerMenu }) {
               });
             }
           });
+          dispatch(checkSocket(true));
         });
       }
       const intervals = setInterval(() => {
@@ -77,6 +79,7 @@ export default function Headers({ handleRouter, headerMenu }) {
         // 컴포넌트 종료 시 채팅 구독 취소 / 웹소켓 연결 종료
         socketClient.disconnect(
           () => {
+            dispatch(checkSocket(false));
             // socketClient.unsubscribe('sub-0');
           },
           { token: `BEARER ${usertoken}` },

@@ -9,9 +9,8 @@ import { selectedUserInfo } from '../../../state/reducer/user/selectors';
 const usertoken = getCookie({ name: 'corinne' });
 
 function ChattingContainer({ userInfos }) {
-  console.log(`userInfos`);
-  console.log(userInfos);
   const userinfo = useSelector(selectedUserInfo);
+  const chkConneted = useSelector((state) => state.trans.socketConnected);
   const dispatch = useDispatch();
   const sendPath = `/pub/chat/message`;
   const [inputMessage, setInputMessage] = React.useState('');
@@ -56,8 +55,6 @@ function ChattingContainer({ userInfos }) {
   };
 
   const subscribeConnect = () => {
-    console.log(`timer2`);
-    console.log(userInfos);
     connectCheckRef.current = true;
     socketClient.subscribe('/sub/topic/corinnechat', (message) => {
       const ChatData = JSON.parse(message.body);
@@ -89,29 +86,33 @@ function ChattingContainer({ userInfos }) {
     socketClient.send(sendPath, {}, JSON.stringify(connectEnter));
   };
 
-  React.useEffect(() => {
-    const intervals = setInterval(() => {
-      if (userInfos !== null) {
-        // if (usertoken !== '' && socketClient.connected === true) console.log('tytt');
-        if (usertoken !== '' && socketClient.connected === true) {
-          if (connectCheckRef.current === null) subscribeConnect();
-        }
-      }
-    }, 1000);
+  // React.useEffect(() => {
+  //   const intervals = setInterval(() => {
+  //     if (userInfos !== null) {
+  //       // if (usertoken !== '' && socketClient.connected === true) console.log('tytt');
+  //       if (usertoken !== '' && socketClient.connected === true) {
+  //         if (connectCheckRef.current === null) subscribeConnect();
+  //       }
+  //     }
+  //   }, 1000);
 
-    return () => {
-      if (socketClient.connected) {
-        // 컴포넌트 종료 시 채팅 구독 취소 / 웹소켓 연결 종료
-        socketClient.disconnect(
-          () => {
-            // socketClient.unsubscribe('sub-0');
-          },
-          { token: `BEARER ${usertoken}` },
-        );
-      }
-      clearTimeout(intervals);
-    };
-  }, [dispatch, userinfo]);
+  //   return () => {
+  //     if (socketClient.connected) {
+  //       // 컴포넌트 종료 시 채팅 구독 취소 / 웹소켓 연결 종료
+  //       socketClient.disconnect(
+  //         () => {
+  //           // socketClient.unsubscribe('sub-0');
+  //         },
+  //         { token: `BEARER ${usertoken}` },
+  //       );
+  //     }
+  //     clearTimeout(intervals);
+  //   };
+  // }, [dispatch, userinfo]);
+
+  React.useEffect(() => {
+    if (chkConneted && connectCheckRef.current === null) subscribeConnect();
+  }, [chkConneted]);
 
   return (
     <Rooms
