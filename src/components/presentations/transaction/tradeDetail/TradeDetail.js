@@ -22,7 +22,6 @@ function TradeDetail({
   userAmount,
   handleChange,
   currentMount,
-  sellPrice,
   setSellPrice,
   buyPoint,
   sellPoint,
@@ -301,7 +300,7 @@ function TradeDetail({
           거래내역
         </div>
         <div className={styles.contestDiv}>
-          {items &&
+          {items.length > 0 ? (
             items.map((el, idx) => (
               <div
                 key={idx}
@@ -326,7 +325,14 @@ function TradeDetail({
                   <p>{el.leverage}x</p>
                 </div>
               </div>
-            ))}
+            ))
+          ) : (
+            <div className="w-full h-full flex flex-col justify-center items-center">
+              <span className=" font-Pretendard fnot-bold text-Neutrals-gray">
+                내역이 존재하지 않습니다
+              </span>
+            </div>
+          )}
           <div ref={infinitiRef} />
         </div>
       </div>

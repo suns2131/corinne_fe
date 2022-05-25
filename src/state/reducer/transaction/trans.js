@@ -2,7 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import intercept from '../../../data/axios';
 import { getCurMonut } from './chart';
-import { postBookmark } from './thunk';
+import { checkSocket, postBookmark } from './thunk';
 
 // 초기 state값
 const initialState = {
@@ -26,6 +26,7 @@ const initialState = {
     type: '',
     desc: '',
   },
+  socketConnected: false,
 };
 
 const { actions, reducer } = createSlice({
@@ -49,18 +50,10 @@ const { actions, reducer } = createSlice({
     tikerList: (state, { payload }) => {
       // eslint-disable-next-line no-param-reassign
       state.tikerList = payload;
-      // console.log(`tikerinfo ${state.tikerinfo.tiker}`);
-      // console.log(`payload ${payload}`);
-      // // eslint-disable-next-line no-param-reassign
-      // if (state.tikerinfo.tiker === payload.tiker) state.tikerinfo.favorite = payload.favorite;
     },
     detilapage: (state, { payload }) => {
       // eslint-disable-next-line no-param-reassign
       state.detailTotalpage = payload;
-      // console.log(`tikerinfo ${state.tikerinfo.tiker}`);
-      // console.log(`payload ${payload}`);
-      // // eslint-disable-next-line no-param-reassign
-      // if (state.tikerinfo.tiker === payload.tiker) state.tikerinfo.favorite = payload.favorite;
     },
     infos: (state, { payload }) => {
       // eslint-disable-next-line no-param-reassign
@@ -93,6 +86,10 @@ const { actions, reducer } = createSlice({
         favorite: !state.tikerinfo.favorite,
       };
     });
+    bulider.addCase(checkSocket.fulfilled, (state, { payload }) => ({
+      ...state,
+      socketConnected: payload,
+    }));
   },
 });
 

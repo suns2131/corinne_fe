@@ -13,6 +13,7 @@ import { getTikerList } from '../../../state/reducer/transaction/trans';
 function ChartContainer() {
   const dispatch = useDispatch();
   const selectInfo = useSelector((state) => state.trans.tikerinfo);
+  const chkConneted = useSelector((state) => state.trans.socketConnected);
   const chartData = useSelector((state) => state.chart.getChart);
   const currentMount = useSelector((state) => state.chart.getCurrentMonut);
   const customer = useSelector((state) => state.chart.customer);
@@ -137,22 +138,13 @@ function ChartContainer() {
 
   React.useEffect(() => {
     dispatch(getLoadChart(selectInfo.tiker, btnStat.stat));
-    // console.log(`chartCheck1: ${selectInfo.tiker}`);
-    // console.log(`chartCheck2: ${socketClient.connected}`);
-
-    const intervals = setInterval(() => {
-      if (selectInfo?.tiker !== undefined && socketClient.connected) {
-        // console.log(`subNum: ${subNum.current}`);
-        if (connectRef.current === null) {
-          checkConnect();
-        }
+    if (selectInfo?.tiker !== undefined && chkConneted) {
+      // console.log(`subNum: ${subNum.current}`);
+      if (connectRef.current === null) {
+        checkConnect();
       }
-    }, 1000);
-
-    return () => {
-      clearInterval(intervals);
-    };
-  }, []);
+    }
+  }, [chkConneted]);
 
   const bookMarkClick = (tiker, type) => {
     if (type) {

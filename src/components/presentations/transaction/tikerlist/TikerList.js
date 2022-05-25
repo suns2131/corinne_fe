@@ -147,9 +147,15 @@ function TikerList({
                       </div>
                       <div className={styles.TikeritemTitle}>
                         <p className=" text-base font-bold">{el.name}</p>
-                        <p className=" text-sm font-normal text-[#CECECE]">
-                          {el.upRate.toFixed(2)}%
-                        </p>
+                        {el.upRate > 0 ? (
+                          <p className=" text-sm font-normal text-Primary-purple2">
+                            +{el.upRate.toFixed(2)}%
+                          </p>
+                        ) : (
+                          <p className=" text-sm font-normal text-Secondary-orange">
+                            {el.upRate.toFixed(2)}%
+                          </p>
+                        )}
                       </div>
                     </div>
                   </div>

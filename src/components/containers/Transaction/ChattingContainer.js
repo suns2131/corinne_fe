@@ -3,15 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addChat } from '../../../state/reducer/transaction/chat';
 import Rooms from '../../presentations/transaction/chatting/Rooms';
 import socketClient from '../../../share/socket';
-import { getCookie } from '../../../share/cookie';
 import { selectedUserInfo } from '../../../state/reducer/user/selectors';
 
-const usertoken = getCookie({ name: 'corinne' });
-
 function ChattingContainer({ userInfos }) {
-  console.log(`userInfos`);
-  console.log(userInfos);
   const userinfo = useSelector(selectedUserInfo);
+  const chkConneted = useSelector((state) => state.trans.socketConnected);
   const dispatch = useDispatch();
   const sendPath = `/pub/chat/message`;
   const [inputMessage, setInputMessage] = React.useState('');
@@ -21,8 +17,11 @@ function ChattingContainer({ userInfos }) {
   // 메세지 전송
   const sendMessage = (e) => {
     const today = new Date();
-    const sendTm = `${today.getHours()}:${today.getMinutes()}`;
-    console.log(sendTm);
+    let hours = today.getHours();
+    let minues = today.getMinutes();
+    if (hours.toString().length === 1) hours = `0${hours}`;
+    if (minues.toString().length === 1) minues = `0${minues}`;
+    const sendTm = `${hours}:${minues}`;
     if (e.key === 'Enter') {
       const SendData = {
         type: 'TALK',
@@ -40,7 +39,11 @@ function ChattingContainer({ userInfos }) {
 
   const sendBtn = () => {
     const today = new Date();
-    const sendTm = `${today.getHours()}:${today.getMinutes()}`;
+    let hours = today.getHours();
+    let minues = today.getMinutes();
+    if (hours.toString().length === 1) hours = `0${hours}`;
+    if (minues.toString().length === 1) minues = `0${minues}`;
+    const sendTm = `${hours}:${minues}`;
 
     const SendData = {
       type: 'TALK',
@@ -55,9 +58,8 @@ function ChattingContainer({ userInfos }) {
     messageRef.current.value = null;
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const subscribeConnect = () => {
-    console.log(`timer2`);
-    console.log(userInfos);
     connectCheckRef.current = true;
     socketClient.subscribe('/sub/topic/corinnechat', (message) => {
       const ChatData = JSON.parse(message.body);
@@ -73,7 +75,11 @@ function ChattingContainer({ userInfos }) {
       dispatch(addChat(updateChat));
     });
     const today = new Date();
-    const sendTm = `${today.getHours()}:${today.getMinutes()}`;
+    let hours = today.getHours();
+    let minues = today.getMinutes();
+    if (hours.toString().length === 1) hours = `0${hours}`;
+    if (minues.toString().length === 1) minues = `0${minues}`;
+    const sendTm = `${hours}:${minues}`;
     const connectEnter = {
       type: 'ENTER',
       topicName: 'corinnechat',
@@ -90,28 +96,8 @@ function ChattingContainer({ userInfos }) {
   };
 
   React.useEffect(() => {
-    const intervals = setInterval(() => {
-      if (userInfos !== null) {
-        // if (usertoken !== '' && socketClient.connected === true) console.log('tytt');
-        if (usertoken !== '' && socketClient.connected === true) {
-          if (connectCheckRef.current === null) subscribeConnect();
-        }
-      }
-    }, 1000);
-
-    return () => {
-      if (socketClient.connected) {
-        // 컴포넌트 종료 시 채팅 구독 취소 / 웹소켓 연결 종료
-        socketClient.disconnect(
-          () => {
-            // socketClient.unsubscribe('sub-0');
-          },
-          { token: `BEARER ${usertoken}` },
-        );
-      }
-      clearTimeout(intervals);
-    };
-  }, [dispatch, userinfo]);
+    if (chkConneted && connectCheckRef.current === null) subscribeConnect();
+  }, [chkConneted, subscribeConnect]);
 
   return (
     <Rooms
