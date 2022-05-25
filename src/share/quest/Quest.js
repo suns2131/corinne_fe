@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Quest({ type, resultQuest, questResult, questNo }) {
+function Quest({ type, resultQuest, questResult, questNo, questMove }) {
   if (type === false) {
     return (
       <div className="flex mb-[12px] ">
@@ -28,11 +28,15 @@ function Quest({ type, resultQuest, questResult, questNo }) {
             </div>
           </div>
         </div>
-        <div className="w-[72px] h-[118px] flex-grow-0 flex flex-col justify-center items-start gap-[10px] py-[44px] px-[15px] bg-Neutrals-black rounded-tr-[10px] rounded-br-[10px]">
+        <button
+          type="button"
+          className="w-[72px] h-[118px] flex-grow-0 flex flex-col justify-center items-start gap-[10px] py-[44px] px-[15px] bg-Neutrals-black rounded-tr-[10px] rounded-br-[10px]"
+          onClick={() => questMove(resultQuest.patchname)}
+        >
           <span className="flex-grow font-Pretendard text-[12px] text-center text-Neutrals-white">
             바로가기
           </span>
-        </div>
+        </button>
       </div>
     );
   }

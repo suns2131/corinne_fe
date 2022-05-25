@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Router } from 'next/router';
 import Quest from '../quest/Quest';
 import Alarms from './Alarms';
 import styles from './MyAlarm.module.css';
@@ -12,17 +13,18 @@ function MyAlarm() {
   const [type, setType] = useState(true);
   const AlramData = useSelector((state) => state.rank.userAlarm);
   const QuestNo = useSelector((state) => state.rank.userQuest);
-  console.log(AlramData);
-  console.log(QuestNo);
   useEffect(() => {
     dispatch(getUserAlarm());
     dispatch(getUserQuest());
   }, [dispatch]);
 
   const questResult = (questNo) => {
-    console.log(`questNo: ${questNo}`);
     dispatch(patchQuest(questNo));
     dispatch(getUserQuest());
+  };
+
+  const questMove = (questPatchname) => {
+    window.location.replace(questPatchname);
   };
 
   return (
@@ -71,6 +73,7 @@ function MyAlarm() {
                     resultQuest={QuestData(el.questNo)}
                     questResult={questResult}
                     questNo={el.questNo}
+                    questMove={questMove}
                   />
                 ))}
             </div>
