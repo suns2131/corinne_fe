@@ -2,7 +2,7 @@
 import React from 'react';
 import Level from '../../../../share/Level';
 import Reset from '../../../../../public/icons/reset.svg';
-import { Won } from '../../../../share/convertWon';
+import { KoreanWon, Won } from '../../../../share/convertWon';
 
 function Ranker({ type, rankerData, followBtn, setCallUser }) {
   let bgColors = '';
@@ -69,19 +69,17 @@ function Ranker({ type, rankerData, followBtn, setCallUser }) {
       <div className="w-[5.25em] flex justify-start items-center mr-[1.563em]">
         <Level Exp={rankerData.exp} />
       </div>
-      <span className="w-[8.063em] flex justify-end items-center flex-grow-0 font-Pretendard text-[15px] font-bold text-right text-Primary-lightPurple mr-[1.5em]">
+      <span className="w-[7.563em] flex justify-end items-center flex-grow-0 font-Pretendard text-[15px] font-bold text-right text-Primary-lightPurple mr-[1.5em]">
         {rankerData.fluctuationRate >= 0 ? (
-          <span className=" text-Primary-purple2">{rankerData.fluctuationRate}%</span>
+          <span className=" text-Primary-purple2">+{Won(rankerData.fluctuationRate)}%</span>
         ) : (
-          <span className=" text-Secondary-orange">{rankerData.fluctuationRate}%</span>
+          <span className=" text-Secondary-orange">-{rankerData.fluctuationRate}%</span>
         )}
       </span>
       <span
-        className={`w-[8em] flex-grow-0 font-Pretendard text-[15px] text-right ${textColors} mr-[1.5em]`}
+        className={`w-[10.438rem] flex-grow-0 font-Pretendard text-[15px] text-right ${textColors} mr-[1.5em]`}
       >
-        {Won(rankerData?.totalBalance !== undefined ? rankerData.totalBalance : 0)}원
-        {/* 99조9999억9999만9999원 */}
-        {/* 99,999,999,999,999원 */}
+        {KoreanWon(rankerData?.totalBalance !== undefined ? rankerData.totalBalance : 0)}원
       </span>
       <div className="flex-grow-0 flex justify-end items-center gap-[0.25em]">
         <div className="w-[16px] h-[16px]">

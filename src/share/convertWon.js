@@ -16,3 +16,26 @@ export function Tname(tiker) {
   if (tiker === 'KRW-DOGE') return '도지코인';
   return '';
 }
+
+export function KoreanWon(money) {
+  const Numbers = typeof money === 'number' ? money : false;
+  const unitWord = ['', '만', '억', '조'];
+  const splitUnit = 10000;
+  const dataArray = [];
+  let result = '';
+
+  for (let i = 0; i < splitUnit; i += 1) {
+    let unitResult = (Numbers % splitUnit ** (i + 1)) / splitUnit ** i;
+    unitResult = Math.floor(unitResult);
+    if (unitResult > 0) {
+      dataArray[i] = unitResult;
+    }
+  }
+
+  for (let i = 0; i < dataArray.length; i += 1) {
+    // eslint-disable-next-line no-continue
+    if (!dataArray[i]) continue;
+    result = `${dataArray[i]}${unitWord[i]}${result}`;
+  }
+  return result;
+}

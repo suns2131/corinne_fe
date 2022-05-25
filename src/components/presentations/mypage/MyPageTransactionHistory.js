@@ -6,7 +6,7 @@ function MyPageTransactionHistory({ userTransaction, lastScrollRef }) {
   return (
     <div className="shadow-box rounded-lg">
       <section className="shadow-box h-[70px] p-5">
-        <h1>거래내역</h1>
+        <h1>전체 거래내역</h1>
       </section>
       <section className="h-[458px] px-5 overflow-auto">
         {content.map(({ amount, leverage, price, tiker, tradeAt, type }) => (
@@ -29,11 +29,11 @@ function MyPageTransactionHistory({ userTransaction, lastScrollRef }) {
             </div>
             <div className="flex justify-between">
               <p className="text-Neutrals-lightGray">체결금액</p>
-              <p>1{amount.toLocaleString()}원</p>
+              <p>{amount.toLocaleString()}원</p>
             </div>
             <div className="flex justify-between">
               <p className="text-Neutrals-lightGray">레버리지</p>
-              <p>x{leverage}</p>
+              <p>{leverage}x</p>
             </div>
           </div>
         ))}
