@@ -29,14 +29,14 @@ function Ranker({ type, rankerData, followBtn, setCallUser }) {
   return (
     <div
       key={type}
-      className={`w-[753px] h-[64px] flex justify-between items-center p-5 rounded-[10px] ${bgColors}`}
+      className={`w-[47.063em] h-[4em] flex justify-start items-center p-5 rounded-[10px] ${bgColors}`}
     >
       <span
-        className={`w-[50px] flex-grow-0 font-Pretendard text-[15px] font-bold text-left ${textColors}`}
+        className={`w-[3.75em] flex-grow-0 font-Pretendard text-[15px] font-bold text-left ${textColors} mr-[1.25em]`}
       >
         {rankText}
       </span>
-      <div className="w-[130px] h-[24px] flex-grow-0 flex justify-start items-center gap-[5px]">
+      <div className="w-[6.625em] h-[24px] flex-grow-0 flex justify-start items-center gap-[0.25em] mr-[1.25em]">
         <button
           type="button"
           onClick={() => {
@@ -66,30 +66,34 @@ function Ranker({ type, rankerData, followBtn, setCallUser }) {
           {rankerData.nickname}
         </span>
       </div>
-      <div className="w-[84px] flex justify-start items-center">
+      <div className="w-[5.25em] flex justify-start items-center mr-[1.563em]">
         <Level Exp={rankerData.exp} />
       </div>
-      <span className="w-[50px] flex justify-start items-center flex-grow-0 font-Pretendard text-[15px] font-bold text-right text-Primary-lightPurple">
+      <span className="w-[8.063em] flex justify-end items-center flex-grow-0 font-Pretendard text-[15px] font-bold text-right text-Primary-lightPurple mr-[1.5em]">
         {rankerData.fluctuationRate >= 0 ? (
           <span className=" text-Primary-purple2">{rankerData.fluctuationRate}%</span>
         ) : (
           <span className=" text-Secondary-orange">{rankerData.fluctuationRate}%</span>
         )}
       </span>
-      <span className={`flex-grow-0 font-Pretendard text-[15px] text-right ${textColors}`}>
+      <span
+        className={`w-[8em] flex-grow-0 font-Pretendard text-[15px] text-right ${textColors} mr-[1.5em]`}
+      >
         {Won(rankerData?.totalBalance !== undefined ? rankerData.totalBalance : 0)}원
+        {/* 99조9999억9999만9999원 */}
+        {/* 99,999,999,999,999원 */}
       </span>
-      <div className="flex-grow-0 flex justify-end items-center gap-[4px]">
+      <div className="flex-grow-0 flex justify-end items-center gap-[0.25em]">
         <div className="w-[16px] h-[16px]">
           <Reset />
         </div>
-        <span className="flex-grow-0 font-Pretendard text-[15px] text-right text-Neutrals-lightGray">
+        <span className="w-[1.563em] flex-grow-0 font-Pretendard text-[15px] text-left text-Neutrals-lightGray mr-[1.25em]">
           {rankerData?.resetCount}
         </span>
       </div>
       {rankerData.follow ? (
         <button
-          className="w-[60px] h-[32px] flex-grow-0 flex justify-center items-center gap-[2px] p-[5px] rounded-[8px] bg-Neutrals-black active:bg-Neutrals-deepGray"
+          className="w-[3.75em] h-[2em] flex-grow-0 flex justify-center items-center gap-[2px] p-[5px] rounded-[8px] bg-Neutrals-black active:bg-Neutrals-deepGray"
           onClick={() => {
             followBtn(rankerData.userId, rankerData.follow);
           }}

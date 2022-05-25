@@ -51,9 +51,26 @@ export const getUserTransaction = createAsyncThunk(
   'user/getUserTransaction',
   async ({ page }, thunkApi) => {
     const { userTransaction } = thunkApi.getState().user;
-    console.log(`getUserTransaction조회 : ${page}`);
-    console.log(`getUserTransaction조회 : ${userTransaction}`);
     const { data } = await axiosInstance.get(`/api/transaction/${page}`);
+
+    if (userTransaction === null) {
+      return data;
+    }
+    const newContent = [...data.content, ...userTransaction.content];
+    const newData = {
+      ...data,
+      content: newContent,
+    };
+
+    return newData;
+  },
+);
+
+export const getTargetTransaction = createAsyncThunk(
+  'user/getTargetTransaction',
+  async ({ followId }, thunkApi) => {
+    const { userTransaction } = thunkApi.getState().user;
+    const { data } = await axiosInstance.get(`/api/user/transaction/${followId}`);
 
     if (userTransaction === null) {
       return data;

@@ -10,29 +10,19 @@ import TradeList from '../../../../share/myalarm/tradelist';
 import Closeicon from '../../../../../public/icons/close.svg';
 import { getTargetInfo } from '../../../../state/reducer/rank/thunk';
 import { Won } from '../../../../share/convertWon';
-import { getUserTransaction } from '../../../../state/reducer/user/thunk';
-import { selectedUserTransaction } from '../../../../state/reducer/user/selectors';
+import { getTargetTransaction } from '../../../../state/reducer/user/thunk';
+import { selectedTargetTransaction } from '../../../../state/reducer/user/selectors';
 
 function UserProfile({ profile, setClose }) {
   const dispatch = useDispatch();
   const targetinfo = useSelector((state) => state.rank.targetInfo);
-  const userTransaction = useSelector(selectedUserTransaction);
-  console.log(targetinfo);
-  const [page, setPage] = useState(1);
-
-  useEffect(() => {
-    dispatch(getUserTransaction({ page }));
-  }, [dispatch, page]);
+  const targetTransaction = useSelector(selectedTargetTransaction);
 
   useEffect(() => {
     dispatch(getTargetInfo(profile.userId));
+    const followId = profile.userId;
+    dispatch(getTargetTransaction({ followId }));
   }, [dispatch, profile.userId]);
-
-  // useEffect(() => {
-  //   if (userTransaction.totalPages > page) {
-  //     setPage(page + 1);
-  //   }
-  // }, [page]);
 
   if (profile === null) return null;
   return (
@@ -53,18 +43,24 @@ function UserProfile({ profile, setClose }) {
         </button>
       </div>
       <div className="flex-grow flex flex-col justify-start items-stretch p-5 shadow-box bg-Neutrals-white rounded-b-[10px]">
-        <div className="w-[710px] h-[447px] flex-grow-0 flex flex-row justify-start items-start p-5 shadow-box ">
+        <div className="w-[44.375em] h-[27.938em] flex-grow-0 flex flex-row justify-start items-start">
           <div className="flex flex-col">
-            <div className="w-[347px] h-[166px] flex flex-col justify-start items-center gap-[24px] ">
+            <div className="w-[21.688em] h-[10.375em] flex flex-col justify-start items-center gap-[1.875em] mr-5 ">
               <div className="h-[94px] self-stretch flex-grow-0 flex justify-start items-center gap-[20px] ">
                 <div className=" z-[2] relative">
                   <img
                     className="w-[87px] h-[87px] rounded-full"
-                    src="/images/defaultProfile/defalutProfile96.png"
+                    src={
+                      targetinfo.imageUrl !== 'null'
+                        ? targetinfo.imageUrl
+                        : '/images/defaultProfile/defalutProfile180.png'
+                    }
                     alt="defaultProfile"
                   />
-                  <div className=" absolute top-[65px] left-[7px]">
-                    <Level Exp={targetinfo.exp} />
+                  <div className="absolute top-[75%] w-[100%]">
+                    <div className="flex justify-center items-center">
+                      <Level Exp={targetinfo.exp} />
+                    </div>
                   </div>
                 </div>
                 <div className="h-[69px] flex-grow flex flex-col justify-center items-start gap-[12px]">
@@ -72,31 +68,6 @@ function UserProfile({ profile, setClose }) {
                     <span className="h-[32px] flex-grow-0 font-Pretendard text-[24px] font-bold text-left text-Neutrals-deepGray">
                       {targetinfo.nickname}
                     </span>
-                    {targetinfo.follow ? (
-                      <button
-                        className="w-[60px] h-[32px] flex-grow-0 flex justify-center items-center gap-[2px] p-[5px] rounded-[8px] bg-Neutrals-black active:bg-Neutrals-deepGray"
-                        onClick={() => {
-                          // followBtn(rankerData.userId, rankerData.follow);
-                        }}
-                        type="button"
-                      >
-                        <span className="flex-grow-0 font-Pretendard text-[12px] text-center text-Neutrals-white">
-                          팔로잉
-                        </span>
-                      </button>
-                    ) : (
-                      <button
-                        className="w-[60px] h-[32px] flex-grow-0 flex justify-center items-center gap-[2px] p-[5px] rounded-[8px] bg-Primary-purple2 active:bg-Primary-lightPurple"
-                        type="button"
-                        onClick={() => {
-                          // followBtn(rankerData.userId, rankerData.follow);
-                        }}
-                      >
-                        <span className="flex-grow-0 font-Pretendard text-[12px] text-center text-Neutrals-white">
-                          팔로우
-                        </span>
-                      </button>
-                    )}
                   </div>
                   <div className="h-[28px] self-stretch flex-grow-0 flex flex-col justify-start items-start">
                     <ExpBar exp={targetinfo.exp} />
@@ -108,7 +79,7 @@ function UserProfile({ profile, setClose }) {
                   </div>
                 </div>
               </div>
-              <div className="w-[304px] h-[48px] flex-grow-0 flex justify-start items-start gap-[32px]">
+              <div className="w-[347px] h-[48px] flex-grow-0 flex justify-center items-start gap-[32px]">
                 <div className="w-[52px] h-[48px] flex-grow-0 flex flex-col justify-start items-center gap-[10px]">
                   <span className="h-[18px]  flex-grow-0 font-Pretendard text-[15px] font-bold text-center text-Primary-purple">
                     {targetinfo.myRank}위
@@ -127,7 +98,7 @@ function UserProfile({ profile, setClose }) {
                 </div>
                 <div className="w-[52px] h-[48px] flex-grow-0 flex flex-col justify-start items-center gap-[10px]">
                   <span className="h-[18px]  flex-grow-0 font-Pretendard text-[15px] font-bold text-center text-Neutrals-black">
-                    {targetinfo.follwer}
+                    {targetinfo.follower}
                   </span>
                   <span className="h-[20px] flex-grow-0 font-Pretendard text-[12px] text-center text-Neutrals-gray">
                     팔로워
@@ -135,7 +106,7 @@ function UserProfile({ profile, setClose }) {
                 </div>
                 <div className="w-[52px] h-[48px] flex-grow-0 flex flex-col justify-start items-center gap-[10px]">
                   <span className="h-[18px]  flex-grow-0 font-Pretendard text-[15px] font-bold text-center text-Neutrals-black">
-                    {targetinfo.follwing}
+                    {targetinfo.following}
                   </span>
                   <span className="h-[20px] flex-grow-0 font-Pretendard text-[12px] text-center text-Neutrals-gray">
                     팔로잉
@@ -143,7 +114,7 @@ function UserProfile({ profile, setClose }) {
                 </div>
               </div>
             </div>
-            <div className="w-[347px] h-[211px] flex-grow-0 flex justify-start items-start gap-[110px] p-5 rounded-[10px] border border-solid border-Neutrals-lightGray2 mt-[30px]">
+            <div className="w-[21.688em] h-[13.188em] flex-grow-0 flex justify-start items-start gap-[13%] p-5 rounded-[10px] border border-solid border-Neutrals-lightGray2 mt-[1.875em]">
               <div className="w-[110px] h-[69px] flex flex-col justify-between items-start gap-[9px] ">
                 <span className="h-[21px] flex-grow-0 font-Pretendard text-[14px] text-left text-Neutrals-gray">
                   수익률
@@ -164,7 +135,7 @@ function UserProfile({ profile, setClose }) {
                   리셋 횟수
                 </span>
               </div>
-              <div className="w-[110px] h-[69px] flex flex-col justify-between items-end gap-[9px] ">
+              <div className="w-[160px] h-[69px] flex flex-col justify-between items-end gap-[9px] ">
                 <span className="h-[21px] flex-grow-0 font-Pretendard text-[15px] font-bold text-right text-Primary-purple2">
                   {targetinfo.fluctuationRate}%
                 </span>
@@ -180,7 +151,7 @@ function UserProfile({ profile, setClose }) {
                       ? targetinfo.draw
                       : 0
                     : 0}
-                  무
+                  무{' '}
                   {targetinfo?.win !== undefined
                     ? targetinfo.win !== null
                       ? targetinfo.win
@@ -203,9 +174,9 @@ function UserProfile({ profile, setClose }) {
               </div>
             </div>
           </div>
-          <div className="w-[303px] h-[407px] flex-grow-0 flex flex-col justify-start items-stretch gap-[10px] p-5 rounded-[10px] bg-Neutrals-whiteGray ml-[20px] overflow-x-hidden overflow-y-auto">
-            {userTransaction &&
-              userTransaction.content.map((el) => <TradeList type={el.type} tradeData={el} />)}
+          <div className="w-[303px] h-[407px] flex-grow-0 flex flex-col justify-start items-stretch gap-[10px] p-5 rounded-[10px] bg-Neutrals-whiteGray ml-[20px] overflow-x-hidden scrollbar-none">
+            {targetTransaction &&
+              targetTransaction.content.map((el) => <TradeList type={el.type} tradeData={el} />)}
           </div>
         </div>
       </div>

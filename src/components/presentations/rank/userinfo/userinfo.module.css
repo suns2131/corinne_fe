@@ -1,29 +1,37 @@
 /* webkit */
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   .progressRed {
+    width: 15em;
     height: 8px;
   }
   .progressOrange {
+    width: 15em;
     height: 8px;
   }
   .progressYello {
+    width: 15em;
     height: 8px;
   }
   .progressGreen {
+    width: 15em;
     height: 8px;
   }
   .progressSky {
+    width: 15em;
     height: 8px;
   }
   .progressNavy {
+    width: 15em;
     height: 8px;
   }
   .progressPurple {
+    width: 15em;
     height: 8px;
   }
 }
 .progressRed::-webkit-progress-bar {
   background: #eeeeee;
+
   border-radius: 8px;
 }
 .progressOrange::-webkit-progress-bar {

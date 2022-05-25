@@ -9,6 +9,7 @@ import AlarmNone from '../../../public/icons/header/alarm_none.svg';
 import AlarmRing from '../../../public/icons/header/alarm_ring.svg';
 import AlarmClick from '../../../public/icons/header/alarm_click.svg';
 import AlarmWhite from '../../../public/icons/header/alarm_white.svg';
+import AlarmWhiteNone from '../../../public/icons/header/alarm_white_none.svg';
 import socketClient from '../socket';
 import { getCookie, removeCookie } from '../cookie';
 import MyAlarm from '../myalarm/MyAlarm';
@@ -46,14 +47,8 @@ export default function Headers({ handleRouter, headerMenu }) {
 
   useEffect(() => {
     if (usertoken !== undefined) {
-      // console.log(`BEARER ${usertoken}`);
-      // console.log(socketClient.connected);
-      // console.log(userInfo);
       if (socketClient.connected === false && userInfo !== null) {
-        // api/user/info에서 조회한 내정보의 userid로 알림 소켓 구독.
-        // console.log(`소켓연결`);
         socketClient.connect({ token: `BEARER ${usertoken}` }, () => {
-          // console.log(`연결성공`);
           socketClient.subscribe(`/sub/topic/${userInfo.userId}`, (message) => {
             const AlramData = JSON.parse(message.body);
             // 알림 로직 체크
@@ -87,10 +82,6 @@ export default function Headers({ handleRouter, headerMenu }) {
           { token: `BEARER ${usertoken}` },
         );
       }
-      // }
-      // if (window.location.pathname === '/transaction') {
-      //   window.location.replace(window.location.pathname);
-      // }
     };
   }, [dispatch, userInfo]);
 
@@ -98,25 +89,25 @@ export default function Headers({ handleRouter, headerMenu }) {
     if (window.location.pathname !== '/') {
       return (
         <div>
-          <div className="w-container h-headers flex justify-between items-center mb-5">
-            <div className="h-[36px] text-[30px] font-bold text-left text-Primary-purple flex justify-start items-center font-Gmarket-Sans">
+          <div className="w-container h-headers flex justify-between items-center">
+            <div className="text-[30px] font-bold text-left text-Primary-purple flex justify-start items-center font-Gmarket-Sans">
               <Link href="/">corinne</Link>
             </div>
             <nav>
-              <ul className="w-[450px] h-[36px] grow-0 flex justify-center items-center gap-[25px]">
+              <ul className="w-[450px] h-[36px] grow-0 flex justify-end items-center gap-[2em]">
                 {headerMenu.map(({ key, pathname, menu }) => (
                   <li
                     key={key}
                     role="presentation"
                     onClick={handleRouter(pathname)}
-                    className="w-[90px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px] cursor-pointer"
+                    className="grow-0 flex justify-center items-center px-[8px] cursor-pointer"
                   >
                     <span
                       className={cn(
                         pathname === router.pathname
                           ? 'text-Primary-purple font-bold'
                           : 'text-Neutrals-gray font-normal',
-                        'w-[90px] h-[18px] grow-0 font-Pretendard text-[15px]  text-center ',
+                        'h-[1.13em] grow-0 font-Pretendard text-[15px]  text-center ',
                       )}
                     >
                       {menu}
@@ -126,13 +117,12 @@ export default function Headers({ handleRouter, headerMenu }) {
                 <li
                   role="presentation"
                   onClick={() => {
-                    console.log('쿠키삭제');
                     removeCookie({ name: 'corinne' });
-                    // window.location.replace('/');
+                    window.location.replace('/');
                   }}
-                  className="w-[90px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px]"
+                  className="w-[4.25em] h-[1.13em] grow-0 flex justify-center items-center gap-[10px] px-[8px]"
                 >
-                  <span className="w-[90px] h-[18px] grow-0 font-Pretendard text-[15px] font-normal text-center text-Neutrals-gray cursor-pointer">
+                  <span className="h-[1.13em] grow-0 font-Pretendard text-[15px] font-normal text-center text-Neutrals-gray cursor-pointer">
                     로그아웃
                   </span>
                 </li>
@@ -166,7 +156,7 @@ export default function Headers({ handleRouter, headerMenu }) {
             </nav>
           </div>
           {alarmState === 2 && (
-            <div className=" absolute left-[1115px] top-[50px]">
+            <div className=" absolute left-[56.9vw] top-[5vh]">
               <MyAlarm />
             </div>
           )}
@@ -187,25 +177,25 @@ export default function Headers({ handleRouter, headerMenu }) {
     if (window.location.pathname === '/') {
       return (
         <div>
-          <div className="w-container h-headers flex justify-between items-center mb-5">
-            <div className="h-[36px] text-[30px] font-bold text-left text-Neutrals-white flex justify-start items-center">
+          <div className="w-container h-headers flex justify-between items-center">
+            <div className="text-[30px] font-bold text-left text-Neutrals-white flex justify-start items-center font-Gmarket-Sans">
               <Link href="/">corinne</Link>
             </div>
             <nav>
-              <ul className="w-[450px] h-[36px] grow-0 flex justify-center items-center gap-[25px]">
+              <ul className="w-[450px] h-[36px] grow-0 flex justify-end items-center gap-[2em]">
                 {headerMenu.map(({ key, pathname, menu }) => (
                   <li
                     key={key}
                     role="presentation"
                     onClick={handleRouter(pathname)}
-                    className="w-[90px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px] cursor-pointer"
+                    className="grow-0 flex justify-center items-center px-[8px] cursor-pointer"
                   >
                     <span
                       className={cn(
                         pathname === router.pathname
                           ? 'text-Primary-purple font-bold'
                           : 'text-Neutrals-white font-normal',
-                        'w-[90px] h-[18px] grow-0 font-Pretendard text-[15px]  text-center ',
+                        'h-[1.13em] grow-0 font-Pretendard text-[15px]  text-center ',
                       )}
                     >
                       {menu}
@@ -215,20 +205,21 @@ export default function Headers({ handleRouter, headerMenu }) {
                 <li
                   role="presentation"
                   onClick={() => {
+                    console.log('쿠키삭제');
                     removeCookie({ name: 'corinne' });
-                    window.location.reload();
+                    window.location.replace('/');
                   }}
-                  className="w-[90px] h-[36px] grow-0 flex justify-center items-center gap-[10px] px-[8px]"
+                  className="w-[4.25em] h-[1.13em] grow-0 flex justify-center items-center gap-[10px] px-[8px]"
                 >
-                  <span className="w-[90px] h-[18px] grow-0 font-Pretendard text-[15px] font-normal text-center text-Neutrals-white cursor-pointer">
+                  <span className="h-[1.13em] grow-0 font-Pretendard text-[15px] font-normal text-center text-Neutrals-white cursor-pointer">
                     로그아웃
                   </span>
                 </li>
                 <li className="w-[24px] h-[24px] grow-0 flex justify-center items-center">
                   <button type="button" onClick={clickAlram}>
-                    {alarmState === 0 && <AlarmWhite />}
+                    {alarmState === 0 && <AlarmWhiteNone />}
                     {alarmState === 1 && <AlarmRing />}
-                    {alarmState === 2 && <AlarmClick />}
+                    {alarmState === 2 && <AlarmWhite />}
                   </button>
                 </li>
                 <li
@@ -237,7 +228,7 @@ export default function Headers({ handleRouter, headerMenu }) {
                   className="w-[40px] h-[36px] grow-0 flex justify-center items-center cursor-pointer"
                 >
                   <img
-                    className=" rounded-full w-[32px] h-[32px]"
+                    className=" rounded-full"
                     src={
                       userInfo?.imageUrl !== undefined
                         ? userInfo.imageUrl !== 'null'
@@ -254,7 +245,7 @@ export default function Headers({ handleRouter, headerMenu }) {
             </nav>
           </div>
           {alarmState === 2 && (
-            <div className=" absolute left-[1115px] top-[50px]">
+            <div className=" absolute left-[57.25vw] top-[5vh]">
               <MyAlarm />
             </div>
           )}
