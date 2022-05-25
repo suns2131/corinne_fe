@@ -144,13 +144,6 @@ function ChartContainer() {
         checkConnect();
       }
     }
-    // const intervals = setInterval(() => {
-
-    // }, 1000);
-
-    // return () => {
-    //   clearInterval(intervals);
-    // };
   }, [chkConneted]);
 
   const bookMarkClick = (tiker, type) => {
