@@ -3,8 +3,6 @@ import Closeicon from '../../../../../public/icons/close.svg';
 import { Won } from '../../../../share/convertWon';
 
 function Receipt({ dispatch, Modals, type, desc }) {
-  console.log(type);
-  console.log(desc);
   return (
     <div>
       <div className=" h-[69px] self-stretch flex-grow-0 flex justify-start items-start p-5 sahdow-box bg-Neutrals-white rounded-t-[10px]">
