@@ -3,11 +3,11 @@ import MessageBox from './MessageBox';
 
 function Rooms({ sendMessage, setInputMessage, sendBtn, messageRef }) {
   return (
-    <div className=" font-Pretendard">
-      <div className=" w-[387px] h-[69px] bg-[#FFFFFF] rounded-t-[10px] shadow-box p-5">
+    <div className=" font-Pretendard bg-Neutrals-white">
+      <div className=" w-[387px] h-[69px]  rounded-t-[10px] shadow-box p-5">
         <p className="font-bold text-[16px] text-[#33323F]">채팅</p>
       </div>
-      <div className="bg-[#FFFFFF] w-[387px] h-[396px] rounded-b-[10px] shadow-box px-5 pb-5">
+      <div className="w-[387px] h-[396px] rounded-b-[10px] shadow-box px-5 pb-5 bg-Neutrals-white">
         <MessageBox />
         <div className="w-[347px] h-[32px] px-[15px] py-[8px] bg-[#f9f9f9] rounded-[22px] mt-[20px] flex ">
           <input
