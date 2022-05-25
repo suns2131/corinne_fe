@@ -30,14 +30,20 @@ function Receipt({ dispatch, Modals, type, desc }) {
       </div>
       <div className="flex-grow flex flex-col justify-start items-stretch p-5 shadow-box bg-Neutrals-white rounded-b-[10px]">
         <div>
-          <span className="h-[24px] flex-grow-0 font-Pretendard text-[16px] font-normal text-left text-Neutrals-black">
+          <span className="h-[24px] flex-grow-0 font-Pretendard text-[16px] font-normal text-left text-Neutrals-black flex justify-start items-center mb-5">
             정상적으로 {type === 'buy' ? '매수' : '매도'}가 체결되었습니다 🎉
           </span>
           <div className="w-[392px] h-[139px] flex justify-between items-center p-5 rounded-[10px] border border-solid border-Neutrals-lightGray2">
             <div className="flex flex-col justify-start items-start gap-[4px]">
-              <span className="h-[21px] flex-grow-0 font-Pretendard text-[15px] font-bold text-left text-Secondary-orange">
-                {type === 'buy' ? '매수' : '매도'}
-              </span>
+              {type === 'buy' ? (
+                <span className="h-[21px] flex-grow-0 font-Pretendard text-[15px] font-bold text-left text-Primary-purple">
+                  매수
+                </span>
+              ) : (
+                <span className="h-[21px] flex-grow-0 font-Pretendard text-[15px] font-bold text-left text-Secondary-orange">
+                  매도
+                </span>
+              )}
               <span className="h-[21px] flex-grow-0 font-Pretendard text-[14px] font-normal text-left text-Neutrals-lightGray">
                 체결가격
               </span>
