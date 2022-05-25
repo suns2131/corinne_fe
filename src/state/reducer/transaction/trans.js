@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable no-shadow */
 import { createSlice } from '@reduxjs/toolkit';
 import intercept from '../../../data/axios';
@@ -128,7 +129,10 @@ export const getTikerList = () =>
           };
           return newElemnt;
         });
-        // eslint-disable-next-line no-use-before-define
+        // eslint-disable-next-line func-names
+        newArray.sort(function (a, b) {
+          return b.price - a.price;
+        });
         dispatch(tikerList(newArray));
       });
   };
