@@ -18,6 +18,8 @@ export function Tname(tiker) {
 
 export function KoreanWon(money) {
   let Numbers = typeof money === 'number' ? money : false;
+  console.log(Numbers);
+  if (Numbers === 0) return 0;
   const defalutNumber = Numbers;
   if (Numbers < 0) {
     // eslint-disable-next-line no-unused-expressions
@@ -40,6 +42,16 @@ export function KoreanWon(money) {
     // eslint-disable-next-line no-continue
     if (!dataArray[i]) continue;
     result = `${dataArray[i]}${unitWord[i]}${result}`;
+  }
+  if (defalutNumber > 1000000000000) {
+    // 경
+    // const index = result.indexOf('억');
+    // result = result.slice(0, index + 1);
+  }
+  if (defalutNumber > 1000000000000) {
+    // 조
+    const index = result.indexOf('만');
+    result = result.slice(0, index + 1);
   }
 
   return defalutNumber < 0 ? `-${result}` : result;

@@ -109,32 +109,28 @@ export const {
 // 코인 정보리스트
 export const getTikerList = () =>
   function (dispatch) {
-    intercept
-      .get(
-        '/api/price/rank',
-        // axios.get('/api/price/rank'
-      )
-      .then((response) => {
-        const reusltData = response.data;
-        const newArray = reusltData.map((el) => {
-          const newElemnt = {
-            favorite: el.favorite,
-            src: `/icons/icon_${el.unit.toLowerCase()}.png`,
-            alt: el.unit,
-            name: el.tikername,
-            tiker: el.tiker,
-            upRate: el.fluctuationRate,
-            price: el.tradePrice,
-            unitPrice: el.unit,
-          };
-          return newElemnt;
-        });
-        // eslint-disable-next-line func-names
-        newArray.sort(function (a, b) {
-          return b.price - a.price;
-        });
-        dispatch(tikerList(newArray));
+    intercept.get('/api/price/rank').then((response) => {
+      let reusltData = response.data;
+      reusltData = reusltData.filter((el) => el.tiker !== 'KRW-DOGE');
+      const newArray = reusltData.map((el) => {
+        const newElemnt = {
+          favorite: el.favorite,
+          src: `/icons/icon_${el.unit.toLowerCase()}.png`,
+          alt: el.unit,
+          name: el.tikername,
+          tiker: el.tiker,
+          upRate: el.fluctuationRate,
+          price: el.tradePrice,
+          unitPrice: el.unit,
+        };
+        return newElemnt;
       });
+      // eslint-disable-next-line func-names
+      newArray.sort(function (a, b) {
+        return b.price - a.price;
+      });
+      dispatch(tikerList(newArray));
+    });
   };
 
 // 연결되는 코인 정보 갱신
@@ -183,6 +179,7 @@ export const postBuySell = (type, requestData) =>
         buyPoint: response.data.accountBalance,
         sellPoint: response.data?.leftover !== undefined ? response.data?.leftover : 0,
       };
+      console.log(newArray);
       const modalData = {
         isopen: true,
         type: newArray.type,

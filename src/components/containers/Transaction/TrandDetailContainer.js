@@ -67,7 +67,8 @@ function TrandDetailContainer() {
       if (SelectCoin?.tiker !== undefined) {
         const newRequest = {
           ...buyRequest,
-          tradePrice: currentMount.tradePrice,
+          // tradePrice: currentMount.tradePrice,
+          tradePrice: 550,
           buyAmount: Number(buyRef.current.value),
           tiker: SelectCoin.tiker,
         };

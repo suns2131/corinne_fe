@@ -31,7 +31,7 @@ export default function Headers({ handleRouter, headerMenu }) {
     title: '',
     desc: '',
   });
-
+  let stridx = 0;
   const clickAlram = () => {
     if (alarmState === 2) setAlarmState(0);
     else setAlarmState(2);
@@ -53,10 +53,12 @@ export default function Headers({ handleRouter, headerMenu }) {
             // 새로운 알림이 생길경우 1 / 알림이 없을 경우 0 / 알림 클릭시 2
             if (AlramData.type === 'BANKRUPTCY') {
               setAlarmState(1);
+              stridx = AlramData.message.indexOf('청');
               setEmergency({
                 emState: true,
                 title: '파산 알림',
-                desc: AlramData.message,
+                desc1: AlramData.message.slice(0, stridx),
+                desc2: AlramData.message.slice(stridx),
               });
             }
             if (AlramData.type === 'ALARM') {
@@ -147,14 +149,14 @@ export default function Headers({ handleRouter, headerMenu }) {
             </div>
           )}
           {emergency.emState && (
-            <div className=" relative">
-              <div className=" absolute left-[403px] top-[-30px]">
-                <Modal title={emergency.title} setClose={setEmergency} btnView>
-                  <div className="w-[392px] font-Pretendard text-[16px] text-left text-Neutrals-black">
-                    {emergency.desc}
-                  </div>
-                </Modal>
-              </div>
+            <div className=" absolute left-[40vw] top-[5vh]">
+              <Modal title={emergency.title} setClose={setEmergency} btnView>
+                <div className="w-[392px] font-Pretendard text-[16px] text-left text-Neutrals-black">
+                  {emergency.desc1}
+                  <br />
+                  {emergency.desc2}
+                </div>
+              </Modal>
             </div>
           )}
         </div>
@@ -225,14 +227,14 @@ export default function Headers({ handleRouter, headerMenu }) {
             </div>
           )}
           {emergency.emState && (
-            <div className=" relative">
-              <div className=" absolute left-[403px] top-[-30px]">
-                <Modal title={emergency.title} setClose={setEmergency} btnView>
-                  <div className="w-[392px] font-Pretendard text-[16px] text-left text-Neutrals-black">
-                    {emergency.desc}
-                  </div>
-                </Modal>
-              </div>
+            <div className=" absolute left-[10px] top-[-30px]">
+              <Modal title={emergency.title} setClose={setEmergency} btnView>
+                <div className="w-[392px] font-Pretendard text-[16px] text-left text-Neutrals-black">
+                  {emergency.desc1}
+                  <br />
+                  {emergency.desc2}
+                </div>
+              </Modal>
             </div>
           )}
         </div>
