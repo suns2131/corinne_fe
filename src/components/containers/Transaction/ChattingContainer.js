@@ -53,6 +53,8 @@ function ChattingContainer({ userInfos }) {
     if (hours.toString().length === 1) hours = `0${hours}`;
     if (minues.toString().length === 1) minues = `0${minues}`;
     const sendTm = `${hours}:${minues}`;
+    const checkClear = questclear.filter((el) => el.questNo === 6);
+    const clear6 = checkClear.length > 1 ? checkClear.clear : false;
 
     const SendData = {
       type: 'TALK',
@@ -62,9 +64,10 @@ function ChattingContainer({ userInfos }) {
       imageUrl: userinfo.imageUrl,
       exp: userinfo.exp,
       sendTime: sendTm,
+      clear: clear6,
       message: inputMessage,
     };
-    socketClient.send(sendPath, {}, JSON.stringify(SendData));
+    socketClient.send(sendPath, { token: `BEARER ${usertoken}` }, JSON.stringify(SendData));
     messageRef.current.value = null;
   };
 
