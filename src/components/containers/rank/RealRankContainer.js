@@ -6,7 +6,7 @@ import RealRank from '../../presentations/rank/realrank/RealRank';
 import { postFollow } from '../../../state/reducer/rank/rank';
 import { selectRankState } from '../../../state/reducer/rank/selector';
 
-function RealRankContainer({ setCallUser }) {
+function RealRankContainer({ setCallUser, userinfos }) {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [list, setList] = useState();
@@ -29,12 +29,22 @@ function RealRankContainer({ setCallUser }) {
   }, [inView]);
 
   const searchNickname = (e) => {
-    setList(realRankState.filter((el) => el.nickname.includes(e.target.value)));
+    setList(
+      realRankState.filter((el) => {
+        if (el.nickname) {
+          return el.nickname.includes(e.target.value);
+        }
+        return '';
+      }),
+    );
   };
 
-  const followBtn = useCallback((userId, followStat) => {
-    dispatch(postFollow(userId, followStat));
-  }, []);
+  const followBtn = useCallback(
+    (userId, followStat) => {
+      dispatch(postFollow(userId, followStat));
+    },
+    [userinfos, dispatch],
+  );
 
   return (
     <RealRank
@@ -43,6 +53,7 @@ function RealRankContainer({ setCallUser }) {
       searchNickname={searchNickname}
       followBtn={followBtn}
       setCallUser={setCallUser}
+      userinfos={userinfos}
     />
   );
 }

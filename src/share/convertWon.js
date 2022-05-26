@@ -18,7 +18,12 @@ export function Tname(tiker) {
 }
 
 export function KoreanWon(money) {
-  const Numbers = typeof money === 'number' ? money : false;
+  let Numbers = typeof money === 'number' ? money : false;
+  const defalutNumber = Numbers;
+  if (Numbers < 0) {
+    // eslint-disable-next-line no-unused-expressions
+    Numbers *= -1;
+  }
   const unitWord = ['', '만', '억', '조'];
   const splitUnit = 10000;
   const dataArray = [];
@@ -37,5 +42,6 @@ export function KoreanWon(money) {
     if (!dataArray[i]) continue;
     result = `${dataArray[i]}${unitWord[i]}${result}`;
   }
-  return result;
+
+  return defalutNumber < 0 ? `-${result}` : result;
 }

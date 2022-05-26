@@ -9,7 +9,7 @@ import axiosInstance from '../../../data/axios';
 
 export const getRealRank = createAsyncThunk('rank/getRealRank', async () => {
   const response = await axiosInstance.get(`/api/rank`);
-
+  console.log(response.data);
   return response.data;
 });
 

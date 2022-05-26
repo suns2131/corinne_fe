@@ -4,10 +4,11 @@ import Level from '../../../../share/Level';
 import Reset from '../../../../../public/icons/reset.svg';
 import { KoreanWon, Won } from '../../../../share/convertWon';
 
-function Ranker({ type, rankerData, followBtn, setCallUser }) {
+function Ranker({ type, rankerData, followBtn, setCallUser, userinfos }) {
   let bgColors = '';
   let textColors = '';
   let rankText = '';
+  let myborder = '';
 
   if (type === 1) {
     bgColors = 'bg-Primary-purple';
@@ -26,10 +27,14 @@ function Ranker({ type, rankerData, followBtn, setCallUser }) {
     textColors = 'text-Neutrals-black';
     rankText = `${type}위`;
   }
+
+  if (userinfos.nickname === rankerData.nickname) {
+    myborder = 'border-[3px] border-solid border-Primary-purple2';
+  }
   return (
     <div
       key={type}
-      className={`w-[47.063em] h-[4em] flex justify-start items-center p-5 rounded-[10px] ${bgColors}`}
+      className={`w-[47.063em] h-[4em] flex justify-start items-center p-5 rounded-[10px] ${bgColors} ${myborder}`}
     >
       <span
         className={`w-[3.75em] flex-grow-0 font-Pretendard text-[15px] font-bold text-left ${textColors} mr-[1.25em]`}
@@ -73,7 +78,7 @@ function Ranker({ type, rankerData, followBtn, setCallUser }) {
         {rankerData.fluctuationRate >= 0 ? (
           <span className=" text-Primary-purple2">+{Won(rankerData.fluctuationRate)}%</span>
         ) : (
-          <span className=" text-Secondary-orange">-{rankerData.fluctuationRate}%</span>
+          <span className=" text-Secondary-orange">{rankerData.fluctuationRate}%</span>
         )}
       </span>
       <span
@@ -89,30 +94,38 @@ function Ranker({ type, rankerData, followBtn, setCallUser }) {
           {rankerData?.resetCount}
         </span>
       </div>
-      {rankerData.follow ? (
-        <button
-          className="w-[3.75em] h-[2em] flex-grow-0 flex justify-center items-center gap-[2px] p-[5px] rounded-[8px] bg-Neutrals-black active:bg-Neutrals-deepGray"
-          onClick={() => {
-            followBtn(rankerData.userId, rankerData.follow);
-          }}
-          type="button"
-        >
-          <span className="flex-grow-0 font-Pretendard text-[12px] text-center text-Neutrals-white">
-            팔로잉
-          </span>
-        </button>
+      {userinfos.nickname !== rankerData.nickname ? (
+        <div>
+          {rankerData.follow ? (
+            <button
+              className="w-[3.75em] h-[2em] flex-grow-0 flex justify-center items-center gap-[2px] p-[5px] rounded-[8px] bg-Neutrals-black active:bg-Neutrals-deepGray"
+              onClick={() => {
+                followBtn(rankerData.userId, rankerData.follow);
+              }}
+              type="button"
+            >
+              <span className="flex-grow-0 font-Pretendard text-[12px] text-center text-Neutrals-white">
+                팔로잉
+              </span>
+            </button>
+          ) : (
+            <button
+              className="w-[60px] h-[32px] flex-grow-0 flex justify-center items-center gap-[2px] p-[5px] rounded-[8px] bg-Primary-purple2 active:bg-Primary-lightPurple"
+              type="button"
+              onClick={() => {
+                followBtn(rankerData.userId, rankerData.follow);
+              }}
+            >
+              <span className="flex-grow-0 font-Pretendard text-[12px] text-center text-Neutrals-white">
+                팔로우
+              </span>
+            </button>
+          )}
+        </div>
       ) : (
-        <button
-          className="w-[60px] h-[32px] flex-grow-0 flex justify-center items-center gap-[2px] p-[5px] rounded-[8px] bg-Primary-purple2 active:bg-Primary-lightPurple"
-          type="button"
-          onClick={() => {
-            followBtn(rankerData.userId, rankerData.follow);
-          }}
-        >
-          <span className="flex-grow-0 font-Pretendard text-[12px] text-center text-Neutrals-white">
-            팔로우
-          </span>
-        </button>
+        <div>
+          <div className="w-[60px] h-[32px] flex-grow-0 flex justify-center items-center gap-[2px] p-[5px] rounded-[8px] bg-transparent" />
+        </div>
       )}
     </div>
   );
