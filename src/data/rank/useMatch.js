@@ -9,14 +9,9 @@ export function useMatch() {
   });
 
   useEffect(() => {
-    axiosInstance
-      .get('/api/user/rival')
-      .then((response) => {
-        setMatchs(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    axiosInstance.get('/api/user/rival').then((response) => {
+      setMatchs(response.data);
+    });
   }, []);
 
   return matchs;

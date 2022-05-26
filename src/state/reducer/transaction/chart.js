@@ -86,8 +86,6 @@ export const { addChart, updateChart, getCurMonut, getChart } = actions;
 export const getTradePrice = (tiker) =>
   function (dispatch) {
     intercept.get(`/api/price/tradeprice/${tiker}`).then((res) => {
-      console.log('tradeprice API');
-      console.log(res.data);
       const TradeData = res.data;
       const newCurrentData = {
         tradePrice: TradeData.tradePrice,
@@ -109,9 +107,7 @@ export const getLoadChart = (tiker, chartType) =>
       intercept
         .get(chartType ? `/api/price/date/${tiker}` : `/api/price/minute/${tiker}`)
         .then((response) => {
-          console.log(response.data);
           const arrays = response.data.filter((el, idx) => idx > response.data.length - 31);
-          console.log(arrays);
           const newChart = arrays.map((el) => {
             const chartdt = {
               x: el?.tradeTime !== undefined ? el.tradeTime : el.tradeDate,
@@ -123,7 +119,6 @@ export const getLoadChart = (tiker, chartType) =>
             };
             return chartdt;
           });
-          console.log(newChart);
           dispatch(getChart(newChart));
           dispatch(getTradePrice(tiker));
         });

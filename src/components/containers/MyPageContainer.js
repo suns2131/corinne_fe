@@ -27,7 +27,6 @@ import MyPageTransactionHistory from '../presentations/mypage/MyPageTransactionH
 import LoginContainer from './LoginContainer';
 import MyPageResetModal from '../presentations/mypage/MyPageResetModal';
 import ResetSuccessModal from '../presentations/mypage/ResetSuccessModal';
-import MyPageInfoHelp from '../presentations/mypage/MyPageInfoHelp';
 
 export default function MyPageContainer() {
   const dispatch = useDispatch();
@@ -74,6 +73,7 @@ export default function MyPageContainer() {
 
   const closeResetModal = useCallback(() => {
     setResetModalOpen(false);
+    // window.location.replace('/mypage');
   }, []);
 
   const openInfo = useCallback((e) => {
@@ -104,6 +104,7 @@ export default function MyPageContainer() {
     if (inView === true && userTransaction.totalPages > page) {
       setPage(page + 1);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
   return (
     <Wrapper>

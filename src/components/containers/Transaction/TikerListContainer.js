@@ -36,10 +36,8 @@ function TikerListContainer() {
 
   const bookMarkClick = (tiker, favor) => {
     if (favor) {
-      console.log(`delete!: ${tiker}`);
       dispatch(deleteTikerListFavor(tiker));
     } else {
-      console.log(`post!: ${tiker}`);
       dispatch(postTikerListFavor(tiker));
     }
   };

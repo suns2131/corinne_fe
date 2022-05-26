@@ -24,7 +24,6 @@ export default function Headers({ handleRouter, headerMenu }) {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  // console.log(`usertoken: ${usertoken}`);
   const islogin = usertoken !== undefined;
   const userInfo = useSelector(selectedUserInfo);
   const [alarmState, setAlarmState] = useState(0);
@@ -43,7 +42,6 @@ export default function Headers({ handleRouter, headerMenu }) {
     if (usertoken !== undefined) {
       dispatch(getUserInfo());
     }
-    // console.log(window.location.pathname);
   }, [dispatch]);
 
   useEffect(() => {
@@ -66,12 +64,6 @@ export default function Headers({ handleRouter, headerMenu }) {
           dispatch(checkSocket(true));
         });
       }
-      const intervals = setInterval(() => {
-        if (socketClient.connected === false && userInfo !== null) {
-          // console.log(socketClient.connected);
-          // console.log(userInfo);
-        }
-      }, 1000);
     }
 
     return () => {

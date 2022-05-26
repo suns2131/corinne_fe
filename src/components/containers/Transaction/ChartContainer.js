@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import socketClient from '../../../share/socket';
 import CoinChart from '../../presentations/transaction/chart/CoinChart';
@@ -25,10 +26,6 @@ function ChartContainer() {
     minute: 'bg-[#eeeeee]',
   });
   const subNum = useRef(1); // 구독취소할 subscribe id 저장변수
-
-  socketClient.debug = (str) => {
-    // console.log(`debugString: ${str}`);
-  };
 
   // 차트 타입 변경될때마다 Chart state초기화
   React.useEffect(() => {
@@ -127,10 +124,7 @@ function ChartContainer() {
   // info 변경될때마다 API 갱신 웹소켓 연결 체크
   React.useEffect(() => {
     dispatch(getLoadChart(selectInfo.tiker, btnStat.stat));
-    // console.log(`chartCheck1: ${selectInfo.tiker}`);
-    // console.log(`chartCheck2: ${socketClient.connected}`);
     if (selectInfo?.tiker !== undefined && socketClient.connected) {
-      // console.log(`subNum: ${subNum.current}`);
       socketClient.unsubscribe(subNum.current);
       checkConnect();
     }
@@ -139,7 +133,6 @@ function ChartContainer() {
   React.useEffect(() => {
     dispatch(getLoadChart(selectInfo.tiker, btnStat.stat));
     if (selectInfo?.tiker !== undefined && chkConneted) {
-      // console.log(`subNum: ${subNum.current}`);
       if (connectRef.current === null) {
         checkConnect();
       }
@@ -148,10 +141,8 @@ function ChartContainer() {
 
   const bookMarkClick = (tiker, type) => {
     if (type) {
-      console.log('delete!');
       dispatch(deleteBookmark(tiker));
     } else {
-      console.log('post!');
       dispatch(postBookmark(tiker));
     }
   };
