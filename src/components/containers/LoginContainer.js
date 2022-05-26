@@ -44,13 +44,17 @@ function LoginContainer() {
 
   const goBackPage = useCallback(() => {
     if (router.pathname === '/') {
-      dispatch(setEventModal(true));
-      window.location.replace(window.location.pathname);
+      if (!userInfo.firstLogin) {
+        dispatch(setEventModal(true));
+        window.location.replace(window.location.pathname);
+      } else {
+        window.location.replace(window.location.pathname);
+      }
     } else {
       window.location.replace(window.location.pathname);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router]);
+  }, [router, userInfo]);
 
   const handleClickLoginSuccess = useCallback(() => {
     if (selectUserName.length < 2 || selectUserName.length > 6) {
