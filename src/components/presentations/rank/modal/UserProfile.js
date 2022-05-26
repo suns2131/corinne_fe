@@ -1,8 +1,7 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-no-comment-textnodes */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Modal from '../../../../share/modal/Modal';
 import Level from '../../../../share/Level';
 import ExpBar from '../userinfo/ExpBar';
 import { maxExp } from '../../../../share/exp';

@@ -2,7 +2,6 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 import AlarmNone from '../../../public/icons/header/alarm_none.svg';
@@ -24,7 +23,6 @@ export default function Headers({ handleRouter, headerMenu }) {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  // console.log(`usertoken: ${usertoken}`);
   const islogin = usertoken !== undefined;
   const userInfo = useSelector(selectedUserInfo);
   const [alarmState, setAlarmState] = useState(0);
@@ -43,7 +41,6 @@ export default function Headers({ handleRouter, headerMenu }) {
     if (usertoken !== undefined) {
       dispatch(getUserInfo());
     }
-    // console.log(window.location.pathname);
   }, [dispatch]);
 
   useEffect(() => {
@@ -62,16 +59,13 @@ export default function Headers({ handleRouter, headerMenu }) {
                 desc: AlramData.message,
               });
             }
+            if (AlramData.type === 'ALARM') {
+              setAlarmState(1);
+            }
           });
           dispatch(checkSocket(true));
         });
       }
-      const intervals = setInterval(() => {
-        if (socketClient.connected === false && userInfo !== null) {
-          // console.log(socketClient.connected);
-          // console.log(userInfo);
-        }
-      }, 1000);
     }
 
     return () => {
@@ -80,7 +74,6 @@ export default function Headers({ handleRouter, headerMenu }) {
         socketClient.disconnect(
           () => {
             dispatch(checkSocket(false));
-            // socketClient.unsubscribe('sub-0');
           },
           { token: `BEARER ${usertoken}` },
         );

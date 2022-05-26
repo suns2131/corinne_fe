@@ -1,4 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import socketClient from '../../../share/socket';
 import CoinChart from '../../presentations/transaction/chart/CoinChart';
@@ -15,9 +17,12 @@ function ChartContainer() {
   const selectInfo = useSelector((state) => state.trans.tikerinfo);
   const chkConneted = useSelector((state) => state.trans.socketConnected);
   const chartData = useSelector((state) => state.chart.getChart);
+
+  const [newChartData, setNewChartData] = useState([]); // 차트데이터 관리용 state
+
   const currentMount = useSelector((state) => state.chart.getCurrentMonut);
   const customer = useSelector((state) => state.chart.customer);
-  const [chartType, setChartType] = useState(false); // false 분봉 / true 일봉
+  // const [chartType, setChartType] = useState(false); // false 분봉 / true 일봉
   const connectRef = useRef(null);
   const [btnStat, setBtnStat] = useState({
     stat: false,
@@ -25,10 +30,6 @@ function ChartContainer() {
     minute: 'bg-[#eeeeee]',
   });
   const subNum = useRef(1); // 구독취소할 subscribe id 저장변수
-
-  socketClient.debug = (str) => {
-    // console.log(`debugString: ${str}`);
-  };
 
   // 차트 타입 변경될때마다 Chart state초기화
   React.useEffect(() => {
@@ -127,10 +128,7 @@ function ChartContainer() {
   // info 변경될때마다 API 갱신 웹소켓 연결 체크
   React.useEffect(() => {
     dispatch(getLoadChart(selectInfo.tiker, btnStat.stat));
-    // console.log(`chartCheck1: ${selectInfo.tiker}`);
-    // console.log(`chartCheck2: ${socketClient.connected}`);
     if (selectInfo?.tiker !== undefined && socketClient.connected) {
-      // console.log(`subNum: ${subNum.current}`);
       socketClient.unsubscribe(subNum.current);
       checkConnect();
     }
@@ -139,7 +137,6 @@ function ChartContainer() {
   React.useEffect(() => {
     dispatch(getLoadChart(selectInfo.tiker, btnStat.stat));
     if (selectInfo?.tiker !== undefined && chkConneted) {
-      // console.log(`subNum: ${subNum.current}`);
       if (connectRef.current === null) {
         checkConnect();
       }
@@ -148,10 +145,8 @@ function ChartContainer() {
 
   const bookMarkClick = (tiker, type) => {
     if (type) {
-      console.log('delete!');
       dispatch(deleteBookmark(tiker));
     } else {
-      console.log('post!');
       dispatch(postBookmark(tiker));
     }
   };
@@ -159,7 +154,6 @@ function ChartContainer() {
   return (
     <div>
       <CoinChart
-        setChartType={setChartType}
         selectInfo={selectInfo}
         currentMount={currentMount}
         chartData={chartData}

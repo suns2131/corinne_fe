@@ -26,7 +26,7 @@ function RealRankContainer({ setCallUser, userinfos }) {
     if (inView) {
       if (page < totalPage) setPage(page + 1);
     }
-  }, [inView]);
+  }, [inView, page, totalPage]);
 
   const searchNickname = (e) => {
     setList(
@@ -43,6 +43,7 @@ function RealRankContainer({ setCallUser, userinfos }) {
     (userId, followStat) => {
       dispatch(postFollow(userId, followStat));
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [userinfos, dispatch],
   );
 

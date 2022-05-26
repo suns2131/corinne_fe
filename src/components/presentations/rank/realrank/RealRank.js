@@ -32,7 +32,7 @@ function RealRank({
       </div>
       {RealRankData && (
         <div className="w-[793px] h-[839px] flex flex-col justify-start items-start gap-[10px] px-5 py-[19px] shadow-box bg-Neutrals-white rounded-b-[10px] overflow-x-hidden overflow-y-auto scrollbar-none">
-          {RealRankData.map((el, idx) => (
+          {RealRankData.map((el) => (
             <div>
               <Ranker
                 type={el.rank}

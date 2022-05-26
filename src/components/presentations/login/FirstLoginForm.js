@@ -8,7 +8,6 @@ function FirstLoginForm({
   handleProfileImgUpload,
   handleClickProfileImg,
 }) {
-  console.log(profileImgPreview);
   return (
     <div
       style={{ background: 'rgba(0, 0, 0, 0.6)' }}

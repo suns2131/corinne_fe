@@ -1,8 +1,8 @@
+/* eslint-disable func-names */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-shadow */
 import { createSlice } from '@reduxjs/toolkit';
 import intercept from '../../../data/axios';
-import { getCurMonut } from './chart';
 import { checkSocket, postBookmark } from './thunk';
 
 // 초기 state값
@@ -80,7 +80,7 @@ const { actions, reducer } = createSlice({
     },
   },
   extraReducers: (bulider) => {
-    bulider.addCase(postBookmark.fulfilled, (state, { payload }) => {
+    bulider.addCase(postBookmark.fulfilled, (state) => {
       // eslint-disable-next-line no-param-reassign
       state.tikerinfo = {
         ...state.tikerinfo,
@@ -154,11 +154,8 @@ export const SelectingTiker = (selectInfo) =>
 // 거래내역 조회
 export const getDetail = (tiker, page) =>
   function (dispatch, getState) {
-    console.log(`detailtiker: ${tiker}`);
     if (tiker !== '') {
-      console.log(`detailtiker2: ${tiker}`);
       intercept.get(`/api/transaction/${tiker}/${page}`).then((response) => {
-        console.log(response.data);
         if (page !== 1) {
           const newArray = [...getState().trans.transDetail, ...response.data.content];
           dispatch(detilapage(response.data.totalPages));
@@ -176,9 +173,7 @@ export const getDetail = (tiker, page) =>
 // 매수 매도 처리
 export const postBuySell = (type, requestData) =>
   function (dispatch) {
-    console.log(requestData);
     intercept.post(`/api/transaction/${type}`, requestData).then((response) => {
-      console.log(response.data);
       const newArray = {
         amount: response.data.amount,
         price: response.data.type === 'buy' ? response.data.buyPrice : response.data.sellPrice,
@@ -193,7 +188,6 @@ export const postBuySell = (type, requestData) =>
         type: newArray.type,
         desc: newArray,
       };
-      console.log(modalData);
       dispatch(addDetail(newArray));
       dispatch(Modals(modalData));
     });
@@ -203,16 +197,13 @@ export const postBuySell = (type, requestData) =>
 export const getUserAmount = (tiker) =>
   function (dispatch) {
     intercept.get(`/api/account/balance/${tiker}`).then((response) => {
-      console.log(response.data);
       dispatch(Amounts(response.data));
     });
   };
 
 export const postTikerListFavor = (tiker) =>
   function (dispatch) {
-    console.log(`/api/account/bookmark/${tiker}`);
-    intercept.get(`/api/account/bookmark/${tiker}`).then((response) => {
-      console.log(response);
+    intercept.get(`/api/account/bookmark/${tiker}`).then(() => {
       dispatch(updateFavorite(true));
       dispatch(getTikerList());
     });
@@ -224,15 +215,10 @@ export const deleteTikerListFavor = (tikername) =>
       .delete(`/api/account/bookmark`, {
         data: { tiker: tikername },
       })
-      .then((response) => {
+      .then(() => {
         dispatch(updateFavorite(false));
         dispatch(getTikerList());
       });
-  };
-
-export const PostServer = (url, requestData) =>
-  function (dispatch) {
-    intercept.post(url, requestData).then((response) => {});
   };
 
 export default reducer;

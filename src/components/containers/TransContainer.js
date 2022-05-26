@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Wrapper from '../presentations/Wrapper';
 import BuySellContainer from './Transaction/TrandDetailContainer';
@@ -15,7 +15,6 @@ function TransContainer() {
   const dispatch = useDispatch();
   const userInfos = useSelector(selectedUserInfo);
   const receiptModal = useSelector((state) => state.trans.callResultModal);
-  const [loading, setloading] = useState(false);
 
   useLayoutEffect(() => {
     dispatch(getUserInfo());

@@ -9,7 +9,6 @@ import axiosInstance from '../../../data/axios';
 
 export const getRealRank = createAsyncThunk('rank/getRealRank', async () => {
   const response = await axiosInstance.get(`/api/rank`);
-  console.log(response.data);
   return response.data;
 });
 
@@ -63,12 +62,9 @@ export const getTargetInfo = createAsyncThunk('/api/user/info', async (userId) =
 });
 
 export const patchQuest = createAsyncThunk('/api/quest', async (questId, { dispatch }) => {
-  console.log(`thunkQuestid: ${questId}`);
-  console.log(typeof questId);
   const datas = {
     questNo: questId,
   };
-  console.log(datas);
   const response = await axiosInstance.patch(`/api/quest`, datas);
   if (response.status === 200) {
     dispatch(getUserQuest());

@@ -22,7 +22,6 @@ function FollowContainer({ setCallUser }) {
   // 사용자가 마지막 요소 조회시 page + 1
   React.useEffect(() => {
     if (inView) {
-      console.log(`inView: ${inView}`);
       setPage((prevPage) => prevPage + 1);
     }
   }, [inView]);

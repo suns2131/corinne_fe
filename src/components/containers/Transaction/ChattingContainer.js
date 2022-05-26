@@ -4,10 +4,14 @@ import { addChat } from '../../../state/reducer/transaction/chat';
 import Rooms from '../../presentations/transaction/chatting/Rooms';
 import socketClient from '../../../share/socket';
 import { selectedUserInfo } from '../../../state/reducer/user/selectors';
+import { getCookie } from '../../../share/cookie';
+
+const usertoken = getCookie({ name: 'corinne' });
 
 function ChattingContainer({ userInfos }) {
   const userinfo = useSelector(selectedUserInfo);
   const chkConneted = useSelector((state) => state.trans.socketConnected);
+  const questclear = useSelector((state) => state.rank.userQuest);
   const dispatch = useDispatch();
   const sendPath = `/pub/chat/message`;
   const [inputMessage, setInputMessage] = React.useState('');
@@ -22,17 +26,22 @@ function ChattingContainer({ userInfos }) {
     if (hours.toString().length === 1) hours = `0${hours}`;
     if (minues.toString().length === 1) minues = `0${minues}`;
     const sendTm = `${hours}:${minues}`;
+    const checkClear = questclear.filter((el) => el.questNo === 6);
+    const clear6 = checkClear.length > 1 ? checkClear.clear : false;
+
     if (e.key === 'Enter') {
       const SendData = {
         type: 'TALK',
         topicName: 'corinnechat',
+        userId: userinfo.userId,
         nickname: userinfo.nickname,
         imageUrl: userinfo.imageUrl,
         exp: userinfo.exp,
         sendTime: sendTm,
+        clear: clear6,
         message: inputMessage,
       };
-      socketClient.send(sendPath, {}, JSON.stringify(SendData));
+      socketClient.send(sendPath, { token: `BEARER ${usertoken}` }, JSON.stringify(SendData));
       e.target.value = '';
     }
   };
@@ -44,17 +53,21 @@ function ChattingContainer({ userInfos }) {
     if (hours.toString().length === 1) hours = `0${hours}`;
     if (minues.toString().length === 1) minues = `0${minues}`;
     const sendTm = `${hours}:${minues}`;
+    const checkClear = questclear.filter((el) => el.questNo === 6);
+    const clear6 = checkClear.length > 1 ? checkClear.clear : false;
 
     const SendData = {
       type: 'TALK',
       topicName: 'corinnechat',
+      userId: userinfo.userId,
       nickname: userinfo.nickname,
       imageUrl: userinfo.imageUrl,
       exp: userinfo.exp,
       sendTime: sendTm,
+      clear: clear6,
       message: inputMessage,
     };
-    socketClient.send(sendPath, {}, JSON.stringify(SendData));
+    socketClient.send(sendPath, { token: `BEARER ${usertoken}` }, JSON.stringify(SendData));
     messageRef.current.value = null;
   };
 

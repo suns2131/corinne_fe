@@ -1,7 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import Image from 'next/image';
 import React from 'react';
-import defalutProfile from '../../../../../public/images/defaultProfile/defalutProfile60.png';
 import { Won } from '../../../../share/convertWon';
 import Level from '../../../../share/Level';
 

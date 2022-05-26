@@ -6,11 +6,9 @@ import { Won } from '../../../../share/convertWon';
 const ApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 function CoinChart({
-  setChartType,
   selectInfo,
   currentMount,
   chartData,
-  VolumeData,
   bookMarkClick,
   customer,
   btnStat,
@@ -46,19 +44,6 @@ function CoinChart({
     ],
   };
 
-  const bState = {
-    options: {
-      chart: {},
-      yaxis: {
-        opposite: true,
-      },
-    },
-    series: [
-      {
-        data: chartData,
-      },
-    ],
-  };
   return (
     <div className=" font-Pretendard bg-Neutrals-white">
       <div className="w-[793px] h-[90px] flex flex-col items-start p-5 shadow-box rounded-[10px] mb-5">

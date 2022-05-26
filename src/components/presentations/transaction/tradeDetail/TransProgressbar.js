@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Slider from '@mui/material/Slider';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { getUserAmount, updateSell } from '../../../../state/reducer/transaction/trans';
-import styles from './TradeDetail.module.css';
 
 function TransProgressbar({
   buyRequest,
@@ -12,7 +12,6 @@ function TransProgressbar({
   setSellRequest,
   type,
   userAmount,
-  setSellPrice,
   SelectCoin,
   buysellState,
 }) {
@@ -20,8 +19,6 @@ function TransProgressbar({
   const buyMarker = [{ value: 1 }, { value: 25 }, { value: 50 }, { value: 75 }, { value: 100 }];
   const sellMarker = [{ value: 1 }, { value: 25 }, { value: 50 }, { value: 75 }, { value: 100 }];
   const currentMount = useSelector((state) => state.chart.getCurrentMonut.tradePrice);
-  console.log(currentMount);
-  // const sliderRef = useRef(null);
   const [buyLeverage, setBuyLeverage] = React.useState(1);
   const [sellLeverage, setSellLeverage] = React.useState(1);
   const sliderTheme = createTheme({
@@ -42,7 +39,6 @@ function TransProgressbar({
       if (sell.length > 0) {
         const bPrice = sell[0].buyPrice;
         const account = sell[0].amount;
-        // console.log(currentMount);
         const yieldSell = ((currentMount - bPrice) / bPrice) * account;
         const sellmonut = Math.floor(yieldSell * sellLeverage + account);
         dispatch(updateSell(sellmonut));
@@ -70,18 +66,11 @@ function TransProgressbar({
   const sellHandleChange = (event, newValue) => {
     setSellLeverage(newValue);
     const sell = userAmount.coins.filter((el) => el.leverage === Number(newValue));
-    // console.log(userAmount);
-    // console.log(newValue);
-    // console.log(`sell: ${sell}`);
     if (sell.length > 0) {
       const bPrice = sell[0].buyPrice;
       const account = sell[0].amount;
       const yieldSell = ((currentMount - bPrice) / bPrice) * account;
-      // console.log(yieldSell);
       const sellmonut = Math.floor(yieldSell * newValue + account);
-      // console.log(`yieldSell: ${yieldSell}`);
-      // console.log(`sliderRef.current.value: ${newValue}`);
-      // console.log(`account: ${account}`);
       setSellRequest({
         ...sellRequest,
         leverage: newValue,

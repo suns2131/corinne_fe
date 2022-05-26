@@ -6,7 +6,6 @@ export function usePrvRank() {
 
   useEffect(() => {
     axiosInstance.get('/api/rank/lastweek/1').then((response) => {
-      console.log(response.data);
       setPrevRank(response.data);
     });
   }, []);
