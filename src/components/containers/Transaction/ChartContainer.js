@@ -17,6 +17,9 @@ function ChartContainer() {
   const selectInfo = useSelector((state) => state.trans.tikerinfo);
   const chkConneted = useSelector((state) => state.trans.socketConnected);
   const chartData = useSelector((state) => state.chart.getChart);
+
+  const [newChartData, setNewChartData] = useState([]); // 차트데이터 관리용 state
+
   const currentMount = useSelector((state) => state.chart.getCurrentMonut);
   const customer = useSelector((state) => state.chart.customer);
   // const [chartType, setChartType] = useState(false); // false 분봉 / true 일봉

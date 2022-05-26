@@ -59,6 +59,9 @@ export default function Headers({ handleRouter, headerMenu }) {
                 desc: AlramData.message,
               });
             }
+            if (AlramData.type === 'ALARM') {
+              setAlarmState(1);
+            }
           });
           dispatch(checkSocket(true));
         });
