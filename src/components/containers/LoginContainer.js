@@ -49,10 +49,7 @@ function LoginContainer() {
     } else {
       window.location.replace(window.location.pathname);
     }
-    // router.push({
-    //   pathname: router.pathname,
-
-    // });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
 
   const handleClickLoginSuccess = useCallback(() => {

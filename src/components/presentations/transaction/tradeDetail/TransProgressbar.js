@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Slider from '@mui/material/Slider';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { getUserAmount, updateSell } from '../../../../state/reducer/transaction/trans';
-import styles from './TradeDetail.module.css';
 
 function TransProgressbar({
   buyRequest,
@@ -12,7 +12,6 @@ function TransProgressbar({
   setSellRequest,
   type,
   userAmount,
-  setSellPrice,
   SelectCoin,
   buysellState,
 }) {
@@ -20,7 +19,6 @@ function TransProgressbar({
   const buyMarker = [{ value: 1 }, { value: 25 }, { value: 50 }, { value: 75 }, { value: 100 }];
   const sellMarker = [{ value: 1 }, { value: 25 }, { value: 50 }, { value: 75 }, { value: 100 }];
   const currentMount = useSelector((state) => state.chart.getCurrentMonut.tradePrice);
-  // const sliderRef = useRef(null);
   const [buyLeverage, setBuyLeverage] = React.useState(1);
   const [sellLeverage, setSellLeverage] = React.useState(1);
   const sliderTheme = createTheme({

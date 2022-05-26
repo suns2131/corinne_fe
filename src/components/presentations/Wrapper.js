@@ -13,10 +13,9 @@ function Wrapper({ children }) {
 
   const handleRouter = useCallback(
     (path) => () => {
-      // router.push(path);
       window.location.replace(path);
     },
-    [router],
+    [],
   );
   return (
     <div className={router.pathname === '/' ? 'w-full h-full' : 'w-full h-full bg-Neutrals-ivory'}>

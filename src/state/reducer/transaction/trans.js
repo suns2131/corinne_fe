@@ -1,8 +1,8 @@
+/* eslint-disable func-names */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-shadow */
 import { createSlice } from '@reduxjs/toolkit';
 import intercept from '../../../data/axios';
-import { getCurMonut } from './chart';
 import { checkSocket, postBookmark } from './thunk';
 
 // 초기 state값
@@ -80,7 +80,7 @@ const { actions, reducer } = createSlice({
     },
   },
   extraReducers: (bulider) => {
-    bulider.addCase(postBookmark.fulfilled, (state, { payload }) => {
+    bulider.addCase(postBookmark.fulfilled, (state) => {
       // eslint-disable-next-line no-param-reassign
       state.tikerinfo = {
         ...state.tikerinfo,
@@ -203,7 +203,7 @@ export const getUserAmount = (tiker) =>
 
 export const postTikerListFavor = (tiker) =>
   function (dispatch) {
-    intercept.get(`/api/account/bookmark/${tiker}`).then((response) => {
+    intercept.get(`/api/account/bookmark/${tiker}`).then(() => {
       dispatch(updateFavorite(true));
       dispatch(getTikerList());
     });
@@ -215,15 +215,10 @@ export const deleteTikerListFavor = (tikername) =>
       .delete(`/api/account/bookmark`, {
         data: { tiker: tikername },
       })
-      .then((response) => {
+      .then(() => {
         dispatch(updateFavorite(false));
         dispatch(getTikerList());
       });
-  };
-
-export const PostServer = (url, requestData) =>
-  function (dispatch) {
-    intercept.post(url, requestData).then((response) => {});
   };
 
 export default reducer;

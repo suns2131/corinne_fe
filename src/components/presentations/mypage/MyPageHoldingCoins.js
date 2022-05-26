@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { memo } from 'react';
 
 function MyPageHoldingCoins({ userBalance }) {

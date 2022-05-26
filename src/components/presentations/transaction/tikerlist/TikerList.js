@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import styles from './TikerList.module.css';
 import { Won } from '../../../../share/convertWon';
@@ -76,7 +76,7 @@ function TikerList({
       {/* 리스트 */}
       <div className={styles.TikerDiv}>
         {coinList &&
-          coinList.map((el, idx) => (
+          coinList.map((el) => (
             <div id={el.unitPrice}>
               <button
                 type="button"

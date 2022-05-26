@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { setCookie } from '../../../src/share/cookie';
 import { isFirstLogin, setEventModal } from '../../../src/state/reducer/user';
 

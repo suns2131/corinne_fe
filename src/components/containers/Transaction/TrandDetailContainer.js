@@ -1,4 +1,5 @@
-import React, { useCallback, useRef, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
 import {
@@ -8,7 +9,6 @@ import {
   updateSell,
 } from '../../../state/reducer/transaction/trans';
 import TradeDetail from '../../presentations/transaction/tradeDetail/TradeDetail';
-import intercept from '../../../data/intercept';
 
 function TrandDetailContainer() {
   const dispatch = useDispatch();

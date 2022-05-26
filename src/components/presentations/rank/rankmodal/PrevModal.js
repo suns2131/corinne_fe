@@ -1,6 +1,5 @@
 import React from 'react';
 import Closeicon from '../../../../../public/icons/close.svg';
-import Searchicon from '../../../../../public/icons/search.svg';
 import Ranker from '../realrank/ranker';
 
 function PrevModal({ setModal, PrevRanks, followClick }) {

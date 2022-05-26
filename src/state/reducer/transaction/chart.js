@@ -1,7 +1,8 @@
+/* eslint-disable func-names */
 /* eslint-disable no-param-reassign */
 import { createSlice, current } from '@reduxjs/toolkit';
 import intercept from '../../../data/axios';
-import { getbuyCount, postBookmark } from './thunk';
+import { getbuyCount } from './thunk';
 
 // 초기 state값
 const initialState = {

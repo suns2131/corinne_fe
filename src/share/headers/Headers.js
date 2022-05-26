@@ -2,7 +2,6 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 import AlarmNone from '../../../public/icons/header/alarm_none.svg';
@@ -72,7 +71,6 @@ export default function Headers({ handleRouter, headerMenu }) {
         socketClient.disconnect(
           () => {
             dispatch(checkSocket(false));
-            // socketClient.unsubscribe('sub-0');
           },
           { token: `BEARER ${usertoken}` },
         );

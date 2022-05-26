@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,7 +19,7 @@ function ChartContainer() {
   const chartData = useSelector((state) => state.chart.getChart);
   const currentMount = useSelector((state) => state.chart.getCurrentMonut);
   const customer = useSelector((state) => state.chart.customer);
-  const [chartType, setChartType] = useState(false); // false 분봉 / true 일봉
+  // const [chartType, setChartType] = useState(false); // false 분봉 / true 일봉
   const connectRef = useRef(null);
   const [btnStat, setBtnStat] = useState({
     stat: false,
@@ -150,7 +151,6 @@ function ChartContainer() {
   return (
     <div>
       <CoinChart
-        setChartType={setChartType}
         selectInfo={selectInfo}
         currentMount={currentMount}
         chartData={chartData}

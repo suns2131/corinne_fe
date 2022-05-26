@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import useTop3 from '../../../data/rank/useTop3';
 import PrevRank from '../../presentations/rank/prevrank/PrevRank';
 
