@@ -7,14 +7,14 @@ import Wrapper from '../Wrapper';
 import UserProfile from './modal/UserProfile';
 import PrevModal from './rankmodal/PrevModal';
 
-function Rank({ modal, setModal, PrevRanks, callUser, setCallUser }) {
+function Rank({ modal, setModal, PrevRanks, callUser, setCallUser, userinfos }) {
   return (
     <div>
       <Wrapper>
         <div className="flex mb-[90px]">
           <div className="mr-5">
             <PrevRankContainer setModal={setModal} setCallUser={setCallUser} />
-            <RealRankContainer setCallUser={setCallUser} />
+            <RealRankContainer setCallUser={setCallUser} userinfos={userinfos} />
           </div>
           <div>
             <UserInfnoContainer setCallUser={setCallUser} />

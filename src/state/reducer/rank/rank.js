@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
@@ -67,12 +68,11 @@ const { actions, reducer } = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getRealRank.fulfilled, (state, { payload }) => ({
       ...state,
-      realRank: payload.rank,
-      realRankTotalPage: payload.totalPage,
+      realRank: payload,
+      // realRankTotalPage: payload.totalPage,
     }));
 
     builder.addCase(getFollowlist.fulfilled, (state, { payload }) => {
-      console.log(payload);
       // eslint-disable-next-line no-param-reassign
       state.followRank = payload;
     });
@@ -107,10 +107,8 @@ export const { myRank, topRank, rankList, infos, matchup, followList, addrank } 
 // 나의 랭크
 export const getMyRank = (url, requestData) =>
   function (dispatch) {
-    console.log(url);
     intercept.get(url, requestData).then((response) => {
       const reusltData = response.data.myRank;
-      console.log(reusltData);
       dispatch(myRank(reusltData));
     });
   };

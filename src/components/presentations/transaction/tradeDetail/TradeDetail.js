@@ -47,7 +47,7 @@ function TradeDetail({
               매도
             </button>
           </div>
-          <div className="w-[386px] h-[395px] flex flex-col justify-center items-center p-5 shadow-box rounded-b-[10]px">
+          <div className="w-[386px] h-[395px] flex flex-col justify-center items-center p-5 shadow-box rounded-b-[10px] bg-Neutrals-white">
             <div className="w-[339px] h-[188px] flex flex-col items-start mb-[77px]">
               <div className="w-full flex justify-between items-center mb-[33px]">
                 <p className="font-normal text-[14px] flex items-center text-[#33323f]">
@@ -178,7 +178,7 @@ function TradeDetail({
               매도
             </button>
           </div>
-          <div className="w-[386px] h-[395px] flex flex-col justify-center items-center p-5 shadow-box rounded-b-[10]px">
+          <div className="w-[386px] h-[395px] flex flex-col justify-center items-center p-5 shadow-box rounded-b-[10px] bg-Neutrals-white">
             <div className="w-[339px] h-[188px] flex flex-col items-start mb-[77px]">
               <div className="w-full flex justify-between items-center mb-[33px]">
                 <p className="font-normal text-[14px] flex items-center text-[#33323f]">

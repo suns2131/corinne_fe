@@ -28,6 +28,7 @@ function RankContainer() {
       PrevRanks={PrevRanks}
       callUser={callUser}
       setCallUser={setCallUser}
+      userinfos={userinfos}
     />
   );
 }

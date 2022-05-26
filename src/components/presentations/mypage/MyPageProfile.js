@@ -2,6 +2,7 @@ import { memo } from 'react';
 import styled from '@emotion/styled';
 import { checkLevelColor, maxExp } from '../../../share/exp';
 import Level from '../../../share/Level';
+import { Won } from '../../../share/convertWon';
 
 function MyPageProfile({ userInfo, goChangeProfile }) {
   if (!userInfo) return null;
@@ -22,7 +23,7 @@ function MyPageProfile({ userInfo, goChangeProfile }) {
         <div className="flex items-center">
           <LevelProgress colorCss={colorCss} value={exp} max={maxExp(exp)} />
           <p className="ml-3 text-Neutrals-gray">
-            {exp}xp / {maxExp(exp)}xp
+            {Won(exp)}xp / {Won(maxExp(exp))}xp
           </p>
         </div>
         <div className="inline-block text-Neutrals-black mt-10">

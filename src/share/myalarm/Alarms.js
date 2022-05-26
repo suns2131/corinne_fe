@@ -5,10 +5,9 @@ import Box from '../../../public/images/boxsvg.svg';
 
 function Alarms({ alData }) {
   if (!alData) return null;
-  console.log(alData);
   if (alData.alarmNo === 'RANK') {
     return (
-      <div className="w-[440px] h-[108px] flex-grow-0 flex flex-col justify-center items-stretch gap-[10px] px-5 bg-Neutrals-white">
+      <div className="w-[440px] h-[108px] flex-grow-0 flex flex-col justify-center items-stretch gap-[10px] px-5 bg-Neutrals-white border-b-Neutrals-gray border ">
         <div className="h-[32px] self-stretch flex-grow-0 flex justify-end items-center gap-[4px]">
           <Image src="/icons/Trophy.png" alt="deflutProfile" width={32} height={32} />
           <div className="flex flex-col justify-start items-center">
@@ -18,7 +17,7 @@ function Alarms({ alData }) {
             </span>
           </div>
           <span className="w-[44px] h-[23px] flex-grow-0 font-Pretendard text-[15px] text-right text-Neutrals-lightGray">
-            {alData.createAT}
+            {alData.createdAt}
           </span>
         </div>
       </div>
@@ -42,7 +41,7 @@ function Alarms({ alData }) {
             <span>경험치 10,000xp / 원화 500,000원</span>
           </div>
           <span className="w-[44px] h-[23px] flex-grow-0 font-Pretendard text-[15px] text-right text-Neutrals-lightGray">
-            {alData.createAT}
+            {alData.createdAt}
           </span>
         </div>
       </div>
@@ -50,7 +49,7 @@ function Alarms({ alData }) {
   }
   if (alData.alarmNo === 'FOLLWER')
     return (
-      <div className="w-[440px] h-[108px] flex-grow-0 flex flex-col justify-center items-stretch gap-[10px] px-5 bg-Neutrals-white">
+      <div className="w-[440px] h-[108px] flex-grow-0 flex flex-col justify-center items-stretch gap-[10px] px-5 bg-Neutrals-white border-b-Neutrals-whiteGray border">
         <div className="h-[32px] self-stretch flex-grow-0 flex justify-end items-center gap-[4px]">
           <Image
             src="/images/defaultProfile/defalutProfile32.png"
@@ -61,8 +60,8 @@ function Alarms({ alData }) {
           <span className="ml-[16px] w-[291px] flex-grow-0 font-Pretendard text-[15px] text-Neutrals-black ">
             <span className="font-bold">{alData.content}</span>님이 회원님을 팔로우했습니다.
           </span>
-          <span className="w-[44px] h-[23px] flex-grow-0 font-Pretendard text-[15px] text-right text-Neutrals-lightGray">
-            {alData.createAT}
+          <span className="w-[3.5rem] h-[23px] flex-grow-0 font-Pretendard text-[15px] text-right text-Neutrals-lightGray">
+            {alData.createdAt}
           </span>
         </div>
       </div>
@@ -75,8 +74,8 @@ function Alarms({ alData }) {
           <span className="ml-[16px] w-[291px] flex-grow-0 font-Pretendard text-[15px] text-Neutrals-black ">
             <span className="font-bold">{alData.content}</span>로 레벨업 되셨습니다.
           </span>
-          <span className="w-[44px] h-[23px] flex-grow-0 font-Pretendard text-[15px] text-right text-Neutrals-lightGray">
-            {alData.createAT}
+          <span className="h-[23px] flex-grow-0 font-Pretendard text-[15px] text-right text-Neutrals-lightGray">
+            {alData.createdAt}
           </span>
         </div>
       </div>
@@ -112,8 +111,8 @@ function Alarms({ alData }) {
               </span>
             )}
           </div>
-          <span className="w-[44px] h-[23px] flex-grow-0 font-Pretendard text-[15px] text-right text-Neutrals-lightGray">
-            {alData.createAT}
+          <span className="h-[23px] flex-grow-0 font-Pretendard text-[15px] text-right text-Neutrals-lightGray">
+            {alData.createdAt}
           </span>
         </div>
       </div>

@@ -22,7 +22,7 @@ function MyPageHoldings({ openResetModal, userBalance, profitOrLossCheck, openIn
       </section>
       <section className="p-5">
         <div className="flex justify-between">
-          <p className="flex items-center">
+          <p className="flex items-start mt-[7px]">
             <svg
               onClick={openResetModal}
               className="cursor-pointer"

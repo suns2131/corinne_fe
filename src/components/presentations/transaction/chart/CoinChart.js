@@ -60,8 +60,8 @@ function CoinChart({
     ],
   };
   return (
-    <div className=" font-Pretendard">
-      <div className="w-[793px] h-[90px] bg-[#ffffff] flex flex-col items-start p-5 shadow-box rounded-[10px] mb-5">
+    <div className=" font-Pretendard bg-Neutrals-white">
+      <div className="w-[793px] h-[90px] flex flex-col items-start p-5 shadow-box rounded-[10px] mb-5">
         <div className="w-[753px] h-[50px] flex justify-between items-center ">
           {selectInfo && (
             <div className="w-[130px] h-[50px] flex flex-row justify-center items-center gap-[11px] ">
@@ -207,22 +207,22 @@ function CoinChart({
               분
             </button>
           </div>
-          <div className="w-[587px] h-[26px] flex justify-center items-center">
-            <div className="w-[113px] h-[20px] font-normal text-[12px] text-Neutrals-gray">
+          <div className="w-[587px] h-[26px] flex justify-between items-center">
+            <div className="h-[20px] font-normal text-[12px] text-Neutrals-gray">
               고가
               <span className=" text-Primary-purple2">
                 {Won(currentMount?.highPrice !== undefined ? currentMount.highPrice : 0)}
               </span>
               원
             </div>
-            <div className="w-[113px] h-[20px] font-normal text-[12px] text-Neutrals-gray">
+            <div className="h-[20px] font-normal text-[12px] text-Neutrals-gray">
               저가
               <span className=" text-Secondary-orange">
                 {Won(currentMount?.lowPrice !== undefined ? currentMount.lowPrice : 0)}
               </span>
               원
             </div>
-            <div className="w-[123px] h-[20px] font-normal text-[12px] text-Neutrals-gray">
+            <div className="h-[20px] font-normal text-[12px] text-Neutrals-gray">
               전일가
               <span className=" text-Neutrals-black">
                 {Won(
@@ -231,7 +231,7 @@ function CoinChart({
               </span>
               원
             </div>
-            <div className="w-[160px] h-[20px] font-normal text-[12px] text-Neutrals-gray">
+            <div className="h-[20px] font-normal text-[12px] text-Neutrals-gray">
               거래대금
               <span className=" text-Neutrals-black">
                 {Won(currentMount?.tradeVolume !== undefined ? currentMount.tradeVolume : 0)}

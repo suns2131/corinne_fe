@@ -6,7 +6,6 @@ import styles from './Messages.module.css';
 function MessageBox() {
   const chattingData = useSelector((state) => state.chat.ChatMessage);
   const userinfo = useSelector(selectedUserInfo);
-  console.log(userinfo);
   const scrollref = useRef(null);
 
   const scrollToBottom = () => {
