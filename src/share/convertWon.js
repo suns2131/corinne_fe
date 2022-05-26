@@ -59,6 +59,7 @@ export function KoreanWon(money) {
 export function convertRate(money) {
   let Numbers = typeof money === 'number' ? money : false;
   if (Numbers === 0) return 0;
+  const ins = money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   const defalutNumber = Numbers;
   if (Numbers < 0) {
     // eslint-disable-next-line no-unused-expressions
@@ -76,22 +77,19 @@ export function convertRate(money) {
       dataArray[i] = unitResult;
     }
   }
-
   for (let i = 0; i < dataArray.length; i += 1) {
     // eslint-disable-next-line no-continue
     if (!dataArray[i]) continue;
     result = `${dataArray[i]}${unitWord[i]}${result}`;
   }
-  if (defalutNumber > 1000000000000) {
-    // 경
-    // const index = result.indexOf('억');
-    // result = result.slice(0, index + 1);
-  }
-  if (defalutNumber > 1000000000000) {
-    // 조
-    const index = result.indexOf('만');
+
+  if (defalutNumber > 100000000) {
+    // 억
+    const index = result.indexOf('억');
     result = result.slice(0, index + 1);
   }
-
-  return defalutNumber < 0 ? `-${result}` : result;
+  if (defalutNumber < 100000000) {
+    result = ins;
+  }
+  return defalutNumber < 0 ? `${result}` : result;
 }

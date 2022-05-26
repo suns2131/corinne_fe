@@ -2,7 +2,7 @@
 import React from 'react';
 import Level from '../../../../share/Level';
 import Reset from '../../../../../public/icons/reset.svg';
-import { KoreanWon, Won } from '../../../../share/convertWon';
+import { convertRate, KoreanWon, Won } from '../../../../share/convertWon';
 
 function Ranker({ type, rankerData, followBtn, setCallUser, userinfos }) {
   let bgColors = '';
@@ -76,9 +76,9 @@ function Ranker({ type, rankerData, followBtn, setCallUser, userinfos }) {
       </div>
       <span className="w-[7.563em] flex justify-end items-center flex-grow-0 font-Pretendard text-[15px] font-bold text-right text-Primary-lightPurple mr-[1.5em]">
         {rankerData.fluctuationRate >= 0 ? (
-          <span className=" text-Primary-purple2">+{Won(rankerData.fluctuationRate)}%</span>
+          <span className=" text-Primary-purple2">+{convertRate(rankerData.fluctuationRate)}%</span>
         ) : (
-          <span className=" text-Secondary-orange">{rankerData.fluctuationRate}%</span>
+          <span className=" text-Secondary-orange">{convertRate(rankerData.fluctuationRate)}%</span>
         )}
       </span>
       <span
