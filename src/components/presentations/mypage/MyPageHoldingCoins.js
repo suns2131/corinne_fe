@@ -12,8 +12,8 @@ function MyPageHoldingCoins({ userBalance }) {
     return 'text-Primary-purple2 font-bold';
   };
   return (
-    <div className="shadow-box rounded-lg">
-      <section className="shadow-box h-[70px] p-5">
+    <div className="shadow-box rounded-lg bg-Neutrals-white ">
+      <section className="shadow-box h-[70px] p-5 flex flex-col justify-center font-bold rounded-[10px]">
         <h1>보유코인</h1>
       </section>
       <section className="px-5">

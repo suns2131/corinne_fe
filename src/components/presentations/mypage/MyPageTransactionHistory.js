@@ -4,8 +4,8 @@ function MyPageTransactionHistory({ userTransaction, lastScrollRef }) {
   if (!userTransaction) return null;
   const { content } = userTransaction;
   return (
-    <div className="shadow-box rounded-lg">
-      <section className="shadow-box h-[70px] p-5">
+    <div className="shadow-box rounded-lg bg-Neutrals-white">
+      <section className="shadow-box h-[70px] p-5 flex flex-col justify-center items-start font-bold rounded-[10px]">
         <h1>전체 거래내역</h1>
       </section>
       <section className="h-[458px] px-5 overflow-auto scrollbar-none">

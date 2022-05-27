@@ -9,7 +9,7 @@ function MyPageProfile({ userInfo, goChangeProfile }) {
   const { userEmail, nickname, exp, imageUrl } = userInfo;
   const { colorCss } = checkLevelColor(exp);
   return (
-    <div className="flex col-span-2 rounded-lg">
+    <div className="flex col-span-2 rounded-lg mt-[15px]">
       <section className="w-[182px] h-[182px] rounded-full">
         <img
           className="w-[182px] h-[182px] rounded-full"
@@ -18,21 +18,21 @@ function MyPageProfile({ userInfo, goChangeProfile }) {
         />
       </section>
       <section className="ml-5">
-        <p className="text-Neutrals-deepGray font-bold text-[32px] ">{nickname}</p>
+        <p className="text-Neutrals-deepGray font-bold text-[32px] mb-[1rem]">{nickname}</p>
         <Level Exp={exp} />
-        <div className="flex items-center">
+        <div className="flex items-center mt-[0.25rem]">
           <LevelProgress colorCss={colorCss} value={exp} max={maxExp(exp)} />
-          <p className="ml-3 text-Neutrals-gray">
+          <p className="ml-3 text-Neutrals-black">
             {Won(exp)}xp / {Won(maxExp(exp))}xp
           </p>
         </div>
-        <div className="inline-block text-Neutrals-black mt-10">
+        <div className="inline-block text-Neutrals-black mt-[0.75rem]">
           <p>카카오 계정</p>
         </div>
         <div className="inline-block ml-[25px]">
           <span className="text-Neutrals-gray">{userEmail}</span>
         </div>
-        <button type="button" onClick={goChangeProfile} className="relative left-[240px]">
+        <button type="button" onClick={goChangeProfile} className="relative left-[270px]">
           <img className="w-[24px] h-[24px]" alt="프로필 편집" src="/icons/edit.png" />
         </button>
       </section>

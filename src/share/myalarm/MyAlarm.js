@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Router } from 'next/router';
 import Quest from '../quest/Quest';
 import Alarms from './Alarms';
 import styles from './MyAlarm.module.css';
 import { QuestData } from '../quest/questData';
-import axiosInstance from '../../data/axios';
 import { getUserAlarm, getUserQuest, patchQuest } from '../../state/reducer/rank/thunk';
 
 function MyAlarm() {

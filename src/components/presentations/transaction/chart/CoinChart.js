@@ -45,8 +45,8 @@ function CoinChart({
   };
 
   return (
-    <div className=" font-Pretendard bg-Neutrals-white">
-      <div className="w-[793px] h-[90px] flex flex-col items-start p-5 shadow-box rounded-[10px] mb-5">
+    <div className=" font-Pretendard ">
+      <div className="w-[793px] h-[90px] flex flex-col items-start p-5 shadow-box rounded-[10px] mb-5 bg-Neutrals-white">
         <div className="w-[753px] h-[50px] flex justify-between items-center ">
           {selectInfo && (
             <div className="w-[130px] h-[50px] flex flex-row justify-center items-center gap-[11px] ">
@@ -111,7 +111,7 @@ function CoinChart({
               </div>
             </div>
           )}
-          <div className="w-[270px] h-[50px] flex flex-col items-end ">
+          <div className="w-[270px] h-[50px] flex flex-col items-end">
             <div className="w-[270px] h-[29px] flex flex-row justify-end items-center gap-[3px] text-[12px] font-normal">
               {currentMount && (
                 <div>
@@ -162,7 +162,7 @@ function CoinChart({
           </div>
         </div>
       </div>
-      <div className="w-[793px] h-[558px] shadow-box rounded-[10px] p-5 mb-[24px]">
+      <div className="w-[793px] h-[558px] shadow-box rounded-[10px] p-5 mb-[24px] bg-Neutrals-white">
         <div className="w-[710px] h-[32px] flex justify-center items-center mb-[10px]">
           <div className="w-[70px] h-[32px] gap-[7px] flex justify-start items-center mr-[15px]">
             <button

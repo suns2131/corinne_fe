@@ -8,6 +8,7 @@ import { selectedUserInfo } from '../../state/reducer/user/selectors';
 const headerMenu = [
   { key: 'transaction', pathname: '/transaction', menu: '모의투자' },
   { key: 'rankpage', pathname: '/rankpage', menu: '랭킹' },
+  { key: 'mypage', pathname: '/mypage', menu: '마이페이지' },
 ];
 
 function Wrapper({ children }) {

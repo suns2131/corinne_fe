@@ -7,7 +7,7 @@ function Alarms({ alData }) {
   if (!alData) return null;
   if (alData.alarmNo === 'RANK') {
     return (
-      <div className="w-[440px] h-[108px] flex-grow-0 flex flex-col justify-center items-stretch gap-[10px] px-5 bg-Neutrals-white border-b-Neutrals-gray border ">
+      <div className="w-[440px] h-[108px] flex-grow-0 flex flex-col justify-center items-stretch gap-[10px] px-5 bg-Neutrals-white border-b-Neutrals-whiteGray border ">
         <div className="h-[32px] self-stretch flex-grow-0 flex justify-end items-center gap-[4px]">
           <Image src="/icons/Trophy.png" alt="deflutProfile" width={32} height={32} />
           <div className="flex flex-col justify-start items-center">
@@ -25,7 +25,7 @@ function Alarms({ alData }) {
   }
   if (alData.alarmNo === 'RIVAL') {
     return (
-      <div className="w-[440px] h-[108px] flex-grow-0 flex flex-col justify-center items-stretch gap-[10px] px-5 bg-Neutrals-white">
+      <div className="w-[440px] h-[108px] flex-grow-0 flex flex-col justify-center items-stretch gap-[10px] px-5 bg-Neutrals-white border-b-Neutrals-whiteGray border">
         <div className="h-[32px] self-stretch flex-grow-0 flex justify-end items-center gap-[4px]">
           <Image
             src="/images/defaultProfile/defalutProfile32.png"
@@ -68,7 +68,7 @@ function Alarms({ alData }) {
     );
   if (alData.alarmNo === 'LEVEL')
     return (
-      <div className="w-[440px] h-[108px] flex-grow-0 flex flex-col justify-center items-stretch gap-[10px] px-5 bg-Neutrals-white">
+      <div className="w-[440px] h-[108px] flex-grow-0 flex flex-col justify-center items-stretch gap-[10px] px-5 bg-Neutrals-white border-b-Neutrals-whiteGray border ">
         <div className="h-[32px] self-stretch flex-grow-0 flex justify-end items-center gap-[4px]">
           <AlarmNone />
           <span className="ml-[16px] w-[291px] flex-grow-0 font-Pretendard text-[15px] text-Neutrals-black ">
@@ -82,7 +82,7 @@ function Alarms({ alData }) {
     );
   if (alData.alarmNo === 'RESULT') {
     return (
-      <div className="w-[440px] h-[108px] flex-grow-0 flex flex-col justify-center items-stretch gap-[10px] px-5 bg-Neutrals-white">
+      <div className="w-[440px] h-[108px] flex-grow-0 flex flex-col justify-center items-stretch gap-[10px] px-5 bg-Neutrals-white border-b-Neutrals-whiteGray border ">
         <div className="h-[32px] self-stretch flex-grow-0 flex justify-end items-center gap-[4px]">
           <Box />
           <div className="flex flex-col justify-start items-center">
