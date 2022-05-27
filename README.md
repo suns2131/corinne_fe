@@ -24,14 +24,14 @@ corinne는 코인 초보자분들이 쉽고 재미있게 접할 수 있도록 �
 
 ![서비스 아키텍처](https://user-images.githubusercontent.com/93954839/170642303-5fc5675f-37a7-450b-9611-3710fcb410eb.PNG)
 
-## 개발 환경
+## 기술스택
 
 #### :boom: Frontend
 
 <img src="https://img.shields.io/badge/next.js-000000?style=flat&logo=next.js&logoColor=white"><br/>
 <img src="https://img.shields.io/badge/vercel-000000?style=flat&logo=vercel&logoColor=white"><br/>
-<img src="https://img.shields.io/badge/Redux-764abc?style=flat&logo=Redux&logoColor=white"><br/>
-<img src="https://img.shields.io/badge/Tailwind CSS-06b6d4?style=flat&logo=Tailwind CSS&logoColor=white"><br/>
+<img src="https://img.shields.io/badge/redux-764abc?style=flat&logo=redux&logoColor=white"><br/>
+<img src="https://img.shields.io/badge/tailwindCSS-06b6d4?style=flat&logo=tailwindCSS&logoColor=white"><br/>
 <img src="https://img.shields.io/badge/PostCSS-dd3a0a?style=flat&logo=POSTCSS&logoColor=white"><br/>
 <img src="https://img.shields.io/badge/sockjs-1877F2?style=flat&logo=ssockjs&logoColor=white"><br/>
 <img src="https://img.shields.io/badge/stomp-1877F2?style=flat&logo=stomp&logoColor=white"><br/>
