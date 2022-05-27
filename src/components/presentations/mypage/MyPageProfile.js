@@ -9,7 +9,7 @@ function MyPageProfile({ userInfo, goChangeProfile }) {
   const { userEmail, nickname, exp, imageUrl } = userInfo;
   const { colorCss } = checkLevelColor(exp);
   return (
-    <div className="flex col-span-2 rounded-lg mt-[15px]">
+    <div className="flex col-span-2 rounded-lg  items-center mb-[0.625rem]">
       <section className="w-[182px] h-[182px] rounded-full">
         <img
           className="w-[182px] h-[182px] rounded-full"
