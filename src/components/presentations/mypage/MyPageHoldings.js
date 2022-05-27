@@ -30,98 +30,59 @@ function MyPageHoldings({ openResetModal, userBalance, profitOrLossCheck, openIn
             <svg
               onClick={openResetModal}
               className="cursor-pointer flex flex-col justify-center items-center"
-              width="24"
-              height="24"
-              viewBox="0 0 36 36"
+              width="20"
+              height="21"
+              viewBox="0 0 20 21"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <g filter="url(#filter0_d_1147_8139)">
-                <rect x="8" y="8" width="20" height="20" rx="4" fill="white" />
-                <path
-                  d="M19.445 14.54C19.01 14.41 18.53 14.325 18 14.325C15.605 14.325 13.665 16.265 13.665 18.66C13.665 21.06 15.605 23 18 23C20.395 23 22.335 21.06 22.335 18.665C22.335 17.775 22.065 16.945 21.605 16.255"
-                  stroke="#CECECE"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M19.445 14.54C19.01 14.41 18.53 14.325 18 14.325C15.605 14.325 13.665 16.265 13.665 18.66C13.665 21.06 15.605 23 18 23C20.395 23 22.335 21.06 22.335 18.665C22.335 17.775 22.065 16.945 21.605 16.255"
-                  stroke="black"
-                  strokeOpacity="0.2"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M20.065 14.66L18.62 13"
-                  stroke="#CECECE"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M20.065 14.66L18.62 13"
-                  stroke="black"
-                  strokeOpacity="0.2"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M20.065 14.66L18.38 15.89"
-                  stroke="#CECECE"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M20.065 14.66L18.38 15.89"
-                  stroke="black"
-                  strokeOpacity="0.2"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <rect x="8.5" y="8.5" width="19" height="19" rx="3.5" stroke="#EEEEEE" />
-              </g>
-              <defs>
-                <filter
-                  id="filter0_d_1147_8139"
-                  x="0"
-                  y="0"
-                  width="36"
-                  height="36"
-                  filterUnits="userSpaceOnUse"
-                  colorInterpolationFilters="sRGB"
-                >
-                  <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                  <feColorMatrix
-                    in="SourceAlpha"
-                    type="matrix"
-                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                    result="hardAlpha"
-                  />
-                  <feOffset />
-                  <feGaussianBlur stdDeviation="4" />
-                  <feComposite in2="hardAlpha" operator="out" />
-                  <feColorMatrix
-                    type="matrix"
-                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.07 0"
-                  />
-                  <feBlend
-                    mode="normal"
-                    in2="BackgroundImageFix"
-                    result="effect1_dropShadow_1147_8139"
-                  />
-                  <feBlend
-                    mode="normal"
-                    in="SourceGraphic"
-                    in2="effect1_dropShadow_1147_8139"
-                    result="shape"
-                  />
-                </filter>
-              </defs>
+              <rect x="0.5" y="1" width="19" height="19" rx="3.5" fill="white" />
+              <path
+                d="M11.445 7.04C11.01 6.91 10.53 6.825 10 6.825C7.60504 6.825 5.66504 8.765 5.66504 11.16C5.66504 13.56 7.60504 15.5 10 15.5C12.395 15.5 14.335 13.56 14.335 11.165C14.335 10.275 14.065 9.445 13.605 8.755"
+                stroke="#CECECE"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M11.445 7.04C11.01 6.91 10.53 6.825 10 6.825C7.60504 6.825 5.66504 8.765 5.66504 11.16C5.66504 13.56 7.60504 15.5 10 15.5C12.395 15.5 14.335 13.56 14.335 11.165C14.335 10.275 14.065 9.445 13.605 8.755"
+                stroke="black"
+                strokeOpacity="0.2"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M12.065 7.16001L10.62 5.50001"
+                stroke="#CECECE"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M12.065 7.16001L10.62 5.50001"
+                stroke="black"
+                strokeOpacity="0.2"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M12.065 7.16L10.38 8.39"
+                stroke="#CECECE"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M12.065 7.16L10.38 8.39"
+                stroke="black"
+                strokeOpacity="0.2"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <rect x="0.5" y="1" width="19" height="19" rx="3.5" stroke="#EEEEEE" />
             </svg>
             <span className="ml-1 text-[14px] text-Neutrals-black">총자산</span>
           </p>
