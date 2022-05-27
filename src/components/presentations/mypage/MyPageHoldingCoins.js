@@ -40,7 +40,12 @@ function MyPageHoldingCoins({ userBalance }) {
               />
               <div className="text-left">
                 <p className="font-bold">{coin.split('-')[1]}</p>
-                <p className="text-sm">{amount.toLocaleString()}원</p>
+                {amount > 0 ? (
+                  <p className="text-sm">+{amount.toLocaleString()}원</p>
+                ) : (
+                  <p className="text-sm">{amount.toLocaleString()}원</p>
+                )}
+                {/* <p className="text-sm">{amount.toLocaleString()}원</p> */}
               </div>
             </div>
             <div className="text-right">

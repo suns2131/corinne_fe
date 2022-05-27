@@ -1,34 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 코린이(corinne) - 코인 모의투자 연습사이트
 
-## Getting Started
+도메인 ![corinne](https://www.corinne.kr)
 
-First, run the development server:
+## 프로젝트 기간
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+2022년 4월 22일 ~ 2022년 6월 3일
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 프로젝트 소개
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+코린이들을 위한 모의투자 corinne
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+corinne는 코인 초보자분들이 쉽고 재미있게 접할 수 있도록 다양한 기능들을 제공하는 코인 모의투자 서비스입니다.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## 서비스 아키텍처
 
-## Learn More
+![서비스 아키텍처](https://user-images.githubusercontent.com/93954839/170642303-5fc5675f-37a7-450b-9611-3710fcb410eb.PNG)
 
-To learn more about Next.js, take a look at the following resources:
+## 개발 환경
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### :boom: Frontend
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Next.js
+- axios
+- Vercel
+- ApexCharts
+- redux-Tookit
+- sockjs
+- stompjs
+- tailwind
+- postCSS
 
-## Deploy on Vercel
+#### :boom: Back-end
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Spring-Boot
+- Spring Security
+- Socket.io
+- MySQL
+- Redis
+- AWS S3
+- GitAction
+- AWS CodeDeploy
+- NginX
+- AWS EC2
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 팀원소개
+
+#### Frontend Github Link : https://github.com/suns2131/corinne_fe
+
+- 윤선식
+- 원동환
+
+#### Backend Github Link : https://github.com/GyuwonY/corinne_BE
+
+- 유규원
+- 정제무
+
+## UI
+
+#### 메인페이지
+
+![메인페이지](https://user-images.githubusercontent.com/93954839/170641474-02c4b7c7-5a94-450f-b026-a34d94643801.PNG)
+
+#### 모의투자페이지
+
+![모의투자화면](https://user-images.githubusercontent.com/93954839/170641555-55b3c709-ad0a-4475-a030-fa5c4871845e.PNG)
+
+#### 랭킹페이지
+
+![랭킹페이지](https://user-images.githubusercontent.com/93954839/170641525-ac36933e-cd80-4cf6-a462-f091431c2816.PNG)
+
+#### 마이페이지
+
+![마이페이지](https://user-images.githubusercontent.com/93954839/170641538-59df30c8-a305-4006-8b44-c2abade7a418.PNG)
