@@ -54,7 +54,7 @@ corinne는 코인 초보자분들이 쉽고 재미있게 접할 수 있도록 �
 ## 팀원소개
 
 | Name                 | GitHub / Contact                       | Position    |
-| -------------------- | -------------------------------------- | ----------- | --- |
+| -------------------- | -------------------------------------- | ----------- |
 | Frontend Github Link | https://github.com/suns2131/corinne_fe |
 | 윤선식VL             | https://github.com/suns2131            | FE / React  |
 | 원동환               | https://github.com/endol007            | FE / React  |
