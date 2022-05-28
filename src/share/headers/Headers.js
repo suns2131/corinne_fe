@@ -112,15 +112,6 @@ export default function Headers({ handleRouter, headerMenu }) {
                     </span>
                   </li>
                 ))}
-                {/* <li
-                  role="presentation"
-                  onClick={handleRouter('/mypage')}
-                  className=" h-[1.13em] grow-0 flex justify-center items-center gap-[10px] px-[8px]"
-                >
-                  <span className="h-[1.13em] grow-0 font-Pretendard text-[15px] font-normal text-center text-Neutrals-gray cursor-pointer">
-                    마이페이지
-                  </span>
-                </li> */}
                 <li
                   role="presentation"
                   onClick={() => {
