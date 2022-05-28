@@ -279,7 +279,7 @@ function TradeDetail({
 
             <div className="w-[346px] h-[80px] flex flex-col justify-end items-center gap-[15px] ">
               <p className="font-normal text-[12px] flex items-center text-center text-[#cecece]">
-                최소 주문금액 50,000원 (수수료 0%)
+                {/* 최소 주문금액 50,000원 (수수료 0%) */}{' '}
               </p>
               <button
                 className="w-[346px] h-[45px] flex justify-center items-center rounded-[6px] bg-[#FF9E0D] text-[14px] font-normal text-[#ffffff] "

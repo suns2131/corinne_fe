@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import axiosInstance from '../../../data/axios';
 import intercept from '../../../data/intercept';
+import { getUserInfo } from '../user/thunk';
 import {
   getRealRank,
   getFollowlist,
@@ -155,12 +156,12 @@ export const getTop3Rank = () =>
   };
 
 // 유저인포
-export const getUserInfo = () =>
-  function (dispatch) {
-    axios.get('/api/rank/userinfo').then((response) => {
-      dispatch(infos(response.data));
-    });
-  };
+// export const getUserInfo = () =>
+//   function (dispatch) {
+//     axios.get('/api/rank/userinfo').then((response) => {
+//       dispatch(infos(response.data));
+//     });
+//   };
 
 // 유저 1:1 매치업
 export const getMatchUp = () =>
@@ -177,12 +178,14 @@ export const postFollow = (userId, followStat) =>
         const page = 1;
         dispatch(getRealRank({ page }));
         dispatch(getFollowlist());
+        dispatch(getUserInfo());
       });
     } else {
       axiosInstance.post(`/api/follow/${userId}`).then(() => {
         const page = 1;
         dispatch(getRealRank({ page }));
         dispatch(getFollowlist());
+        dispatch(getUserInfo());
       });
     }
   };
