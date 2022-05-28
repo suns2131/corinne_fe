@@ -23,7 +23,7 @@ function FollowRank({ followlist, searchNickname, setCallUser }) {
           </div>
         </div>
       </div>
-      <div className="w-[387px] h-[746px] flex-grow-0 flex flex-col justify-start items-stretch gap-[30px] p-5 shadow-box bg-Neutrals-white rounded-b-[10px]">
+      <div className="w-[387px] h-[746px] flex-grow-0 flex flex-col justify-start items-stretch gap-[30px] p-5 shadow-box bg-Neutrals-white rounded-b-[10px] overflow-y-auto overflow-x-hidden scrollbar-none">
         {followlist &&
           followlist.map((el) => <Follower followData={el} setCallUser={setCallUser} />)}
 
