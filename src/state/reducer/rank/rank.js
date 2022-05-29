@@ -155,14 +155,6 @@ export const getTop3Rank = () =>
     });
   };
 
-// 유저인포
-// export const getUserInfo = () =>
-//   function (dispatch) {
-//     axios.get('/api/rank/userinfo').then((response) => {
-//       dispatch(infos(response.data));
-//     });
-//   };
-
 // 유저 1:1 매치업
 export const getMatchUp = () =>
   function (dispatch) {
