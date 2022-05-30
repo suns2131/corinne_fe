@@ -25,7 +25,7 @@ function Rank({ modal, setModal, PrevRanks, callUser, setCallUser, userinfos }) 
       </Wrapper>
       {modal && (
         <div className="w-full h-screen fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-40 text-center z-40">
-          <PrevModal setModal={setModal} PrevRanks={PrevRanks} />
+          <PrevModal setModal={setModal} PrevRanks={PrevRanks} userinfos={userinfos} />
         </div>
       )}
       {callUser.isopen && (

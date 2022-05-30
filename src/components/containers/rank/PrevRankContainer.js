@@ -15,6 +15,7 @@ function PrevRankContainer({ setModal, setCallUser }) {
       prevRankTop3={prevRankTop3Data}
       setCallUser={setCallUser}
       goSurvey={goSurvey}
+      type
     />
   );
 }

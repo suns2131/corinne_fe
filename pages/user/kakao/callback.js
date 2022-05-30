@@ -29,7 +29,8 @@ export default function KakaoCallback() {
         setCookie({ name: 'corinne', value: token });
         if (!res.data) {
           dispatch(setEventModal(true));
-          router.push('/');
+          window.location.replace('/');
+          // router.push('/');
         } else {
           window.location.href = '/?progress=image';
         }

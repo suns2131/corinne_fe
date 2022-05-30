@@ -193,9 +193,11 @@ export const postBuySell = (type, requestData) =>
 // 유저 자산 정보 조회
 export const getUserAmount = (tiker) =>
   function (dispatch) {
-    intercept.get(`/api/account/balance/${tiker}`).then((response) => {
-      dispatch(Amounts(response.data));
-    });
+    if (tiker !== undefined) {
+      intercept.get(`/api/account/balance/${tiker}`).then((response) => {
+        dispatch(Amounts(response.data));
+      });
+    }
   };
 
 export const postTikerListFavor = (tiker) =>

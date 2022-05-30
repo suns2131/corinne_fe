@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import dayjs from 'dayjs';
 import Hoveroff from '../../../../../public/icons/help/helpnone.svg';
-import { Won } from '../../../../share/convertWon';
+import { convertRate, KoreanWon, Won } from '../../../../share/convertWon';
 import Help from '../help/Help';
 
 function PrevRank({ setModal, prevRankTop3, setCallUser, type, goSurvey }) {
@@ -75,12 +75,12 @@ function PrevRank({ setModal, prevRankTop3, setCallUser, type, goSurvey }) {
               <div className="w-[118px] h-[78px] flex-grow-0 px-[26px] pt-[14px]  bg-Neutrals-black rounded-t-[10px] ">
                 <div className="flex flex-col justify-center items-center font-Pretendard text-[12px] font-bold text-center text-Primary-lightPurple">
                   {prevRankTop3.states[1]?.fluctuationRate !== undefined
-                    ? prevRankTop3.states[1].fluctuationRate
+                    ? convertRate(prevRankTop3.states[1].fluctuationRate)
                     : 0}
                   %
                   <span className="font-normal text-Neutrals-white">
                     {prevRankTop3.states[1]?.totalBalance !== undefined
-                      ? Won(prevRankTop3.states[1].totalBalance)
+                      ? KoreanWon(prevRankTop3.states[1].totalBalance)
                       : 0}
                     원
                   </span>
@@ -119,12 +119,12 @@ function PrevRank({ setModal, prevRankTop3, setCallUser, type, goSurvey }) {
               <div className="w-[140px] h-[108px] flex-grow-0 px-[26px] pt-[14px] bg-Neutrals-deepGray rounded-t-[10px] ">
                 <div className="flex flex-col justify-center items-center font-Pretendard text-[12px] font-bold text-center text-Primary-lightPurple">
                   {prevRankTop3.states[0]?.fluctuationRate !== undefined
-                    ? prevRankTop3.states[0].fluctuationRate
+                    ? convertRate(prevRankTop3.states[0].fluctuationRate)
                     : 0}
                   %
                   <span className="font-normal text-Neutrals-white">
                     {prevRankTop3.states[0]?.totalBalance !== undefined
-                      ? Won(prevRankTop3.states[0].totalBalance)
+                      ? KoreanWon(prevRankTop3.states[0].totalBalance)
                       : 0}
                     원
                   </span>
@@ -163,12 +163,12 @@ function PrevRank({ setModal, prevRankTop3, setCallUser, type, goSurvey }) {
               <div className="w-[118px] h-[78px] flex-grow-0 px-[26px] pt-[14px]  bg-Neutrals-black rounded-t-[10px] ">
                 <div className="flex flex-col justify-center items-center font-Pretendard text-[12px] font-bold text-center text-Primary-lightPurple">
                   {prevRankTop3.states[2]?.fluctuationRate !== undefined
-                    ? prevRankTop3.states[2].fluctuationRate
+                    ? convertRate(prevRankTop3.states[2].fluctuationRate)
                     : 0}
                   %
                   <span className="font-normal text-Neutrals-white">
                     {prevRankTop3.states[2]?.totalBalance !== undefined
-                      ? Won(prevRankTop3.states[2].totalBalance)
+                      ? KoreanWon(prevRankTop3.states[2].totalBalance)
                       : 0}
                     원
                   </span>
