@@ -24,7 +24,7 @@ function Wrapper({ children }) {
 
   const handleRouter = useCallback(
     (path) => () => {
-      if (!userinfo.firstLogin) router.replace(path);
+      if (!userinfo.firstLogin) window.location.replace(path);
       else goNickname();
     },
     [goNickname, userinfo],
