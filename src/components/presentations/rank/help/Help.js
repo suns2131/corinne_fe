@@ -7,7 +7,7 @@ function Help({ type }) {
     return (
       <div className="flex justify-center items-start ">
         <div className={styles.arrow} />
-        <div className="p-5 gap-[16px] rounded-[12px] shadow-help bg-Neutrals-black">
+        <div className="w-[23.4375rem] p-5 gap-[16px] rounded-[12px] shadow-help bg-Neutrals-black">
           <div className="flex-grow-0 flex flex-col justify-start items-start gap-[8px]">
             <span className="flex-grow-0 font-Pretendard text-[12px] font-bold text-left text-Neutrals-white">
               주간 모의투자 랭킹
@@ -48,7 +48,7 @@ function Help({ type }) {
     return (
       <div className="flex justify-center items-start ">
         <div className={styles.arrow} />
-        <div className="w-[245px] h-[215px] p-5 gap-[16px] rounded-[12px] shadow-help bg-Neutrals-black">
+        <div className="w-[15.3125rem] p-5 gap-[16px] rounded-[12px] shadow-help bg-Neutrals-black">
           <div className="flex-grow-0 flex flex-col justify-start items-start gap-[8px]">
             <span className="flex-grow-0 font-Pretendard text-[12px] font-bold text-left text-Neutrals-white">
               1:1 랜덤 배틀
