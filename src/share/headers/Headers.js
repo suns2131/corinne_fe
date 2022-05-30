@@ -70,6 +70,8 @@ export default function Headers({ handleRouter, headerMenu }) {
       }
     }
 
+    socketClient.debug = null;
+
     return () => {
       if (socketClient.connected) {
         // 컴포넌트 종료 시 채팅 구독 취소 / 웹소켓 연결 종료
