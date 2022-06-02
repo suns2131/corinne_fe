@@ -23,7 +23,7 @@ corinne는 코인 초보자분들이 쉽고 재미있게 접할 수 있도록 �
 ## 서비스 아키텍처
 
 ![서비스 아키텍처](https://user-images.githubusercontent.com/93954839/170642303-5fc5675f-37a7-450b-9611-3710fcb410eb.PNG)
-
+![프론트엔드 ](https://user-images.githubusercontent.com/42165194/171688402-b36119fd-9b6f-429a-9c29-b80f25b91764.png)
 ## 기술스택
 
 #### :boom: Frontend
@@ -82,3 +82,4 @@ corinne는 코인 초보자분들이 쉽고 재미있게 접할 수 있도록 �
 
 #### ERD
 ![ERD](https://user-images.githubusercontent.com/42165194/170925272-e4d00fc2-ca2d-4b2a-a65d-79bdd488b02a.png)
+
