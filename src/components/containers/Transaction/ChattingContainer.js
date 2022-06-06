@@ -81,7 +81,7 @@ function ChattingContainer({ userInfos }) {
         time: ChatData.sendTime,
         imageUrl:
           ChatData.imageUrl === 'null'
-            ? '/images/defaultProfile/defalutProfile32.png'
+            ? '/images/defaultProfile/defalutProfile32.webp'
             : ChatData.imageUrl,
         message: ChatData.message,
       };
@@ -99,7 +99,7 @@ function ChattingContainer({ userInfos }) {
       nickname: userInfos.nickname,
       imageUrl:
         userInfos.imageUrl === 'null'
-          ? '/images/defaultProfile/defalutProfile32.png'
+          ? '/images/defaultProfile/defalutProfile32.webp'
           : userInfos.imageUrl,
       exp: userInfos.exp,
       sendTime: sendTm,
@@ -109,8 +109,17 @@ function ChattingContainer({ userInfos }) {
   };
 
   React.useEffect(() => {
-    if (chkConneted && connectCheckRef.current === null) subscribeConnect();
-  }, [chkConneted, subscribeConnect]);
+    socketClient.subscribe('/sub/topic/corinnechat', (message) => {
+      const ChatData = JSON.parse(message.body);
+      const updateChat = {
+        nickname: ChatData.nickname,
+        message: ChatData.message,
+      };
+      dispatch(addChat(updateChat));
+    });
+  }, []);
+
+  // if (chkConneted && connectCheckRef.current === null) subscribeConnect();
 
   return (
     <Rooms

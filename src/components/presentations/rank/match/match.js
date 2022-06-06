@@ -19,8 +19,8 @@ function MatchOne({ Info, matchs }) {
               matchs.imageUrl !== undefined
                 ? matchs.imageUrl !== 'null'
                   ? matchs.imageUrl
-                  : '/images/defaultProfile/defalutProfile96.png'
-                : '/images/defaultProfile/defalutProfile96.png'
+                  : '/images/defaultProfile/defalutProfile96.webp'
+                : '/images/defaultProfile/defalutProfile96.webp'
             }
             alt={matchs.nickname}
           />

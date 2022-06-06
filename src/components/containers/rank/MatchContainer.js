@@ -12,7 +12,6 @@ function MatchContainer() {
   const userInfo = useSelector(selectedUserInfo);
 
   useLayoutEffect(() => {
-    dispatch(getUserInfo());
     dispatch(getMatch());
   }, [dispatch]);
   return <MatchOne Info={userInfo} matchs={matchs} />;

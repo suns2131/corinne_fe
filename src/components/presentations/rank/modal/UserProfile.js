@@ -52,7 +52,7 @@ function UserProfile({ profile, setClose }) {
                     src={
                       targetinfo.imageUrl !== 'null'
                         ? targetinfo.imageUrl
-                        : '/images/defaultProfile/defalutProfile180.png'
+                        : '/images/defaultProfile/defalutProfile180.webp'
                     }
                     alt="defaultProfile"
                   />

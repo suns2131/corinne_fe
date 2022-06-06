@@ -28,7 +28,7 @@ function Alarms({ alData }) {
       <div className="w-[440px] h-[108px] flex-grow-0 flex flex-col justify-center items-stretch gap-[10px] px-5 bg-Neutrals-white border-b-Neutrals-whiteGray border">
         <div className="h-[32px] self-stretch flex-grow-0 flex justify-end items-center gap-[4px]">
           <Image
-            src="/images/defaultProfile/defalutProfile32.png"
+            src="/images/defaultProfile/defalutProfile32.webp"
             alt="deflutProfile"
             width={32}
             height={32}
@@ -52,7 +52,7 @@ function Alarms({ alData }) {
       <div className="w-[440px] h-[108px] flex-grow-0 flex flex-col justify-center items-stretch gap-[10px] px-5 bg-Neutrals-white border-b-Neutrals-whiteGray border">
         <div className="h-[32px] self-stretch flex-grow-0 flex justify-end items-center gap-[4px]">
           <Image
-            src="/images/defaultProfile/defalutProfile32.png"
+            src="/images/defaultProfile/defalutProfile32.webp"
             alt="deflutProfile"
             width={32}
             height={32}

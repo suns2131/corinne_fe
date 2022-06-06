@@ -27,8 +27,8 @@ function Userinfo({ Info, setCallUser }) {
                     Info.imageUrl !== undefined
                       ? Info.imageUrl !== 'null'
                         ? Info.imageUrl
-                        : '/images/defaultProfile/defalutProfile96.png'
-                      : '/images/defaultProfile/defalutProfile96.png'
+                        : '/images/defaultProfile/defalutProfile96.webp'
+                      : '/images/defaultProfile/defalutProfile96.webp'
                   }
                   alt={Info.nickname}
                 />

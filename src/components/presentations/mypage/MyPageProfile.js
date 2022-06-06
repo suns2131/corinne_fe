@@ -14,7 +14,7 @@ function MyPageProfile({ userInfo, goChangeProfile }) {
         <img
           className="w-[182px] h-[182px] rounded-full"
           alt="프로필 이미지"
-          src={imageUrl === 'null' ? '/images/defaultProfile/defalutProfile180.png' : imageUrl}
+          src={imageUrl === 'null' ? '/images/defaultProfile/defalutProfile180.webp' : imageUrl}
         />
       </section>
       <section className="ml-5">

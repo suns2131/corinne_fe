@@ -29,7 +29,7 @@ function LoginContainer() {
   const [loginStatusText, setLoginStatusText] = useState('');
   const [loginStatus, setLoginStatus] = useState(false);
   const [profileImgPreview, setProfileImgPreview] = useState(
-    userInfo ? userInfo.imageUrl : '/images/defaultProfile/defalutProfile180.png',
+    userInfo ? userInfo.imageUrl : '/images/defaultProfile/defalutProfile180.webp',
   );
 
   const goNextProgress = useCallback(
@@ -57,6 +57,9 @@ function LoginContainer() {
   }, [router, userInfo]);
 
   const handleClickLoginSuccess = useCallback(() => {
+    if (selectUserName === null || selectUserName === '') {
+      setLoginStatusText('닉네임이 비어있습니다, 확인해주세요.');
+    }
     if (selectUserName.length < 2 || selectUserName.length > 6) {
       setLoginStatusText('글자수를 확인해주세요');
     } else {

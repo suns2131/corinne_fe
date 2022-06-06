@@ -15,9 +15,9 @@ function PrevRank({ setModal, prevRankTop3, setCallUser, type, goSurvey }) {
 
   if (type) {
     return (
-      <div className="w-[793px] h-[372px] flex-grow-0 pl-5 pt-5 rounded-[10px] bg-[url('/images/corinne_back.png')] bg-cover bg-center mb-5">
+      <div className="w-[793px] h-[372px] flex-grow-0 pl-5 pt-5 rounded-[10px] bg-[url('/images/corinne_back.webp')] bg-cover bg-center mb-5">
         <div className="w-[291px] h-[53px] flex justify-start items-center gap-[4px]">
-          <Image src="/icons/Trophy.png" alt="trophy" width="41px" height="51px" />
+          <img src="/icons/Trophy.png" alt="trophy" width="41px" height="51px" />
           <div className="w-[245px] h-[53px] flex-grow-0 flex flex-col justify-start items-start gap-[4px]">
             <span className="flex-grow-0 font-Pretendard text-[24px] font-bold text-left text-Neutrals-white">
               지난주 모의투자 랭킹 결과
@@ -58,13 +58,13 @@ function PrevRank({ setModal, prevRankTop3, setCallUser, type, goSurvey }) {
                   }}
                 >
                   <img
-                    className=" border border-solid border-Neutrals-lightGray rounded-full"
+                    className=" border border-solid border-Neutrals-lightGray rounded-full w-[84px] h-[84px] object-cover"
                     src={
                       prevRankTop3.states[1]?.imageUrl !== undefined
                         ? prevRankTop3.states[1].imageUrl !== 'null'
                           ? prevRankTop3.states[1].imageUrl
-                          : '/images/defaultProfile/defalutProfile96.png'
-                        : '/images/defaultProfile/defalutProfile96.png'
+                          : '/images/defaultProfile/defalutProfile96.webp'
+                        : '/images/defaultProfile/defalutProfile96.webp'
                     }
                     alt="defalutProfile"
                     width="84px"
@@ -102,13 +102,13 @@ function PrevRank({ setModal, prevRankTop3, setCallUser, type, goSurvey }) {
                   }}
                 >
                   <img
-                    className=" border border-solid border-Neutrals-lightGray rounded-full"
+                    className=" border border-solid border-Neutrals-lightGray rounded-full w-[110px] h-[110px] object-cover"
                     src={
                       prevRankTop3.states[0]?.imageUrl !== undefined
                         ? prevRankTop3.states[0].imageUrl !== 'null'
                           ? prevRankTop3.states[0].imageUrl
-                          : '/images/defaultProfile/defalutProfile96.png'
-                        : '/images/defaultProfile/defalutProfile96.png'
+                          : '/images/defaultProfile/defalutProfile96.webp'
+                        : '/images/defaultProfile/defalutProfile96.webp'
                     }
                     alt="defalutProfile"
                     width="110px"
@@ -146,13 +146,13 @@ function PrevRank({ setModal, prevRankTop3, setCallUser, type, goSurvey }) {
                   }}
                 >
                   <img
-                    className=" border border-solid border-Neutrals-lightGray rounded-full"
+                    className=" border border-solid border-Neutrals-lightGray rounded-full w-[84px] h-[84px] object-cover"
                     src={
                       prevRankTop3.states[2]?.imageUrl !== undefined
                         ? prevRankTop3.states[2].imageUrl !== 'null'
                           ? prevRankTop3.states[2].imageUrl
-                          : '/images/defaultProfile/defalutProfile96.png'
-                        : '/images/defaultProfile/defalutProfile96.png'
+                          : '/images/defaultProfile/defalutProfile96.webp'
+                        : '/images/defaultProfile/defalutProfile96.webp'
                     }
                     alt="defalutProfile"
                     width="84px"

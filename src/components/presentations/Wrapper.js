@@ -41,7 +41,18 @@ function Wrapper({ children }) {
       <div className={router.pathname === '/' ? 'hidden' : ''}>
         <Footers />
       </div>
-      <div
+      {/* <div
+        className={
+          router.pathname === '/' ? 'absolute top-0 min-w-full min-h-full -z-50' : 'hidden'
+        }
+        style={{ backgroundImage: "url('/images/corinne_background.gif')" }}
+      />
+    </div> */}
+      <video
+        src="/images/corinne_background.mp4"
+        muted
+        autoPlay
+        loop
         className={
           router.pathname === '/' ? 'absolute top-0 min-w-full min-h-full -z-50' : 'hidden'
         }

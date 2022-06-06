@@ -57,8 +57,8 @@ function Ranker({ type, rankerData, followBtn, setCallUser, userinfos }) {
               rankerData?.imageUrl !== undefined
                 ? rankerData.imageUrl !== 'null'
                   ? rankerData.imageUrl
-                  : '/images/defaultProfile/defalutProfile24.png'
-                : '/images/defaultProfile/defalutProfile24.png'
+                  : '/images/defaultProfile/defalutProfile24.webp'
+                : '/images/defaultProfile/defalutProfile24.webp'
             }
             alt="defalutProfile"
             width="24px"

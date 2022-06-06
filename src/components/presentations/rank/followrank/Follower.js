@@ -15,13 +15,13 @@ function Follower({ followData, setCallUser }) {
           }}
         >
           <img
-            className="rounded-full w-[60px] h-[60px]"
+            className="rounded-full w-[60px] h-[60px] object-cover"
             src={
               followData?.imageUrl !== undefined
                 ? followData.imageUrl !== 'null'
                   ? followData.imageUrl
-                  : '/images/defaultProfile/defalutProfile60.png'
-                : '/images/defaultProfile/defalutProfile60.png'
+                  : '/images/defaultProfile/defalutProfile60.webp'
+                : '/images/defaultProfile/defalutProfile60.webp'
             }
             width="60px"
             height="60px"
