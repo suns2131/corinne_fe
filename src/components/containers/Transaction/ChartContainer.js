@@ -122,17 +122,11 @@ function ChartContainer() {
 
   const checkConnect = () => {
     connectRef.current = true;
-    socketClient.subscribe(`/sub/topic/${selectInfo.tiker}`, (message) => {
+    subNum.current = socketClient.subscribe(`/sub/topic/${selectInfo.tiker}`, (message) => {
       const ChartData = JSON.parse(message.body);
-      subNum.current = message.headers.subscription;
       chkChartData(ChartData);
-    });
+    }).id;
   };
-  // subNum.current = message.headers.subscription;
-  // subNum.current = socketClient.subscribe(`/sub/topic/${selectInfo.tiker}`, (message) => {
-  //   const ChartData = JSON.parse(message.body);
-  //   chkChartData(ChartData);
-  // }).id;
 
   // info 변경될때마다 API 갱신 웹소켓 연결 체크
   React.useEffect(() => {

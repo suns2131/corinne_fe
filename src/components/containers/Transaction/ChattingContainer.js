@@ -109,15 +109,8 @@ function ChattingContainer({ userInfos }) {
   };
 
   React.useEffect(() => {
-    socketClient.subscribe('/sub/topic/corinnechat', (message) => {
-      const ChatData = JSON.parse(message.body);
-      const updateChat = {
-        nickname: ChatData.nickname,
-        message: ChatData.message,
-      };
-      dispatch(addChat(updateChat));
-    });
-  }, []);
+    if (chkConneted && connectCheckRef.current === null) subscribeConnect();
+  }, [chkConneted, subscribeConnect]);
 
   // if (chkConneted && connectCheckRef.current === null) subscribeConnect();
 
